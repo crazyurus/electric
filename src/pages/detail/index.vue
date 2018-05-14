@@ -50,7 +50,7 @@
                     <img src="https://web.wutnews.net/Application/Electric/Assets/image/pay.svg">支付信息
                   </li>
                   <li>
-                    <a class="item-link item-content" href="{:U('info/pay')}">
+                    <a class="item-link item-content" href="/detail/pay">
                       <div class="item-inner">
                         <div class="item-title">购电详情</div>
                       </div>
