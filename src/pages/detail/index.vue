@@ -22,7 +22,7 @@
               <div class="list-block">
                 <ul>
                   <li class="list-group-title">
-                    <img src="https://web.wutnews.net/Application/Electric/Assets/image/home.svg">
+                    <img src="/Application/Electric/Assets/image/home.svg">
                     <span>宿舍信息</span>
                   </li>
                   <li class="item-content">
@@ -48,7 +48,7 @@
               <div class="list-block">
                 <ul>
                   <li class="list-group-title">
-                    <img src="https://web.wutnews.net/Application/Electric/Assets/image/pay.svg">
+                    <img src="/Application/Electric/Assets/image/pay.svg">
                     <span>支付信息</span>
                   </li>
                   <li>
@@ -101,21 +101,14 @@
                       <div class="item-inner">
                         <div class="item-title">剩余电量不足时提醒</div>
                         <div class="item-after">
-                          <label class="label-switch">
-                            <input type="checkbox" name="switch" value="yes" v-model="warning.show">
-                            <div class="checkbox"></div>
-                          </label>
+                          <f7-input type="switch" v-model="warning.show"></f7-input>
                         </div>
                       </div>
                     </li>
                     <li class="item-content" v-show="warning.show">
                       <div class="item-inner">
                         <div class="item-title label">剩余电量警告值</div>
-                        <div class="item-input">
-                          <div class="range-slider">
-                            <input type="range" min="1" max="120" step="1" v-model="warning.value">
-                          </div>
-                        </div>
+                        <f7-input type="range" min="1" max="120" step="1" v-model="warning.value"></f7-input>
                         <div class="item-after item-range">{{warning.value}}</div>
                       </div>
                     </li>
@@ -125,7 +118,7 @@
               <div class="list-block">
                 <ul>
                   <li class="list-group-title">
-                    <img src="https://web.wutnews.net/Application/Electric/Assets/image/rank.svg">
+                    <img src="/Application/Electric/Assets/image/rank.svg">
                     <span>排名信息</span>
                   </li>
                   <li class="item-content">
@@ -177,6 +170,11 @@
         electric: {
           name: '加载中……',
           status: '',
+          left: 0,
+          today: {
+            use: '',
+            price: ''
+          },
           month: {}
         },
         warning: {
@@ -197,7 +195,7 @@
 
           result = result.data;
           if(result.errCode === 0) {
-            Loader('https://web.wutnews.net/Application/Electric/Assets/js/count.js').then(() => {
+            Loader('/Application/Electric/Assets/js/count.js').then(() => {
               new CountUp("txtLeft", 0, parseFloat(result.data.left.replace('度', '')), 2, 1).start();
               new CountUp("txtTodayCost", 0, parseFloat(result.data.today.use.replace('千瓦时', '')), 2, 1).start();
               new CountUp("txtTodayPrice", 0, parseFloat(result.data.today.price.replace('千瓦时', '')), 2, 1).start();
@@ -219,7 +217,7 @@
         Token.message.confirm("确定要更换宿舍信息吗？").then(() => {
           this.$f7.showPreloader("更换宿舍中…");
           e.target.disabled = true;
-          return this.$http.get('https://web.wutnews.net/electric/login/logout');
+          return this.$http.get('/electric/login/logout');
         }).then(() => {
           if(typeof token !== 'undefined' && token.setMeter) token.setMeter('');
           this.$f7.hidePreloader();
@@ -273,9 +271,6 @@
 <style scoped>
   .link-disabled {
     opacity: 0.55;
-  }
-  .label-switch input[type=checkbox]:checked+.checkbox {
-    background: #45c8dc;
   }
   .cost-area {
     background: #45c8dc;
@@ -340,14 +335,5 @@
   .item-range {
     width: 2rem;
     justify-content: flex-end;
-  }
-  /*.range-slider input[type=range] {
-    background: linear-gradient(to right,#45c8dc 100%,#45c8dc 100%);
-    background-position: center;
-  background-size: 100% 2px;
-  background-repeat: no-repeat;
-  }*/
-  .range-slider input[type=range]::-webkit-slider-thumb::before {
-    background: #45c8dc;
   }
 </style>

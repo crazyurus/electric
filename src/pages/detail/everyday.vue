@@ -11,7 +11,7 @@
 
   export default {
     mounted () {
-      Loader('https://web.wutnews.net/Application/Electric/Assets/chart/echarts.min.js').then(() => {
+      Loader('/Application/Electric/Assets/chart/echarts.min.js').then(() => {
         Token.indicator.show();
         this.$http.post('https://api.wutnews.net/electric/info/day', {
           id: this.$store.state.meter,

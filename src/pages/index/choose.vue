@@ -98,7 +98,7 @@
               </template>
             </div>
             <footer>
-              <img src="https://web.wutnews.net/act/girlsday/img/token.png" @click="about">
+              <img src="/act/girlsday/img/token.png" @click="about">
             </footer>
           </f7-page>
         </f7-pages>
@@ -217,7 +217,10 @@
           }
         }
         this.$f7.showPreloader('正在查询，请稍后…');
-        this.$http.post('https://web.wutnews.net/electric/login/register', this.select).then(result => {
+        this.$http.post('/electric/login/register', {
+          meter: this.select.meter,
+          area: this.select.area
+        }).then(result => {
           this.$f7.hidePreloader();
           if (result.data.errCode === 0) {
             if (typeof token !== 'undefined' && token.setMeter) token.setMeter(this.select.meter + '|' + this.select.area);
