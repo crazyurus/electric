@@ -1,5 +1,6 @@
 import DetailPage from './pages/detail/index'
 import PayRecordPage from './pages/detail/pay'
+import DayRecordPage from './pages/detail/everyday'
 import ChoosePage from './pages/index/choose'
 import NoticeListPage from './pages/notice/list'
 import NoticeDetailPage from './pages/notice/detail'
@@ -16,6 +17,9 @@ export default [
   {
     path: '/detail/pay',
     component: PayRecordPage
+  },{
+    path: '/detail/everyday',
+    component: DayRecordPage
   },
   {
     path: '/notice/list',

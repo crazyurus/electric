@@ -22,7 +22,8 @@
               <div class="list-block">
                 <ul>
                   <li class="list-group-title">
-                    <img src="https://web.wutnews.net/Application/Electric/Assets/image/home.svg">宿舍信息
+                    <img src="https://web.wutnews.net/Application/Electric/Assets/image/home.svg">
+                    <span>宿舍信息</span>
                   </li>
                   <li class="item-content">
                     <div class="item-inner">
@@ -47,7 +48,8 @@
               <div class="list-block">
                 <ul>
                   <li class="list-group-title">
-                    <img src="https://web.wutnews.net/Application/Electric/Assets/image/pay.svg">支付信息
+                    <img src="https://web.wutnews.net/Application/Electric/Assets/image/pay.svg">
+                    <span>支付信息</span>
                   </li>
                   <li>
                     <a class="item-link item-content" href="/detail/pay">
@@ -57,7 +59,7 @@
                     </a>
                   </li>
                   <li>
-                    <a class="item-link item-content" href="{:U('info/day')}">
+                    <a class="item-link item-content" href="/detail/everyday">
                       <div class="item-inner">
                         <div class="item-title">每日用电</div>
                       </div>
@@ -123,7 +125,8 @@
               <div class="list-block">
                 <ul>
                   <li class="list-group-title">
-                    <img src="https://web.wutnews.net/Application/Electric/Assets/image/rank.svg">排名信息
+                    <img src="https://web.wutnews.net/Application/Electric/Assets/image/rank.svg">
+                    <span>排名信息</span>
                   </li>
                   <li class="item-content">
                     <div class="item-inner">
@@ -152,7 +155,7 @@
               </div>
             </div>
             <f7-toolbar class="toolbar" v-if="$store.state.sno !== 'anonymous'">
-              <a href="javascript:;" class="link" :class="{ 'link-disabled': isChargable }" @click="charge">充值</a>
+              <a href="javascript:;" class="link" :class="{ 'link-disabled': !isChargable }" @click="charge">充值</a>
               <a href="javascript:;" class="link" @click="update">刷新电量</a>
               <a href="javascript:;" class="link" @click="change">更换宿舍</a>
             </f7-toolbar>
@@ -242,7 +245,7 @@
     },
     computed: {
       isChargable() {
-        return this.$store.state.area === 7 && this.electric.status.indexOf('离线') < 0;
+        return this.$store.state.area == 7 && this.electric.status.indexOf('离线') < 0;
       },
       remain () {
         const speed = this.electric.speed;
@@ -311,10 +314,10 @@
 
   .list-group-title {
     font-size: 1.08rem;
-    color: #000;
     height: 3rem;
-    line-height: 2.8rem;
     font-weight: 300;
+    display: flex;
+    align-items: center;
   }
 
   .list-group-title > img {
