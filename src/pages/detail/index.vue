@@ -70,7 +70,7 @@
                     </div>
                   </li>
                   <li>
-                    <a class="item-link item-content" href="/electric/notice">
+                    <a class="item-link item-content" href="/notice/list">
                       <div class="item-inner">
                         <div class="item-title">停电通知</div>
                       </div>
@@ -138,7 +138,7 @@
                     </div>
                   </li>
                   <li v-if="$store.state.sno !== 'anonymous'">
-                    <a class="item-link item-content" href="/feedback?from=electric">
+                    <a class="item-link item-content external" href="/feedback?from=electric">
                       <div class="item-inner">
                         <div class="item-title">帮助与建议</div>
                       </div>
@@ -152,10 +152,9 @@
               </div>
             </div>
             <f7-toolbar class="toolbar" v-if="$store.state.sno !== 'anonymous'">
-              <a href="#" class="link" id="btnCharge" v-if="isChargable">充值</a>
-              <a href="#" class="link link-disabled" v-else>充值</a>
-              <a href="#" class="link" @click="update">刷新电量</a>
-              <a href="#" class="link" @click="change">更换宿舍</a>
+              <a href="javascript:;" class="link" :class="{ 'link-disabled': isChargable }" @click="charge">充值</a>
+              <a href="javascript:;" class="link" @click="update">刷新电量</a>
+              <a href="javascript:;" class="link" @click="change">更换宿舍</a>
             </f7-toolbar>
           </div>
         </f7-pages>
@@ -166,7 +165,7 @@
 
 <script>
   import Token from '../../libs/Token'
-  import { Count } from '../../libs/Count'
+  import { Loader } from '../../libs/Loader'
   import Vue from 'vue'
 
   export default {
@@ -195,7 +194,7 @@
 
           result = result.data;
           if(result.errCode === 0) {
-            Count().then(() => {
+            Loader('https://web.wutnews.net/Application/Electric/Assets/js/count.js').then(() => {
               new CountUp("txtLeft", 0, parseFloat(result.data.left.replace('度', '')), 2, 1).start();
               new CountUp("txtTodayCost", 0, parseFloat(result.data.today.use.replace('千瓦时', '')), 2, 1).start();
               new CountUp("txtTodayPrice", 0, parseFloat(result.data.today.price.replace('千瓦时', '')), 2, 1).start();
@@ -210,6 +209,9 @@
       });
     },
     methods: {
+      charge () {
+
+      },
       change (e) {
         Token.message.confirm("确定要更换宿舍信息吗？").then(() => {
           this.$f7.showPreloader("更换宿舍中…");
@@ -217,7 +219,8 @@
           return this.$http.get('https://web.wutnews.net/electric/login/logout');
         }).then(() => {
           if(typeof token !== 'undefined' && token.setMeter) token.setMeter('');
-          this.$f7.router.reloadPage('/index/choose');
+          this.$f7.hidePreloader();
+          this.$f7.mainView.router.reloadPage('/index/choose');
         });
       },
       update () {
@@ -231,10 +234,7 @@
           const left = this.electric.left.replace('度', '');
           this.electric.time = result.data.data.time.split('.')[0].replace('T', ' ').replace('-0', '/').replace('-0', '/').replace('-', '/').replace('-', '/');
           this.electric.left = result.data.data.left;
-
-          Count().then(() => {
-            new CountUp('txtLeft', left, result.data.data.left, 2, 1).start();
-          });
+          new CountUp('txtLeft', left, result.data.data.left, 2, 1).start();
         }).catch(function(result) {
           Token.message.alert(result.errMsg);
         });

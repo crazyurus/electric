@@ -1,8 +1,8 @@
-export function Count() {
+export function Loader(url) {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = 'https://web.wutnews.net/Application/Electric/Assets/js/count.js';
+    script.src = url;
     script.onload = resolve;
     script.onerror = reject;
     document.head.appendChild(script);

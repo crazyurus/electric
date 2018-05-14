@@ -222,7 +222,7 @@
           if (result.data.errCode === 0) {
             if (typeof token !== 'undefined' && token.setMeter) token.setMeter(this.select.meter + '|' + this.select.area);
             this.$store.commit('meter', this.select);
-            this.$f7.router.reloadPage('/detail/index');
+            this.$f7.mainView.router.reloadPage('/detail/index');
           }
           else Token.message.toast('未知异常，请联系管理员');
         });
