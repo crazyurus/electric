@@ -76,10 +76,25 @@
           self.charge(parseFloat($this.find(".money").text()));
         }
       },
+      qrcode (text) {
+        this.$f7.modal({
+          title: '电费查询',
+          text,
+          afterText: '<img src="/Application/Electric/Assets/image/mina.jpg" style="width: 200px; height: 200px">',
+          buttons: [{
+            text: '确定',
+            bold: true
+          }]
+        });
+      },
       charge (amount) {
         if (this.$store.state.area == 7) {
           if (this.isWeChat()) {
-            Token.message.alert('暂不支持微信内支付，请关注小程序“武汉理工大学电费查询”');
+            this.qrcode('暂不支持微信内支付，请长按打开小程序“武汉理工大学电费查询”');
+            return;
+          }
+          if (!navigator.userAgent.match(/(android|iphone)/i)) {
+            this.qrcode('暂不支持PC端支付，请扫码打开小程序“武汉理工大学电费查询”');
             return;
           }
           if (amount < 1) Token.message.toast('充值金额必须大于1元');
