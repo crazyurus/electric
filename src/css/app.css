@@ -137,3 +137,13 @@ label.label-radio input[type=checkbox]:checked ~ .item-inner, label.label-radio 
 .label-switch input[type=checkbox]:checked+.checkbox {
   background: #45c8dc !important;
 }
+
+.weui-slider-box__value {
+  width: 2rem;
+  color: #8e8e93 !important;
+  font-size: 17px !important;
+}
+
+.weui-slider__track {
+  background-color: #45c8dc !important;
+}

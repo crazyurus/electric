@@ -8,7 +8,12 @@
   "env": {
     "test": {
       "presets": ["env", "stage-2"],
-      "plugins": [ "istanbul" ]
+      "plugins": [ "istanbul", ["component", [
+        {
+          "libraryName": "we-vue",
+          "style": true
+        }
+      ]]]
     }
   }
 }

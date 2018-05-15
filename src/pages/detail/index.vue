@@ -104,8 +104,9 @@
             <li class="item-content" v-show="warning.show">
               <div class="item-inner">
                 <div class="item-title label">剩余电量警告值</div>
-                <f7-input type="range" min="1" max="120" step="1" v-model="warning.value"></f7-input>
-                <div class="item-after item-range">{{warning.value}}</div>
+                <div class="item-input">
+                  <wv-slider :min="1" :max="120" :step="1" v-model="warning.value"></wv-slider>
+                </div>
               </div>
             </li>
           </template>
@@ -155,6 +156,9 @@
   import Token from '../../libs/Token'
   import { Loader } from '../../libs/Loader'
   import Vue from 'vue'
+  import { Slider } from 'we-vue'
+
+  Vue.component(Slider.name, Slider)
 
   export default {
     data () {
@@ -323,10 +327,5 @@
 
   .text-red {
     color: red !important;
-  }
-
-  .item-range {
-    width: 2rem;
-    justify-content: flex-end;
   }
 </style>
