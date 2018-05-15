@@ -146,7 +146,7 @@
         }, {
           name: '升升公寓',
           position: [30.504560, 114.344748],
-          telephone: '',
+          telephone: 'empty',
           address: '物业办公楼一层'
         }];
 

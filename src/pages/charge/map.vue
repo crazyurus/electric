@@ -7,8 +7,8 @@
       <div class="desc">{{decodeURIComponent(address)}}</div>
       <div class="tel">
         <span>联系电话：</span>
-        <a :href="'tel:027-' + telephone" class="external" v-if="telephone">027-{{telephone}}</a>
-        <span v-else>暂无</span>
+        <span v-if="telephone === 'empty'">暂无</span>
+        <a :href="'tel:027-' + telephone" class="external" v-else>027-{{telephone}}</a>
       </div>
     </div>
   </f7-page>
