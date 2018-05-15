@@ -104,7 +104,7 @@
             <li class="item-content" v-show="warning.show">
               <div class="item-inner">
                 <div class="item-title label">剩余电量警告值</div>
-                <range :min="1" :max="120" :step="1" v-model="warning.value"></range>
+                <f7-input type="range" min="1" max="120" step="1" v-model="warning.value"></f7-input>
                 <div class="item-after item-range">{{warning.value}}</div>
               </div>
             </li>
@@ -155,10 +155,8 @@
   import Token from '../../libs/Token'
   import { Loader } from '../../libs/Loader'
   import Vue from 'vue'
-  import { Range } from 'vux'
 
   export default {
-    components: { Range },
     data () {
       return {
         electric: {
@@ -264,10 +262,6 @@
 </script>
 
 <style scoped>
-  .vux-range-input-box {
-    flex: 1;
-    margin: 0 !important;
-  }
   .link-disabled {
     opacity: 0.55;
   }

@@ -137,7 +137,3 @@ label.label-radio input[type=checkbox]:checked ~ .item-inner, label.label-radio 
 .label-switch input[type=checkbox]:checked+.checkbox {
   background: #45c8dc !important;
 }
-
-.range-min, .range-max {
-  display: none !important;
-}
