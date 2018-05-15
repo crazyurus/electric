@@ -5,6 +5,7 @@ import ChoosePage from './pages/index/choose'
 import NoticeListPage from './pages/notice/list'
 import NoticeDetailPage from './pages/notice/detail'
 import ChargePage from './pages/charge/index'
+import MapPage from './pages/charge/map'
 
 export default [
   {
@@ -33,5 +34,9 @@ export default [
   {
     path: '/charge/index',
     component: ChargePage
+  },
+  {
+    path: '/charge/map/:latitude/:longitude/:title/:address/:telephone',
+    component: MapPage
   }
 ]
