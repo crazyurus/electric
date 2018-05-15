@@ -104,7 +104,7 @@
             <li class="item-content" v-show="warning.show">
               <div class="item-inner">
                 <div class="item-title label">剩余电量警告值</div>
-                <f7-input type="range" min="1" max="120" step="1" v-model="warning.value"></f7-input>
+                <mt-range :min="1" :max="120" :step="1" v-model="warning.value"></mt-range>
                 <div class="item-after item-range">{{warning.value}}</div>
               </div>
             </li>
@@ -155,6 +155,8 @@
   import Token from '../../libs/Token'
   import Loader from '../../libs/Loader'
   import Vue from 'vue'
+  import { Range } from 'mint-ui';
+  Vue.component(Range.name, Range);
 
   export default {
     data () {
@@ -198,7 +200,7 @@
           else Token.message.alert(result.errMsg);
         });
 
-        if (location.search.indexOf('refresh=') > -1) token.setMeter(meter + '|' + area);
+        if (location.search.indexOf('?refresh=') > -1) token.setMeter(meter + '|' + area);
       });
     },
     methods: {
@@ -328,5 +330,10 @@
   .item-range {
     width: 2rem;
     justify-content: flex-end;
+  }
+
+  .mt-range {
+    flex: 1;
+    margin-left: 20px;
   }
 </style>

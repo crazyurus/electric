@@ -137,3 +137,7 @@ label.label-radio input[type=checkbox]:checked ~ .item-inner, label.label-radio 
 .label-switch input[type=checkbox]:checked+.checkbox {
   background: #45c8dc !important;
 }
+
+.mt-range-progress {
+  background-color: #45c8dc !important;
+}
