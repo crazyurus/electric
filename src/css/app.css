@@ -141,3 +141,43 @@ label.label-radio input[type=checkbox]:checked ~ .item-inner, label.label-radio 
 .mt-range-progress {
   background-color: #45c8dc !important;
 }
+
+.mint-actionsheet {
+  background-color: #EFEFF4;
+}
+
+.mint-actionsheet-list {
+  margin-bottom: 6px;
+}
+
+.mint-actionsheet-listitem, .mint-actionsheet-button {
+  position: relative;
+  color: #000;
+  padding: 10px 0;
+  font-size: 18px;
+  line-height: 1.6;
+  height: auto;
+  border: none;
+}
+
+.mint-actionsheet-listitem::before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid #e5e5e5;
+  color: #e5e5e5;
+  transform-origin: 0 0;
+  transform: scaleY(0.5);
+}
+
+.mint-actionsheet-listitem:active, .mint-actionsheet-button:active {
+  background-color: #ECECEC;
+}
+
+.v-modal {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+}

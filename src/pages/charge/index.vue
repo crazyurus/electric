@@ -32,13 +32,28 @@
     <footer>
       <a href="javascript:;" @click="showStation">线下充值点</a>
     </footer>
+    <mt-actionsheet
+        :actions="sheet.actions"
+        v-model="sheet.show">
+    </mt-actionsheet>
   </f7-page>
 </template>
 
 <script>
   import Token from '../../libs/Token'
+  import Vue from 'vue'
+  import { Actionsheet } from 'mint-ui';
+  Vue.component(Actionsheet.name, Actionsheet);
 
   export default {
+    data () {
+      return {
+        sheet: {
+          actions: [],
+          show: false
+        }
+      }
+    },
     methods: {
       portal (e) {
         const $$ = this.Dom7;
@@ -167,18 +182,18 @@
 
         for (let i in station) {
             buttons.push({
-              text: station[i].name,
-              onClick: () => {
+              name: station[i].name,
+              method: () => {
                 let name = encodeURIComponent(station[i].name + '电费充值点');
                 this.$f7.mainView.router.loadPage('/charge/map/' + station[i].position[0] + '/' + station[i].position[1] + '/' + name + '/' + encodeURIComponent(i == 4 ? '武汉升升学府物业管理有限公司' : '武汉理工大学水电管理中心') + '/' + station[i].telephone);
               }
             });
         }
 
-        this.$f7.actions([buttons, [{
-          text: '取消',
-          color: 'red'
-        }]]);
+        this.sheet = {
+          show: true,
+          actions: buttons
+        };
       }
     }
   }
