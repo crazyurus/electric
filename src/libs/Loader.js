@@ -1,4 +1,4 @@
-export function Loader(url) {
+export default function (url) {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.type = 'text/javascript';

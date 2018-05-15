@@ -153,7 +153,7 @@
 
 <script>
   import Token from '../../libs/Token'
-  import { Loader } from '../../libs/Loader'
+  import Loader from '../../libs/Loader'
   import Vue from 'vue'
 
   export default {
