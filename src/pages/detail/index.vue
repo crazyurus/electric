@@ -196,9 +196,9 @@
           result = result.data;
           if(result.errCode === 0) {
             Loader('/Application/Electric/Assets/js/count.js').then(() => {
-              new CountUp("txtLeft", 0, parseFloat(result.data.left.replace('度', '')), 2, 1).start();
-              new CountUp("txtTodayCost", 0, parseFloat(result.data.today.use.replace('千瓦时', '')), 2, 1).start();
-              new CountUp("txtTodayPrice", 0, parseFloat(result.data.today.price.replace('千瓦时', '')), 2, 1).start();
+              new CountUp("txtLeft", 0, Number.parseFloat(result.data.left.replace('度', '')), 2, 1).start();
+              new CountUp("txtTodayCost", 0, Number.parseFloat(result.data.today.use.replace('千瓦时', '')), 2, 1).start();
+              new CountUp("txtTodayPrice", 0, Number.parseFloat(result.data.today.price.replace('千瓦时', '')), 2, 1).start();
             });
 
             this.electric = result.data;
@@ -235,14 +235,14 @@
           const left = this.electric.left.replace('度', '');
           this.electric.time = result.data.data.time.split('.')[0].replace('T', ' ').replace('-0', '/').replace('-0', '/').replace('-', '/').replace('-', '/');
           this.electric.left = result.data.data.left;
-          new CountUp('txtLeft', left, result.data.data.left, 2, 1).start();
-        }).catch(function(result) {
-          Token.message.alert(result.errMsg);
+          new CountUp('txtLeft', Number.parseFloat(left), Number.parseFloat(result.data.data.left), 2, 1).start();
+        }).catch(result => {
+          Token.message.alert(result.data.errMsg);
         });
       }
     },
     computed: {
-      isChargable() {
+      isChargable () {
         return this.$store.state.area == 7 && this.electric.status.indexOf('离线') < 0;
       },
       remain () {
