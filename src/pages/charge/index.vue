@@ -170,7 +170,7 @@
               text: station[i].name,
               onClick: () => {
                 let name = encodeURIComponent(station[i].name + '电费充值点');
-                this.$f7.mainView.router.loadPage('/charge/map/' + station[i].position[0] + '/' + station[i].position[1] + '/' + name + '/' + encodeURIComponent(i == 4 ? '武汉升升学府物业管理有限公司' : '武汉理工大学水电管理中心') + '/' + station[i].telephone);
+                this.$f7.mainView.router.loadPage('/charge/map/' + station[i].position[0] + '/' + station[i].position[1] + '/' + name + '/' + encodeURIComponent(i === 4 ? '武汉升升学府物业管理有限公司' : '武汉理工大学水电管理中心') + '/' + station[i].telephone);
               }
             });
         }
