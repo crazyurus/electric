@@ -1,5 +1,5 @@
 <template>
-  <f7-page>
+  <f7-page name="everyday">
     <div class="content-block-title">以下是近二个月每天的用电情况（单位：度）</div>
     <div class="content-block" style="height: calc(100% - 70px); margin-bottom: 0;" id="chart"></div>
   </f7-page>

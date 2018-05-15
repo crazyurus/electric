@@ -3,7 +3,7 @@
     <f7-views>
       <f7-view main>
         <f7-pages>
-          <div class="page">
+          <div class="page" data-page="detail">
             <div class="page-content">
               <div class="cost-area">
                 <div class="cost-title">剩余电量(度)</div>

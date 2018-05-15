@@ -3,7 +3,7 @@
     <f7-views>
       <f7-view main>
         <f7-pages>
-          <f7-page>
+          <f7-page name="choose">
             <div class="title">宿舍</div>
             <div class="content-block-title">{{$store.state.userName}}同学你好，请选择你的宿舍</div>
             <div class="list-block">

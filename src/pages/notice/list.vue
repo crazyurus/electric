@@ -1,5 +1,5 @@
 <template>
-  <f7-page infinite-scroll @infinite="load">
+  <f7-page infinite-scroll @infinite="load" name="list">
     <div class="content-block-title">以下通知来源于武汉理工大学{{ $store.state.area == 7 ? '余家头校区管理委员会' : '后勤保障处' }}</div>
     <div class="list-block media-list record-list">
       <ul>

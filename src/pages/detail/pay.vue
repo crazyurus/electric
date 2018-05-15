@@ -1,5 +1,5 @@
 <template>
-  <f7-page>
+  <f7-page name="pay">
     <div class="content-block-title">
       <span>以下是电费缴纳记录</span>
       <a v-if="type === false" @click="changeView">列表</a>

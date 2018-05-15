@@ -1,5 +1,5 @@
 <template>
-  <f7-page>
+  <f7-page name="map">
     <div id="container"></div>
     <div class="info">
       <img src="/Application/Electric/Assets/image/nav.png">
