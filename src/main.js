@@ -7,8 +7,7 @@ import Framework7ThemeColors from 'framework7/dist/css/framework7.ios.colors.min
 
 import './css/app.css'
 import Routes from './routes.js'
-import ChoosePage from './pages/index/choose'
-import DetailPage from './pages/detail/index'
+import App from './app'
 
 import axios from './libs/axios'
 import store from './store/data'
@@ -31,7 +30,7 @@ new Vue({
     smartSelectSearchbar: true
   },
   store,
-  render: h => h(window.electric.meter ? DetailPage : ChoosePage)
+  render: h => h(App)
 });
 
 store.commit('init', window.electric);

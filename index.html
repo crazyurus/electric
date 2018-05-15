@@ -11,10 +11,10 @@
   <div id="app"></div>
   <script>
     window.electric = {
-      sno: '1049721601499',
-      userName: '廖星',
-      area: 3,
-      meter: '4511*Meter*学海20栋-409'
+      sno: '{$Think.session.sno}',
+      userName: '{$Think.session.tl_user.name|urldecode}',
+      area: '{$Think.session.area}',
+      meter: '{$Think.session.meter}'
     };
   </script>
 </body>
