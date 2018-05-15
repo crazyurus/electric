@@ -211,7 +211,8 @@
     },
     methods: {
       charge () {
-
+        if (this.electric.status.indexOf('离线') < 0) this.$f7.mainView.router.loadPage('/charge/index');
+        else Token.message.alert('电表处于离线状态，暂不可以充值电费，请前往自助充值点缴费');
       },
       change (e) {
         Token.message.confirm("确定要更换宿舍信息吗？").then(() => {
@@ -219,7 +220,7 @@
           e.target.disabled = true;
           return this.$http.get('/electric/login/logout');
         }).then(() => {
-          if(typeof token !== 'undefined' && token.setMeter) token.setMeter('');
+          if (typeof token !== 'undefined' && token.setMeter) token.setMeter('');
           this.$f7.hidePreloader();
           this.$f7.mainView.router.reloadPage('/index/choose');
         });

@@ -20,7 +20,7 @@ body {
   background: #fff;
 }
 
-.page[data-page=content] > .page-content {
+.page[data-page=content] > .page-content, .page[data-page=charge] > .page-content {
   background: #efeff4;
 }
 

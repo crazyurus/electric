@@ -4,6 +4,7 @@ import DayRecordPage from './pages/detail/everyday'
 import ChoosePage from './pages/index/choose'
 import NoticeListPage from './pages/notice/list'
 import NoticeDetailPage from './pages/notice/detail'
+import ChargePage from './pages/charge/index'
 
 export default [
   {
@@ -28,5 +29,9 @@ export default [
   {
     path: '/notice/detail/:link',
     component: NoticeDetailPage
+  },
+  {
+    path: '/charge/index',
+    component: ChargePage
   }
 ]
