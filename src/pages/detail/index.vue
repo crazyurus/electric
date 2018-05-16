@@ -15,129 +15,103 @@
           </div>
         </div>
       </div>
-      <div class="list-block">
-        <ul>
-          <li class="list-group-title">
-            <img src="/Application/Electric/Assets/image/home.svg">
-            <span>宿舍信息</span>
-          </li>
+      <f7-list>
+        <li class="list-group-title">
+          <img src="/Application/Electric/Assets/image/home.svg">
+          <span>宿舍信息</span>
+        </li>
+        <f7-list-item title="宿舍" :after="electric.name"></f7-list-item>
+        <f7-list-item title="电表状态" :after="electric.status"></f7-list-item>
+        <f7-list-item title="电表编号" :after="electric.no"></f7-list-item>
+      </f7-list>
+      <f7-list>
+        <li class="list-group-title">
+          <img src="/Application/Electric/Assets/image/pay.svg">
+          <span>支付信息</span>
+        </li>
+        <li>
+          <a class="item-link item-content" href="/detail/pay">
+            <div class="item-inner">
+              <div class="item-title">购电详情</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="item-link item-content" href="/detail/everyday">
+            <div class="item-inner">
+              <div class="item-title">每日用电</div>
+            </div>
+          </a>
+        </li>
+        <f7-list-item title="用电趋势" :after="'预计' + remain + '用完'"></f7-list-item>
+        <li>
+          <a class="item-link item-content" href="/notice/list">
+            <div class="item-inner">
+              <div class="item-title">停电通知</div>
+            </div>
+          </a>
+        </li>
+        <li class="item-content">
+          <div class="item-inner">
+            <div class="item-title">当月电费</div>
+            <div class="item-after">{{electric.month.use|do}}/{{electric.month.price|yuan}}</div>
+          </div>
+        </li>
+        <li class="item-content">
+          <div class="item-inner">
+            <div class="item-title">总共用电</div>
+            <div class="item-after">{{electric.sum|do}}</div>
+          </div>
+        </li>
+        <li class="item-content">
+          <div class="item-inner">
+            <div class="item-title">电费单价</div>
+            <div class="item-after">{{electric.unit_price|unit}}</div>
+          </div>
+        </li>
+        <template v-if="$store.state.sno !== 'anonymous'">
           <li class="item-content">
             <div class="item-inner">
-              <div class="item-title">宿舍</div>
-              <div class="item-after">{{electric.name}}</div>
-            </div>
-          </li>
-          <li class="item-content">
-            <div class="item-inner">
-              <div class="item-title">电表状态</div>
-              <div class="item-after">{{electric.status}}</div>
-            </div>
-          </li>
-          <li class="item-content">
-            <div class="item-inner">
-              <div class="item-title">电表编号</div>
-              <div class="item-after">{{electric.no}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="list-block">
-        <ul>
-          <li class="list-group-title">
-            <img src="/Application/Electric/Assets/image/pay.svg">
-            <span>支付信息</span>
-          </li>
-          <li>
-            <a class="item-link item-content" href="/detail/pay">
-              <div class="item-inner">
-                <div class="item-title">购电详情</div>
+              <div class="item-title">剩余电量不足时提醒</div>
+              <div class="item-after">
+                <f7-input type="switch" v-model="warning.show"></f7-input>
               </div>
-            </a>
-          </li>
-          <li>
-            <a class="item-link item-content" href="/detail/everyday">
-              <div class="item-inner">
-                <div class="item-title">每日用电</div>
-              </div>
-            </a>
-          </li>
-          <li class="item-content">
-            <div class="item-inner">
-              <div class="item-title">用电趋势</div>
-              <div class="item-after">预计{{remain}}用完</div>
             </div>
           </li>
-          <li>
-            <a class="item-link item-content" href="/notice/list">
-              <div class="item-inner">
-                <div class="item-title">停电通知</div>
-              </div>
-            </a>
-          </li>
-          <li class="item-content">
+          <li class="item-content" v-show="warning.show">
             <div class="item-inner">
-              <div class="item-title">当月电费</div>
-              <div class="item-after">{{electric.month.use|do}}/{{electric.month.price|yuan}}</div>
+              <div class="item-title label">剩余电量警告值</div>
+              <mt-range :min="1" :max="120" :step="1" v-model="warning.value"></mt-range>
+              <div class="item-after item-range">{{warning.value}}</div>
             </div>
           </li>
-          <li class="item-content">
+        </template>
+      </f7-list>
+      <f7-list>
+        <li class="list-group-title">
+          <img src="/Application/Electric/Assets/image/rank.svg">
+          <span>排名信息</span>
+        </li>
+        <li class="item-content">
+          <div class="item-inner">
+            <div class="item-title">区域用电排名</div>
+            <div class="item-after text-red">暂无</div>
+          </div>
+        </li>
+        <li class="item-content">
+          <div class="item-inner">
+            <div class="item-title">建筑用电排名</div>
+            <div class="item-after text-red">暂无</div>
+          </div>
+        </li>
+        <li v-if="$store.state.sno !== 'anonymous'">
+          <a class="item-link item-content external" href="/feedback?from=electric">
             <div class="item-inner">
-              <div class="item-title">总共用电</div>
-              <div class="item-after">{{electric.sum|do}}</div>
+              <div class="item-title">帮助与建议</div>
             </div>
-          </li>
-          <li class="item-content">
-            <div class="item-inner">
-              <div class="item-title">电费单价</div>
-              <div class="item-after">{{electric.unit_price|unit}}</div>
-            </div>
-          </li>
-          <template v-if="$store.state.sno !== 'anonymous'">
-            <li class="item-content">
-              <div class="item-inner">
-                <div class="item-title">剩余电量不足时提醒</div>
-                <div class="item-after">
-                  <f7-input type="switch" v-model="warning.show"></f7-input>
-                </div>
-              </div>
-            </li>
-            <li class="item-content" v-show="warning.show">
-              <div class="item-inner">
-                <div class="item-title label">剩余电量警告值</div>
-                <mt-range :min="1" :max="120" :step="1" v-model="warning.value"></mt-range>
-                <div class="item-after item-range">{{warning.value}}</div>
-              </div>
-            </li>
-          </template>
-        </ul>
-      </div>
-      <div class="list-block">
-        <ul>
-          <li class="list-group-title">
-            <img src="/Application/Electric/Assets/image/rank.svg">
-            <span>排名信息</span>
-          </li>
-          <li class="item-content">
-            <div class="item-inner">
-              <div class="item-title">区域用电排名</div>
-              <div class="item-after text-red">暂无</div>
-            </div>
-          </li>
-          <li class="item-content">
-            <div class="item-inner">
-              <div class="item-title">建筑用电排名</div>
-              <div class="item-after text-red">暂无</div>
-            </div>
-          </li>
-          <li v-if="$store.state.sno !== 'anonymous'">
-            <a class="item-link item-content external" href="/feedback?from=electric">
-              <div class="item-inner">
-                <div class="item-title">帮助与建议</div>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
+          </a>
+        </li>
+      </f7-list>
       <div class="content-block" style="margin-bottom: 80px">
         <p>以上电费信息更新于&nbsp;{{electric.time}}，关注微信小程序“武汉理工大学电费查询”也可以查询哦</p>
         <p class="text-center" v-if="$store.state.sno === 'anonymous'">本服务由 <a href="http://token.team/">Token团队</a> 提供技术支持</p>

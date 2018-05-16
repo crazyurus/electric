@@ -2,90 +2,59 @@
   <f7-page name="choose">
     <div class="title">宿舍</div>
     <div class="content-block-title">{{$store.state.userName}}同学你好，请选择你的宿舍</div>
-    <div class="list-block">
-      <ul>
-        <li>
-          <a href="#area" data-searchbar-placeholder="搜索校区" class="item-link smart-select">
-            <select @change="changeAreaPicker">
-              <option value="">请选择</option>
-              <optgroup label="马房山校区">
-                <option value="1*Area*南湖">南湖</option>
-                <option value="2*Area*东院">东院</option>
-                <option value="3*Area*西院">西院</option>
-                <option value="3*Area*鉴湖">鉴湖</option>
-                <option value="0*Area*升升">升升公寓</option>
-              </optgroup>
-              <optgroup label="余家头校区">
-                <option value="7*Area*余区">余区</option>
-                <!-- <option value="9*Area*家属区北区">家属区北区</option>
-                <option value="8*Area*家属区南区">家属区南区</option>
-                <option value="11*Area*家属区中区">家属区中区</option>
-                <option value="12*Area*家属区西区">家属区西区</option>
-                <option value="10*Area*家属区联盟路">家属区联盟路</option> -->
-              </optgroup>
-            </select>
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">校区</div>
-              </div>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="#architecture" data-searchbar-placeholder="搜索宿舍楼" class="item-link smart-select">
-            <select @change="changeArcPicker">
-              <option value="">请选择</option>
-              <option v-for="arc in roomInfo.architecture" :key="arc.id" :value="arc.id">{{arc.name}}</option>
-            </select>
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">宿舍楼</div>
-              </div>
-            </div>
-          </a>
-        </li>
-        <li class="item-content" v-show="canInputNo">
-          <div class="item-inner item-no-border">
-            <div class="item-title label">房间号</div>
-            <div class="item-input">
-              <input type="tel" placeholder="如：409" maxlength="3" :disabled="!setInputFocus" v-focus="setInputFocus" @input="onInput">
-            </div>
-            <div class="item-after">
-              <a href="#" class="list-button" @click.prevent="showRoomPicker">选择宿舍</a>
-            </div>
+    <f7-list>
+      <f7-list-item smart-select title="校区" smart-select-searchbar-placeholder="搜索校区" smart-select-searchbar-cancel="取消">
+        <select @change="changeAreaPicker">
+          <option value="">请选择</option>
+          <optgroup label="马房山校区">
+            <option value="1*Area*南湖">南湖</option>
+            <option value="2*Area*东院">东院</option>
+            <option value="3*Area*西院">西院</option>
+            <option value="3*Area*鉴湖">鉴湖</option>
+            <option value="0*Area*升升">升升公寓</option>
+          </optgroup>
+          <optgroup label="余家头校区">
+            <option value="7*Area*余区">余区</option>
+            <!-- <option value="9*Area*家属区北区">家属区北区</option>
+            <option value="8*Area*家属区南区">家属区南区</option>
+            <option value="11*Area*家属区中区">家属区中区</option>
+            <option value="12*Area*家属区西区">家属区西区</option>
+            <option value="10*Area*家属区联盟路">家属区联盟路</option> -->
+          </optgroup>
+        </select>
+      </f7-list-item>
+      <f7-list-item smart-select title="宿舍楼" smart-select-searchbar-placeholder="搜索宿舍楼" smart-select-searchbar-cancel="取消">
+        <select @change="changeArcPicker">
+          <option value="">请选择</option>
+          <option v-for="arc in roomInfo.architecture" :key="arc.id" :value="arc.id">{{arc.name}}</option>
+        </select>
+      </f7-list-item>
+      <li class="item-content" v-show="canInputNo">
+        <div class="item-inner item-no-border">
+          <div class="item-title label">房间号</div>
+          <div class="item-input">
+            <input type="tel" placeholder="如：409" maxlength="3" :disabled="!setInputFocus" v-focus="setInputFocus" @input="onInput">
           </div>
-        </li>
-        <li v-show="!canInputNo" style="display: none">
-          <a href="#floor" data-searchbar-placeholder="搜索楼层" class="item-link smart-select">
-            <select @change="changeFloorPicker">
-              <option value="">请选择</option>
-              <option v-for="floor in roomInfo.floor" :key="floor.id" :value="floor.id">{{floor.name}}</option>
-            </select>
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">楼层</div>
-              </div>
-            </div>
-          </a>
-        </li>
-        <li v-show="!canInputNo" style="display: none">
-          <a href="#meter" data-searchbar-placeholder="搜索房间" class="item-link smart-select">
-            <select @change="changeMeterPicker">
-              <option value="">请选择</option>
-              <option v-for="meter in roomInfo.meter" :key="meter.id" :value="meter.id">{{meter.name}}</option>
-            </select>
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">房间</div>
-              </div>
-            </div>
-          </a>
-        </li>
-      </ul>
-      <div class="list-block-label">
-        * 暂不支持升升公寓的电费查询
-      </div>
-    </div>
+          <div class="item-after">
+            <a href="#" class="list-button" @click.prevent="showRoomPicker">选择宿舍</a>
+          </div>
+        </div>
+      </li>
+      <f7-list-item smart-select title="楼层" smart-select-searchbar-placeholder="搜索楼层" smart-select-searchbar-cancel="取消" v-show="!canInputNo">
+
+        <select @change="changeFloorPicker">
+          <option value="">请选择</option>
+          <option v-for="floor in roomInfo.floor" :key="floor.id" :value="floor.id">{{floor.name}}</option>
+        </select>
+      </f7-list-item>
+      <f7-list-item smart-select title="房间" smart-select-searchbar-placeholder="搜索房间" smart-select-searchbar-cancel="取消" v-show="!canInputNo">
+        <select @change="changeMeterPicker">
+          <option value="">请选择</option>
+          <option v-for="meter in roomInfo.meter" :key="meter.id" :value="meter.id">{{meter.name}}</option>
+        </select>
+      </f7-list-item>
+      <f7-list-label>* 暂不支持升升公寓的电费查询</f7-list-label>
+    </f7-list>
     <div class="button-area">
       <button class="button button-big button-fill color-blue" :disabled="!canSubmit" @click="queryMeterDetail">查询</button>
       <template v-if="$store.state.sno === 'anonymous'">
@@ -313,9 +282,6 @@
   }
   .ios .list-button {
     border-left: 0.5px #c8c7cc solid;
-  }
-  .list-block .item-content {
-    padding-left: 20px;
   }
   .item-no-border::after {
     display: none;
