@@ -91,11 +91,11 @@
           self.charge(parseFloat($this.find(".money").text()));
         }
       },
-      qrcode (text) {
+      qrcode (text, url) {
         this.$f7.modal({
           title: '电费查询',
           text,
-          afterText: '<img src="/Application/Electric/Assets/image/mina.jpg" style="width: 200px; height: 200px">',
+          afterText: '<img src="' + url + '" style="width: 200px; height: 200px">',
           buttons: [{
             text: '确定',
             bold: true
@@ -103,34 +103,35 @@
         });
       },
       charge (amount) {
-        if (this.$store.state.area == 7) {
-          if (Token.detect.wechat()) {
-            this.qrcode('暂不支持微信内支付，请长按打开小程序“武汉理工大学电费查询”');
-            return;
-          }
-          if (!Token.detect.mobile()) {
-            this.qrcode('暂不支持PC端支付，请扫码打开小程序“武汉理工大学电费查询”');
-            return;
-          }
-          if (amount < 1) Token.message.toast('充值金额必须大于1元');
-          else {
-            Token.indicator.show();
-            this.$http.get('https://palmwhut.sinaapp.com/ip.php').then(ip => {
-              let param = {
-                area: this.$store.state.area,
-                amount: amount,
-                sno: this.$store.state.sno,
-                meter: this.$store.state.meter,
-                type: 'MWEB'
-              };
-              if (ip.data) param['ip'] = ip.data;
+        if (this.$store.state.area != 7) {
+          this.openLocation();
+          return;
+        }
+        if (Token.detect.wechat()) {
+          this.qrcode('暂不支持微信内支付，请长按打开小程序“武汉理工大学电费查询”', '/Application/Electric/Assets/image/mina.jpg');
+          return;
+        }
+        if (amount < 1) {
+          Token.message.toast('充值金额必须大于1元');
+          return;
+        }
+        Token.indicator.show();
+        this.$http.get('https://palmwhut.sinaapp.com/ip.php').then(ip => {
+          let param = {
+            area: this.$store.state.area,
+            amount: amount,
+            sno: this.$store.state.sno,
+            meter: this.$store.state.meter,
+            type: Token.detect.mobile() ? 'MWEB' : 'NATIVE'
+          };
+          if (ip.data) param['ip'] = ip.data;
 
-              this.$http.post('/electric/pay/prepare', param).then(result => {
-                location.assign(result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('https://web.wutnews.net/electric/pay/callback?order=' + result.data.data.return.prepay_id));
-              });
-            });
-          }
-        } else this.openLocation();
+          this.$http.post('/electric/pay/prepare', param).then(result => {
+            Token.indicator.hide();
+            if (result.data.data.return.mweb_url) location.assign(result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('https://web.wutnews.net/electric/pay/callback?order=' + result.data.data.return.prepay_id));
+            if (result.data.data.return.code_url) this.qrcode('请用微信扫码完成支付', '/electric/detail/qrcode?url=' + encodeURIComponent(result.data.data.return.code_url));
+          });
+        });
       },
       change () {
         Token.message.toast('暂只支持微信支付');
@@ -138,7 +139,7 @@
       openLocation () {
         this.$f7.modal({
           title: '充值失败',
-          text: "马房山校区、南湖校区线上充值功能暂未开放，敬请期待~<br>请前往线下充值点缴费<br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
+          text: "马房山校区线上充值功能暂未开放，敬请期待~<br>请前往线下充值点缴费<br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
           buttons: [{
             text: '关闭',
           }, {
