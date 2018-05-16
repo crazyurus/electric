@@ -60,5 +60,16 @@ export default {
     clear () {
       this._storage.clear();
     }
+  },
+  detect: {
+    mobile () {
+      return !!navigator.userAgent.match(/(android|iphone)/i);
+    },
+    iWUT () {
+      return typeof token !== 'undefined';
+    },
+    wechat () {
+      return navigator.userAgent.indexOf('MicroMessenger') > -1
+    }
   }
 };

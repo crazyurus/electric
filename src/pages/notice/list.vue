@@ -15,7 +15,7 @@
             </div>
           </a>
           <div class="swipeout-actions-right">
-            <a href="javascript:;" class="action-down swipeout-delete">删除</a>
+            <a href="#" class="swipeout-delete">删除</a>
           </div>
         </li>
       </ul>

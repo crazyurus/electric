@@ -104,11 +104,11 @@
       },
       charge (amount) {
         if (this.$store.state.area == 7) {
-          if (this.isWeChat()) {
+          if (Token.detect.wechat()) {
             this.qrcode('暂不支持微信内支付，请长按打开小程序“武汉理工大学电费查询”');
             return;
           }
-          if (!navigator.userAgent.match(/(android|iphone)/i)) {
+          if (!Token.detect.mobile()) {
             this.qrcode('暂不支持PC端支付，请扫码打开小程序“武汉理工大学电费查询”');
             return;
           }
@@ -147,9 +147,6 @@
             onClick: this.showStation
           }]
         });
-      },
-      isWeChat () {
-        return navigator.userAgent.indexOf('MicroMessenger') > -1;
       },
       showStation () {
         let buttons = [];

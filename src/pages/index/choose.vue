@@ -75,7 +75,7 @@
     data() {
       return {
         canSubmit: false,
-        canInputNo: true,
+        canInputNo: Token.detect.mobile(),
         setInputFocus: false,
         inputValue: '',
         roomInfo: {
@@ -98,14 +98,13 @@
 
         if (select === '0*Area*升升') {
           let ssArc = ['升升A栋', '升升B栋', '升升C栋', '升升E栋', '升升F栋', '升升H栋', '升升I栋', '升升J栋', '升升K栋', '升升L栋'];
-          let result = ssArc.map(arc => {
+          this.roomInfo.architecture = ssArc.map(arc => {
             return {
               id: arc,
               name: arc
             }
           });
 
-          this.roomInfo.architecture = result;
           return;
         }
 
