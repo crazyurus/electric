@@ -50,7 +50,13 @@ export default class GlobalHeader extends PureComponent {
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout">
-          <Icon type="logout" />退出登录
+          <a
+            target="_blank"
+            href="/electric/api/logout"
+            rel="noopener noreferrer"
+          >
+            <Icon type="logout" />退出登录
+          </a>
         </Menu.Item>
       </Menu>
     );
@@ -72,7 +78,7 @@ export default class GlobalHeader extends PureComponent {
           <Tooltip title="帮助建议">
             <a
               target="_blank"
-              href="http://pro.ant.design/docs/getting-started"
+              href="https://support.qq.com/product/23798"
               rel="noopener noreferrer"
               className={styles.action}
             >
