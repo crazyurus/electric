@@ -10,7 +10,9 @@ import 'moment/locale/zh-cn';
 import './index.less';
 // 1. Initialize
 const app = dva({
-  history: createHistory(),
+  history: createHistory({
+    basename: '/electric',
+  }),
 });
 
 // 2. Plugins
