@@ -3,24 +3,24 @@ import { isUrl } from '../utils/utils';
 const menuData = [{
     name: '概况',
     icon: 'dashboard',
-    path: 'general',
+    path: 'detail/index',
   }, {
     name: '充值',
     icon: 'pay-circle',
-    path: 'charge',
+    path: 'charge/index',
     authority: 'user',
   }, {
     name: '停电通知',
-    icon: 'table',
-    path: 'notice',
+    icon: 'profile',
+    path: 'notice/list',
   }, {
     name: '帮助建议',
     icon: 'question-circle',
-    path: 'help',
+    path: 'feedback',
   }, {
     name: '更换宿舍',
     icon: 'cloud',
-    path: 'change',
+    path: 'index/choose',
   },
 ];
 
