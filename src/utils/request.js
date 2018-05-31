@@ -3,6 +3,8 @@ import { notification } from 'antd';
 import { routerRedux } from 'dva/router';
 import store from '../index';
 
+const noProxy = process.env.NO_PROXY === 'true';
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -42,7 +44,7 @@ function checkStatus(response) {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options) {
+export default function request(host, url, options) {
   const defaultOptions = {
     credentials: 'include',
   };
@@ -64,7 +66,7 @@ export default function request(url, options) {
     }
   }
 
-  return fetch(url, newOptions)
+  return fetch((noProxy ? '//' + host : '') + '/electric' + url, newOptions)
     .then(checkStatus)
     .then(response => {
       if (newOptions.method === 'DELETE' || response.status === 204) {

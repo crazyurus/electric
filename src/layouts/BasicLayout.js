@@ -1,12 +1,11 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Icon, message } from 'antd';
+import { Layout, Icon } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
 import { Route, Redirect, Switch, routerRedux } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
-import pathToRegexp from 'path-to-regexp';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
@@ -108,6 +107,9 @@ class BasicLayout extends React.PureComponent {
     this.props.dispatch({
       type: 'user/fetchCurrent',
     });
+    this.props.dispatch({
+      type: 'room/fetchCurrent',
+    });
   }
   componentWillUnmount() {
     unenquireScreen(this.enquireHandler);
@@ -141,42 +143,15 @@ class BasicLayout extends React.PureComponent {
       payload: collapsed,
     });
   };
-  handleNoticeClear = type => {
-    message.success(`清空了${type}`);
-    this.props.dispatch({
-      type: 'global/clearNotices',
-      payload: type,
-    });
-  };
-  handleMenuClick = ({ key }) => {
-    if (key === 'triggerError') {
-      this.props.dispatch(routerRedux.push('/exception/trigger'));
-      return;
-    }
-    if (key === 'logout') {
-      this.props.dispatch({
-        type: 'login/logout',
-      });
-    }
-  };
-  handleNoticeVisibleChange = visible => {
-    if (visible) {
-      this.props.dispatch({
-        type: 'global/fetchNotices',
-      });
-    }
-  };
   render() {
     const {
       currentUser,
       collapsed,
-      fetchingNotices,
-      notices,
       routerData,
       match,
       location,
     } = this.props;
-    const bashRedirect = this.getBashRedirect();
+    const redirectPath = this.props.room.meter === '' ? '/choose/index' : '/detail/index';
     const layout = (
       <Layout>
         <SiderMenu
@@ -196,14 +171,10 @@ class BasicLayout extends React.PureComponent {
             <GlobalHeader
               logo={logo}
               currentUser={currentUser}
-              fetchingNotices={fetchingNotices}
-              notices={notices}
               collapsed={collapsed}
               isMobile={this.state.isMobile}
-              onNoticeClear={this.handleNoticeClear}
               onCollapse={this.handleMenuCollapse}
               onMenuClick={this.handleMenuClick}
-              onNoticeVisibleChange={this.handleNoticeVisibleChange}
             />
           </Header>
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
@@ -221,7 +192,7 @@ class BasicLayout extends React.PureComponent {
                   redirectPath="/exception/403"
                 />
               ))}
-              <Redirect exact from="/" to={bashRedirect} />
+              <Redirect exact from="/" to={redirectPath} />
               <Route render={NotFound} />
             </Switch>
           </Content>
@@ -268,9 +239,9 @@ class BasicLayout extends React.PureComponent {
   }
 }
 
-export default connect(({ user, global, loading }) => ({
+export default connect(({ user, room, global, loading }) => ({
   currentUser: user.currentUser,
   collapsed: global.collapsed,
-  fetchingNotices: loading.effects['global/fetchNotices'],
-  notices: global.notices,
+  loading: loading.effects['room/fetchCurrent'],
+  room,
 }))(BasicLayout);

@@ -17,7 +17,6 @@
     "lint-staged:js": "eslint --ext .js",
     "test": "roadhog test",
     "test:component": "roadhog test ./src/components",
-    "test:all": "node ./tests/run-tests.js",
     "prettier": "prettier --write ./src/**/**/**/*"
   },
   "dependencies": {

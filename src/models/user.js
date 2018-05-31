@@ -1,23 +1,17 @@
-import { query as queryUsers, queryCurrent } from '../services/user';
+import { user } from '../services/web';
+import { setAuthority } from '../utils/authority';
 
 export default {
   namespace: 'user',
 
   state: {
-    list: [],
     currentUser: {},
+    currentAuthority: 'anonymous',
   },
 
   effects: {
-    *fetch(_, { call, put }) {
-      const response = yield call(queryUsers);
-      yield put({
-        type: 'save',
-        payload: response,
-      });
-    },
     *fetchCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
+      const response = yield call(user);
       yield put({
         type: 'saveCurrentUser',
         payload: response,
@@ -26,25 +20,13 @@ export default {
   },
 
   reducers: {
-    save(state, action) {
-      return {
-        ...state,
-        list: action.payload,
-      };
-    },
     saveCurrentUser(state, action) {
+      const authority = action.payload.sno === 'anonymous' ? 'anonymous' : 'user';
+      setAuthority(authority);
       return {
         ...state,
         currentUser: action.payload,
-      };
-    },
-    changeNotifyCount(state, action) {
-      return {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          notifyCount: action.payload,
-        },
+        currentAuthority: authority,
       };
     },
   },

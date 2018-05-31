@@ -70,57 +70,46 @@ function getFlatMenuData(menus) {
 export const getRouterData = app => {
   const routerConfig = {
     '/': {
-      component: dynamicWrapper(app, ['user'], () => import('../layouts/BasicLayout')),
+      component: dynamicWrapper(app, ['user', 'room'], () => import('../layouts/BasicLayout')),
     },
     '/detail/index': {
       name: '概况',
-      component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
+      component: dynamicWrapper(app, ['room'], () => import('../routes/Dashboard/Analysis')),
     },
     '/detail/pay': {
       name: '充值记录',
-      component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Monitor')),
+      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
     },
     '/notice/list': {
       name: '通知列表',
-      component: dynamicWrapper(app, ['project', 'activities', 'chart'], () =>
-        import('../routes/Dashboard/Workplace')
-      ),
+      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
     },
     '/notice/detail/:link': {
       name: '通知详情',
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
+      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
     },
     '/index/choose': {
       name: '选择宿舍',
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step1')),
+      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
     },
     '/charge/index': {
       name: '充值',
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm')),
+      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
     },
     '/charge/index/form': {
       name: '充值金额表单',
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step2')),
+      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
     },
     '/charge/index/qrcode': {
       name: '充值扫码支付',
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step3')),
+      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
     },
     '/charge/index/finish': {
       name: '充值完成',
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/AdvancedForm')),
+      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
     },
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
-    },
-    '/user/login': {
-      component: dynamicWrapper(app, [], () => import('../routes/User/Login')),
-    },
-    '/user/register': {
-      component: dynamicWrapper(app, ['register'], () => import('../routes/User/Register')),
-    },
-    '/user/register-result': {
-      component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
     },
   };
   // Get name from ./menu.js or just set it in the router data.

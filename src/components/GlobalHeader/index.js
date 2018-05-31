@@ -28,7 +28,7 @@ export default class GlobalHeader extends PureComponent {
       logo,
       onMenuClick,
     } = this.props;
-    const menu = (
+    const menu = currentUser.sno === 'anonymous' ? '' : (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item>
           <a
@@ -75,6 +75,16 @@ export default class GlobalHeader extends PureComponent {
           onClick={this.toggle}
         />
         <div className={styles.right}>
+          <Tooltip title="微信小程序">
+            <a
+              target="_blank"
+              href="https://support.qq.com/product/23798"
+              rel="noopener noreferrer"
+              className={styles.action}
+            >
+              <Icon type="wechat" />
+            </a>
+          </Tooltip>
           <Tooltip title="帮助建议">
             <a
               target="_blank"
