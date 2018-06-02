@@ -52,8 +52,15 @@ export default class Index extends Component {
   componentDidMount() {
     this.props.dispatch({
       type: 'room/fetchRoomDetail',
-      payload: this.props.room.room,
+      payload: this.refactRoom(this.props.room.room),
     });
+  }
+
+  refactRoom(room) {
+    return {
+      id: room.meter,
+      area: room.area,
+    };
   }
 
   handleChangeSalesType = e => {
@@ -68,7 +75,7 @@ export default class Index extends Component {
     });
     this.props.dispatch({
       type: 'room/updateRoomDetail',
-      payload: this.props.room.room,
+      payload: this.refactRoom(this.props.room.room),
     }).then(() => {
       this.setState({
         updateLoading: false,
