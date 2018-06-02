@@ -1,4 +1,4 @@
-import { user } from '../services/web';
+import web from '../services/web';
 import { setAuthority } from '../utils/authority';
 
 export default {
@@ -11,7 +11,7 @@ export default {
 
   effects: {
     *fetchCurrent(_, { call, put }) {
-      const response = yield call(user);
+      const response = yield call(web.user);
       yield put({
         type: 'saveCurrentUser',
         payload: response,

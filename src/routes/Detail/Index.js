@@ -8,17 +8,18 @@ import {
   Card,
   Tabs,
   Tooltip,
+  Spin,
+  message,
 } from 'antd';
 import numeral from 'numeral';
 import {
   ChartCard,
-  yuan,
   Field,
   Bar,
 } from 'components/Charts';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
-import styles from './Analysis.less';
+import styles from './Index.less';
 
 const { TabPane } = Tabs;
 
@@ -30,17 +31,22 @@ for (let i = 0; i < 7; i += 1) {
   });
 }
 
-const Yuan = ({ children }) => (
-  <span dangerouslySetInnerHTML={{ __html: yuan(children) }}/> /* eslint-disable-line react/no-danger */
-);
+const Yuan = ({ children }) => {
+  return children ? '¥' + children.replace('元', '') : ''; /* eslint-disable-line react/no-danger */
+};
+
+const Do = ({ children }) => {
+  return children ? children.replace('度', '').replace('千瓦时', '') : '0.00'; /* eslint-disable-line react/no-danger */
+};
 
 @connect(({ room, loading }) => ({
   room,
   loading: loading.effects['room/fetchRoomDetail'],
 }))
-export default class Analysis extends Component {
+export default class Index extends Component {
+
   state = {
-    salesType: 'all',
+    updateLoading: false,
   };
 
   componentDidMount() {
@@ -50,20 +56,48 @@ export default class Analysis extends Component {
     });
   }
 
-  componentWillUnmount() {
-    this.props.dispatch({
-      type: 'room/clear',
-    });
-  }
-
   handleChangeSalesType = e => {
     this.setState({
       salesType: e.target.value,
     });
   };
 
+  updateRoomDetail = () => {
+    // this.setState({
+    //   updateLoading: true,
+    // });
+    // this.props.dispatch({
+    //   type: 'room/updateRoomDetail',
+    //   payload: this.props.room.room,
+    // }).then(() => {
+    //   this.setState({
+    //     updateLoading: false,
+    //   });
+    //   message.success('抄表成功');
+    // });
+  };
+
+  transAreaName(area) {
+    const id = Number.parseInt(area, 10);
+    switch (id) {
+      case 1: return '南湖校区';
+      case 2: return '东院';
+      case 3: return '西院/鉴湖校区';
+      case 7: return '余家头校区';
+      default: return '未知';
+    }
+  }
+
+  calcRemainDay(left, speed) {
+    if (!speed || speed == -1) return '很久之后';
+    const remain = Math.floor(left.replace('度', '') / speed);
+    const now = new Date();
+    const predict = new Date(now.getFullYear(), now.getMonth(), now.getDate() + remain);
+    return (predict.getFullYear() === now.getFullYear() ? '' : predict.getFullYear() + '年') + (predict.getMonth() + 1) + '月' + predict.getDate() + '日';
+  }
+
   isActive(type) {
-    return;
+
   }
 
   render() {
@@ -92,7 +126,7 @@ export default class Analysis extends Component {
         </div>
         <div className={styles.content}>
           <div className={styles.contentTitle}>{room.detail.name ? room.detail.name : '加载中…'}</div>
-          <div>鉴湖校区 | No.{room.detail.no}</div>
+          <div>{this.transAreaName(this.props.room.room.area)} | No.{room.detail.no}</div>
         </div>
       </div>
     );
@@ -117,9 +151,9 @@ export default class Analysis extends Component {
     const leftCardFooter = (
       <Fragment>
         <Tooltip title="预计用完日期仅供参考">
-          <Icon type="info-circle-o" className={styles.leftCardFooterIcon}/>
+          <Icon type="info-circle-o" className={styles.leftCardFooterIcon} />
         </Tooltip>
-        <Field label="预计7月13日用完" value=""/>
+        <Field label={'预计' + this.calcRemainDay(this.props.room.detail.left, this.props.room.detail.speed) + '用完'} value="" />
       </Fragment>
     );
 
@@ -136,46 +170,44 @@ export default class Analysis extends Component {
       <PageHeaderLayout content={pageHeaderContent} extraContent={extraContent}>
         <Row gutter={24}>
           <Col {...topColResponsiveProps}>
-            <ChartCard
-              bordered={false}
-              title="剩余电量"
-              action={<a href="#" title="刷新电量">刷新</a>}
-              total={() => <Yuan>126560</Yuan>}
-              footer={leftCardFooter}
-              contentHeight={46}
-            >
-            </ChartCard>
+            <Spin spinning={this.state.updateLoading} delay={500}>
+              <ChartCard
+                bordered={false}
+                title="剩余电量"
+                action={<a href="#" title="刷新电量" onClick={this.updateRoomDetail}>刷新</a>}
+                total={<Do>{room.detail.left}</Do>}
+                footer={leftCardFooter}
+                contentHeight={46}
+              />
+            </Spin>
           </Col>
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
               title="今日用电"
-              total={numeral(8846).format('0,0')}
-              footer={<Field label="当日电费" value={numeral(1234).format('0,0')}/>}
+              total={<Do>{room.detail.today.use}</Do>}
+              footer={<Field label="当日电费" value={<Yuan>{room.detail.today.price}</Yuan>} />}
               contentHeight={46}
-            >
-            </ChartCard>
+            />
           </Col>
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
               title="当月用电"
-              total={numeral(8846).format('0,0')}
-              footer={<Field label="当月电费" value={numeral(1234).format('0,0')}/>}
+              total={<Do>{room.detail.month.use}</Do>}
+              footer={<Field label="当月电费" value={<Yuan>{room.detail.month.price}</Yuan>} />}
               contentHeight={46}
-            >
-            </ChartCard>
+            />
           </Col>
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
               title="累计用电"
-              action={<Tooltip title="该宿舍电表累计示数"><Icon type="info-circle-o"/></Tooltip>}
-              total={numeral(8846).format('0,0')}
-              footer={<Field label="电费单价" value={numeral(1234).format('0,0')}/>}
+              action={<Tooltip title="该宿舍电表累计示数"><Icon type="info-circle-o" /></Tooltip>}
+              total={numeral(room.detail.sum.replace('千瓦时', '')).format('0,0')}
+              footer={<Field label="电费单价" value={<Yuan>{room.detail.unit_price}</Yuan>} />}
               contentHeight={46}
-            >
-            </ChartCard>
+            />
           </Col>
         </Row>
 
@@ -185,9 +217,7 @@ export default class Analysis extends Component {
               <TabPane tab="每日用电" key="sales">
                 <Row>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
-                    <div className={styles.salesBar}>
-
-                    </div>
+                    <div className={styles.salesBar} />
                   </Col>
                   <Col xl={8} lg={12} md={12} sm={24} xs={24}>
                     <div className={styles.salesRank}>
@@ -208,8 +238,11 @@ export default class Analysis extends Component {
             </Tabs>
           </div>
         </Card>
-        <Field label={<Fragment><Icon type="info-circle"/>&nbsp;&nbsp;以上电费信息更新于&nbsp;</Fragment>} value={room.detail.time}
-               className={styles.updateTimeField}/>
+        <Field
+          label={<Fragment><Icon type="info-circle" />&nbsp;&nbsp;以上电费信息更新于&nbsp;</Fragment>}
+          value={room.detail.time}
+          className={styles.updateTimeField}
+        />
       </PageHeaderLayout>
     );
   }
