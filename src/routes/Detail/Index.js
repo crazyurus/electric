@@ -63,18 +63,18 @@ export default class Index extends Component {
   };
 
   updateRoomDetail = () => {
-    // this.setState({
-    //   updateLoading: true,
-    // });
-    // this.props.dispatch({
-    //   type: 'room/updateRoomDetail',
-    //   payload: this.props.room.room,
-    // }).then(() => {
-    //   this.setState({
-    //     updateLoading: false,
-    //   });
-    //   message.success('抄表成功');
-    // });
+    this.setState({
+      updateLoading: true,
+    });
+    this.props.dispatch({
+      type: 'room/updateRoomDetail',
+      payload: this.props.room.room,
+    }).then(() => {
+      this.setState({
+        updateLoading: false,
+      });
+      message.success('抄表成功');
+    });
   };
 
   transAreaName(area) {

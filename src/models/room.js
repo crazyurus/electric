@@ -33,13 +33,13 @@ export default {
         payload: response.data,
       });
     },
-    // *updateRoomDetail({ payload }, { call, put }) {
-    //   const response = yield call(api.InfoUpdate, payload);
-    //   yield put({
-    //     type: 'update',
-    //     payload: response.data,
-    //   })
-    // },
+    *updateRoomDetail({ payload }, { call, put }) {
+      const response = yield call(api.InfoUpdate, payload);
+      yield put({
+        type: 'update',
+        payload: response.data,
+      })
+    },
     *fetchEverydayInfo(_, { call, put }) {
       const response = yield call(api.InfoEveryday);
       yield put({
@@ -62,15 +62,15 @@ export default {
         detail: action.payload,
       };
     },
-    // update(state, action) {
-    //   const detail = {...state.detail};
-    //   detail.time = action.payload.time.split('.')[0].replace('T', ' ').replace('-0', '/').replace('-0', '/').replace('-', '/').replace('-', '/');
-    //   detail.left = action.payload.left;
-    //   return {
-    //     ...state,
-    //     detail,
-    //   };
-    // },
+    update(state, action) {
+      const detail = {...state.detail};
+      detail.time = action.payload.time.split('.')[0].replace('T', ' ').replace('-0', '/').replace('-0', '/').replace('-', '/').replace('-', '/');
+      detail.left = action.payload.left;
+      return {
+        ...state,
+        detail,
+      };
+    },
     saveEverydayInfo(state, action) {
       return {
         ...state,

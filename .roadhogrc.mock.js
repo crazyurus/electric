@@ -9,6 +9,7 @@ const api = [
   'GET /electric/api/room',
   'POST /electric/info/detail',
   'POST /electric/info/day',
+  'POST /electric/info/update',
 ];
 
 const proxy = {};
