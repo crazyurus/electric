@@ -109,7 +109,7 @@ class BasicLayout extends React.PureComponent {
     this.props.dispatch({
       type: 'room/fetchCurrent',
     }).then(room => {
-      this.props.dispatch(routerRedux.push(room.meter === '' ? '/choose/index' : '/detail/index'));
+      this.props.dispatch(routerRedux.push(room.meter === '' ? '/index/choose' : '/detail/index'));
     });
   }
   componentWillUnmount() {
