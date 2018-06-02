@@ -74,7 +74,7 @@ export const getRouterData = app => {
     },
     '/detail/index': {
       name: '概况',
-      component: dynamicWrapper(app, ['room'], () => import('../routes/Dashboard/Analysis')),
+      component: dynamicWrapper(app, ['room'], () => import('../routes/Detail/Index')),
     },
     '/detail/pay': {
       name: '充值记录',
@@ -107,9 +107,6 @@ export const getRouterData = app => {
     '/charge/index/finish': {
       name: '充值完成',
       component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
-    },
-    '/user': {
-      component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
     },
   };
   // Get name from ./menu.js or just set it in the router data.

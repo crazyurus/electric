@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import { Layout, Icon } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
-import { Route, Redirect, Switch, routerRedux } from 'dva/router';
+import { Switch, routerRedux } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
-import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
@@ -109,6 +108,8 @@ class BasicLayout extends React.PureComponent {
     });
     this.props.dispatch({
       type: 'room/fetchCurrent',
+    }).then(room => {
+      this.props.dispatch(routerRedux.push(room.meter === '' ? '/choose/index' : '/detail/index'));
     });
   }
   componentWillUnmount() {
@@ -151,7 +152,6 @@ class BasicLayout extends React.PureComponent {
       match,
       location,
     } = this.props;
-    const redirectPath = this.props.room.meter === '' ? '/choose/index' : '/detail/index';
     const layout = (
       <Layout>
         <SiderMenu
@@ -179,9 +179,6 @@ class BasicLayout extends React.PureComponent {
           </Header>
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
             <Switch>
-              {redirectData.map(item => (
-                <Redirect key={item.from} exact from={item.from} to={item.to} />
-              ))}
               {getRoutes(match.path, routerData).map(item => (
                 <AuthorizedRoute
                   key={item.key}
@@ -192,8 +189,6 @@ class BasicLayout extends React.PureComponent {
                   redirectPath="/exception/403"
                 />
               ))}
-              <Redirect exact from="/" to={redirectPath} />
-              <Route render={NotFound} />
             </Switch>
           </Content>
           <Footer style={{ padding: 0 }}>
