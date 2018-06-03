@@ -3,7 +3,7 @@ import { notification } from 'antd';
 import { routerRedux } from 'dva/router';
 import store from '../index';
 
-const noProxy = process.env.NO_PROXY === 'true';
+const isProduction = process.env.NODE_ENV === 'production';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -61,7 +61,7 @@ export default function request(host, url, options) {
       newOptions.body = formData.join('&');
   }
 
-  return fetch((noProxy ? '//' + host : '') + '/electric' + url, newOptions)
+  return fetch((isProduction ? '//' + host : '') + '/electric' + url, newOptions)
     .then(checkStatus)
     .then(response => {
       if (newOptions.method === 'DELETE' || response.status === 204) {
