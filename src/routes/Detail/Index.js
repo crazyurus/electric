@@ -76,11 +76,12 @@ export default class Index extends Component {
     this.props.dispatch({
       type: 'room/updateRoomDetail',
       payload: this.refactRoom(this.props.room.room),
-    }).then(() => {
+    }).then(response => {
       this.setState({
         updateLoading: false,
       });
-      message.success('抄表成功');
+      if (response.errCode === 0) message.success('抄表成功');
+      else message.error('抄表失败');
     });
   };
 
@@ -96,7 +97,7 @@ export default class Index extends Component {
   }
 
   calcRemainDay(left, speed) {
-    if (!speed || speed == -1) return '很久之后';
+    if (!speed || speed === -1) return '很久之后';
     const remain = Math.floor(left.replace('度', '') / speed);
     const now = new Date();
     const predict = new Date(now.getFullYear(), now.getMonth(), now.getDate() + remain);
@@ -128,7 +129,7 @@ export default class Index extends Component {
         <div className={styles.avatar}>
           <Avatar
             size="large"
-            src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
+            src="//gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
           />
         </div>
         <div className={styles.content}>

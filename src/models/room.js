@@ -35,10 +35,11 @@ export default {
     },
     *updateRoomDetail({ payload }, { call, put }) {
       const response = yield call(api.InfoUpdate, payload);
-      yield put({
+      if (response.data) yield put({
         type: 'update',
         payload: response.data,
-      })
+      });
+      return response;
     },
     *fetchEverydayInfo(_, { call, put }) {
       const response = yield call(api.InfoEveryday);
