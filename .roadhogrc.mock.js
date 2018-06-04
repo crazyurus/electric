@@ -10,6 +10,9 @@ const api = [
   'POST /electric/info/detail',
   'POST /electric/info/day',
   'POST /electric/info/update',
+  'POST /electrlc/choose/architecture',
+  'POST /electrlc/choose/floor',
+  'POST /electrlc/choose/meter',
 ];
 
 const proxy = {};
