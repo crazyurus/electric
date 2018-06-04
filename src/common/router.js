@@ -90,7 +90,7 @@ export const getRouterData = app => {
     },
     '/index/choose': {
       name: '选择宿舍',
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
+      component: dynamicWrapper(app, ['user', 'room'], () => import('../routes/Index/Choose')),
     },
     '/charge/index': {
       name: '充值',

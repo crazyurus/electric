@@ -9,4 +9,10 @@ export default {
   async room() {
     return request(host, '/api/room');
   },
+  async register(params) {
+    return request(host, '/login/register', {
+      method: 'POST',
+      body: params,
+    });
+  },
 }

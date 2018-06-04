@@ -48,6 +48,14 @@ export default {
         payload: response.data,
       });
     },
+    *register({ payload }, { call, put }) {
+      const response = yield call(web.register, payload);
+      yield put({
+        type: 'saveCurrentRoom',
+        payload,
+      });
+      return response;
+    },
   },
 
   reducers: {
