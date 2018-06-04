@@ -89,6 +89,7 @@ class BasicLayout extends React.PureComponent {
   };
   state = {
     isMobile,
+    menuData: getMenuData(),
   };
   getChildContext() {
     const { location, routerData } = this.props;
@@ -109,6 +110,9 @@ class BasicLayout extends React.PureComponent {
     this.props.dispatch({
       type: 'room/fetchCurrent',
     }).then(room => {
+      const { menuData } = this.state;
+      if (room.meter === '') menuData[4].name = '选择宿舍';
+      this.setState({ menuData });
       this.props.dispatch(routerRedux.push(room.meter === '' ? '/index/choose' : '/detail/index'));
     });
   }
@@ -152,6 +156,7 @@ class BasicLayout extends React.PureComponent {
       match,
       location,
     } = this.props;
+
     const layout = (
       <Layout>
         <SiderMenu
@@ -160,7 +165,7 @@ class BasicLayout extends React.PureComponent {
           // If you do not have the Authorized parameter
           // you will be forced to jump to the 403 interface without permission
           Authorized={Authorized}
-          menuData={getMenuData()}
+          menuData={this.state.menuData}
           collapsed={collapsed}
           location={location}
           isMobile={this.state.isMobile}
