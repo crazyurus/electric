@@ -1,21 +1,23 @@
 import api from '../services/api';
 import web from '../services/web';
 
+const initialState = {
+  room: {
+    meter: '',
+    area: 0,
+  },
+  detail: {
+    sum: '0',
+    today: {},
+    month: {},
+  },
+  everyday: {},
+};
+
 export default {
   namespace: 'room',
 
-  state: {
-    room: {
-      meter: '',
-      area: 0,
-    },
-    detail: {
-      sum: '0',
-      today: {},
-      month: {},
-    },
-    everyday: {},
-  },
+  state: { ...initialState },
 
   effects: {
     *fetchCurrent(_, { call, put }) {
@@ -79,6 +81,9 @@ export default {
         ...state,
         detail,
       };
+    },
+    reset() {
+      return { ...initialState };
     },
     saveEverydayInfo(state, action) {
       return {

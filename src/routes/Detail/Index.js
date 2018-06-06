@@ -46,10 +46,12 @@ const Do = ({ children }) => {
 export default class Index extends Component {
 
   componentDidMount() {
-    this.props.dispatch({
-      type: 'room/fetchRoomDetail',
-      payload: this.refactRoom(this.props.room.room),
-    });
+    if (!this.props.room.detail.left) {
+      this.props.dispatch({
+        type: 'room/fetchRoomDetail',
+        payload: this.refactRoom(this.props.room.room),
+      });
+    }
   }
 
   refactRoom(room) {
