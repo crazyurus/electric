@@ -8,7 +8,6 @@ import {
   Card,
   Tabs,
   Tooltip,
-  Spin,
   message,
 } from 'antd';
 import numeral from 'numeral';
@@ -41,13 +40,10 @@ const Do = ({ children }) => {
 
 @connect(({ room, loading }) => ({
   room,
-  loading: loading.effects['room/fetchRoomDetail'],
+  detailLoading: loading.effects['room/fetchRoomDetail'],
+  updateLoading: loading.effects['room/updateRoomDetail'],
 }))
 export default class Index extends Component {
-
-  state = {
-    updateLoading: false,
-  };
 
   componentDidMount() {
     this.props.dispatch({
@@ -70,16 +66,10 @@ export default class Index extends Component {
   };
 
   updateRoomDetail = () => {
-    this.setState({
-      updateLoading: true,
-    });
     this.props.dispatch({
       type: 'room/updateRoomDetail',
       payload: this.refactRoom(this.props.room.room),
     }).then(response => {
-      this.setState({
-        updateLoading: false,
-      });
       if (response.errCode === 0) message.success('抄表成功');
       else message.error('抄表失败');
     });
@@ -109,7 +99,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { room, loading } = this.props;
+    const { room, detailLoading, updateLoading, chartLoading } = this.props;
 
     const monthChoose = (
       <div className={styles.salesExtraWrap}>
@@ -178,7 +168,6 @@ export default class Index extends Component {
       <PageHeaderLayout content={pageHeaderContent} extraContent={extraContent}>
         <Row gutter={24}>
           <Col {...topColResponsiveProps}>
-            <Spin spinning={this.state.updateLoading} delay={500}>
               <ChartCard
                 bordered={false}
                 title="剩余电量"
@@ -186,8 +175,8 @@ export default class Index extends Component {
                 total={<Do>{room.detail.left}</Do>}
                 footer={leftCardFooter}
                 contentHeight={46}
+                loading={detailLoading || updateLoading}
               />
-            </Spin>
           </Col>
           <Col {...topColResponsiveProps}>
             <ChartCard
@@ -196,6 +185,7 @@ export default class Index extends Component {
               total={<Do>{room.detail.today.use}</Do>}
               footer={<Field label="当日电费" value={<Yuan>{room.detail.today.price}</Yuan>} />}
               contentHeight={46}
+              loading={detailLoading}
             />
           </Col>
           <Col {...topColResponsiveProps}>
@@ -205,6 +195,7 @@ export default class Index extends Component {
               total={<Do>{room.detail.month.use}</Do>}
               footer={<Field label="当月电费" value={<Yuan>{room.detail.month.price}</Yuan>} />}
               contentHeight={46}
+              loading={detailLoading}
             />
           </Col>
           <Col {...topColResponsiveProps}>
@@ -215,11 +206,12 @@ export default class Index extends Component {
               total={numeral(room.detail.sum.replace('千瓦时', '')).format('0,0')}
               footer={<Field label="电费单价" value={<Yuan>{room.detail.unit_price}</Yuan>} />}
               contentHeight={46}
+              loading={detailLoading}
             />
           </Col>
         </Row>
 
-        <Card loading={loading} bordered={false} bodyStyle={{ padding: 0 }}>
+        <Card bordered={false} bodyStyle={{ padding: 0 }}>
           <div className={styles.salesCard}>
             <Tabs tabBarExtraContent={monthChoose} size="large" tabBarStyle={{ marginBottom: 24 }}>
               <TabPane tab="每日用电" key="sales">
