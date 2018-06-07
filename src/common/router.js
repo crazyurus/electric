@@ -78,7 +78,7 @@ export const getRouterData = app => {
     },
     '/detail/pay': {
       name: '充值记录',
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
+      component: dynamicWrapper(app, [], () => import('../routes/Detail/Pay')),
     },
     '/notice/list': {
       name: '通知列表',

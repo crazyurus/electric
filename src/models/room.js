@@ -27,7 +27,7 @@ export default {
       });
       return response;
     },
-    *fetchRoomDetail({ payload }, { select, call, put }) {
+    *fetchRoomDetail(_, { select, call, put }) {
       const room = yield select(state => state.room.room);
       const response = yield call(api.InfoDetail, refactRoom(room));
       yield put({
@@ -35,7 +35,7 @@ export default {
         payload: response.data,
       });
     },
-    *updateRoomDetail({ payload }, { select, call, put }) {
+    *updateRoomDetail(_, { select, call, put }) {
       const room = yield select(state => state.room.room);
       const response = yield call(api.InfoUpdate, refactRoom(room));
       if (response.data) yield put({

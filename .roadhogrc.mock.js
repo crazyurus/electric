@@ -10,6 +10,7 @@ const api = [
   'POST /electric/info/detail',
   'POST /electric/info/day',
   'POST /electric/info/update',
+  'POST /electric/info/pay',
   'POST /electric/choose/architecture',
   'POST /electric/choose/floor',
   'POST /electric/choose/meter',

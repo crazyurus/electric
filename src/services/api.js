@@ -9,8 +9,17 @@ export default {
       body: params,
     });
   },
-  async InfoEveryday() {
-    return request(host, '/info/everyday');
+  async InfoCharge(params) {
+    return request(host, '/info/pay', {
+      method: 'POST',
+      body: params,
+    });
+  },
+  async InfoEveryday(params) {
+    return request(host, '/info/everyday', {
+      method: 'POST',
+      body: params,
+    });
   },
   async InfoUpdate(params) {
     return request(host, '/info/update', {
