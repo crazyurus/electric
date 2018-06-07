@@ -49,16 +49,8 @@ export default class Index extends Component {
     if (!this.props.room.detail.left) {
       this.props.dispatch({
         type: 'room/fetchRoomDetail',
-        payload: this.refactRoom(this.props.room.room),
       });
     }
-  }
-
-  refactRoom(room) {
-    return {
-      id: room.meter,
-      area: room.area,
-    };
   }
 
   handleChangeSalesType = e => {
@@ -70,7 +62,6 @@ export default class Index extends Component {
   updateRoomDetail = () => {
     this.props.dispatch({
       type: 'room/updateRoomDetail',
-      payload: this.refactRoom(this.props.room.room),
     }).then(response => {
       if (response.errCode === 0) message.success('抄表成功');
       else message.error('抄表失败');

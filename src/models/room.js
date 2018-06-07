@@ -1,5 +1,6 @@
 import api from '../services/api';
 import web from '../services/web';
+import { refactRoom } from '../utils/utils';
 
 export default {
   namespace: 'room',
@@ -26,23 +27,26 @@ export default {
       });
       return response;
     },
-    *fetchRoomDetail({ payload }, { call, put }) {
-      const response = yield call(api.InfoDetail, payload);
+    *fetchRoomDetail({ payload }, { select, call, put }) {
+      const room = yield select(state => state.room.room);
+      const response = yield call(api.InfoDetail, refactRoom(room));
       yield put({
         type: 'saveRoomDetail',
         payload: response.data,
       });
     },
-    *updateRoomDetail({ payload }, { call, put }) {
-      const response = yield call(api.InfoUpdate, payload);
+    *updateRoomDetail({ payload }, { select, call, put }) {
+      const room = yield select(state => state.room.room);
+      const response = yield call(api.InfoUpdate, refactRoom(room));
       if (response.data) yield put({
         type: 'update',
         payload: response.data,
       });
       return response;
     },
-    *fetchEverydayInfo(_, { call, put }) {
-      const response = yield call(api.InfoEveryday);
+    *fetchEverydayInfo(_, { select, call, put }) {
+      const room = yield select(state => state.room.room);
+      const response = yield call(api.InfoEveryday, refactRoom(room));
       yield put({
         type: 'saveEverydayInfo',
         payload: response.data,
