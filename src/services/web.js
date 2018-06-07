@@ -15,4 +15,16 @@ export default {
       body: params,
     });
   },
+  async prepare(params) {
+    return request(host, '/pay/prepare', {
+      method: 'POST',
+      body: params,
+    });
+  },
+  async check(params) {
+    return request(host, '/pay/check', {
+      method: 'POST',
+      body: params,
+    });
+  },
 }

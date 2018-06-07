@@ -78,8 +78,7 @@ export default class Index extends Component {
   };
 
   transAreaName(area) {
-    const id = Number.parseInt(area, 10);
-    switch (id) {
+    switch (area.valueOf()) {
       case 1: return '南湖校区';
       case 2: return '东院';
       case 3: return '西院/鉴湖校区';

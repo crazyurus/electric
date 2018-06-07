@@ -1,0 +1,188 @@
+@import '~antd/lib/style/themes/default.less';
+
+.card {
+  margin-bottom: 24px;
+}
+
+.heading {
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0 0 16px 0;
+}
+
+.steps:global(.ant-steps) {
+  max-width: 750px;
+  margin: 16px auto;
+}
+
+.errorIcon {
+  cursor: pointer;
+  color: @error-color;
+  margin-right: 24px;
+  i {
+    margin-right: 4px;
+  }
+}
+
+.errorPopover {
+  :global {
+    .ant-popover-inner-content {
+      padding: 0;
+      max-height: 290px;
+      overflow: auto;
+      min-width: 256px;
+    }
+  }
+}
+
+.errorListItem {
+  list-style: none;
+  border-bottom: 1px solid @border-color-split;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    background: @primary-1;
+  }
+  &:last-child {
+    border: 0;
+  }
+  .errorIcon {
+    color: @error-color;
+    float: left;
+    margin-top: 4px;
+    margin-right: 12px;
+    padding-bottom: 22px;
+  }
+  .errorField {
+    font-size: 12px;
+    color: @text-color-secondary;
+    margin-top: 2px;
+  }
+}
+
+.editable {
+  td {
+    padding-top: 13px !important;
+    padding-bottom: 12.5px !important;
+  }
+}
+
+// custom footer for fixed footer toolbar
+.advancedForm + div {
+  padding-bottom: 64px;
+}
+
+.advancedForm {
+  :global {
+    .ant-form .ant-row:last-child .ant-form-item {
+      margin-bottom: 24px;
+    }
+    .ant-table td {
+      transition: none !important;
+    }
+  }
+}
+
+.optional {
+  color: @text-color-secondary;
+  font-style: normal;
+}
+
+.stepForm {
+  margin: 40px auto 0 !important;
+  max-width: 500px;
+}
+
+.stepFormText {
+  margin-bottom: 24px;
+  :global {
+    .ant-form-item-label,
+    .ant-form-item-control {
+      line-height: 22px;
+    }
+  }
+}
+
+.result {
+  margin: 0 auto;
+  max-width: 560px;
+  padding: 24px 0 8px;
+}
+
+.desc {
+  padding: 0 56px;
+  color: @text-color-secondary;
+  h3 {
+    font-size: 16px;
+    margin: 0 0 12px 0;
+    color: @text-color-secondary;
+    line-height: 32px;
+  }
+  h4 {
+    margin: 0 0 4px 0;
+    color: @text-color-secondary;
+    font-size: 14px;
+    line-height: 22px;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    line-height: 22px;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .desc {
+    padding: 0;
+  }
+}
+
+.information {
+  line-height: 22px;
+  :global {
+    .ant-row:not(:last-child) {
+      margin-bottom: 24px;
+    }
+  }
+  .label {
+    color: @heading-color;
+    text-align: right;
+    padding-right: 8px;
+    @media screen and (max-width: @screen-sm) {
+      text-align: left;
+    }
+  }
+}
+
+.money {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 14px;
+}
+
+.uppercase {
+  font-size: 12px;
+}
+
+.qrcode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .title {
+    line-height: 1.6;
+    margin: 20px 0;
+    color: rgb(55,55,55);
+    font-size: 15px;
+  }
+  .image {
+    border: 1px solid #E2E2E2;
+    border-radius: 6px;
+    img {
+      width: 248px;
+      height: 248px;
+    }
+  }
+}
+

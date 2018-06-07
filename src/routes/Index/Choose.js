@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { connect, red } from 'dva';
+import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import {
   Form,
@@ -51,7 +51,7 @@ export default class ChooseForm extends PureComponent {
 
   changeAreaPicker = (value) => {
     const area = value.split('*')[0];
-    this.state.select.area = area;
+    this.state.select.area = area.valueOf();
     this.getChooseInfo('architecture', value).then(res => {
       this.setState({
         select: Object.assign({}, this.state.select, { area }),
@@ -70,7 +70,7 @@ export default class ChooseForm extends PureComponent {
     this.setState({
       select: Object.assign({}, this.state.select, { meter }),
     });
-  }
+  };
 
   changeCascader = (selectedOptions) => {
     const targetOption = selectedOptions[selectedOptions.length - 1];

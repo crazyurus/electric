@@ -14,6 +14,9 @@ const api = [
   'POST /electric/choose/floor',
   'POST /electric/choose/meter',
   'POST /electric/login/register',
+  'POST /electric/pay/prepare',
+  'POST /electric/pay/check',
+  'GET /electric/ip.php',
 ];
 
 const proxy = {};

@@ -94,19 +94,19 @@ export const getRouterData = app => {
     },
     '/charge/index': {
       name: '充值',
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
+      component: dynamicWrapper(app, ['pay'], () => import('../routes/Charge/Index')),
     },
     '/charge/index/form': {
-      name: '充值金额表单',
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
+      name: '填写充值信息',
+      component: dynamicWrapper(app, ['pay', 'room', 'user'], () => import('../routes/Charge/Step/Form')),
     },
     '/charge/index/qrcode': {
-      name: '充值扫码支付',
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
+      name: '扫码支付',
+      component: dynamicWrapper(app, ['pay'], () => import('../routes/Charge/Step/Qrcode')),
     },
-    '/charge/index/finish': {
-      name: '充值完成',
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
+    '/charge/index/success': {
+      name: '完成',
+      component: dynamicWrapper(app, ['pay'], () => import('../routes/Charge/Step/Success')),
     },
   };
   // Get name from ./menu.js or just set it in the router data.
