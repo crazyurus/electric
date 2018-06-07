@@ -26,10 +26,10 @@ class ChargeForm extends React.PureComponent {
          return this.props.dispatch({
            type: 'pay/prepare',
            payload: {
-             area: this.props.room.area,
+             area: this.props.room.room.area,
              amount: values.amount,
              sno: this.props.user.currentUser.sno,
-             meter: this.props.room.meter,
+             meter: this.props.room.room.meter,
              type: 'NATIVE',
              ip,
            },
@@ -44,7 +44,8 @@ class ChargeForm extends React.PureComponent {
   render() {
     const { form, room, submitLoading } = this.props;
     const { getFieldDecorator } = form;
-    const isYuArea = room.area === 7;
+    const isYuArea = room.room.area === 7;
+    const isOffline = room.detail.status.indexOf('离线') > -1;
 
     return (
       <Fragment>
@@ -52,8 +53,11 @@ class ChargeForm extends React.PureComponent {
           {
             isYuArea ? '' : <Alert showIcon message="马房山校区的宿舍暂不支持在线充值" style={{ marginBottom: 24 }} />
           }
+          {
+            !isYuArea && isOffline ? <Alert showIcon message="宿舍电表处于离线状态暂不支持在线充值" style={{ marginBottom: 24 }} /> : ''
+          }
           <Form.Item {...formItemLayout} label="宿舍">
-            <strong>{room.meter.split('*')[2]}</strong>
+            <strong>{room.room.meter.split('*')[2]}</strong>
           </Form.Item>
           <Form.Item {...formItemLayout} label="充值金额">
             {getFieldDecorator('amount', {
@@ -98,7 +102,7 @@ class ChargeForm extends React.PureComponent {
               },
             }}
           >
-            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={!isYuArea}>
+            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={!isYuArea || isOffline}>
               支付
             </Button>
             <Button type="default" style={{ marginLeft: '12px' }} onClick={() => this.props.dispatch(routerRedux.push('/detail/pay'))}>
@@ -121,7 +125,7 @@ class ChargeForm extends React.PureComponent {
 
 export default connect(({ user, room, pay, loading }) => ({
   user,
-  room: room.room,
+  room: room,
   pay,
   submitLoading: loading.effects['pay/prepare'] || loading.effects['pay/ip'],
 }))(ChargeForm);
