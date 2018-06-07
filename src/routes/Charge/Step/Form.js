@@ -54,7 +54,7 @@ class ChargeForm extends React.PureComponent {
             isYuArea ? '' : <Alert showIcon message="马房山校区的宿舍暂不支持在线充值" style={{ marginBottom: 24 }} />
           }
           {
-            !isYuArea && isOffline ? <Alert showIcon message="宿舍电表处于离线状态暂不支持在线充值" style={{ marginBottom: 24 }} /> : ''
+            isYuArea && isOffline ? <Alert showIcon message="宿舍电表处于离线状态暂不支持在线充值" style={{ marginBottom: 24 }} /> : ''
           }
           <Form.Item {...formItemLayout} label="宿舍">
             <strong>{room.room.meter.split('*')[2]}</strong>

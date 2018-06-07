@@ -125,7 +125,7 @@ export default class Index extends Component {
         </div>
         <div className={styles.content}>
           <div className={styles.contentTitle}>{room.detail.name ? room.detail.name : '加载中…'}</div>
-          <div>{this.transAreaName(this.props.room.room.area)} | No.{room.detail.no}</div>
+          <div>{this.transAreaName(room.room.area)} | No.{room.detail.no}</div>
         </div>
       </div>
     );

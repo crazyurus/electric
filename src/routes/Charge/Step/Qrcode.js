@@ -16,7 +16,7 @@ class ChargeQrcode extends React.PureComponent {
       if (status === 0) this.props.dispatch(routerRedux.push('/charge/index/success'));
       else Modal.error({
         title: '电费支付失败',
-        content: '支付失败，可能是支付尚未完成，请再次扫码支付',
+        content: '可能是支付尚未完成或银行卡余额不足，请再次扫码支付',
       });
     });
   }
@@ -24,7 +24,7 @@ class ChargeQrcode extends React.PureComponent {
   render() {
     return (
       <div className={styles.qrcode}>
-        <div className={styles.title}>请使用 <Icon type="wechat" /> <strong>微信</strong>扫描二维码支付</div>
+        <div className={styles.title}>请使用 <Icon type="wechat" /> <strong>微信</strong> 扫描二维码支付</div>
         <div className={styles.image}>
           <img src={'/electric/detail/qrcode?url=' + encodeURIComponent(this.props.pay.qrcode)} alt="二维码" />
         </div>

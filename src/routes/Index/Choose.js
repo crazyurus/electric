@@ -50,11 +50,11 @@ export default class ChooseForm extends PureComponent {
   };
 
   changeAreaPicker = (value) => {
-    const area = value.split('*')[0];
-    this.state.select.area = area.valueOf();
+    const area = Number.parseInt(value.split('*')[0], 10);
+    this.state.select.area = area;
     this.getChooseInfo('architecture', value).then(res => {
       this.setState({
-        select: Object.assign({}, this.state.select, { area }),
+        select: { area },
         data: res.data.map(item => ({
           id: item.id,
           type: 'architecture',
