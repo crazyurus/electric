@@ -78,7 +78,7 @@ export default class GlobalHeader extends PureComponent {
           <Popover placement="bottom" title={<center>微信扫一扫打开小程序</center>} content={<img src="//web.wutnews.net/Application/Electric/Assets/image/mina.jpg" style={{ width: '200px', height: '200px' }} />}>
             <a className={styles.action}><Icon type="wechat" /></a>
           </Popover>
-          <Tooltip title="帮助建议">
+          <Tooltip title="反馈">
             <a
               target="_blank"
               href="https://support.qq.com/product/23798"
