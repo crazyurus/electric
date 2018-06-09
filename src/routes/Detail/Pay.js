@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Card, Badge } from 'antd';
 import StandardTable from 'components/StandardTable';

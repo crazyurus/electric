@@ -24,7 +24,7 @@ function RouterConfig({ history, app }) {
             path="/"
             render={props => <BasicLayout {...props} />}
             authority={['anonymous', 'user']}
-            redirectPath="/user/login"
+            redirectPath="/exception/404"
           />
         </Switch>
       </ConnectedRouter>

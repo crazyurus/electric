@@ -17,6 +17,8 @@ const api = [
   'POST /electric/login/register',
   'POST /electric/pay/prepare',
   'POST /electric/pay/check',
+  'POST /electric/notice/api',
+  'GET /electric/notice/content',
   'GET /electric/ip.php',
 ];
 

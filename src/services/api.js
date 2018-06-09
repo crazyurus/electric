@@ -27,4 +27,13 @@ export default {
       body: params,
     });
   },
+  async NoticeList(params) {
+    return request(host, '/notice/api', {
+      method: 'POST',
+      body: params,
+    });
+  },
+  async NoticeDetail() {
+    return request(host, '/notice/content');
+  },
 }
