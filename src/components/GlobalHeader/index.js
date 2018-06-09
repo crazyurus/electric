@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Menu, Icon, Spin, Dropdown, Avatar, Divider, Tooltip } from 'antd';
+import { Menu, Icon, Spin, Dropdown, Avatar, Divider, Tooltip, Popover } from 'antd';
 import Debounce from 'lodash-decorators/debounce';
 import { Link } from 'dva/router';
 import styles from './index.less';
@@ -75,16 +75,9 @@ export default class GlobalHeader extends PureComponent {
           onClick={this.toggle}
         />
         <div className={styles.right}>
-          <Tooltip title="微信小程序">
-            <a
-              target="_blank"
-              href="https://support.qq.com/product/23798"
-              rel="noopener noreferrer"
-              className={styles.action}
-            >
-              <Icon type="wechat" />
-            </a>
-          </Tooltip>
+          <Popover placement="bottom" title={<center>微信扫一扫打开小程序</center>} content={<img src="//web.wutnews.net/Application/Electric/Assets/image/mina.jpg" style={{ width: '200px', height: '200px' }} />}>
+            <a className={styles.action}><Icon type="wechat" /></a>
+          </Popover>
           <Tooltip title="帮助建议">
             <a
               target="_blank"
