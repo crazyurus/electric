@@ -8,7 +8,6 @@ const menuData = [{
     name: '充值',
     icon: 'pay-circle',
     path: 'charge/index',
-    authority: 'user',
   }, {
     name: '停电通知',
     icon: 'profile',
