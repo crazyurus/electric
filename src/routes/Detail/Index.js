@@ -163,7 +163,7 @@ export default class Index extends Component {
               <ChartCard
                 bordered={false}
                 title="剩余电量"
-                action={<a href="#" title="刷新电量" onClick={this.updateRoomDetail}>刷新</a>}
+                action={<a href="javascript:;" title="刷新电量" onClick={this.updateRoomDetail}>刷新</a>}
                 total={<Do>{room.detail.left}</Do>}
                 footer={leftCardFooter}
                 contentHeight={46}

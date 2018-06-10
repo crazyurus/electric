@@ -25,6 +25,12 @@ export default class Feedback extends React.Component {
         link: 'http://sighttp.qq.com/authd?IDKEY=ef6445db7bb631874b7e44061d0acd803cb77a3b8306251d',
         avatar: 'qq',
       },
+      {
+        name: '微信公众号',
+        desc: 'Token团队公众号搜索wutnews关注',
+        link: 'javascript:;',
+        avatar: 'wechat',
+      },
     ];
 
     return (
