@@ -108,6 +108,10 @@ export const getRouterData = app => {
       name: '完成',
       component: dynamicWrapper(app, ['pay'], () => import('../routes/Charge/Step/Success')),
     },
+    '/charge/map': {
+      name: '线下充值点',
+      component: dynamicWrapper(app, [], () => import('../routes/Charge/Map')),
+    },
     '/feedback': {
       name: '帮助建议',
       component: dynamicWrapper(app, [], () => import('../routes/Feedback')),

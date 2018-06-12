@@ -69,18 +69,24 @@ class ChargeForm extends React.PureComponent {
     }, {
       name: '升升公寓',
       position: [30.504560, 114.344748],
-      telephone: 'empty',
+      telephone: null,
       address: '物业办公楼一层',
     }];
 
     const menu = (
       <Menu>
         {
-          station.map(item => (
-            <Menu.Item>
-              <Link to="/charge/map">{item.name}</Link>
-            </Menu.Item>
-          ))
+          station.map(item => {
+            const path = {
+              pathname: '/charge/map',
+              query: item,
+            };
+            return (
+              <Menu.Item key={item.name}>
+                <Link to={path}>{item.name}</Link>
+              </Menu.Item>
+            );
+          })
         }
       </Menu>
     );
@@ -152,7 +158,7 @@ class ChargeForm extends React.PureComponent {
         <div className={styles.desc}>
           <h3>充值说明</h3>
           <h4>线上充值范围</h4>
-          <p>目前余家头校区的宿舍支持在线充值，马房山校区的宿舍暂不支持需要前往线下充值点缴费。<Dropdown overlay={menu} trigger="click">
+          <p>目前余家头校区的宿舍支持在线充值，马房山校区的宿舍暂不支持需要前往线下充值点缴费。<Dropdown overlay={menu} trigger={['click']}>
             <a className="ant-dropdown-link">
               点击查看各个校区的线下充值点
             </a>
