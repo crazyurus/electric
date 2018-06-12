@@ -5,8 +5,8 @@ export default {
   namespace: 'user',
 
   state: {
-    currentUser: {},
-    currentAuthority: 'anonymous',
+    current: {},
+    authority: 'anonymous',
   },
 
   effects: {
@@ -25,8 +25,8 @@ export default {
       setAuthority(authority);
       return {
         ...state,
-        currentUser: action.payload,
-        currentAuthority: authority,
+        current: action.payload,
+        authority,
       };
     },
   },

@@ -144,7 +144,7 @@ export default class ChooseForm extends PureComponent {
       },
     };
 
-    const { currentUser, currentAuthority } = this.props.user;
+    const { current: currentUser, authority: currentAuthority } = this.props.user;
 
     return (
       <PageHeaderLayout

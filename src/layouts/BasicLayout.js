@@ -240,7 +240,7 @@ class BasicLayout extends React.PureComponent {
 }
 
 export default connect(({ user, room, global, loading }) => ({
-  currentUser: user.currentUser,
+  currentUser: user.current,
   collapsed: global.collapsed,
   loading: loading.effects['room/fetchCurrent'],
   room,

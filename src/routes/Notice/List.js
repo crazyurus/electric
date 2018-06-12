@@ -67,7 +67,7 @@ export default class NoticeList extends Component {
             renderItem={item => (
               <List.Item key={item.link}>
                 <List.Item.Meta
-                  title={<a href={'http://i.whut.edu.cn/xxtg/znbm/' + item.link} className="external" target="_blank">{item.title}</a>}
+                  title={<a href={'http://i.whut.edu.cn/xxtg/znbm/' + item.link} target="_blank">{item.title}</a>}
                   description={item.time}
                   style={{ marginBottom: 0 }}
                 />

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
-import { Form, Input, Button, Radio, Divider, Alert } from 'antd';
-import { routerRedux } from 'dva/router';
+import { Form, Input, Button, Radio, Divider, Alert, Menu, Dropdown } from 'antd';
+import { routerRedux, Link } from 'dva/router';
 import styles from '../style.less';
 
 const formItemLayout = {
@@ -28,7 +28,7 @@ class ChargeForm extends React.PureComponent {
            payload: {
              area: this.props.room.room.area,
              amount: values.amount,
-             sno: this.props.user.currentUser.sno,
+             sno: this.props.currentUser.sno,
              meter: this.props.room.room.meter,
              type: 'NATIVE',
              ip,
@@ -46,6 +46,44 @@ class ChargeForm extends React.PureComponent {
     const { getFieldDecorator } = form;
     const isYuArea = room.room.area === 7;
     const isOffline = room.detail.status.indexOf('离线') > -1;
+    const station = [{
+      name: '南湖',
+      position: [30.512500, 114.329079],
+      telephone: '87756329',
+      address: '后街医务室旁，北七宿舍对面',
+    }, {
+      name: '西院/鉴湖',
+      position: [30.513068, 114.343386],
+      telephone: '87381736',
+      address: '鉴湖主教学楼西侧',
+    }, {
+      name: '东院',
+      position: [30.521752, 114.351904],
+      telephone: '87859134',
+      address: '东院大门右侧',
+    }, {
+      name: '余区',
+      position: [30.607892, 114.357253],
+      telephone: '86860918',
+      address: '余27栋后勤办公室',
+    }, {
+      name: '升升公寓',
+      position: [30.504560, 114.344748],
+      telephone: 'empty',
+      address: '物业办公楼一层',
+    }];
+
+    const menu = (
+      <Menu>
+        {
+          station.map(item => (
+            <Menu.Item>
+              <Link to="/charge/map">{item.name}</Link>
+            </Menu.Item>
+          ))
+        }
+      </Menu>
+    );
 
     return (
       <Fragment>
@@ -74,7 +112,7 @@ class ChargeForm extends React.PureComponent {
                 },
                 {
                   validator(rule, value, callback) {
-                    if (value.valueOf() < 1) callback('充值金额不能小于1元');
+                    if (Number.parseFloat(value) < 1) callback('充值金额不能小于1元');
                     else callback();
                   },
                 },
@@ -114,7 +152,11 @@ class ChargeForm extends React.PureComponent {
         <div className={styles.desc}>
           <h3>充值说明</h3>
           <h4>线上充值范围</h4>
-          <p>目前余家头校区的宿舍支持在线充值，马房山校区的宿舍暂不支持需要前往线下充值点缴费。<a href="#">点击查看各个校区的线下充值点</a></p>
+          <p>目前余家头校区的宿舍支持在线充值，马房山校区的宿舍暂不支持需要前往线下充值点缴费。<Dropdown overlay={menu} trigger="click">
+            <a className="ant-dropdown-link">
+              点击查看各个校区的线下充值点
+            </a>
+          </Dropdown><br />人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30；自助充值机充值时间：每日6:00-24:00。注意不可以跨校区充值。</p>
           <h4>充值后未成功下发电</h4>
           <p>请联系余家头校区管理委员会后勤办公室，电话：<a href="tel:027-86860918">027-86860918</a>。</p>
         </div>
@@ -124,8 +166,8 @@ class ChargeForm extends React.PureComponent {
 }
 
 export default connect(({ user, room, pay, loading }) => ({
-  user,
-  room: room,
+  currentUser: user.current,
+  room,
   pay,
   submitLoading: loading.effects['pay/prepare'] || loading.effects['pay/ip'],
 }))(ChargeForm);
