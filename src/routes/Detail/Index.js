@@ -17,23 +17,12 @@ import {
   Bar,
 } from 'components/Charts';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
-
 import styles from './Index.less';
 
 const { TabPane } = Tabs;
-
-const rankingListData = [];
-for (let i = 0; i < 7; i += 1) {
-  rankingListData.push({
-    title: `工大路 ${i} 号店`,
-    total: 323234,
-  });
-}
-
 const Yuan = ({ children }) => {
   return children ? '¥' + children.replace('元', '') : ''; /* eslint-disable-line react/no-danger */
 };
-
 const Do = ({ children }) => {
   return children ? children.replace('度', '').replace('千瓦时', '') : '0.00'; /* eslint-disable-line react/no-danger */
 };
@@ -48,6 +37,7 @@ export default class Index extends Component {
 
   state = {
     month: 0,
+    rankList: [],
   };
 
   componentDidMount() {
@@ -64,7 +54,16 @@ export default class Index extends Component {
   }
 
   setMonth = month => {
-    this.setState({ month });
+    let monthData = [].concat(this.props.room.everyday[month]);
+    monthData.sort((a, b) => b.y - a.y);
+    const rankList = [];
+    for (let i = 0; i < Math.min(monthData.length, 8); ++i) {
+      rankList.push({
+        title: month + '月' + monthData[i].x + '日',
+        total: monthData[i].y + '度',
+      });
+    }
+    this.setState({ month, rankList });
   };
 
   updateRoomDetail = () => {
@@ -214,18 +213,18 @@ export default class Index extends Component {
                 <Row>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
                     <div className={styles.salesBar}>
-                      <Bar height={300} title={this.state.month + '月'} data={room.everyday[this.state.month]} />
+                      <Bar height={340} title={this.state.month + '月'} data={room.everyday[this.state.month]} />
                     </div>
                   </Col>
                   <Col xl={8} lg={12} md={12} sm={24} xs={24}>
                     <div className={styles.salesRank}>
                       <h4 className={styles.rankingTitle}>{this.state.month}月用电排名</h4>
                       <ul className={styles.rankingList}>
-                        {rankingListData.map((item, i) => (
+                        {this.state.rankList.map((item, i) => (
                           <li key={item.title}>
                             <span className={i < 3 ? styles.active : ''}>{i + 1}</span>
                             <span>{item.title}</span>
-                            <span>{numeral(item.total).format('0,0')}</span>
+                            <span>{item.total}</span>
                           </li>
                         ))}
                       </ul>
