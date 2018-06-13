@@ -45,12 +45,12 @@ export default class Index extends Component {
       this.props.dispatch({
         type: 'room/fetchRoomDetail',
       });
-      this.props.dispatch({
-        type: 'room/fetchEverydayInfo',
-      }).then(month => {
-        this.setMonth(month);
-      });
     }
+    this.props.dispatch({
+      type: 'room/fetchEverydayInfo',
+    }).then(month => {
+      this.setMonth(month);
+    });
   }
 
   setMonth = month => {
