@@ -16,7 +16,7 @@ export default {
     });
   },
   async InfoEveryday(params) {
-    return request(host, '/info/everyday', {
+    return request(host, '/info/day', {
       method: 'POST',
       body: params,
     });

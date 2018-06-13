@@ -60,7 +60,7 @@ class Bar extends Component {
       title,
       forceFit = true,
       data,
-      color = 'rgba(24, 144, 255, 0.85)',
+      color = 'rgba(69, 200, 220, 0.6)',
       padding,
     } = this.props;
 
@@ -78,18 +78,17 @@ class Bar extends Component {
     const tooltip = [
       'x*y',
       (x, y) => ({
-        name: x,
-        value: y,
+        name: title + (x + 1) + '日',
+        value: y + '度',
       }),
     ];
 
     return (
       <div className={styles.chart} style={{ height }} ref={this.handleRoot}>
         <div ref={this.handleRef}>
-          {title && <h4 style={{ marginBottom: 20 }}>{title}</h4>}
           <Chart
             scale={scale}
-            height={title ? height - 41 : height}
+            height={height}
             forceFit={forceFit}
             data={data}
             padding={padding || 'auto'}

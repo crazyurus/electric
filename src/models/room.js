@@ -47,10 +47,25 @@ export default {
     *fetchEverydayInfo(_, { select, call, put }) {
       const room = yield select(state => state.room.room);
       const response = yield call(api.InfoEveryday, refactRoom(room));
+
+      const everyday = {};
+      let month = 0;
+      for (const day in response.data) {
+        const current = day.split('-');
+        month = Number.parseInt(current[0]);
+        if (!everyday[month]) everyday[month] = [];
+        everyday[month].push({
+          x: Number.parseInt(current[1]),
+          y: Number.parseFloat(response.data[day]),
+        });
+      }
+
       yield put({
         type: 'saveEverydayInfo',
-        payload: response.data,
+        payload: everyday,
       });
+
+      return month;
     },
     *register({ payload }, { call, put }) {
       const response = yield call(web.register, payload);
@@ -95,10 +110,10 @@ export default {
         everyday: {},
       };
     },
-    saveEverydayInfo(state, action) {
+    saveEverydayInfo(state, { payload }) {
       return {
         ...state,
-        everyday: action.payload,
+        everyday: payload,
       };
     },
   },

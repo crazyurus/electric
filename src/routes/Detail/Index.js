@@ -42,21 +42,29 @@ const Do = ({ children }) => {
   room,
   detailLoading: loading.effects['room/fetchRoomDetail'],
   updateLoading: loading.effects['room/updateRoomDetail'],
+  chartLoading: loading.effects['room/fetchEverydayInfo'],
 }))
 export default class Index extends Component {
+
+  state = {
+    month: 0,
+  };
 
   componentDidMount() {
     if (!this.props.room.detail.left) {
       this.props.dispatch({
         type: 'room/fetchRoomDetail',
       });
+      this.props.dispatch({
+        type: 'room/fetchEverydayInfo',
+      }).then(month => {
+        this.setMonth(month);
+      });
     }
   }
 
-  handleChangeSalesType = e => {
-    this.setState({
-      salesType: e.target.value,
-    });
+  setMonth = month => {
+    this.setState({ month });
   };
 
   updateRoomDetail = () => {
@@ -86,22 +94,18 @@ export default class Index extends Component {
     return (predict.getFullYear() === now.getFullYear() ? '' : predict.getFullYear() + '年') + (predict.getMonth() + 1) + '月' + predict.getDate() + '日';
   }
 
-  isActive(type) {
-
-  }
-
   render() {
     const { room, detailLoading, updateLoading, chartLoading } = this.props;
+
+    const months = [];
+    for (const month in room.everyday) {
+      months.push(month);
+    }
 
     const monthChoose = (
       <div className={styles.salesExtraWrap}>
         <div className={styles.salesExtra}>
-          <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
-            四月
-          </a>
-          <a className={this.isActive('week')} onClick={() => this.selectDate('week')}>
-            五月
-          </a>
+          {months.map(month => <a key={month} className={month == this.state.month ? styles.currentDate : null} onClick={() => this.setMonth(month)}>{month}月</a>)}
         </div>
       </div>
     );
@@ -143,7 +147,7 @@ export default class Index extends Component {
         <Tooltip title="预计用完日期仅供参考">
           <Icon type="info-circle-o" className={styles.leftCardFooterIcon} />
         </Tooltip>
-        <Field label={'预计' + this.calcRemainDay(this.props.room.detail.left, this.props.room.detail.speed) + '用完'} value="" />
+        <Field label={'预计' + this.calcRemainDay(room.detail.left, room.detail.speed) + '用完'} value="" />
       </Fragment>
     );
 
@@ -203,17 +207,19 @@ export default class Index extends Component {
           </Col>
         </Row>
 
-        <Card bordered={false} bodyStyle={{ padding: 0 }}>
+        <Card bordered={false} bodyStyle={{ padding: 0 }} loading={chartLoading}>
           <div className={styles.salesCard}>
             <Tabs tabBarExtraContent={monthChoose} size="large" tabBarStyle={{ marginBottom: 24 }}>
               <TabPane tab="每日用电" key="sales">
                 <Row>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
-                    <div className={styles.salesBar} />
+                    <div className={styles.salesBar}>
+                      <Bar height={300} title={this.state.month + '月'} data={room.everyday[this.state.month]} />
+                    </div>
                   </Col>
                   <Col xl={8} lg={12} md={12} sm={24} xs={24}>
                     <div className={styles.salesRank}>
-                      <h4 className={styles.rankingTitle}>门店销售额排名</h4>
+                      <h4 className={styles.rankingTitle}>{this.state.month}月用电排名</h4>
                       <ul className={styles.rankingList}>
                         {rankingListData.map((item, i) => (
                           <li key={item.title}>
