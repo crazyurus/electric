@@ -15,28 +15,30 @@ const formItemLayout = {
 
 @Form.create()
 class ChargeForm extends React.PureComponent {
-
   onValidateForm = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        this.props.dispatch({
-          type: 'pay/ip',
-        }).then(ip => {
-         return this.props.dispatch({
-           type: 'pay/prepare',
-           payload: {
-             area: this.props.room.room.area,
-             amount: values.amount,
-             sno: this.props.currentUser.sno,
-             meter: this.props.room.room.meter,
-             type: 'NATIVE',
-             ip,
-           },
-         });
-        }).then(() => {
-          return this.props.dispatch(routerRedux.push('/charge/index/qrcode'));
-        });
+        this.props
+          .dispatch({
+            type: 'pay/ip',
+          })
+          .then(ip => {
+            return this.props.dispatch({
+              type: 'pay/prepare',
+              payload: {
+                area: this.props.room.room.area,
+                amount: values.amount,
+                sno: this.props.currentUser.sno,
+                meter: this.props.room.room.meter,
+                type: 'NATIVE',
+                ip,
+              },
+            });
+          })
+          .then(() => {
+            return this.props.dispatch(routerRedux.push('/charge/index/qrcode'));
+          });
       }
     });
   };
@@ -46,60 +48,81 @@ class ChargeForm extends React.PureComponent {
     const { getFieldDecorator } = form;
     const isYuArea = room.room.area === 7;
     const isOffline = room.detail.status.indexOf('离线') > -1;
-    const station = [{
-      name: '南湖',
-      position: [30.512500, 114.329079],
-      telephone: '87756329',
-      address: '后街医务室旁，北七宿舍对面',
-    }, {
-      name: '西院/鉴湖',
-      position: [30.513068, 114.343386],
-      telephone: '87381736',
-      address: '鉴湖主教学楼西侧',
-    }, {
-      name: '东院',
-      position: [30.521752, 114.351904],
-      telephone: '87859134',
-      address: '东院大门右侧',
-    }, {
-      name: '余区',
-      position: [30.607892, 114.357253],
-      telephone: '86860918',
-      address: '余27栋后勤办公室',
-    }, {
-      name: '升升公寓',
-      position: [30.504560, 114.344748],
-      telephone: null,
-      address: '物业办公楼一层',
-    }];
+    const station = [
+      {
+        name: '南湖',
+        position: [30.5125, 114.329079],
+        telephone: '87756329',
+        address: '后街医务室旁，北七宿舍对面',
+      },
+      {
+        name: '西院/鉴湖',
+        position: [30.513068, 114.343386],
+        telephone: '87381736',
+        address: '鉴湖主教学楼西侧',
+      },
+      {
+        name: '东院',
+        position: [30.521752, 114.351904],
+        telephone: '87859134',
+        address: '东院大门右侧',
+      },
+      {
+        name: '余区',
+        position: [30.607892, 114.357253],
+        telephone: '86860918',
+        address: '余27栋后勤办公室',
+      },
+      {
+        name: '升升公寓',
+        position: [30.50456, 114.344748],
+        telephone: null,
+        address: '物业办公楼一层',
+      },
+    ];
 
     const menu = (
       <Menu>
-        {
-          station.map(item => {
-            const path = {
-              pathname: '/charge/map',
-              query: item,
-            };
-            return (
-              <Menu.Item key={item.name}>
-                <Link to={path}>{item.name}</Link>
-              </Menu.Item>
-            );
-          })
-        }
+        {station.map(item => {
+          const path = {
+            pathname: '/charge/map',
+            query: item,
+          };
+          return (
+            <Menu.Item key={item.name}>
+              <Link to={path}>{item.name}</Link>
+            </Menu.Item>
+          );
+        })}
       </Menu>
     );
 
     return (
       <Fragment>
-        <Form layout="horizontal" className={styles.stepForm} onSubmit={this.onValidateForm} hideRequiredMark>
-          {
-            isYuArea ? '' : <Alert showIcon message="马房山校区的宿舍暂不支持在线充值" style={{ marginBottom: 24 }} />
-          }
-          {
-            isYuArea && isOffline ? <Alert showIcon message="宿舍电表处于离线状态暂不支持在线充值" style={{ marginBottom: 24 }} /> : ''
-          }
+        <Form
+          layout="horizontal"
+          className={styles.stepForm}
+          onSubmit={this.onValidateForm}
+          hideRequiredMark
+        >
+          {isYuArea ? (
+            ''
+          ) : (
+            <Alert
+              showIcon
+              message="马房山校区的宿舍暂不支持在线充值"
+              style={{ marginBottom: 24 }}
+            />
+          )}
+          {isYuArea && isOffline ? (
+            <Alert
+              showIcon
+              message="宿舍电表处于离线状态暂不支持在线充值"
+              style={{ marginBottom: 24 }}
+            />
+          ) : (
+            ''
+          )}
           <Form.Item {...formItemLayout} label="宿舍">
             <strong>{room.room.meter.split('*')[2]}</strong>
           </Form.Item>
@@ -132,8 +155,12 @@ class ChargeForm extends React.PureComponent {
             })(
               <Radio.Group>
                 <Radio value={1}>微信支付</Radio>
-                <Radio value={2} disabled>支付宝</Radio>
-                <Radio value={3} disabled>校园卡电子账户</Radio>
+                <Radio value={2} disabled>
+                  支付宝
+                </Radio>
+                <Radio value={3} disabled>
+                  校园卡电子账户
+                </Radio>
               </Radio.Group>
             )}
           </Form.Item>
@@ -146,10 +173,19 @@ class ChargeForm extends React.PureComponent {
               },
             }}
           >
-            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={!isYuArea || isOffline}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={submitLoading}
+              disabled={!isYuArea || isOffline}
+            >
               支付
             </Button>
-            <Button type="default" style={{ marginLeft: '12px' }} onClick={() => this.props.dispatch(routerRedux.push('/detail/pay'))}>
+            <Button
+              type="default"
+              style={{ marginLeft: '12px' }}
+              onClick={() => this.props.dispatch(routerRedux.push('/detail/pay'))}
+            >
               充值记录
             </Button>
           </Form.Item>
@@ -158,13 +194,20 @@ class ChargeForm extends React.PureComponent {
         <div className={styles.desc}>
           <h3>充值说明</h3>
           <h4>线上充值范围</h4>
-          <p>目前余家头校区的宿舍支持在线充值，马房山校区的宿舍暂不支持需要前往线下充值点缴费。<Dropdown overlay={menu} trigger={['click']}>
-            <a className="ant-dropdown-link">
-              点击查看各个校区的线下充值点
-            </a>
-          </Dropdown><br />人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30；自助充值机充值时间：每日6:00-24:00。注意不可以跨校区充值。</p>
+          <p>
+            目前余家头校区的宿舍支持在线充值，马房山校区的宿舍暂不支持需要前往线下充值点缴费。<Dropdown
+              overlay={menu}
+              trigger={['click']}
+            >
+              <a className="ant-dropdown-link">点击查看各个校区的线下充值点</a>
+            </Dropdown>
+            <br />人工窗口工作时间：周一到周五 8:00-11:30
+            14:00-16:30；自助充值机充值时间：每日6:00-24:00。注意不可以跨校区充值。
+          </p>
           <h4>充值后未成功下发电</h4>
-          <p>请联系余家头校区管理委员会后勤办公室，电话：<a href="tel:027-86860918">027-86860918</a>。</p>
+          <p>
+            请联系余家头校区管理委员会后勤办公室，电话：<a href="tel:027-86860918">027-86860918</a>。
+          </p>
         </div>
       </Fragment>
     );

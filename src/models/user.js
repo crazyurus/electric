@@ -21,7 +21,9 @@ export default {
 
   reducers: {
     saveCurrentUser(state, action) {
-      const authority = action.payload.sno === 'anonymous' ? 'anonymous' : 'user';
+      const authority = action.payload.room
+        ? action.payload.sno === 'anonymous' ? 'anonymous' : 'user'
+        : 'guest';
       setAuthority(authority);
       return {
         ...state,

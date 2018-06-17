@@ -75,46 +75,59 @@ export const getRouterData = app => {
     '/detail/index': {
       name: '概况',
       component: dynamicWrapper(app, ['room'], () => import('../routes/Detail/Index')),
+      authority: ['user', 'anonymous'],
     },
     '/detail/pay': {
       name: '充值记录',
       component: dynamicWrapper(app, [], () => import('../routes/Detail/Pay')),
+      authority: ['user', 'anonymous'],
     },
     '/notice/list': {
       name: '通知列表',
       component: dynamicWrapper(app, ['room', 'notice'], () => import('../routes/Notice/List')),
+      authority: ['user', 'anonymous'],
     },
     '/notice/detail/:link': {
       name: '通知详情',
       component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
+      authority: ['user', 'anonymous'],
     },
     '/index/choose': {
       name: '选择宿舍',
       component: dynamicWrapper(app, ['user', 'room'], () => import('../routes/Index/Choose')),
+      authority: ['user', 'anonymous', 'guest'],
     },
     '/charge/index': {
       name: '充值',
       component: dynamicWrapper(app, ['pay'], () => import('../routes/Charge/Index')),
+      authority: ['user'],
     },
     '/charge/index/form': {
       name: '填写充值信息',
-      component: dynamicWrapper(app, ['pay', 'room', 'user'], () => import('../routes/Charge/Step/Form')),
+      component: dynamicWrapper(app, ['pay', 'room', 'user'], () =>
+        import('../routes/Charge/Step/Form')
+      ),
+      authority: ['user'],
     },
     '/charge/index/qrcode': {
       name: '扫码支付',
       component: dynamicWrapper(app, ['pay'], () => import('../routes/Charge/Step/Qrcode')),
+      authority: ['user'],
     },
     '/charge/index/success': {
       name: '完成',
       component: dynamicWrapper(app, ['pay'], () => import('../routes/Charge/Step/Success')),
+      authority: ['user'],
     },
     '/charge/map': {
       name: '线下充值点',
       component: dynamicWrapper(app, [], () => import('../routes/Charge/Map')),
+      authority: ['user', 'anonymous'],
     },
     '/feedback': {
       name: '帮助建议',
       component: dynamicWrapper(app, [], () => import('../routes/Feedback')),
+      authority: ['user', 'anonymous'],
     },
     '/exception/403': {
       component: dynamicWrapper(app, [], () => import('../routes/Exception/403')),

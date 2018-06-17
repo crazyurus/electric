@@ -1,6 +1,7 @@
 import api from '../services/api';
 import web from '../services/web';
 import { refactRoom } from '../utils/utils';
+import { setAuthority } from '../utils/authority';
 
 export default {
   namespace: 'room',
@@ -38,10 +39,11 @@ export default {
     *updateRoomDetail(_, { select, call, put }) {
       const room = yield select(state => state.room.room);
       const response = yield call(api.InfoUpdate, refactRoom(room));
-      if (response.data) yield put({
-        type: 'update',
-        payload: response.data,
-      });
+      if (response.data)
+        yield put({
+          type: 'update',
+          payload: response.data,
+        });
       return response;
     },
     *fetchEverydayInfo(_, { select, call, put }) {
@@ -79,6 +81,7 @@ export default {
 
   reducers: {
     saveCurrentRoom(state, action) {
+      setAuthority(action.payload.meter ? 'user' : 'guest');
       return {
         ...state,
         room: action.payload,
@@ -91,8 +94,14 @@ export default {
       };
     },
     update(state, action) {
-      const detail = {...state.detail};
-      detail.time = action.payload.time.split('.')[0].replace('T', ' ').replace('-0', '/').replace('-0', '/').replace('-', '/').replace('-', '/');
+      const detail = { ...state.detail };
+      detail.time = action.payload.time
+        .split('.')[0]
+        .replace('T', ' ')
+        .replace('-0', '/')
+        .replace('-0', '/')
+        .replace('-', '/')
+        .replace('-', '/');
       detail.left = action.payload.left;
       return {
         ...state,
