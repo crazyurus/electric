@@ -51,11 +51,14 @@ export default class NoticeContent extends Component {
               </a>
             </Tooltip>
             <div style={{ color: '#8c8c8c', cursor: 'pointer' }}>
-              分享到：<Tooltip title="QQ">
+              <span>分享到：</span>
+              <Tooltip title="QQ">
                 <Icon type="qq" />
-              </Tooltip>　<Tooltip title="微信">
+              </Tooltip>
+              <Tooltip title="微信">
                 <Icon type="wechat" />
-              </Tooltip>　<Tooltip title="微信">
+              </Tooltip>
+              <Tooltip title="微博">
                 <Icon type="weibo" />
               </Tooltip>
             </div>
