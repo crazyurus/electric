@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
+import { Link } from 'dva/router';
 import { Card, List, Icon, Button } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
@@ -9,7 +10,6 @@ import PageHeaderLayout from '../../layouts/PageHeaderLayout';
   loading: loading.effects['notice/list'],
 }))
 export default class NoticeList extends Component {
-
   state = {
     page: 1,
   };
@@ -50,7 +50,10 @@ export default class NoticeList extends Component {
     return (
       <PageHeaderLayout
         title="停电通知"
-        content={'以下通知来源于武汉理工大学' + (this.props.room.area === 7 ? '余家头校区管理委员会' : '后勤保障处') + '（需要校园网或校园VPN下访问）'}
+        content={
+          '以下通知来源于武汉理工大学' +
+          (this.props.room.area === 7 ? '余家头校区管理委员会' : '后勤保障处')
+        }
       >
         <Card
           style={{ marginTop: 24 }}
@@ -67,7 +70,9 @@ export default class NoticeList extends Component {
             renderItem={item => (
               <List.Item key={item.link}>
                 <List.Item.Meta
-                  title={<a href={'http://i.whut.edu.cn/xxtg/znbm/' + item.link} target="_blank">{item.title}</a>}
+                  title={
+                    <Link to={'/notice/detail/' + encodeURIComponent(item.link)}>{item.title}</Link>
+                  }
                   description={item.time}
                   style={{ marginBottom: 0 }}
                 />

@@ -89,7 +89,7 @@ export const getRouterData = app => {
     },
     '/notice/detail/:link': {
       name: '通知详情',
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
+      component: dynamicWrapper(app, ['notice'], () => import('../routes/Notice/Content')),
       authority: ['user', 'anonymous'],
     },
     '/index/choose': {

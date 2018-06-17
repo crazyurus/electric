@@ -15,6 +15,9 @@ export default {
         payload: response.data,
       });
     },
+    *detail({ link }, { call }) {
+      return yield call(api.NoticeDetail, link);
+    },
   },
 
   reducers: {

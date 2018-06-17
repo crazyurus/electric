@@ -33,7 +33,7 @@ export default {
       body: params,
     });
   },
-  async NoticeDetail() {
-    return request(host, '/notice/content');
+  async NoticeDetail(link) {
+    return request(host, '/notice/content?link=' + link);
   },
-}
+};

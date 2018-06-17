@@ -65,18 +65,26 @@ export default class GlobalHeader extends PureComponent {
       ) : (
         <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
           <Menu.Item>
-            <a target="_blank" href="http://zhlgd.whut.edu.cn/tp_idc/idc?m=icdc">
+            <a
+              target="_blank"
+              href="http://zhlgd.whut.edu.cn/tp_idc/idc?m=icdc"
+              rel="noopener noreferrer"
+            >
               <Icon type="user" />个人中心
             </a>
           </Menu.Item>
           <Menu.Item>
-            <a target="_blank" href="http://zhlgd.whut.edu.cn/tp_up/view?m=up#act=sys/uacm/profile">
+            <a
+              target="_blank"
+              href="http://zhlgd.whut.edu.cn/tp_up/view?m=up#act=sys/uacm/profile"
+              rel="noopener noreferrer"
+            >
               <Icon type="safety" />账户安全
             </a>
           </Menu.Item>
           <Menu.Divider />
           <Menu.Item key="logout">
-            <a target="_blank" href="/electric/api/logout">
+            <a target="_blank" href="/electric/api/logout" rel="noopener noreferrer">
               <Icon type="logout" />退出登录
             </a>
           </Menu.Item>
@@ -176,6 +184,7 @@ export default class GlobalHeader extends PureComponent {
           <Tooltip title="反馈">
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href="https://support.qq.com/product/23798"
               className={styles.action}
             >

@@ -4,7 +4,6 @@ import PageHeaderLayout from '../layouts/PageHeaderLayout';
 import styles from './Feedback.less';
 
 export default class Feedback extends React.Component {
-
   render() {
     const feedbackList = [
       {
@@ -44,14 +43,22 @@ export default class Feedback extends React.Component {
               <List.Item key={item.name}>
                 <Card hoverable className={styles.card}>
                   <Card.Meta
-                    title={<a href={item.link} target="_blank">{item.name}</a>}
-                    avatar={<img className={styles.cardAvatar} src={'/Application/Electric/Assets/image/feedback/' + item.avatar + '.png'} />}
+                    title={
+                      <a href={item.link} target="_blank" rel="noopener noreferrer">
+                        {item.name}
+                      </a>
+                    }
+                    avatar={
+                      <img
+                        className={styles.cardAvatar}
+                        src={'/Application/Electric/Assets/image/feedback/' + item.avatar + '.png'}
+                      />
+                    }
                     description={item.desc}
                   />
                 </Card>
               </List.Item>
-              )
-            }
+            )}
           />
         </div>
       </PageHeaderLayout>
