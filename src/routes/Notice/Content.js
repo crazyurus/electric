@@ -55,9 +55,11 @@ export default class NoticeContent extends Component {
               <Tooltip title="QQ">
                 <Icon type="qq" />
               </Tooltip>
+              {'　'}
               <Tooltip title="微信">
                 <Icon type="wechat" />
               </Tooltip>
+              {'　'}
               <Tooltip title="微博">
                 <Icon type="weibo" />
               </Tooltip>
