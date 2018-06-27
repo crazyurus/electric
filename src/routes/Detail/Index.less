@@ -159,38 +159,6 @@
   bottom: 15px;
 }
 
-.offlineCard {
-  :global {
-    .ant-tabs-ink-bar {
-      bottom: auto;
-    }
-    .ant-tabs-bar {
-      border-bottom: none;
-    }
-    .ant-tabs-nav-container-scrolling {
-      padding-left: 40px;
-      padding-right: 40px;
-    }
-    .ant-tabs-tab-prev-icon:before {
-      position: relative;
-      left: 6px;
-    }
-    .ant-tabs-tab-next-icon:before {
-      position: relative;
-      right: 6px;
-    }
-  }
-
-  :global(.ant-tabs-tab-active) h4 {
-    color: @primary-color;
-  }
-}
-
-.trendText {
-  margin-left: 8px;
-  color: @heading-color;
-}
-
 @media screen and (max-width: @screen-lg) {
   .salesExtra {
     display: none;
@@ -236,6 +204,10 @@
 }
 
 .updateTimeField {
-  color: rgba(0, 0, 0, .45);
+  color: rgba(0, 0, 0, 0.45);
   margin: 20px 0 10px;
+}
+
+.txtRed {
+  color: @error-color !important;
 }

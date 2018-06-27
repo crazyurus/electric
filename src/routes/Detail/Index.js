@@ -1,22 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
-import {
-  Avatar,
-  Divider,
-  Row,
-  Col,
-  Icon,
-  Card,
-  Tabs,
-  Tooltip,
-  message,
-} from 'antd';
+import { Avatar, Divider, Row, Col, Icon, Card, Tabs, Tooltip, message } from 'antd';
 import numeral from 'numeral';
-import {
-  ChartCard,
-  Field,
-  Bar,
-} from 'components/Charts';
+import { ChartCard, Field, Bar } from 'components/Charts';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './Index.less';
 
@@ -24,8 +10,12 @@ const { TabPane } = Tabs;
 const Yuan = ({ children }) => {
   return children ? '¥' + children.replace('元', '') : ''; /* eslint-disable-line react/no-danger */
 };
-const Do = ({ children }) => {
-  return children ? children.replace('度', '').replace('千瓦时', '') : '0.00'; /* eslint-disable-line react/no-danger */
+const Do = ({ className, children }) => {
+  return (
+    <span className={className}>
+      {children ? children.replace('度', '').replace('千瓦时', '') : '0.00'}
+    </span>
+  ); /* eslint-disable-line react/no-danger */
 };
 
 @connect(({ room, loading }) => ({
@@ -35,7 +25,6 @@ const Do = ({ children }) => {
   chartLoading: loading.effects['room/fetchEverydayInfo'],
 }))
 export default class Index extends Component {
-
   state = {
     month: 0,
     rankList: [],
@@ -47,11 +36,13 @@ export default class Index extends Component {
         type: 'room/fetchRoomDetail',
       });
     }
-    this.props.dispatch({
-      type: 'room/fetchEverydayInfo',
-    }).then(month => {
-      this.setMonth(month);
-    });
+    this.props
+      .dispatch({
+        type: 'room/fetchEverydayInfo',
+      })
+      .then(month => {
+        this.setMonth(month);
+      });
   }
 
   setMonth = month => {
@@ -67,22 +58,31 @@ export default class Index extends Component {
     this.setState({ month, rankList });
   };
 
-  updateRoomDetail = () => {
-    this.props.dispatch({
-      type: 'room/updateRoomDetail',
-    }).then(response => {
-      if (response.errCode === 0) message.success('抄表成功');
-      else message.error('抄表失败');
-    });
+  updateRoomDetail = e => {
+    e.preventDefault();
+
+    this.props
+      .dispatch({
+        type: 'room/updateRoomDetail',
+      })
+      .then(response => {
+        if (response.errCode === 0) message.success('抄表成功');
+        else message.error('抄表失败');
+      });
   };
 
   transAreaName(area) {
     switch (Number.parseInt(area)) {
-      case 1: return '南湖校区';
-      case 2: return '东院';
-      case 3: return '西院/鉴湖校区';
-      case 7: return '余家头校区';
-      default: return '未知';
+      case 1:
+        return '南湖校区';
+      case 2:
+        return '东院';
+      case 3:
+        return '西院/鉴湖校区';
+      case 7:
+        return '余家头校区';
+      default:
+        return '未知';
     }
   }
 
@@ -91,7 +91,13 @@ export default class Index extends Component {
     const remain = Math.floor(left.replace('度', '') / speed);
     const now = new Date();
     const predict = new Date(now.getFullYear(), now.getMonth(), now.getDate() + remain);
-    return (predict.getFullYear() === now.getFullYear() ? '' : predict.getFullYear() + '年') + (predict.getMonth() + 1) + '月' + predict.getDate() + '日';
+    return (
+      (predict.getFullYear() === now.getFullYear() ? '' : predict.getFullYear() + '年') +
+      (predict.getMonth() + 1) +
+      '月' +
+      predict.getDate() +
+      '日'
+    );
   }
 
   render() {
@@ -105,7 +111,15 @@ export default class Index extends Component {
     const monthChoose = (
       <div className={styles.salesExtraWrap}>
         <div className={styles.salesExtra}>
-          {months.map(month => <a key={month} className={month == this.state.month ? styles.currentDate : null} onClick={() => this.setMonth(month)}>{month}月</a>)}
+          {months.map(month => (
+            <a
+              key={month}
+              className={month == this.state.month ? styles.currentDate : null}
+              onClick={() => this.setMonth(month)}
+            >
+              {month}月
+            </a>
+          ))}
         </div>
       </div>
     );
@@ -120,7 +134,10 @@ export default class Index extends Component {
         </div>
         <div className={styles.content}>
           <div className={styles.contentTitle}>{room.detail.name || '加载中…'}</div>
-          <div>{this.transAreaName(room.room.area)}<Divider type="vertical" />No.{room.detail.no || '000000000000'}</div>
+          <div>
+            {this.transAreaName(room.room.area)}
+            <Divider type="vertical" />No.{room.detail.no || '000000000000'}
+          </div>
         </div>
       </div>
     );
@@ -147,7 +164,10 @@ export default class Index extends Component {
         <Tooltip title="预计用完日期仅供参考">
           <Icon type="info-circle-o" className={styles.leftCardFooterIcon} />
         </Tooltip>
-        <Field label={'预计' + this.calcRemainDay(room.detail.left, room.detail.speed) + '用完'} value="" />
+        <Field
+          label={'预计' + this.calcRemainDay(room.detail.left, room.detail.speed) + '用完'}
+          value=""
+        />
       </Fragment>
     );
 
@@ -164,15 +184,25 @@ export default class Index extends Component {
       <PageHeaderLayout content={pageHeaderContent} extraContent={extraContent}>
         <Row gutter={24}>
           <Col {...topColResponsiveProps}>
-              <ChartCard
-                bordered={false}
-                title="剩余电量"
-                action={<a href="javascript:;" title="刷新电量" onClick={this.updateRoomDetail}>刷新</a>}
-                total={<Do>{room.detail.left}</Do>}
-                footer={leftCardFooter}
-                contentHeight={46}
-                loading={detailLoading || updateLoading}
-              />
+            <ChartCard
+              bordered={false}
+              title="剩余电量"
+              action={
+                <a href="#" title="刷新电量" onClick={this.updateRoomDetail}>
+                  刷新
+                </a>
+              }
+              total={
+                room.detail.left && room.detail.left.replace('度', '') < 15 ? (
+                  <Do className={styles.txtRed}>{room.detail.left}</Do>
+                ) : (
+                  <Do>{room.detail.left}</Do>
+                )
+              }
+              footer={leftCardFooter}
+              contentHeight={46}
+              loading={detailLoading || updateLoading}
+            />
           </Col>
           <Col {...topColResponsiveProps}>
             <ChartCard
@@ -198,7 +228,11 @@ export default class Index extends Component {
             <ChartCard
               bordered={false}
               title="累计用电"
-              action={<Tooltip title="该宿舍电表累计示数"><Icon type="info-circle-o" /></Tooltip>}
+              action={
+                <Tooltip title="该宿舍电表累计示数">
+                  <Icon type="info-circle-o" />
+                </Tooltip>
+              }
               total={numeral(room.detail.sum.replace('千瓦时', '')).format('0,0')}
               footer={<Field label="电费单价" value={<Yuan>{room.detail.unit_price}</Yuan>} />}
               contentHeight={46}
@@ -214,7 +248,11 @@ export default class Index extends Component {
                 <Row>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
                     <div className={styles.salesBar}>
-                      <Bar height={340} title={this.state.month + '月'} data={room.everyday[this.state.month]} />
+                      <Bar
+                        height={340}
+                        title={this.state.month + '月'}
+                        data={room.everyday[this.state.month]}
+                      />
                     </div>
                   </Col>
                   <Col xl={8} lg={12} md={12} sm={24} xs={24}>
@@ -237,7 +275,11 @@ export default class Index extends Component {
           </div>
         </Card>
         <Field
-          label={<Fragment><Icon type="info-circle" />&nbsp;&nbsp;以上电费信息更新于&nbsp;</Fragment>}
+          label={
+            <Fragment>
+              <Icon type="info-circle" />&nbsp;&nbsp;以上电费信息更新于&nbsp;
+            </Fragment>
+          }
           value={room.detail.time}
           className={styles.updateTimeField}
         />
