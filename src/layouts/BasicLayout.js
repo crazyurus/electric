@@ -106,11 +106,16 @@ class BasicLayout extends React.PureComponent {
     this.props.dispatch({
       type: 'user/fetchCurrent',
     });
-    this.props.dispatch({
-      type: 'room/fetchCurrent',
-    }).then(room => {
-      this.props.dispatch(routerRedux.push(room.meter === '' ? '/index/choose' : '/detail/index'));
-    });
+    this.props
+      .dispatch({
+        type: 'room/fetchCurrent',
+      })
+      .then(room => {
+        if (location.pathname === '/electric')
+          this.props.dispatch(
+            routerRedux.push(room.meter === '' ? '/index/choose' : '/detail/index')
+          );
+      });
   }
   componentWillUnmount() {
     unenquireScreen(this.enquireHandler);
@@ -145,13 +150,7 @@ class BasicLayout extends React.PureComponent {
     });
   };
   render() {
-    const {
-      currentUser,
-      collapsed,
-      routerData,
-      match,
-      location,
-    } = this.props;
+    const { currentUser, collapsed, routerData, match, location } = this.props;
 
     const layout = (
       <Layout>
