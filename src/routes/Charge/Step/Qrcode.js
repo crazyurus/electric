@@ -31,7 +31,7 @@ class ChargeQrcode extends React.PureComponent {
         </div>
         <div className={styles.image}>
           <img
-            src={'/electric/detail/qrcode?url=' + encodeURIComponent(this.props.pay.qrcode)}
+            src={'/electric/api/qrcode?url=' + encodeURIComponent(this.props.pay.qrcode)}
             alt="二维码"
           />
         </div>
