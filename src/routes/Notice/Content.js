@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Card, Tooltip, Icon } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import { share } from '../../utils/utils';
 
 @connect(({ notice, loading }) => ({
   notice,
@@ -23,6 +24,12 @@ export default class NoticeContent extends Component {
           article: response.data,
         });
       });
+  }
+
+  shareToSNS(e) {
+    const classList = e.target.className.split('anticon-');
+    const type = classList[1].split(' ', 1)[0];
+    share(type, this.state.article.title);
   }
 
   render() {
@@ -53,7 +60,7 @@ export default class NoticeContent extends Component {
             <div style={{ color: '#8c8c8c', cursor: 'pointer' }}>
               <span>分享到：</span>
               <Tooltip title="QQ">
-                <Icon type="qq" />
+                <Icon type="qq" onClick={this.shareToSNS.bind(this)} />
               </Tooltip>
               {'　'}
               <Tooltip title="微信">
@@ -61,7 +68,7 @@ export default class NoticeContent extends Component {
               </Tooltip>
               {'　'}
               <Tooltip title="微博">
-                <Icon type="weibo" />
+                <Icon type="weibo" onClick={this.shareToSNS.bind(this)} />
               </Tooltip>
             </div>
           </div>

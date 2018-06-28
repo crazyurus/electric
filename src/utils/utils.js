@@ -166,3 +166,21 @@ const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-
 export function isUrl(path) {
   return reg.test(path);
 }
+
+export function share(type, title) {
+  const site = '%E6%8E%8C%E4%B8%8A%E7%90%86%E5%B7%A5%E5%A4%A7';
+  const pic = encodeURI('https://web.wutnews.net/Application/Electric/Assets/image/logo.png');
+  const href = encodeURI(location.href);
+  let url = '';
+  title = encodeURI(title + ' - 武汉理工大学电费系统');
+  if (type === 'qq')
+    url = `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${href}&site=${site}&title=${title}&pics=${pic}&summary=${title}`;
+  else if (type === 'weibo')
+    url = `http://service.weibo.com/share/share.php?url=${href}&title=${title}&appkey=277159429&&ralateUid=1855112015&searchPic=true`;
+  if (url !== '')
+    window.open(
+      url,
+      'share',
+      'height=600,width=720,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no'
+    );
+}
