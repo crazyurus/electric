@@ -17,7 +17,16 @@
       area: '{$Think.session.area}',
       meter: '{$Think.session.meter}'
     };
+    // Sentry监控
     Raven.config('https://a5046b43c96c461fb9c22b94c18f87f6@sentry.wutnews.net/13').install();
+    // 百度统计
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6937a39e5483039406a2ae45f8f1f392";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
   </script>
 </body>
 </html>
