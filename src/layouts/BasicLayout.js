@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Layout, Icon } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
-import { Switch, routerRedux } from 'dva/router';
+import { Switch, Redirect, routerRedux } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
@@ -33,6 +33,12 @@ const getRedirect = item => {
         getRedirect(children);
       });
     }
+  }
+  if (item && item.redirect) {
+    redirectData.push({
+      from: `${item.path}`,
+      to: `${item.redirect}`,
+    });
   }
 };
 getMenuData().forEach(getRedirect);
@@ -111,7 +117,7 @@ class BasicLayout extends React.PureComponent {
         type: 'room/fetchCurrent',
       })
       .then(room => {
-        if (location.pathname === '/electric')
+        if (location.pathname === '/electric' || location.pathname === '/electric/detail/index')
           this.props.dispatch(
             routerRedux.push(room.meter === '' ? '/index/choose' : '/detail/index')
           );
@@ -179,6 +185,9 @@ class BasicLayout extends React.PureComponent {
           </Header>
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
             <Switch>
+              {redirectData.map(item => (
+                <Redirect key={item.from} exact from={item.from} to={item.to} />
+              ))}
               {getRoutes(match.path, routerData).map(item => (
                 <AuthorizedRoute
                   key={item.key}

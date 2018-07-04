@@ -14,7 +14,7 @@ class ChargeSuccess extends React.PureComponent {
         actions={
           <Fragment>
             <Button
-              onClick={() => this.props.dispatch(routerRedux.push('/detail/pay'))}
+              onClick={() => this.props.dispatch(routerRedux.push('/charge/record'))}
               type="primary"
             >
               查看充值记录

@@ -184,7 +184,7 @@ class ChargeForm extends React.PureComponent {
             <Button
               type="default"
               style={{ marginLeft: '12px' }}
-              onClick={() => this.props.dispatch(routerRedux.push('/detail/pay'))}
+              onClick={() => this.props.dispatch(routerRedux.push('/charge/record'))}
             >
               充值记录
             </Button>

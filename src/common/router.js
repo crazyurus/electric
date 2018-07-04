@@ -77,7 +77,7 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, ['room'], () => import('../routes/Detail/Index')),
       authority: ['user', 'anonymous'],
     },
-    '/detail/pay': {
+    '/charge/record': {
       name: '充值记录',
       component: dynamicWrapper(app, [], () => import('../routes/Detail/Pay')),
       authority: ['user', 'anonymous'],
