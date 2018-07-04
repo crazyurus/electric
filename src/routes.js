@@ -17,9 +17,6 @@ export default [
     component: DetailPage
   },
   {
-    path: '/detail/pay',
-    component: PayRecordPage
-  },{
     path: '/detail/everyday',
     component: DayRecordPage
   },
@@ -34,6 +31,10 @@ export default [
   {
     path: '/charge/index',
     component: ChargePage
+  },
+  {
+    path: '/charge/record',
+    component: PayRecordPage
   },
   {
     path: '/charge/map/:latitude/:longitude/:title/:address/:telephone',
