@@ -98,7 +98,6 @@ export const getRouterData = app => {
       authority: ['user', 'anonymous', 'guest'],
     },
     '/charge/index': {
-      name: '充值',
       component: dynamicWrapper(app, ['pay'], () => import('../routes/Charge/Index')),
       authority: ['user'],
     },
