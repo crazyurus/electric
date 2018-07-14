@@ -9,7 +9,7 @@ export default class Feedback extends React.Component {
       {
         name: '吐个槽社区',
         desc: '欢迎随时来吐槽',
-        link: 'https://support.qq.com/products/23798',
+        link: 'https://support.qq.com/product/23796',
         avatar: 'tucao',
       },
       {
