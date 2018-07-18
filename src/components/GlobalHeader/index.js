@@ -142,9 +142,9 @@ export default class GlobalHeader extends PureComponent {
     return (
       <div className={styles.header}>
         {isMobile && [
-          <Link to="/" className={styles.logo} key="logo">
+          <a href="/electric" className={styles.logo} key="logo">
             <img src={logo} alt="logo" width="32" />
-          </Link>,
+          </a>,
           <Divider type="vertical" key="line" />,
         ]}
         <Icon
@@ -158,7 +158,7 @@ export default class GlobalHeader extends PureComponent {
             title={<center>微信扫一扫打开小程序</center>}
             content={
               <img
-                src="//web.wutnews.net/Application/Electric/Assets/image/mina.jpg"
+                src="/Application/Electric/Assets/image/mina.jpg"
                 style={{ width: '200px', height: '200px' }}
               />
             }
@@ -167,6 +167,11 @@ export default class GlobalHeader extends PureComponent {
               <Icon type="wechat" />
             </a>
           </Popover>
+          <Tooltip title="手机版">
+            <Link to="/mobile" className={styles.action}>
+              <Icon type="mobile" />
+            </Link>
+          </Tooltip>
           <Popover
             placement="bottom"
             title="设置"
@@ -181,16 +186,6 @@ export default class GlobalHeader extends PureComponent {
               </a>
             </Tooltip>
           </Popover>
-          <Tooltip title="反馈">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://support.qq.com/product/23798"
-              className={styles.action}
-            >
-              <Icon type="question-circle-o" />
-            </a>
-          </Tooltip>
           {currentUser.name ? (
             <Dropdown overlay={menu}>
               <span className={`${styles.action} ${styles.account}`}>

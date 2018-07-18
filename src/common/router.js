@@ -128,6 +128,11 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, [], () => import('../routes/Feedback')),
       authority: ['user', 'anonymous'],
     },
+    '/mobile': {
+      name: '手机版',
+      component: dynamicWrapper(app, [], () => import('../routes/Index/Mobile')),
+      authority: ['user', 'anonymous'],
+    },
     '/exception/403': {
       component: dynamicWrapper(app, [], () => import('../routes/Exception/403')),
     },

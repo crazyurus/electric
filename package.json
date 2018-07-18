@@ -2,6 +2,7 @@
   "name": "electric-pc",
   "version": "1.0.0",
   "description": "电费查询PC版",
+  "author": "廖星",
   "private": true,
   "scripts": {
     "precommit": "npm run lint-staged",
@@ -76,9 +77,6 @@
     "stylelint": "^8.4.0",
     "stylelint-config-prettier": "^3.0.4",
     "stylelint-config-standard": "^18.0.0"
-  },
-  "optionalDependencies": {
-    "puppeteer": "^1.4.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,less}": [

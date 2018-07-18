@@ -13,10 +13,10 @@ import SiderMenu from '../components/SiderMenu';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
-import logo from '../assets/logo.png';
 
 const { Content, Header, Footer } = Layout;
 const { AuthorizedRoute, check } = Authorized;
+const logo = '/Application/Electric/Assets/image/logo.png';
 
 /**
  * 根据菜单取得重定向地址.
