@@ -214,7 +214,7 @@ export default class SiderMenu extends PureComponent {
         className={styles.sider}
       >
         <div className={styles.logo} key="logo">
-          <a href="/electric">
+          <a href="/electric" rel="noreferer">
             <img src={logo} alt="logo" />
             <h1>电费系统</h1>
           </a>

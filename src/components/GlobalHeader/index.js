@@ -142,7 +142,7 @@ export default class GlobalHeader extends PureComponent {
     return (
       <div className={styles.header}>
         {isMobile && [
-          <a href="/electric" className={styles.logo} key="logo">
+          <a href="/electric" className={styles.logo} key="logo" rel="noreferer">
             <img src={logo} alt="logo" width="32" />
           </a>,
           <Divider type="vertical" key="line" />,
