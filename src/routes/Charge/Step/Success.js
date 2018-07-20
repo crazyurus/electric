@@ -10,7 +10,7 @@ class ChargeSuccess extends React.PureComponent {
       <Result
         type="success"
         title="支付成功"
-        description="充值的电量将于1-10分钟后下发到电表，可以在购电详情中查询。若长时间仍未成功下发，请咨询对应校区充值点的工作人员。"
+        description="充值的电量预计1-10分钟后下发到电表，可以在购电详情中查询。若长时间仍未成功下发，请咨询所在校区充值点的工作人员。"
         actions={
           <Fragment>
             <Button
