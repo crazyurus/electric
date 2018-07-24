@@ -181,6 +181,10 @@ label.label-radio input[type=checkbox]:checked ~ .item-inner, label.label-radio 
   background-color: #ECECEC;
 }
 
+.mint-indicator-wrapper {
+  z-index: 9999;
+}
+
 .v-modal {
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.6);

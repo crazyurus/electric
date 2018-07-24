@@ -15,11 +15,6 @@
           </optgroup>
           <optgroup label="余家头校区">
             <option value="7*Area*余区">余区</option>
-            <!-- <option value="9*Area*家属区北区">家属区北区</option>
-            <option value="8*Area*家属区南区">家属区南区</option>
-            <option value="11*Area*家属区中区">家属区中区</option>
-            <option value="12*Area*家属区西区">家属区西区</option>
-            <option value="10*Area*家属区联盟路">家属区联盟路</option> -->
           </optgroup>
         </select>
       </f7-list-item>
@@ -75,7 +70,7 @@
     data() {
       return {
         canSubmit: false,
-        canInputNo: Token.detect.mobile(),
+        canInputNo: false,
         setInputFocus: false,
         inputValue: '',
         roomInfo: {
@@ -249,7 +244,7 @@
     },
     directives: {
       focus: {
-        inserted (el, obj) {
+        update (el, obj) {
           if (obj.value) el.focus();
         }
       }

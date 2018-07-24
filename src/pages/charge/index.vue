@@ -42,8 +42,9 @@
 <script>
   import Token from '../../libs/Token'
   import Vue from 'vue'
-  import { Actionsheet } from 'mint-ui';
+  import { Actionsheet, Indicator } from 'mint-ui';
   Vue.component(Actionsheet.name, Actionsheet);
+  Vue.use(Indicator);
 
   export default {
     data () {
@@ -115,7 +116,7 @@
           Token.message.toast('充值金额必须大于1元');
           return;
         }
-        Token.indicator.show();
+        Indicator.open('微信支付');
         this.$http.get('https://palmwhut.sinaapp.com/ip.php').then(ip => {
           let param = {
             area: this.$store.state.area,
@@ -127,7 +128,7 @@
           if (ip.data) param['ip'] = ip.data;
 
           this.$http.post('/electric/pay/prepare', param).then(result => {
-            Token.indicator.hide();
+            Indicator.close();
             if (result.data.data.return.mweb_url) location.assign(result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('https://web.wutnews.net/electric/pay/callback?order=' + result.data.data.return.prepay_id));
             if (result.data.data.return.code_url) this.qrcode('请用微信扫码完成支付', '/electric/api/qrcode?url=' + encodeURIComponent(result.data.data.return.code_url));
           });
