@@ -67,7 +67,7 @@ export default class Index extends Component {
       })
       .then(response => {
         if (response.errCode === 0) message.success('抄表成功');
-        else message.error('抄表失败');
+        else message.error(response.errMsg || '抄表失败');
       });
   };
 
