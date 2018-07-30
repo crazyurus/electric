@@ -33,25 +33,23 @@ export default class ChargeIndex extends PureComponent {
         content="为宿舍在线缴纳电费，自动下发到电表"
       >
         <Card bordered={false}>
-          <Fragment>
-            <Steps current={this.getCurrentStep()} className={styles.steps}>
-              <Step title="填写充值信息" />
-              <Step title="扫码支付" />
-              <Step title="完成" />
-            </Steps>
-            <Switch>
-              {getRoutes(match.path, routerData).map(item => (
-                <Route
-                  key={item.key}
-                  path={item.path}
-                  component={item.component}
-                  exact={item.exact}
-                />
-              ))}
-              <Redirect exact from="/charge/index" to="/charge/index/form" />
-              <Route render={NotFound} />
-            </Switch>
-          </Fragment>
+          <Steps current={this.getCurrentStep()} className={styles.steps}>
+            <Step title="填写充值信息" />
+            <Step title="扫码支付" />
+            <Step title="完成" />
+          </Steps>
+          <Switch>
+            {getRoutes(match.path, routerData).map(item => (
+              <Route
+                key={item.key}
+                path={item.path}
+                component={item.component}
+                exact={item.exact}
+              />
+            ))}
+            <Redirect exact from="/charge/index" to="/charge/index/form" />
+            <Route render={NotFound} />
+          </Switch>
         </Card>
       </PageHeaderLayout>
     );

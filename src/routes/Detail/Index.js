@@ -5,6 +5,7 @@ import numeral from 'numeral';
 import { ChartCard, Field, Bar } from 'components/Charts';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './Index.less';
+import roomAvatar from 'assets/room.png';
 
 const { TabPane } = Tabs;
 const Yuan = ({ children }) => {
@@ -72,7 +73,7 @@ export default class Index extends Component {
   };
 
   transAreaName(area) {
-    switch (Number.parseInt(area)) {
+    switch (Number(area)) {
       case 1:
         return '南湖校区';
       case 2:
@@ -127,10 +128,7 @@ export default class Index extends Component {
     const pageHeaderContent = (
       <div className={styles.pageHeaderContent}>
         <div className={styles.avatar}>
-          <Avatar
-            size="large"
-            src="//gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
-          />
+          <img src={roomAvatar} style={{ borderRadius: '50%' }} />
         </div>
         <div className={styles.content}>
           <div className={styles.contentTitle}>{room.detail.name || '加载中…'}</div>
