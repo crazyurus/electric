@@ -17,7 +17,6 @@ import Debounce from 'lodash-decorators/debounce';
 import { Link } from 'dva/router';
 import styles from './index.less';
 import weappLogo from 'assets/weapp.svg';
-import minaQrcode from 'assets/mina.jpg';
 
 export default class GlobalHeader extends PureComponent {
   state = {
@@ -158,7 +157,12 @@ export default class GlobalHeader extends PureComponent {
           <Popover
             placement="bottom"
             title={<center>微信扫一扫打开小程序</center>}
-            content={<img src={minaQrcode} style={{ width: '200px', height: '200px' }} />}
+            content={
+              <img
+                src="/Application/Electric/Assets/image/mina.jpg"
+                style={{ width: '200px', height: '200px' }}
+              />
+            }
           >
             <a className={styles.action}>
               <img src={weappLogo} style={{ width: '16px', height: '16px' }} />

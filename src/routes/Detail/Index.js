@@ -5,7 +5,6 @@ import numeral from 'numeral';
 import { ChartCard, Field, Bar } from 'components/Charts';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './Index.less';
-import roomAvatar from 'assets/room.png';
 
 const { TabPane } = Tabs;
 const Yuan = ({ children }) => {
@@ -128,7 +127,10 @@ export default class Index extends Component {
     const pageHeaderContent = (
       <div className={styles.pageHeaderContent}>
         <div className={styles.avatar}>
-          <img src={roomAvatar} style={{ borderRadius: '50%' }} />
+          <Avatar
+            size="large"
+            src="//gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
+          />
         </div>
         <div className={styles.content}>
           <div className={styles.contentTitle}>{room.detail.name || '加载中…'}</div>
