@@ -82,7 +82,7 @@ export default class ChooseForm extends PureComponent {
         data: res.data.map(item => ({
           id: item.id,
           type: 'architecture',
-          name: this.transMeterName(item.name),
+          name: ChooseForm.transMeterName(item.name),
           isLeaf: false,
         })),
       });
