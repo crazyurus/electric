@@ -1,18 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import {
-  Form,
-  Select,
-  Cascader,
-  Button,
-  Card,
-  message,
-} from 'antd';
+import { Form, Select, Cascader, Button, Card, message } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import request from '../../utils/request';
 
-const FormItem = Form.Item;
 const { Option, OptGroup } = Select;
 
 @connect(({ user, room, loading }) => ({
@@ -22,6 +14,26 @@ const { Option, OptGroup } = Select;
 }))
 @Form.create()
 export default class ChooseForm extends PureComponent {
+  static transMeterName(arc) {
+    switch (arc) {
+      case '学海15栋':
+        return '学海G栋/西15栋';
+      case '学海16栋':
+        return '学海F栋/西16栋';
+      case '学海17栋':
+        return '学海D栋/西17栋';
+      case '学海18栋':
+        return '学海E栋/西18栋';
+      case '学海19栋':
+        return '学海C栋/西19栋';
+      case '学海20栋':
+        return '学海B栋/西20栋';
+      case '学海21栋':
+        return '学海A栋/西21栋';
+      default:
+        return arc;
+    }
+  }
 
   state = {
     data: [],
@@ -31,25 +43,37 @@ export default class ChooseForm extends PureComponent {
     },
   };
 
+  getChooseInfo = (api, id) => {
+    return request('api.wutnews.net', '/choose/' + api, {
+      method: 'POST',
+      body: {
+        id,
+        area: this.state.select.area,
+      },
+    });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll(err => {
       if (!err) {
-        this.props.dispatch({
-          type: 'room/register',
-          payload: this.state.select,
-        }).then(res => {
-          this.props.dispatch({
-            type: 'room/reset',
+        this.props
+          .dispatch({
+            type: 'room/register',
+            payload: this.state.select,
+          })
+          .then(res => {
+            this.props.dispatch({
+              type: 'room/reset',
+            });
+            if (res.errCode === 0) this.props.dispatch(routerRedux.push('/detail/index'));
+            else message.error('选择宿舍失败，请稍后再试');
           });
-          if (res.errCode === 0) this.props.dispatch(routerRedux.push('/detail/index'));
-          else message.error('选择宿舍失败，请稍后再试');
-        });
       }
     });
   };
 
-  changeAreaPicker = (value) => {
+  changeAreaPicker = value => {
     const area = Number.parseInt(value.split('*')[0], 10);
     this.state.select.area = area;
     this.getChooseInfo('architecture', value).then(res => {
@@ -65,20 +89,20 @@ export default class ChooseForm extends PureComponent {
     });
   };
 
-  changeMeterPicker = (value) => {
+  changeMeterPicker = value => {
     const meter = value[value.length - 1];
     this.setState({
       select: Object.assign({}, this.state.select, { meter }),
     });
   };
 
-  changeCascader = (selectedOptions) => {
+  changeCascader = selectedOptions => {
     const targetOption = selectedOptions[selectedOptions.length - 1];
     const childType = targetOption.type === 'architecture' ? 'floor' : 'meter';
     targetOption.loading = true;
 
     this.getChooseInfo(childType, targetOption.id).then(res => {
-      let data = res.data;
+      let { data } = res;
 
       if (childType !== 'meter') {
         data = data.map(item => ({
@@ -97,29 +121,6 @@ export default class ChooseForm extends PureComponent {
       });
     });
   };
-
-  getChooseInfo = (api, id) => {
-    return request('api.wutnews.net', '/choose/' + api, {
-      method: 'POST',
-      body: {
-        id,
-        area: this.state.select.area,
-      },
-    });
-  };
-
-  transMeterName(arc) {
-    switch (arc) {
-      case "学海15栋": return "学海G栋/西15栋";
-      case "学海16栋": return "学海F栋/西16栋";
-      case "学海17栋": return "学海D栋/西17栋";
-      case "学海18栋": return "学海E栋/西18栋";
-      case "学海19栋": return "学海C栋/西19栋";
-      case "学海20栋": return "学海B栋/西20栋";
-      case "学海21栋": return "学海A栋/西21栋";
-      default: return arc;
-    }
-  }
 
   render() {
     const { submitLoading } = this.props;
@@ -149,11 +150,14 @@ export default class ChooseForm extends PureComponent {
     return (
       <PageHeaderLayout
         title="宿舍"
-        content={(currentAuthority === 'anonymous' ? `来自${currentUser.name}的` : currentUser.name) + '同学你好，请选择你的宿舍'}
+        content={
+          (currentAuthority === 'anonymous' ? `来自${currentUser.name}的` : currentUser.name) +
+          '同学你好，请选择你的宿舍'
+        }
       >
         <Card bordered={false}>
           <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>
-            <FormItem {...formItemLayout} label="校区">
+            <Form.Item {...formItemLayout} label="校区">
               {getFieldDecorator('title', {
                 rules: [
                   {
@@ -162,21 +166,27 @@ export default class ChooseForm extends PureComponent {
                   },
                 ],
               })(
-                <Select placeholder="请选择校区" style={{ width: '100%' }} onChange={this.changeAreaPicker}>
+                <Select
+                  placeholder="请选择校区"
+                  style={{ width: '100%' }}
+                  onChange={this.changeAreaPicker}
+                >
                   <OptGroup label="马房山校区">
                     <Option value="1*Area*南湖">南湖</Option>
                     <Option value="2*Area*东院">东院</Option>
                     <Option value="3*Area*西院">西院</Option>
                     <Option value="3*Area*鉴湖">鉴湖</Option>
-                    <Option value="0*Area*升升" disabled>升升公寓</Option>
+                    <Option value="0*Area*升升" disabled>
+                      升升公寓
+                    </Option>
                   </OptGroup>
                   <OptGroup label="余家头校区">
                     <Option value="7*Area*余区">余区</Option>
                   </OptGroup>
                 </Select>
-            )}
-            </FormItem>
-            <FormItem {...formItemLayout} label="宿舍" help="暂不支持升升公寓的电费查询">
+              )}
+            </Form.Item>
+            <Form.Item {...formItemLayout} label="宿舍" extra="暂不支持升升公寓的电费查询">
               {getFieldDecorator('date', {
                 rules: [
                   {
@@ -191,15 +201,20 @@ export default class ChooseForm extends PureComponent {
                   options={this.state.data}
                   loadData={this.changeCascader}
                   onChange={this.changeMeterPicker}
-                  filedNames={{ label: 'name', value: 'id'}}
+                  filedNames={{ label: 'name', value: 'id' }}
                 />
               )}
-            </FormItem>
-            <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
-              <Button type="primary" htmlType="submit" loading={submitLoading} disabled={!this.state.select.area || !this.state.select.meter}>
+            </Form.Item>
+            <Form.Item {...submitFormLayout} style={{ marginTop: 32 }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={submitLoading}
+                disabled={!this.state.select.area || !this.state.select.meter}
+              >
                 查询
               </Button>
-            </FormItem>
+            </Form.Item>
           </Form>
         </Card>
       </PageHeaderLayout>
