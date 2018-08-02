@@ -116,7 +116,7 @@
           Token.message.toast('充值金额必须大于1元');
           return;
         }
-        Indicator.open('微信支付');
+        Indicator.open('唤起微信');
         this.$http.get('https://palmwhut.sinaapp.com/ip.php').then(ip => {
           let param = {
             area: this.$store.state.area,
@@ -139,14 +139,15 @@
       },
       openLocation () {
         this.$f7.modal({
-          title: '充值失败',
-          text: "马房山校区线上充值功能暂未开放，敬请期待~<br>请前往线下充值点缴费<br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
+          title: '请选择充值方式',
+          text: "马房山校区暂不支持移动端充值，请用电脑访问或前往线下充值点缴费<br><strong>https://web.wutnews.net/electric</strong><br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
+          verticalButtons: true,
           buttons: [{
-            text: '关闭',
-          }, {
-            text: '查看充值点',
+            text: '查看线下充值点',
             bold: true,
             onClick: this.showStation
+          }, {
+            text: '关闭',
           }]
         });
       },

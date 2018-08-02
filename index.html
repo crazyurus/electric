@@ -9,7 +9,6 @@
 </head>
 <body>
   <div id="app"></div>
-  <script src="//cdn.ravenjs.com/3.19.1/raven.min.js" crossorigin="anonymous"></script>
   <script>
     window.electric = {
       sno: '{$Think.session.sno}',
@@ -17,8 +16,6 @@
       area: '{$Think.session.area}',
       meter: '{$Think.session.meter}'
     };
-    // Sentry监控
-    Raven.config('https://a5046b43c96c461fb9c22b94c18f87f6@sentry.wutnews.net/13').install();
     // 百度统计
     var _hmt = _hmt || [];
     (function() {

@@ -118,7 +118,7 @@
       </div>
     </div>
     <f7-toolbar class="toolbar" v-if="$store.state.sno !== 'anonymous'">
-      <a href="javascript:;" class="link" :class="{ 'link-disabled': !isChargable }" @click="charge">充值</a>
+      <a href="javascript:;" class="link" @click="charge">充值</a>
       <a href="javascript:;" class="link" @click="update">刷新电量</a>
       <a href="javascript:;" class="link" @click="change">更换宿舍</a>
     </f7-toolbar>
