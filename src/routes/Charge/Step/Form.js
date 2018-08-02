@@ -105,16 +105,7 @@ class ChargeForm extends React.PureComponent {
           onSubmit={this.onValidateForm}
           hideRequiredMark
         >
-          {isYuArea ? (
-            ''
-          ) : (
-            <Alert
-              showIcon
-              message="马房山校区的宿舍暂不支持在线充值"
-              style={{ marginBottom: 24 }}
-            />
-          )}
-          {isYuArea && isOffline ? (
+          {isOffline ? (
             <Alert
               showIcon
               message="宿舍电表处于离线状态暂不支持在线充值"
@@ -153,15 +144,21 @@ class ChargeForm extends React.PureComponent {
               initialValue: 1,
               rules: [{ required: true, message: '支付方式必选' }],
             })(
-              <Radio.Group>
-                <Radio value={1}>微信支付</Radio>
-                <Radio value={2} disabled>
-                  支付宝
-                </Radio>
-                <Radio value={3} disabled>
-                  校园卡电子账户
-                </Radio>
-              </Radio.Group>
+              isYuArea ? (
+                <Radio.Group>
+                  <Radio value={1}>微信支付</Radio>
+                  <Radio value={2} disabled>
+                    支付宝
+                  </Radio>
+                  <Radio value={3} disabled>
+                    校园卡电子账户
+                  </Radio>
+                </Radio.Group>
+              ) : (
+                <Radio.Group>
+                  <Radio value={1}>收费平台支付</Radio>
+                </Radio.Group>
+              )
             )}
           </Form.Item>
           <Form.Item
@@ -173,14 +170,19 @@ class ChargeForm extends React.PureComponent {
               },
             }}
           >
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={submitLoading}
-              disabled={!isYuArea || isOffline}
-            >
-              支付
-            </Button>
+            {isYuArea ? (
+              <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline}>
+                支付
+              </Button>
+            ) : (
+              <Button
+                type="primary"
+                htmlType="button"
+                onClick={() => document.getElementById('cwsfForm').submit()}
+              >
+                前往收费平台
+              </Button>
+            )}
             <Button
               type="default"
               style={{ marginLeft: '12px' }}
@@ -190,12 +192,33 @@ class ChargeForm extends React.PureComponent {
             </Button>
           </Form.Item>
         </Form>
+        {isYuArea ? null : (
+          <div style={{ visibility: 'hidden' }}>
+            <img alt="" src="http://cwsf.whut.edu.cn/casLogin" />
+            <form
+              id="cwsfForm"
+              method="POST"
+              action="http://cwsf.whut.edu.cn/elecPayprojectCreateOrder"
+              target="_blank"
+            >
+              <input type="hidden" name="factorycode" value="E023" />
+              <input type="hidden" name="roomno" value="学海20栋-409" />
+              <input type="hidden" name="roomid" value="4511" />
+              <input type="hidden" name="floor" value="4楼" />
+              <input type="hidden" name="loudong" value="学海20栋" />
+              <input type="hidden" name="payAmt" value="0.1" />
+              <input type="hidden" name="payProjectId" value="6" />
+              <input type="hidden" name="schoolid" value="3" />
+              <input type="hidden" name="area" value="9002" />
+            </form>
+          </div>
+        )}
         <Divider style={{ margin: '40px 0 24px' }} />
         <div className={styles.desc}>
           <h3>充值说明</h3>
           <h4>线上充值范围</h4>
           <p>
-            目前余家头校区的宿舍支持在线充值，马房山校区的宿舍暂不支持需要前往线下充值点缴费。<Dropdown
+            目前余家头校区的宿舍支持在线微信充值，马房山校区的宿舍可在收费平台缴费或前往线下充值点。<Dropdown
               overlay={menu}
               trigger={['click']}
             >
@@ -206,7 +229,9 @@ class ChargeForm extends React.PureComponent {
           </p>
           <h4>充值后未成功下发电</h4>
           <p>
-            请联系余家头校区管理委员会后勤办公室，电话：<a href="tel:027-86860918">027-86860918</a>。
+            马房山校区的同学请联系后勤保障处水电管理中心或线下充值点。<br />余家头校区的同学请联系余区管委会后勤办公室，电话：<a href="tel:027-86860918">
+              027-86860918
+            </a>。
           </p>
         </div>
       </Fragment>
