@@ -30,7 +30,7 @@
           <span>支付信息</span>
         </li>
         <li>
-          <a class="item-link item-content" href="/detail/pay">
+          <a class="item-link item-content" href="/charge/record">
             <div class="item-inner">
               <div class="item-title">购电详情</div>
             </div>
