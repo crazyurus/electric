@@ -21,10 +21,16 @@ export default {
       body: params,
     });
   },
+  async cwsf(params) {
+    return request(host, '/api/cwsf', {
+      method: 'POST',
+      body: params,
+    });
+  },
   async check(params) {
     return request(host, '/pay/check', {
       method: 'POST',
       body: params,
     });
   },
-}
+};

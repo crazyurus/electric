@@ -13,6 +13,9 @@ export default {
   },
 
   effects: {
+    *cwsf({ payload }, { call }) {
+      return yield call(web.cwsf, payload);
+    },
     *prepare({ payload }, { call, put }) {
       const response = yield call(web.prepare, payload);
       yield put({
@@ -43,7 +46,7 @@ export default {
       return {
         ...state,
         record: payload,
-      }
+      };
     },
     saveQrcode(state, { payload }) {
       return {

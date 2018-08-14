@@ -18,7 +18,9 @@ class ChargeForm extends React.PureComponent {
   onValidateForm = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
+      if (err) return;
+
+      if (this.props.room.room.area === 7) {
         this.props
           .dispatch({
             type: 'pay/ip',
@@ -38,6 +40,23 @@ class ChargeForm extends React.PureComponent {
           })
           .then(() => {
             return this.props.dispatch(routerRedux.push('/charge/index/qrcode'));
+          });
+      } else {
+        const cwsfWindow = window.open();
+        cwsfWindow.document.write(
+          '<h3>正在连接武汉理工大学校园缴费平台……</h3><p>武汉理工大学电费系统</p><hr><p>&copy; 2018 Token团队</p>'
+        );
+        return this.props
+          .dispatch({
+            type: 'pay/cwsf',
+            payload: {
+              area: this.props.room.room.area,
+              amount: values.amount,
+              meter: this.props.room.room.meter,
+            },
+          })
+          .then(response => {
+            cwsfWindow.location.href = response.url;
           });
       }
     });
@@ -105,15 +124,21 @@ class ChargeForm extends React.PureComponent {
           onSubmit={this.onValidateForm}
           hideRequiredMark
         >
-          {isOffline ? (
+          {isYuArea ? null : (
+            <Alert
+              showIcon
+              type="warning"
+              message="马房山校区宿舍电费功能测试中，请勿充值，敬请期待"
+              style={{ marginBottom: 24 }}
+            />
+          )}
+          {isYuArea && isOffline ? (
             <Alert
               showIcon
               message="宿舍电表处于离线状态暂不支持在线充值"
               style={{ marginBottom: 24 }}
             />
-          ) : (
-            ''
-          )}
+          ) : null}
           <Form.Item {...formItemLayout} label="宿舍">
             <strong>{room.room.meter.split('*')[2]}</strong>
           </Form.Item>
@@ -170,19 +195,9 @@ class ChargeForm extends React.PureComponent {
               },
             }}
           >
-            {isYuArea ? (
-              <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline}>
-                支付
-              </Button>
-            ) : (
-              <Button
-                type="primary"
-                htmlType="button"
-                onClick={() => document.getElementById('cwsfForm').submit()}
-              >
-                前往收费平台
-              </Button>
-            )}
+            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline}>
+              支付
+            </Button>
             <Button
               type="default"
               style={{ marginLeft: '12px' }}
@@ -194,23 +209,7 @@ class ChargeForm extends React.PureComponent {
         </Form>
         {isYuArea ? null : (
           <div style={{ visibility: 'hidden' }}>
-            <img alt="" src="http://cwsf.whut.edu.cn/casLogin" />
-            <form
-              id="cwsfForm"
-              method="POST"
-              action="http://cwsf.whut.edu.cn/elecPayprojectCreateOrder"
-              target="_blank"
-            >
-              <input type="hidden" name="factorycode" value="E023" />
-              <input type="hidden" name="roomno" value="学海20栋-409" />
-              <input type="hidden" name="roomid" value="4511" />
-              <input type="hidden" name="floor" value="4楼" />
-              <input type="hidden" name="loudong" value="学海20栋" />
-              <input type="hidden" name="payAmt" value="0.1" />
-              <input type="hidden" name="payProjectId" value="6" />
-              <input type="hidden" name="schoolid" value="3" />
-              <input type="hidden" name="area" value="9002" />
-            </form>
+            <img alt="" src="/electric/api/zhlgd" />
           </div>
         )}
         <Divider style={{ margin: '40px 0 24px' }} />
@@ -229,7 +228,7 @@ class ChargeForm extends React.PureComponent {
           </p>
           <h4>充值后未成功下发电</h4>
           <p>
-            马房山校区的同学请联系后勤保障处水电管理中心或线下充值点。<br />余家头校区的同学请联系余区管委会后勤办公室，电话：<a href="tel:027-86860918">
+            马房山校区的同学请联系后勤保障处水电管理中心或各个校区线下充值点。<br />余家头校区的同学请联系余区管委会后勤办公室，电话：<a href="tel:027-86860918">
               027-86860918
             </a>。
           </p>
@@ -243,5 +242,6 @@ export default connect(({ user, room, pay, loading }) => ({
   currentUser: user.current,
   room,
   pay,
-  submitLoading: loading.effects['pay/prepare'] || loading.effects['pay/ip'],
+  submitLoading:
+    loading.effects['pay/prepare'] || loading.effects['pay/ip'] || loading.effects['pay/cwsf'],
 }))(ChargeForm);
