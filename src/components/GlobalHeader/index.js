@@ -68,7 +68,7 @@ export default class GlobalHeader extends PureComponent {
           <Menu.Item>
             <a
               target="_blank"
-              href="http://zhlgd.whut.edu.cn/tp_idc/idc?m=icdc"
+              href="http://zhlgd.whut.edu.cn/tp_idc/idc?m=idc"
               rel="noopener noreferrer"
             >
               <Icon type="user" />个人中心

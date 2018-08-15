@@ -136,7 +136,7 @@ export default class Index extends Component {
           <div className={styles.contentTitle}>{room.detail.name || '加载中…'}</div>
           <div>
             {this.transAreaName(room.room.area)}
-            <Divider type="vertical" />No.{room.detail.no || '000000000000'}
+            <Divider type="vertical" style={{ color: 'rgba(0,0,0,.45)' }} />No.{room.detail.no || '000000000000'}
           </div>
         </div>
       </div>

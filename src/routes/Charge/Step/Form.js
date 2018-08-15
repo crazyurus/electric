@@ -124,15 +124,7 @@ class ChargeForm extends React.PureComponent {
           onSubmit={this.onValidateForm}
           hideRequiredMark
         >
-          {isYuArea ? null : (
-            <Alert
-              showIcon
-              type="warning"
-              message="马房山校区宿舍电费功能测试中，请勿充值，敬请期待"
-              style={{ marginBottom: 24 }}
-            />
-          )}
-          {isYuArea && isOffline ? (
+          {isOffline ? (
             <Alert
               showIcon
               message="宿舍电表处于离线状态暂不支持在线充值"
@@ -195,7 +187,7 @@ class ChargeForm extends React.PureComponent {
               },
             }}
           >
-            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline}>
+            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline || !isYuArea}>
               支付
             </Button>
             <Button
