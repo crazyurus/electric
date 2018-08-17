@@ -30,7 +30,8 @@ export default class PayRecordList extends PureComponent {
         render(value) {
           let color = '';
           switch (value) {
-            case '微信支付': color = 'success'; break;
+            case '微信支付':
+            case '收费平台支付': color = 'success'; break;
             case '系统售电': color = 'processing'; break;
             case '统一月补': color = 'warning'; break;
             case '临时调剂': color = 'error'; break;
@@ -41,6 +42,7 @@ export default class PayRecordList extends PureComponent {
         },
         filters: [
           { text: '微信支付', value: '微信支付' },
+          { text: '收费平台支付', value: '收费平台支付' },
           { text: '系统售电', value: '系统售电' },
           { text: '统一月补', value: '统一月补' },
           { text: '临时调剂', value: '临时调剂' },
