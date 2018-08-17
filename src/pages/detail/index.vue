@@ -1,9 +1,9 @@
 <template>
   <div class="page" data-page="detail">
     <div class="am-notice" role="alert" v-if="broadcast">
-      <div class="am-notice-content">{{broadcast}}</div>
+      <div class="am-notice-content">{{broadcast.text}}</div>
       <div class="am-notice-operation">
-        <a class="am-notice-go" href="#"></a>
+        <a class="am-notice-go" :href="broadcast.link"></a>
       </div>
     </div>
     <div class="page-content">
@@ -155,7 +155,7 @@
           show: false,
           value: 20
         },
-        broadcast: ''
+        broadcast: {}
       }
     },
     mounted () {

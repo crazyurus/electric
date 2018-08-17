@@ -142,7 +142,7 @@
       openLocation () {
         this.$f7.modal({
           title: '请选择充值方式',
-          text: "马房山校区的宿舍请用电脑访问以下网址缴费<br><strong>https://web.wutnews.net/electric</strong><br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
+          text: "马房山校区的宿舍请在00:10-23:20间用电脑访问以下网址缴费<br><strong>http://token.team/electric</strong><br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
           verticalButtons: true,
           buttons: [{
             text: '复制缴费网址',
