@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
-import { Form, Input, Button, Radio, Divider, Alert, Menu, Dropdown } from 'antd';
+import { Form, Input, Button, Radio, Divider, Alert, Menu, Dropdown, message } from 'antd';
 import { routerRedux, Link } from 'dva/router';
 import styles from '../style.less';
 
@@ -42,6 +42,14 @@ class ChargeForm extends React.PureComponent {
             return this.props.dispatch(routerRedux.push('/charge/index/qrcode'));
           });
       } else {
+        const now = new Date();
+        if (
+          (now.getHours() === 23 && now.getMinutes() >= 20) ||
+          (now.getHours() === 0 && now.getMinutes() <= 10)
+        ) {
+          message.error('23:20至次日00:10为收费平台结算时间，暂不可缴费');
+          return false;
+        }
         const cwsfWindow = window.open();
         cwsfWindow.document.write(
           '<h3>正在连接武汉理工大学校园缴费平台……</h3><p>武汉理工大学电费系统</p><hr><p>&copy; 2018 Token团队</p>'
@@ -223,6 +231,7 @@ class ChargeForm extends React.PureComponent {
             >
               <a className="ant-dropdown-link">点击查看各个校区的线下充值点</a>
             </Dropdown>
+            <br />马房山校区线上充值时间00:10-23:20，余家头校区24小时均可充值。
             <br />人工窗口工作时间：周一到周五 8:00-11:30
             14:00-16:30；自助充值机充值时间：每日6:00-24:00。注意不可以跨校区充值。
           </p>
