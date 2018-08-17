@@ -43,6 +43,8 @@
   import Token from '../../libs/Token'
   import Vue from 'vue'
   import { Actionsheet, Indicator } from 'mint-ui';
+  import copy from 'copy-to-clipboard';
+
   Vue.component(Actionsheet.name, Actionsheet);
   Vue.use(Indicator);
 
@@ -140,11 +142,18 @@
       openLocation () {
         this.$f7.modal({
           title: '请选择充值方式',
-          text: "马房山校区暂不支持移动端充值，请用电脑访问或前往线下充值点缴费<br><strong>https://web.wutnews.net/electric</strong><br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
+          text: "马房山校区的宿舍请用电脑访问以下网址缴费<br><strong>https://web.wutnews.net/electric</strong><br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
           verticalButtons: true,
           buttons: [{
-            text: '查看线下充值点',
+            text: '复制缴费网址',
             bold: true,
+            onClick() {
+              copy('https://web.wutnews.net/electric');
+              Token.message.toast('复制成功');
+            }
+          }, {
+            text: '查看线下充值点',
+            bold: false,
             onClick: this.showStation
           }, {
             text: '关闭',
