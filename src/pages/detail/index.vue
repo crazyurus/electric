@@ -1,5 +1,11 @@
 <template>
   <div class="page" data-page="detail">
+    <div class="am-notice" role="alert" v-if="broadcast">
+      <div class="am-notice-content">{{broadcast}}</div>
+      <div class="am-notice-operation">
+        <a class="am-notice-go" href="#"></a>
+      </div>
+    </div>
     <div class="page-content">
       <div class="cost-area">
         <div class="cost-title">剩余电量(度)</div>
@@ -148,7 +154,8 @@
         warning: {
           show: false,
           value: 20
-        }
+        },
+        broadcast: ''
       }
     },
     mounted () {
@@ -172,6 +179,10 @@
             this.electric = result.data;
           }
           else Token.message.alert(result.errMsg);
+        });
+
+        this.$http.get('https://web.wutnews.net/electric/api/broadcast').then(result => {
+          this.broadcast = result.data;
         });
 
         if (location.search.indexOf('?refresh=') > -1) token.setMeter(meter + '|' + area);

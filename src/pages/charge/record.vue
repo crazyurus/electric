@@ -71,11 +71,12 @@
       typeToColor (type) {
         switch (type) {
           case '微信支付': return 'bg-green';
+          case '收费平台支付': return 'bg-purple';
           case '系统售电': return 'bg-blue';
           case '统一月补': return 'bg-orange';
           case '临时调剂': return 'bg-red';
           case '一卡通售电': return 'bg-yellow';
-          default: return 'bg-purple';
+          default: return 'bg-gray';
         }
       },
       amtToFix2 (amt) {

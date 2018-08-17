@@ -7,6 +7,7 @@ import Framework7ThemeColors from 'framework7/dist/css/framework7.ios.colors.min
 
 import 'mint-ui/lib/style.css'
 import './css/app.css'
+import './css/notice.css'
 import Routes from './routes.js'
 import App from './app'
 
