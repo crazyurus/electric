@@ -131,6 +131,14 @@ class ChargeForm extends React.PureComponent {
               style={{ marginBottom: 24 }}
             />
           ) : null}
+          {!isYuArea ? (
+            <Alert
+              type="warning"
+              showIcon
+              message="马房山宿舍电费在线充值测试中，请小额充值"
+              style={{ marginBottom: 24 }}
+            />
+          ) : null}
           <Form.Item {...formItemLayout} label="宿舍">
             <strong>{room.room.meter.split('*')[2]}</strong>
           </Form.Item>
@@ -187,7 +195,7 @@ class ChargeForm extends React.PureComponent {
               },
             }}
           >
-            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline || !isYuArea}>
+            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline}>
               支付
             </Button>
             <Button
