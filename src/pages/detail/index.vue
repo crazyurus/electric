@@ -1,6 +1,6 @@
 <template>
   <div class="page" data-page="detail">
-    <div class="am-notice" role="alert" v-if="broadcast">
+    <div class="am-notice" role="alert" v-if="broadcast.text">
       <div class="am-notice-content">{{broadcast.text}}</div>
       <div class="am-notice-operation">
         <a class="am-notice-go" :href="broadcast.link"></a>
