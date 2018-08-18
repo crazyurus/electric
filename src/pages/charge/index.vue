@@ -6,7 +6,7 @@
           <div class="item-inner">
             <div class="item-title-row">
               <div class="item-title item-cardno">{{$store.state.meter.split('*')[2]}}</div>
-              <div class="item-text" style="font-weight:300">微信支付　<a href="javascript:;" @click="change">更换</a></div>
+              <div class="item-text" style="font-weight:300">{{$store.state.area == 7 ? '微信支付' : '收费平台支付'}}　<a href="javascript:;" @click="change">更换</a></div>
             </div>
           </div>
         </li>
@@ -137,7 +137,7 @@
         });
       },
       change () {
-        Token.message.toast('暂只支持微信支付');
+        Token.message.toast('暂只支持' + (this.$store.state.area == 7 ? '微信支付' : '收费平台支付'));
       },
       openLocation () {
         this.$f7.modal({
