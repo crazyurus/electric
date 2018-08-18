@@ -20,7 +20,7 @@ class ChargeForm extends React.PureComponent {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (err) return;
 
-      if (this.props.room.room.area === 7) {
+      if (values.type === 1) {
         this.props
           .dispatch({
             type: 'pay/ip',
@@ -52,7 +52,7 @@ class ChargeForm extends React.PureComponent {
         }
         const cwsfWindow = window.open();
         cwsfWindow.document.write(
-          '<h3>正在连接武汉理工大学校园缴费平台……</h3><p>武汉理工大学电费系统</p><hr><p>&copy; 2018 Token团队</p>'
+          '<h3>正在连接武汉理工大学校园缴费平台……</h3><p>第一次登录收费平台需要补充个人联系方式</p><p>武汉理工大学电费系统</p><hr><p>&copy; 2018 Token团队</p>'
         );
         return this.props
           .dispatch({
@@ -174,22 +174,17 @@ class ChargeForm extends React.PureComponent {
           </Form.Item>
           <Form.Item {...formItemLayout} label="支付方式">
             {getFieldDecorator('type', {
-              initialValue: 1,
+              initialValue: isYuArea ? 1 : 2,
               rules: [{ required: true, message: '支付方式必选' }],
             })(
               isYuArea ? (
                 <Radio.Group>
                   <Radio value={1}>微信支付</Radio>
-                  <Radio value={2} disabled>
-                    支付宝
-                  </Radio>
-                  <Radio value={3} disabled>
-                    校园卡电子账户
-                  </Radio>
+                  <Radio value={2}>收费平台支付</Radio>
                 </Radio.Group>
               ) : (
                 <Radio.Group>
-                  <Radio value={1}>收费平台支付</Radio>
+                  <Radio value={2}>收费平台支付</Radio>
                 </Radio.Group>
               )
             )}
@@ -215,11 +210,9 @@ class ChargeForm extends React.PureComponent {
             </Button>
           </Form.Item>
         </Form>
-        {isYuArea ? null : (
-          <div style={{ visibility: 'hidden' }}>
-            <img alt="" src="/electric/api/zhlgd" />
-          </div>
-        )}
+        <div style={{ visibility: 'hidden' }}>
+          <img alt="" src="/electric/api/zhlgd" />
+        </div>
         <Divider style={{ margin: '40px 0 24px' }} />
         <div className={styles.desc}>
           <h3>充值说明</h3>
