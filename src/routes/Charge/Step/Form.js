@@ -143,7 +143,7 @@ class ChargeForm extends React.PureComponent {
             <Alert
               type="warning"
               showIcon
-              message="马房山宿舍电费在线充值测试中，请小额充值"
+              message="马房山宿舍电费在线充值测试结束，预计开学初正式上线，敬请期待～"
               style={{ marginBottom: 24 }}
             />
           ) : null}
@@ -180,7 +180,7 @@ class ChargeForm extends React.PureComponent {
               isYuArea ? (
                 <Radio.Group>
                   <Radio value={1}>微信支付</Radio>
-                  <Radio value={2}>收费平台支付</Radio>
+                  <Radio value={2} disabled>收费平台支付</Radio>
                 </Radio.Group>
               ) : (
                 <Radio.Group>
@@ -198,7 +198,7 @@ class ChargeForm extends React.PureComponent {
               },
             }}
           >
-            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline}>
+            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline || !isYuArea}>
               支付
             </Button>
             <Button
