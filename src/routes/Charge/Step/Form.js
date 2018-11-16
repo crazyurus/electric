@@ -139,14 +139,6 @@ class ChargeForm extends React.PureComponent {
               style={{ marginBottom: 24 }}
             />
           ) : null}
-          {!isYuArea ? (
-            <Alert
-              type="warning"
-              showIcon
-              message="马房山宿舍电费在线充值测试结束，预计开学初正式上线，敬请期待～"
-              style={{ marginBottom: 24 }}
-            />
-          ) : null}
           <Form.Item {...formItemLayout} label="宿舍">
             <strong>{room.room.meter.split('*')[2]}</strong>
           </Form.Item>
@@ -180,7 +172,7 @@ class ChargeForm extends React.PureComponent {
               isYuArea ? (
                 <Radio.Group>
                   <Radio value={1}>微信支付</Radio>
-                  <Radio value={2} disabled>收费平台支付</Radio>
+                  <Radio value={2}>收费平台支付</Radio>
                 </Radio.Group>
               ) : (
                 <Radio.Group>
@@ -198,7 +190,7 @@ class ChargeForm extends React.PureComponent {
               },
             }}
           >
-            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline || !isYuArea}>
+            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline}>
               支付
             </Button>
             <Button
@@ -229,6 +221,9 @@ class ChargeForm extends React.PureComponent {
             14:00-16:30；自助充值机充值时间：每日6:00-24:00。注意不可以跨校区充值。
           </p>
           <h4>充值后未成功下发电</h4>
+          <p>
+            通过校园缴费平台支付的同学，请加QQ群：<a>939924027</a>
+          </p>
           <p>
             马房山校区的同学请联系后勤保障处水电管理中心或各个校区线下充值点。<br />余家头校区的同学请联系余区管委会后勤办公室，电话：<a href="tel:027-86860918">
               027-86860918
