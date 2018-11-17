@@ -149,7 +149,7 @@
           Indicator.close();
           if (result.data.url) {
             if (typeof tokenNative === 'undefined') location.assign(result.data.url);
-            else tokenNative.openAppWithURL(result.data.url);
+            else tokenNative.openAppWithURL({ url: result.data.url });
           }
         });
       },
