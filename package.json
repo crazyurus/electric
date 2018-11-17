@@ -39,6 +39,7 @@
     "omit.js": "^1.0.0",
     "path-to-regexp": "^2.1.0",
     "prop-types": "^15.5.10",
+    "qrcode.react": "^0.8.0",
     "rc-drawer-menu": "^0.5.0",
     "react": "^16.2.0",
     "react-amap": "^1.2.7",

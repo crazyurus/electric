@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Fragment, Component } from 'react';
 import { connect } from 'dva';
 import { Icon } from 'antd';
 import { routerRedux } from 'dva/router';
+import QRCode from 'qrcode.react';
 import styles from '../style.less';
 
-class ChargeQrcode extends React.PureComponent {
+class ChargeQrcode extends Component {
   state = {};
 
   componentDidMount() {
@@ -16,6 +17,7 @@ class ChargeQrcode extends React.PureComponent {
   }
 
   checkPaySuccess() {
+    if (!this.props.pay.order) return;
     this.props
       .dispatch({
         type: 'pay/check',
@@ -32,16 +34,21 @@ class ChargeQrcode extends React.PureComponent {
   }
 
   render() {
+    const isCwsf = this.props.pay.qrcode.indexOf('.icbc.') > -1;
     return (
       <div className={styles.qrcode}>
         <div className={styles.title}>
-          请打开 <Icon type="wechat" /> <strong>微信</strong> 扫描二维码支付
+          请打开 <Icon type="wechat" /> <strong>微信</strong>
+          {isCwsf ? (
+            <Fragment>
+              {' '}
+              或 <Icon type="alipay" /> <strong>支付宝</strong>
+            </Fragment>
+          ) : null}{' '}
+          扫描二维码支付
         </div>
         <div className={styles.image}>
-          <img
-            src={'/electric/api/qrcode?url=' + encodeURIComponent(this.props.pay.qrcode)}
-            alt="二维码"
-          />
+          <QRCode value={this.props.pay.qrcode} size={248} />
         </div>
       </div>
     );

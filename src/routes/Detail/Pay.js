@@ -8,7 +8,6 @@ import PageHeaderLayout from '../../layouts/PageHeaderLayout';
   listLoading: loading.effects['pay/record'],
 }))
 export default class PayRecordList extends PureComponent {
-
   componentDidMount() {
     this.props.dispatch({
       type: 'pay/record',
@@ -31,18 +30,28 @@ export default class PayRecordList extends PureComponent {
           let color = '';
           switch (value) {
             case '微信支付':
-            case '收费平台支付': color = 'success'; break;
-            case '系统售电': color = 'processing'; break;
-            case '统一月补': color = 'warning'; break;
-            case '临时调剂': color = 'error'; break;
+            case '缴费平台支付':
+              color = 'success';
+              break;
+            case '系统售电':
+              color = 'processing';
+              break;
+            case '统一月补':
+              color = 'warning';
+              break;
+            case '临时调剂':
+              color = 'error';
+              break;
             case '一卡通售电':
-            default: color = 'default'; break;
+            default:
+              color = 'default';
+              break;
           }
-          return <Badge status={color} text={value} />
+          return <Badge status={color} text={value} />;
         },
         filters: [
           { text: '微信支付', value: '微信支付' },
-          { text: '收费平台支付', value: '收费平台支付' },
+          { text: '缴费平台支付', value: '缴费平台支付' },
           { text: '系统售电', value: '系统售电' },
           { text: '统一月补', value: '统一月补' },
           { text: '临时调剂', value: '临时调剂' },
@@ -78,13 +87,10 @@ export default class PayRecordList extends PureComponent {
         title: '订单状态',
         align: 'center',
         dataIndex: 'status',
-        filters: [
-          { text: '正在下发', value: '正在下发' },
-          { text: '下发成功', value: '下发成功' },
-        ],
+        filters: [{ text: '正在下发', value: '正在下发' }, { text: '下发成功', value: '下发成功' }],
         onFilter: (value, current) => current.status === value,
         render(value) {
-          return <Badge status={value === '下发成功' ? 'success' : 'processing'} text={value} />
+          return <Badge status={value === '下发成功' ? 'success' : 'processing'} text={value} />;
         },
       },
     ];
@@ -93,12 +99,7 @@ export default class PayRecordList extends PureComponent {
       <PageHeaderLayout title="充值记录" content="该宿舍线上及线下的所有充值记录">
         <Card bordered={false}>
           <div>
-            <Table
-              loading={listLoading}
-              dataSource={record }
-              columns={columns}
-              rowKey="no"
-            />
+            <Table loading={listLoading} dataSource={record} columns={columns} rowKey="no" />
           </div>
         </Card>
       </PageHeaderLayout>

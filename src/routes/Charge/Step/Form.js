@@ -47,13 +47,9 @@ class ChargeForm extends React.PureComponent {
           (now.getHours() === 23 && now.getMinutes() >= 20) ||
           (now.getHours() === 0 && now.getMinutes() <= 10)
         ) {
-          message.error('23:20至次日00:10为收费平台结算时间，暂不可缴费');
+          message.error('23:20至次日00:10为缴费平台结算时间，暂不可缴费');
           return false;
         }
-        const cwsfWindow = window.open();
-        cwsfWindow.document.write(
-          '<h3>正在连接武汉理工大学校园缴费平台……</h3><p>第一次登录收费平台需要补充个人联系方式</p><p>武汉理工大学电费系统</p><hr><p>&copy; 2018 Token团队</p>'
-        );
         return this.props
           .dispatch({
             type: 'pay/cwsf',
@@ -64,7 +60,8 @@ class ChargeForm extends React.PureComponent {
             },
           })
           .then(response => {
-            cwsfWindow.location.href = response.url;
+            if (response.url) return this.props.dispatch(routerRedux.push('/charge/index/qrcode'));
+            else message.error('订单生成失败');
           });
       }
     });
@@ -172,11 +169,11 @@ class ChargeForm extends React.PureComponent {
               isYuArea ? (
                 <Radio.Group>
                   <Radio value={1}>微信支付</Radio>
-                  <Radio value={2}>收费平台支付</Radio>
+                  <Radio value={2}>缴费平台支付</Radio>
                 </Radio.Group>
               ) : (
                 <Radio.Group>
-                  <Radio value={2}>收费平台支付</Radio>
+                  <Radio value={2}>缴费平台支付</Radio>
                 </Radio.Group>
               )
             )}
@@ -202,15 +199,12 @@ class ChargeForm extends React.PureComponent {
             </Button>
           </Form.Item>
         </Form>
-        <div style={{ visibility: 'hidden' }}>
-          <img alt="" src="/electric/api/zhlgd" />
-        </div>
         <Divider style={{ margin: '40px 0 24px' }} />
         <div className={styles.desc}>
           <h3>充值说明</h3>
           <h4>线上充值范围</h4>
           <p>
-            目前余家头校区的宿舍支持在线微信充值，马房山校区的宿舍可在收费平台缴费或前往线下充值点。<Dropdown
+            目前余家头校区的宿舍支持在线微信充值，马房山校区的宿舍可在缴费平台充值或前往线下充值点。<Dropdown
               overlay={menu}
               trigger={['click']}
             >
@@ -223,8 +217,7 @@ class ChargeForm extends React.PureComponent {
           <h4>充值后未成功下发电</h4>
           <p>
             通过校园缴费平台支付的同学，请加QQ群：<a>939924027</a>
-          </p>
-          <p>
+            <br />
             马房山校区的同学请联系后勤保障处水电管理中心或各个校区线下充值点。<br />余家头校区的同学请联系余区管委会后勤办公室，电话：<a href="tel:027-86860918">
               027-86860918
             </a>。

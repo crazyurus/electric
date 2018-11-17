@@ -13,8 +13,16 @@ export default {
   },
 
   effects: {
-    *cwsf({ payload }, { call }) {
-      return yield call(web.cwsf, payload);
+    *cwsf({ payload }, { call, put }) {
+      const response = yield call(web.cwsf, payload);
+      yield put({
+        type: 'saveQrcode',
+        payload: {
+          code_url: response.url,
+          prepay_id: '',
+        },
+      });
+      return response;
     },
     *prepare({ payload }, { call, put }) {
       const response = yield call(web.prepare, payload);

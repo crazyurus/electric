@@ -9,9 +9,4 @@ const Charts = {
   Field,
 };
 
-export {
-  Charts as default,
-  Bar,
-  ChartCard,
-  Field,
-};
+export { Charts as default, Bar, ChartCard, Field };

@@ -50,15 +50,15 @@ export default function request(host, url, options) {
   };
   const newOptions = { ...defaultOptions, ...options };
   if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
-      newOptions.headers = {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-        ...newOptions.headers,
-      };
-      const formData = [];
-      for (const key in newOptions.body) {
-        formData.push(key + '=' + newOptions.body[key]);
-      }
-      newOptions.body = formData.join('&');
+    newOptions.headers = {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+      ...newOptions.headers,
+    };
+    const formData = [];
+    for (const key in newOptions.body) {
+      formData.push(key + '=' + newOptions.body[key]);
+    }
+    newOptions.body = formData.join('&');
   }
 
   return fetch((isProduction ? '//' + host : '') + '/electric' + url, newOptions)

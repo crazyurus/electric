@@ -6,4 +6,4 @@ export default {
   async ip() {
     return request(host, '/ip.php');
   },
-}
+};
