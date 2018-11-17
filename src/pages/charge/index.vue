@@ -6,7 +6,7 @@
           <div class="item-inner">
             <div class="item-title-row">
               <div class="item-title item-cardno">{{$store.state.meter.split('*')[2]}}</div>
-              <div class="item-text" style="font-weight:300">{{$store.state.area == 7 ? '微信支付' : '收费平台支付'}}　<a href="javascript:;" @click="change">更换</a></div>
+              <div class="item-text" style="font-weight:300">{{type}}　<a href="javascript:;" @click="change">更换</a></div>
             </div>
           </div>
         </li>
@@ -54,7 +54,8 @@
         sheet: {
           actions: [],
           show: false
-        }
+        },
+        type: this.$store.state.area == 7 ? '微信支付' : '支付宝支付'
       }
     },
     methods: {
@@ -106,10 +107,6 @@
         });
       },
       charge (amount) {
-        if (this.$store.state.area != 7) {
-          this.openLocation();
-          return;
-        }
         if (Token.detect.wechat()) {
           this.qrcode('暂不支持微信内支付，请长按打开小程序“武汉理工大学电费查询”', '/Application/Electric/Assets/image/mina.jpg');
           return;
@@ -118,7 +115,11 @@
           Token.message.toast('充值金额必须大于1元');
           return;
         }
-        Indicator.open('唤起微信');
+        if (this.type === '微信支付') this.chargeWechat(amount);
+        else this.chargeAlipay(amount);
+      },
+      chargeWechat(amount) {
+        Indicator.open('微信支付');
         this.$http.get('https://palmwhut.sinaapp.com/ip.php').then(ip => {
           let param = {
             area: this.$store.state.area,
@@ -136,13 +137,47 @@
           });
         });
       },
+      chargeAlipay(amount) {
+        Indicator.open('支付宝');
+        let param = {
+          area: this.$store.state.area,
+          amount: amount,
+          meter: this.$store.state.meter,
+        };
+
+        this.$http.post('/electric/api/cwsfMobile', param).then(result => {
+          Indicator.close();
+          if (result.data.url) {
+            if (typeof tokenNative === 'undefined') location.assign(result.data.url);
+            else tokenNative.openAppWithURL(result.data.url);
+          }
+        });
+      },
       change () {
-        Token.message.toast('暂只支持' + (this.$store.state.area == 7 ? '微信支付' : '收费平台支付'));
+        if (this.$store.state.area != 7) {
+          Token.message.toast('暂只支持支付宝支付');
+          return;
+        }
+
+        this.sheet = {
+          show: true,
+          actions: [{
+            name: '微信支付',
+            method: () => {
+              this.type = '微信支付'
+            }
+          }, {
+            name: '支付宝支付',
+            method: () => {
+              this.type = '支付宝支付'
+            }
+          }]
+        };
       },
       openLocation () {
         this.$f7.modal({
           title: '请选择充值方式',
-          text: "马房山校区的宿舍请在00:10-23:20间用电脑访问以下网址缴费<br><strong>http://token.team/electric</strong><br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
+          text: "马房山校区的宿舍请在00:10-23:20间用电脑访问以下网址缴费<br><strong>https://web.wutnews.net/electric</strong><br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
           verticalButtons: true,
           buttons: [{
             text: '复制缴费网址',
