@@ -138,20 +138,56 @@
         });
       },
       chargeAlipay(amount) {
-        Indicator.open('支付宝');
-        let param = {
-          area: this.$store.state.area,
-          amount: amount,
-          meter: this.$store.state.meter,
-        };
+        const now = new Date();
+        const $$ = this.Dom7;
+        if (
+          (now.getHours() === 23 && now.getMinutes() >= 20) ||
+          (now.getHours() === 0 && now.getMinutes() <= 10)
+        ) {
+          Token.message.alert('23:20至次日00:10为缴费平台结算时间，暂不可缴费');
+          return false;
+        }
 
-        this.$http.post('/electric/api/cwsfMobile', param).then(result => {
-          Indicator.close();
-          if (result.data.url) {
-            if (typeof tokenNative === 'undefined') location.assign(result.data.url);
-            else tokenNative.openAppWithURL({ url: result.data.url });
+        this.$f7.modal({
+          title: "校园缴费平台",
+          text: "请输入下方图片中的数字",
+          afterText: '<div class="input-field modal-input-double modal-input-captcha"><input type="tel" maxlength="4" class="modal-text-input" id="txtCaptcha" placeholder="验证码"><img src="/electric/cwsf/captcha" alt="点击刷新" onclick="this.src = this.src;"></div>',
+          buttons: [
+            {
+              text: '验证',
+              bold: true
+            }
+          ],
+          onClick: (modal, index) => {
+            if(index === 0) {
+              const captcha = $$("#txtCaptcha").val();
+
+              if(captcha.trim() === "") {
+                Token.message.toast("验证码输入不完整");
+                return;
+              }
+
+              Indicator.open('支付宝');
+              let param = {
+                area: this.$store.state.area,
+                amount: amount,
+                meter: this.$store.state.meter,
+                captcha,
+              };
+
+              this.$http.post('/electric/cwsf/pay', param).then(result => {
+                Indicator.close();
+                if (result.data.url) {
+                  const url = 'alipays://platformapi/startapp?appId=20000067&url=' + encodeURIComponent(result.data.url);
+                  if (typeof tokenNative === 'undefined') location.assign(url);
+                  else tokenNative.openAppWithURL({ url });
+                }
+                else Token.message.toast('订单生成失败');
+              });
+            }
           }
         });
+        $$("#txtCaptcha").focus();
       },
       change () {
         if (this.$store.state.area != 7) {
@@ -312,5 +348,16 @@
     font-size: 1.5rem !important;
     color: #45c8dc !important;
     font-weight: 300 !important;
+  }
+  .modal-input-captcha > input {
+    display: inline-block;
+    width: calc(100% - 60px);
+    vertical-align: bottom;
+  }
+  .modal-input-captcha > img {
+    height: 26px;
+    width: 60px;
+    display: inline-block;
+    vertical-align: bottom;
   }
 </style>
