@@ -57,6 +57,7 @@ class ChargeForm extends React.PureComponent {
               area: this.props.room.room.area,
               amount: values.amount,
               meter: this.props.room.room.meter,
+              captcha: values.captcha,
             },
           })
           .then(response => {
@@ -69,7 +70,7 @@ class ChargeForm extends React.PureComponent {
 
   render() {
     const { form, room, submitLoading } = this.props;
-    const { getFieldDecorator } = form;
+    const { getFieldDecorator, getFieldValue } = form;
     const isYuArea = room.room.area === 7;
     const isOffline = room.detail.status.indexOf('离线') > -1;
     const station = [
@@ -178,6 +179,19 @@ class ChargeForm extends React.PureComponent {
               )
             )}
           </Form.Item>
+          {getFieldValue('type') === 2 ? (
+            <Form.Item {...formItemLayout} label="验证码">
+              {getFieldDecorator('captcha', {
+                initialValue: '',
+                rules: [
+                  {
+                    required: true,
+                    message: '请输入验证码',
+                  },
+                ],
+              })(<Input type="tel" maxLength={4} addonAfter={<img src="/electric/cwsf/captcha" style={{ width: 70, height: 20 }} alt="验证码" />} />)}
+            </Form.Item>
+          ) : null}
           <Form.Item
             wrapperCol={{
               xs: { span: 24, offset: 0 },

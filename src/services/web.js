@@ -22,7 +22,7 @@ export default {
     });
   },
   async cwsf(params) {
-    return request(host, '/api/cwsf', {
+    return request(host, '/cwsf/pay', {
       method: 'POST',
       body: params,
     });
