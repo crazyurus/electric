@@ -11,7 +11,7 @@
             <option value="2*Area*东院">东院</option>
             <option value="3*Area*西院">西院</option>
             <option value="3*Area*鉴湖">鉴湖</option>
-            <option value="0*Area*升升">升升公寓</option>
+            <option value="0*Area*升升" disabled>升升公寓</option>
           </optgroup>
           <optgroup label="余家头校区">
             <option value="7*Area*余区">余区</option>
