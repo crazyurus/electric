@@ -6,7 +6,11 @@
         <a class="am-notice-go" :href="broadcast.link" :class="{ external: broadcast.link.indexOf('http') > -1 }"></a>
       </div>
     </div>
-    <div class="page-content">
+    <div class="page-content pull-to-refresh-content">
+      <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+        <div class="pull-to-refresh-arrow"></div>
+      </div>
       <div class="cost-area">
         <div class="cost-title" @click="charge">剩余电量(度)</div>
         <div class="cost-content number" id="txtLeft" @click="charge">0.00</div>
