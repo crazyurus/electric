@@ -22,9 +22,12 @@
         </div>
       </div>
       <f7-list>
-        <li class="list-group-title">
-          <img src="/Application/Electric/Assets/image/home.svg">
-          <span>宿舍信息</span>
+        <li class="list-group-title" style="justify-content: space-between">
+          <div>
+            <img src="/Application/Electric/Assets/image/home.svg">
+            <span>宿舍信息</span>
+          </div>
+          <a class="link-after link" @click="change">更换宿舍</a>
         </li>
         <f7-list-item title="宿舍" :after="electric.name"></f7-list-item>
         <f7-list-item title="电表状态" :after="electric.status"></f7-list-item>
@@ -101,13 +104,13 @@
         <li class="item-content">
           <div class="item-inner">
             <div class="item-title">区域用电排名</div>
-            <div class="item-after text-red">暂无</div>
+            <div class="item-after">暂无</div>
           </div>
         </li>
         <li class="item-content">
           <div class="item-inner">
             <div class="item-title">建筑用电排名</div>
-            <div class="item-after text-red">暂无</div>
+            <div class="item-after">暂无</div>
           </div>
         </li>
         <li v-if="$store.state.sno !== 'anonymous'">
@@ -118,16 +121,11 @@
           </a>
         </li>
       </f7-list>
-      <div class="content-block" style="margin-bottom: 80px">
+      <div class="content-block">
         <p>以上电费信息更新于&nbsp;{{electric.time}}，关注微信小程序“武汉理工大学电费查询”也可以查询哦</p>
         <p class="text-center" v-if="$store.state.sno === 'anonymous'">本服务由 <a href="http://token.team/">Token团队</a> 提供技术支持</p>
       </div>
     </div>
-    <f7-toolbar class="toolbar" v-if="$store.state.sno !== 'anonymous'">
-      <a href="javascript:;" class="link" @click="charge">充值</a>
-      <a href="javascript:;" class="link" @click="update">刷新电量</a>
-      <a href="javascript:;" class="link" @click="change">更换宿舍</a>
-    </f7-toolbar>
   </div>
 </template>
 
@@ -320,5 +318,10 @@
   .mt-range {
     flex: 1;
     margin-left: 20px;
+  }
+
+  .link-after {
+    font-size: 16px;
+    font-weight: normal;
   }
 </style>
