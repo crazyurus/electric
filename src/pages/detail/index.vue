@@ -8,8 +8,12 @@
     </div>
     <div class="page-content">
       <div class="cost-area">
-        <div class="cost-title">剩余电量(度)</div>
-        <div class="cost-content number" id="txtLeft">0.00</div>
+        <div class="cost-title" @click="charge">剩余电量(度)</div>
+        <div class="cost-content number" id="txtLeft" @click="charge">0.00</div>
+        <div class="cost-button" @click="charge">充值电费</div>
+        <div class="cost-wrapper" @click="charge">
+          <div class="cost-wave" :class="warning"></div>
+        </div>
         <div class="cost-bottom row">
           <div class="col-50">
             <div class="cost-bottom-title">当日用电(度)</div>
@@ -230,6 +234,12 @@
         let now = new Date();
         let predict = new Date(now.getFullYear(), now.getMonth(), now.getDate() + remain);
         return (predict.getFullYear() === now.getFullYear() ? '' : predict.getFullYear() + '年') + (predict.getMonth() + 1) + '月' + predict.getDate() + '日';
+      },
+      warning () {
+        if (!this.electric.name) return '';
+        if (this.electric.left <= 15 && this.electric.left > 5) return 'warning';
+        if (this.electric.left <= 5) return 'danger';
+        return '';
       }
     },
     filters: {
@@ -247,6 +257,8 @@
 </script>
 
 <style scoped>
+  @import '../../css/wave.css';
+
   .link-disabled {
     opacity: 0.55;
   }
@@ -256,13 +268,33 @@
     text-align: center;
   }
   .cost-title {
-    padding-top: 1.3rem;
-    padding-bottom: 0.4rem;
-    font-size: 1.05rem;
+    position: absolute;
+    top: 44px;
+    width: 100%;
+    text-align: center;
+    z-index: 30;
+    font-size: 16px;
   }
   .cost-content {
-    font-size: 3.3rem;
-    padding-bottom: 1.3rem;
+    position: absolute;
+    font-size: 42px;
+    top: 66px;
+    width: 100%;
+    text-align: center;
+    z-index: 30;
+  }
+  .cost-button {
+    position: absolute;
+    top: 128px;
+    left: calc(50% - 40px);
+    width: 80px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    text-align: center;
+    z-index: 30;
+    border: 1px solid #83DBE8;
+    border-radius: 13px;
   }
   .cost-bottom {
     padding: 0.5rem 0;
