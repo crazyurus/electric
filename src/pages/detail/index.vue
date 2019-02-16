@@ -3,7 +3,7 @@
     <div class="am-notice" role="alert" v-if="broadcast.text">
       <div class="am-notice-content">{{broadcast.text}}</div>
       <div class="am-notice-operation">
-        <a class="am-notice-go" :href="broadcast.link"></a>
+        <a class="am-notice-go" :href="broadcast.link" :class="{ external: broadcast.link.indexOf('http') > -1 }"></a>
       </div>
     </div>
     <div class="page-content">
