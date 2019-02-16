@@ -144,7 +144,7 @@
           (now.getHours() === 23 && now.getMinutes() >= 20) ||
           (now.getHours() === 0 && now.getMinutes() <= 10)
         ) {
-          Token.message.alert('23:20至次日00:10为缴费平台结算时间，暂不可缴费');
+          Token.message.alert('23:20至次日00:10为校园缴费平台结算时间，暂不可充值');
           return false;
         }
 
@@ -236,23 +236,23 @@
         const station = [{
           name: '南湖',
           position: [30.512500, 114.329079],
-          telephone: '87756329',
+          telephone: '13317102360',
           address: '后街医务室旁，北七宿舍对面'
         }, {
           name: '西院/鉴湖',
           position: [30.513068, 114.343386],
-          telephone: '87381736',
+          telephone: '027-87381736',
           address: '鉴湖主教学楼西侧'
         }, {
           name: '东院',
           position: [30.521752, 114.351904],
-          telephone: '87859134',
+          telephone: '027-87859134',
           address: '东院大门右侧'
         }, {
           name: '余区',
           position: [30.607892, 114.357253],
-          telephone: '86860918',
-          address: '余27栋后勤办公室'
+          telephone: '027-86860918',
+          address: '水电中心收费大厅'
         }, {
           name: '升升公寓',
           position: [30.504560, 114.344748],

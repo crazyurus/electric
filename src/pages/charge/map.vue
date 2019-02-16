@@ -8,7 +8,7 @@
       <div class="tel">
         <span>联系电话：</span>
         <span v-if="telephone === 'empty'">暂无</span>
-        <a :href="'tel:027-' + telephone" class="external" v-else>027-{{telephone}}</a>
+        <a :href="'tel:' + telephone" class="external" v-else>{{telephone}}</a>
       </div>
     </div>
   </f7-page>
