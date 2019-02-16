@@ -8,7 +8,7 @@
     </div>
     <div class="page-content pull-to-refresh-content">
       <div class="pull-to-refresh-layer">
-        <div class="preloader"></div>
+        <div class="preloader preloader-white"></div>
         <div class="pull-to-refresh-arrow"></div>
       </div>
       <div class="cost-area">
@@ -16,7 +16,7 @@
         <div class="cost-content number" id="txtLeft" @click="charge">0.00</div>
         <div class="cost-button" @click="charge">充值电费</div>
         <div class="cost-wrapper" @click="charge">
-          <div class="cost-wave" :class="warning"></div>
+          <div class="cost-wave" :class="waveClass"></div>
         </div>
         <div class="cost-bottom row">
           <div class="col-50">
@@ -192,6 +192,11 @@
         });
 
         if (location.search.indexOf('?refresh=') > -1) token.setMeter(meter + '|' + area);
+
+        this.Dom7('.pull-to-refresh-content').on('ptr:refresh', e => {
+          this.update();
+          this.$f7.pullToRefreshDone();
+        });
       });
     },
     methods: {
@@ -211,12 +216,12 @@
         });
       },
       update () {
-        this.$f7.showPreloader("正在抄表中…");
+        // this.$f7.showPreloader("正在抄表中…");
         this.$http.post('https://api.wutnews.net/electric/info/update', {
           id: this.$store.state.meter,
           area: this.$store.state.area
         }).then(result => {
-          this.$f7.hidePreloader();
+          // this.$f7.hidePreloader();
 
           const left = this.electric.left.replace('度', '');
           this.electric.time = result.data.data.time.split('.')[0].replace('T', ' ').replace('-0', '/').replace('-0', '/').replace('-', '/').replace('-', '/');
@@ -239,7 +244,7 @@
         let predict = new Date(now.getFullYear(), now.getMonth(), now.getDate() + remain);
         return (predict.getFullYear() === now.getFullYear() ? '' : predict.getFullYear() + '年') + (predict.getMonth() + 1) + '月' + predict.getDate() + '日';
       },
-      warning () {
+      waveClass () {
         if (!this.electric.name) return '';
         if (this.electric.left <= 15 && this.electric.left > 5) return 'warning';
         if (this.electric.left <= 5) return 'danger';
@@ -267,6 +272,7 @@
     opacity: 0.55;
   }
   .cost-area {
+    position: relative;
     background: #45c8dc;
     color: #fff;
     text-align: center;
@@ -329,7 +335,7 @@
     align-items: center;
   }
 
-  .list-group-title > img {
+  .list-group-title img {
     width: 1.5rem;
     height: 1.5rem;
     display: inline-block;
@@ -359,5 +365,9 @@
   .link-after {
     font-size: 16px;
     font-weight: normal;
+  }
+
+  .pull-to-refresh-layer {
+    background-color: #45c8dc;
   }
 </style>
