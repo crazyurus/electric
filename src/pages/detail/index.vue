@@ -9,15 +9,15 @@
     <div class="page-content">
       <div class="cost-area">
         <div class="cost-title">剩余电量(度)</div>
-        <div class="cost-content" id="txtLeft">0.00</div>
+        <div class="cost-content number" id="txtLeft">0.00</div>
         <div class="cost-bottom row">
           <div class="col-50">
             <div class="cost-bottom-title">当日用电(度)</div>
-            <div class="cost-bottom-content" id="txtTodayCost">0.00</div>
+            <div class="cost-bottom-content number" id="txtTodayCost">0.00</div>
           </div>
           <div class="col-50">
             <div class="cost-bottom-title">当日电费(元)</div>
-            <div class="cost-bottom-content" id="txtTodayPrice">0.00</div>
+            <div class="cost-bottom-content number" id="txtTodayPrice">0.00</div>
           </div>
         </div>
       </div>
