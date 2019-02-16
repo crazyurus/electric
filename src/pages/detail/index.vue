@@ -245,7 +245,7 @@
         return (predict.getFullYear() === now.getFullYear() ? '' : predict.getFullYear() + '年') + (predict.getMonth() + 1) + '月' + predict.getDate() + '日';
       },
       waveClass () {
-        if (!this.electric.name) return '';
+        if (!this.electric.status) return '';
         if (this.electric.left <= 15 && this.electric.left > 5) return 'warning';
         if (this.electric.left <= 5) return 'danger';
         return '';
