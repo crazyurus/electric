@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import { Map } from '../../libs/map'
+  import { Map } from '../../libs/Map'
 
   export default {
     props: ['latitude', 'longitude', 'title', 'address', 'telephone'],
