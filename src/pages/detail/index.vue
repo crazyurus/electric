@@ -195,7 +195,6 @@
 
         this.Dom7('.pull-to-refresh-content').on('ptr:refresh', e => {
           this.update();
-          this.$f7.pullToRefreshDone();
         });
       });
     },
@@ -227,6 +226,7 @@
           this.electric.time = result.data.data.time.split('.')[0].replace('T', ' ').replace('-0', '/').replace('-0', '/').replace('-', '/').replace('-', '/');
           this.electric.left = result.data.data.left;
           new CountUp('txtLeft', Number.parseFloat(left), Number.parseFloat(result.data.data.left), 2, 1).start();
+          this.$f7.pullToRefreshDone();
         }).catch(result => {
           Token.message.alert(result.data.errMsg);
         });
@@ -369,5 +369,9 @@
 
   .pull-to-refresh-layer {
     background-color: #45c8dc;
+  }
+
+  .pull-to-refresh-layer .pull-to-refresh-arrow {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2026%2040'%3E%3Cpolygon%20points%3D'9%2C22%209%2C0%2017%2C0%2017%2C22%2026%2C22%2013.5%2C40%200%2C22'%20fill%3D'%23ffffff'%2F%3E%3C%2Fsvg%3E");
   }
 </style>
