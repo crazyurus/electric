@@ -190,6 +190,10 @@
         $$("#txtCaptcha").focus();
       },
       change () {
+        // 屏蔽缴费平台支付
+        Token.message.alert('只支持微信支付，支付宝/校园缴费平台渠道暂时下线');
+        return;
+
         if (this.$store.state.area != 7) {
           Token.message.toast('暂只支持支付宝支付');
           return;
