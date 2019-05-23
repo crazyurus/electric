@@ -10,7 +10,7 @@ axios.interceptors.request.use(config => {
     return ret.join('&');
   }];
 
-  if (process.env !== 'production') {
+  if (process.env.NODE_ENV=== 'development') {
     const objUrl = new URL(config.url);
     const service = objUrl.host.split('.')[0];
     config.url = `/${service}${objUrl.pathname}`;

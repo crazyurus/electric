@@ -23,7 +23,7 @@ new Vue({
     root: '#app',
     routes: Routes,
     pushState: true,
-    pushStateSeparator: process.env === 'production' ? '' : '#',
+    pushStateSeparator: process.env.NODE_ENV === 'production' ? '' : '#',
     pushStateRoot: '/electric',
     modalTitle: '电费查询',
     modalButtonOk: '确定',
