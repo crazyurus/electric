@@ -10,7 +10,12 @@
 <body>
   <div id="app"></div>
   <script>
-    window.electric = {
+    window.electric = location.host === 'localhost:8080' ? {
+      sno: '09901',
+      userName: '测试用户',
+      area: '7',
+      meter: '10344*Meter*老1栋-223'
+    } : {
       sno: '{$Think.session.sno}',
       userName: '{$Think.session.tl_user.name}',
       area: '{$Think.session.area}',

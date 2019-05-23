@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 axios.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -9,6 +9,12 @@ axios.interceptors.request.use(config => {
     }
     return ret.join('&');
   }];
+
+  if (process.env !== 'production') {
+    const objUrl = new URL(config.url);
+    const service = objUrl.host.split('.')[0];
+    config.url = `/${service}${objUrl.pathname}`;
+  }
 
   return config;
 });

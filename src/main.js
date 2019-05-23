@@ -1,9 +1,9 @@
 import Vue from 'vue'
 
-import Framework7 from 'framework7'
+import 'framework7'
 import Framework7Vue from 'framework7-vue'
-import Framework7Theme from 'framework7/dist/css/framework7.ios.min.css'
-import Framework7ThemeColors from 'framework7/dist/css/framework7.ios.colors.min.css'
+import 'framework7/dist/css/framework7.ios.min.css'
+import 'framework7/dist/css/framework7.ios.colors.min.css'
 
 import 'mint-ui/lib/style.css'
 import './css/app.css'
@@ -23,7 +23,7 @@ new Vue({
     root: '#app',
     routes: Routes,
     pushState: true,
-    pushStateSeparator: '',
+    pushStateSeparator: process.env === 'production' ? '' : '#',
     pushStateRoot: '/electric',
     modalTitle: '电费查询',
     modalButtonOk: '确定',
