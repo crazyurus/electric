@@ -36,13 +36,14 @@
 }
 
 .am-notice .am-notice-operation {
-  padding: 8px 0
+  height: 100%;
 }
 
 .am-notice .am-notice-operation a {
   display: block;
   height: 100%;
-  margin: auto 15px
+  padding: 0 15px;
+  line-height: 36px;
 }
 
 .am-notice .am-notice-operation .am-notice-close {
