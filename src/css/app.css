@@ -194,7 +194,12 @@ label.label-radio input[type=checkbox]:checked ~ .item-inner, label.label-radio 
   background-color: rgba(0, 0, 0, 0.6);
 }
 
+@font-face {
+  font-family: DIN;
+  src: url('../fonts/DIN.ttf');
+}
+
 .number {
-  font-family: DINAlternate-Bold, DINCondensed-Bold, Arial, Helvetica, sans-serif;
+  font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, Arial, Helvetica, sans-serif;
   font-weight: normal;
 }
