@@ -91,7 +91,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     ]),
     new SriPlugin({
       hashFuncNames: ['sha256', 'sha512'],
-      enabled: process.env.NODE_ENV === 'production',
+      enabled: false,
     })
   ]
 })
