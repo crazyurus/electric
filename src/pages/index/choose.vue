@@ -14,7 +14,7 @@
             <option value="0*Area*升升" disabled>升升公寓</option>
           </optgroup>
           <optgroup label="余家头校区">
-            <option value="7*Area*余区">余区</option>
+            <option value="1*Area*余区">余区</option>
           </optgroup>
         </select>
       </f7-list-item>
@@ -101,6 +101,10 @@
           });
 
           return;
+        }
+        
+        if (select === '1*Area*余区') {
+          this.select.area = "7";
         }
 
         Token.indicator.show();
