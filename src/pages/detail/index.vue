@@ -185,11 +185,14 @@
             this.electric = result.data;
           }
           else Token.message.alert(result.errMsg);
+        }).catch(() => {
+          this.$f7.hideIndicator();
+          Token.message.toast('无法读取电表数据');
         });
 
-        this.$http.get('https://web.wutnews.net/electric/api/broadcast').then(result => {
+        /* this.$http.get('https://web.wutnews.net/electric/api/broadcast').then(result => {
           this.broadcast = result.data;
-        });
+        }); */
 
         if (location.search.indexOf('?refresh=') > -1) token.setMeter(meter + '|' + area);
 
@@ -200,11 +203,14 @@
     },
     methods: {
       charge () {
-        if (this.electric.status.indexOf('离线') < 0) {
+        if (this.electric.status.includes('在线')) {
           if (this.$store.state.area == 7) {
             this.$f7.mainView.router.loadPage('/charge/index');
           }
-          else Token.message.alert('马房山校区、南湖校区电费充值功能应要求下线，如需充值请到线下充值点或电脑访问校园缴费平台');
+          //else Token.message.alert('马房山校区、南湖校区电费充值功能应要求下线，如需充值请到线下充值点或电脑访问校园缴费平台');
+          else {
+            Token.router.push('http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023');
+          }
         }
         else Token.message.alert('电表处于离线状态，暂不可以充值电费，请前往自助充值点缴费');
       },

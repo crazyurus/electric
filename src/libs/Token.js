@@ -1,4 +1,10 @@
 export default {
+  router: {
+    push (url) {
+      if (typeof token !== 'undefined' && token.loadUrl) token.loadUrl(url);
+      else location.assign(url);
+    }
+  },
   message: {
     alert (text) {
       return new Promise(function (resolve, reject) {
