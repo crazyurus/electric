@@ -143,7 +143,7 @@
     import Token from '../../libs/Token'
     import Loader from '../../libs/Loader'
     import Vue from 'vue'
-    import {Range} from 'mint-ui';
+    import { Range } from 'mint-ui';
 
     Vue.component(Range.name, Range);
 
@@ -206,7 +206,6 @@
         methods: {
             charge() {
                 if (this.electric.status.includes("未开户")) {
-                    Token.message.alert('电表未开户，暂不可以充值电费，请前往自助充值点缴费');
                     Token.message.alert('由于上一次缴费系统主服务器故障，导致部分宿舍线上显示未开户，这部分宿舍暂时只能通过线下缴费点缴费，预计下学期全部恢复。');
                 } else if (this.electric.status.includes('在线')) {
                     if (this.$store.state.area == 7) {
@@ -214,7 +213,17 @@
                     }
                     //else Token.message.alert('马房山校区、南湖校区电费充值功能应要求下线，如需充值请到线下充值点或电脑访问校园缴费平台');
                     else {
-                        Token.router.push('http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023');
+                        f7.modal({
+                            title: '马区电费充值步骤',
+                            content: '1. 通过智慧理工大账号登录缴费平台<br>2. 选择宿舍并输入充值金额<br>3. 选择支付宝或微信支付充值<br>4. 将二维码截图并打开支付宝或微信扫一扫<br>5. 从相册选择该二维码并完成支付',
+                            buttons: [{
+                                text: '前往缴费平台充值',
+                                bold: true,
+                                onClick() {
+                                    Token.router.push('http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023');
+                                }
+                            }]
+                        });
                     }
                 } else Token.message.alert('电表处于离线状态，暂不可以充值电费，请前往自助充值点缴费');
             },
