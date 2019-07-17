@@ -130,7 +130,7 @@
                     </a>
                 </li>
                 <li v-if="$store.state.sno !== 'anonymous'">
-                    <a class="item-link item-content external" href="mqqapi//microapp/open?mini_appid=1109559705&fakeUrl=https://m.q.qq.com/a/s/11c84551edb3b31057d38c468a0a0818&xcxPath=pages/index/index.html&xcxSourceType=0">
+                    <a class="item-link item-content external" @click="mina">
                         <div class="item-inner">
                             <div class="item-title">打开QQ小程序</div>
                         </div>
@@ -261,6 +261,9 @@
                 }).catch(result => {
                     Token.message.alert(result.data.errMsg);
                 });
+            },
+            mina() {
+                window.location.assign('mqqapi//microapp/open?mini_appid=1109559705&fakeUrl=https://m.q.qq.com/a/s/11c84551edb3b31057d38c468a0a0818&xcxPath=pages/index/index.html&xcxSourceType=0');
             }
         },
         computed: {
