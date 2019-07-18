@@ -130,7 +130,7 @@
                     </a>
                 </li>
                 <li v-if="$store.state.sno !== 'anonymous'">
-                    <a class="item-link item-content external" @click="mina">
+                    <a class="item-link item-content external" href="mqqapi://microapp/open?mini_appid=1109559705&fakeUrl=https://m.q.qq.com/a/s/11c84551edb3b31057d38c468a0a0818&xcxPath=pages/index/index.html&xcxSourceType=0">
                         <div class="item-inner">
                             <div class="item-title">打开QQ小程序</div>
                         </div>
@@ -140,7 +140,7 @@
             <div class="content-block">
                 <p>以上电费信息更新于&nbsp;{{electric.time}}，关注微信/QQ小程序“武汉理工大学电费查询”也可以查询哦</p>
                 <p class="text-center" v-if="$store.state.sno === 'anonymous'">本服务由 <a
-                        href="http://token.team/">Token团队</a> 提供技术支持</p>
+                        href="http://itoken.team/">Token团队</a> 提供技术支持</p>
             </div>
         </div>
     </div>
@@ -261,9 +261,6 @@
                 }).catch(result => {
                     Token.message.alert(result.data.errMsg);
                 });
-            },
-            mina() {
-                window.location.assign('mqqapi://microapp/open?mini_appid=1109559705&fakeUrl=https://m.q.qq.com/a/s/11c84551edb3b31057d38c468a0a0818&xcxPath=pages/index/index.html&xcxSourceType=0');
             }
         },
         computed: {

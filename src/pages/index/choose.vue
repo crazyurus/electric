@@ -102,7 +102,7 @@
 
           return;
         }
-        
+
         if (select === '1*Area*余区') {
           this.select.area = "7";
         }
@@ -243,7 +243,7 @@
         this.inputValue = value;
       },
       about () {
-        Token.message.alert('Token团队出品<br>产品：廖星 石明阳<br>设计：廖星 郑文伟<br>开发：廖星 刘福鑫');
+        Token.message.alert('Token团队出品<br>产品：廖星 石明阳<br>设计：廖星 郑文伟<br>开发：廖星 邓维迪 刘福鑫');
       }
     },
     directives: {
