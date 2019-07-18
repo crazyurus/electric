@@ -9,7 +9,7 @@ import 'mint-ui/lib/style.css'
 import './css/app.css'
 import './css/notice.css'
 import Routes from './routes.js'
-import App from './app'
+import App from './pages/app'
 
 import axios from './libs/axios'
 import store from './store/data'
