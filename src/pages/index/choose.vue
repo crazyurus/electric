@@ -24,25 +24,13 @@
           <option v-for="arc in roomInfo.architecture" :key="arc.id" :value="arc.id">{{arc.name}}</option>
         </select>
       </f7-list-item>
-      <li class="item-content" v-show="canInputNo">
-        <div class="item-inner item-no-border">
-          <div class="item-title label">房间号</div>
-          <div class="item-input">
-            <input type="tel" placeholder="如：409" maxlength="3" :disabled="!setInputFocus" v-focus="setInputFocus" @input="onInput">
-          </div>
-          <div class="item-after">
-            <a href="#" class="list-button" @click.prevent="showRoomPicker">选择宿舍</a>
-          </div>
-        </div>
-      </li>
-      <f7-list-item smart-select title="楼层" smart-select-searchbar-placeholder="搜索楼层" smart-select-searchbar-cancel="取消" v-show="!canInputNo">
-
+      <f7-list-item smart-select title="楼层" smart-select-searchbar-placeholder="搜索楼层" smart-select-searchbar-cancel="取消">
         <select @change="changeFloorPicker">
           <option value="">请选择</option>
           <option v-for="floor in roomInfo.floor" :key="floor.id" :value="floor.id">{{floor.name}}</option>
         </select>
       </f7-list-item>
-      <f7-list-item smart-select title="房间" smart-select-searchbar-placeholder="搜索房间" smart-select-searchbar-cancel="取消" v-show="!canInputNo">
+      <f7-list-item smart-select title="房间" smart-select-searchbar-placeholder="搜索房间" smart-select-searchbar-cancel="取消">
         <select @change="changeMeterPicker">
           <option value="">请选择</option>
           <option v-for="meter in roomInfo.meter" :key="meter.id" :value="meter.id">{{meter.name}}</option>
@@ -66,9 +54,6 @@
     data() {
       return {
         canSubmit: false,
-        canInputNo: false,
-        setInputFocus: false,
-        inputValue: '',
         roomInfo: {
           architecture: [],
           floor: [],
@@ -124,7 +109,6 @@
           return;
         }
 
-        this.setInputFocus = this.canInputNo;
         Token.indicator.show();
         this.getChooseInfo('floor', select).then(res => {
           let result = res.data.data;
@@ -157,22 +141,8 @@
         this.canSubmit = true;
       },
       queryMeterDetail () {
-        if (this.select.meter == 0) {
-          if (this.roomInfo.meter.length === 0) {
-            Token.message.toast('数据加载中');
-            return;
-          }
-          let meter = this.roomInfo.meter.filter(item => {
-            return item.name.indexOf(this.inputValue) > -1;
-          });
-          if (meter && meter.length > 0) this.changeMeterPicker(meter[0]);
-          else {
-            Token.message.toast('无此房间');
-            return;
-          }
-        }
         this.$f7.showPreloader('正在查询，请稍后…');
-        this.$http.post('/electric/login/register', {
+        this.$http.post('https://web.wutnews.net/electric/login/register', {
           meter: this.select.meter,
           area: this.select.area
         }).then(result => {
@@ -203,50 +173,8 @@
           area: this.select.area
         });
       },
-      download () {
-        location.assign("http://app.wutnews.net/");
-      },
-      wechat () {
-        const photoBrowser = this.$f7.photoBrowser({
-          loop: false,
-          photos: {
-            url: '/Application/Electric/Assets/image/qrcode.png',
-            caption: 'Token团队微信公众号'
-          },
-          navbar: false,
-          toolbar: false,
-          ofText: ' / ',
-          lazyLoading: true,
-          onClick (swiper, event) {
-            photoBrowser.close();
-          }
-        });
-        photoBrowser.open();
-      },
-      showRoomPicker () {
-        this.canInputNo = false;
-      },
-      onInput (e) {
-        let value = e.target.value;
-        if (value.length === 1 && value != this.select.floor.split('*')[0]) {
-          let floor = this.roomInfo.floor.filter(item => {
-            return item.name === value + '楼层';
-          });
-          if (floor.length > 0) this.changeFloorPicker(floor[0]);
-          else Token.message.toast('无此楼层');
-        }
-        this.canSubmit = value.length === 3;
-        this.inputValue = value;
-      },
       about () {
         Token.message.alert('Token团队出品<br>产品：廖星 石明阳<br>设计：廖星 郑文伟<br>开发：廖星 邓维迪 刘福鑫');
-      }
-    },
-    directives: {
-      focus: {
-        update (el, obj) {
-          if (obj.value) el.focus();
-        }
       }
     }
   }
