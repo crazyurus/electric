@@ -52,10 +52,6 @@
     </f7-list>
     <div class="button-area">
       <button class="button button-big button-fill color-blue" :disabled="!canSubmit" @click="queryMeterDetail">查询</button>
-      <template v-if="$store.state.sno === 'anonymous'">
-        <button class="button button-big button-fill color-red" @click="download">下载掌上理工大App</button>
-        <button class="button button-big button-fill color-green" @click="wechat">关注Token团队电费查询小程序</button>
-      </template>
     </div>
     <footer>
       <img src="/act/girlsday/img/token.png" @click="about">
@@ -259,14 +255,6 @@
 <style scoped>
   .content-block-title {
     margin: 20px 20px 10px;
-  }
-  .button-fill.color-red {
-    background-color: rgb(254, 50, 101) !important;
-    margin-top: 1rem;
-  }
-  .button-fill.color-green {
-    background: rgb(80, 227, 194) !important;
-    margin-top: 1rem;
   }
   .list-button {
     display: inline-block !important;
