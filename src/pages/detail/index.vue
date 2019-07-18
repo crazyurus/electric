@@ -33,7 +33,7 @@
       <f7-list>
         <li class="list-group-title" style="justify-content: space-between">
           <div>
-            <img src="/Application/Electric/Assets/image/home.svg">
+            <img :src="icons.home">
             <span>宿舍信息</span>
           </div>
           <a class="link-after link" @click="change">更换宿舍</a>
@@ -44,7 +44,7 @@
       </f7-list>
       <f7-list>
         <li class="list-group-title">
-          <img src="/Application/Electric/Assets/image/pay.svg">
+          <img :src="icons.pay">
           <span>支付信息</span>
         </li>
         <li>
@@ -105,7 +105,7 @@
       </f7-list>
       <f7-list>
         <li class="list-group-title">
-          <img src="/Application/Electric/Assets/image/rank.svg">
+          <img :src="icons.rank">
           <span>排名信息</span>
         </li>
         <li class="item-content">
@@ -148,6 +148,10 @@
   import Vue from 'vue'
   import { Range } from 'mint-ui';
 
+  import svgHome from '@/images/detail/home.svg';
+  import svgPay from '@/images/detail/pay.svg';
+  import svgRank from '@/images/detail/rank.svg';
+
   Vue.component(Range.name, Range);
 
   export default {
@@ -167,7 +171,12 @@
           show: false,
           value: 20
         },
-        broadcast: {}
+        broadcast: {},
+        icons: {
+          home: svgHome,
+          pay: svgPay,
+          rank: svgRank
+        }
       }
     },
     mounted() {

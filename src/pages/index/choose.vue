@@ -42,13 +42,14 @@
       <button class="button button-big button-fill color-blue" :disabled="!canSubmit" @click="queryMeterDetail">查询</button>
     </div>
     <footer>
-      <img src="/act/girlsday/img/token.png" @click="about">
+      <img :src="tokenLogo" @click="about">
     </footer>
   </f7-page>
 </template>
 
 <script>
   import Token from '../../libs/Token'
+  import TokenLogo from '@/images/token.png';
 
   export default {
     data() {
@@ -64,7 +65,8 @@
           architecture: '0',
           floor: '0',
           meter: '0'
-        }
+        },
+        tokenLogo: TokenLogo
       }
     },
     methods: {

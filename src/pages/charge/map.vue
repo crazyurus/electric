@@ -2,7 +2,7 @@
   <f7-page name="map">
     <div id="container"></div>
     <div class="info">
-      <img src="/Application/Electric/Assets/image/nav.png">
+      <img :src="iconNav" alt="nav">
       <div class="title">{{decodeURIComponent(title)}}</div>
       <div class="desc">{{decodeURIComponent(address)}}</div>
       <div class="tel">
@@ -16,9 +16,15 @@
 
 <script>
   import { Map } from '../../libs/Map'
+  import iconNav from '@/images/nav.png';
 
   export default {
     props: ['latitude', 'longitude', 'title', 'address', 'telephone'],
+    data() {
+      return {
+        iconNav
+      }
+    },
     mounted() {
       Map('ECCBZ-HMTKQ-SJY5I-GL4YB-EEKS6-ZKFDN').then(() => {
         let center = new qq.maps.LatLng(this.latitude, this.longitude);
