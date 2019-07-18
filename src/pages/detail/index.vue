@@ -143,7 +143,6 @@
 </template>
 
 <script>
-  import Token from '../../libs/Token'
   import Loader from '../../libs/Loader'
   import Vue from 'vue'
   import { Range } from 'mint-ui';
@@ -198,10 +197,10 @@
             });
 
             this.electric = result.data;
-          } else Token.message.alert(result.errMsg);
+          } else this.$message.alert(result.errMsg);
         }).catch(() => {
           this.$f7.hideIndicator();
-          Token.message.toast('无法读取电表数据');
+          this.$message.toast('无法读取电表数据');
         });
 
         /* this.$http.get('https://web.wutnews.net/electric/api/broadcast').then(result => {
@@ -218,12 +217,12 @@
     methods: {
       charge() {
         if (this.electric.status.includes("未开户")) {
-          Token.message.alert('由于上一次缴费系统主服务器故障，导致部分宿舍线上显示未开户，这部分宿舍暂时只能通过线下缴费点缴费，预计下学期全部恢复。');
+          this.$message.alert('由于上一次缴费系统主服务器故障，导致部分宿舍线上显示未开户，这部分宿舍暂时只能通过线下缴费点缴费，预计下学期全部恢复。');
         } else if (this.electric.status.includes('在线')) {
           if (this.$store.state.area == 7) {
             this.$f7.mainView.router.loadPage('/charge/index');
           }
-          //else Token.message.alert('马房山校区、南湖校区电费充值功能应要求下线，如需充值请到线下充值点或电脑访问校园缴费平台');
+          //else this.$message.alert('马房山校区、南湖校区电费充值功能应要求下线，如需充值请到线下充值点或电脑访问校园缴费平台');
           else {
             f7.modal({
               title: '马区电费充值步骤',
@@ -231,16 +230,16 @@
               buttons: [{
                 text: '前往缴费平台充值',
                 bold: true,
-                onClick() {
-                  Token.router.push('http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023');
+                onClick: () => {
+                  this.$navigator.go('http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023');
                 }
               }]
             });
           }
-        } else Token.message.alert('电表处于离线状态，暂不可以充值电费，请前往自助充值点缴费');
+        } else this.$message.alert('电表处于离线状态，暂不可以充值电费，请前往自助充值点缴费');
       },
       change(e) {
-        Token.message.confirm("确定要更换宿舍信息吗？").then(() => {
+        this.$message.confirm("确定要更换宿舍信息吗？").then(() => {
           this.$f7.showPreloader("更换宿舍中…");
           e.target.disabled = true;
           return this.$http.get('/electric/login/logout');
@@ -264,7 +263,7 @@
           new CountUp('txtLeft', Number.parseFloat(left), Number.parseFloat(result.data.data.left), 2, 1).start();
           this.$f7.pullToRefreshDone();
         }).catch(result => {
-          Token.message.alert(result.data.errMsg);
+          this.$message.alert(result.data.errMsg);
         });
       }
     },

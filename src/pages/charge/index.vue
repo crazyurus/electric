@@ -40,7 +40,6 @@
 </template>
 
 <script>
-  import Token from '../../libs/Token'
   import Vue from 'vue'
   import { Actionsheet, Indicator } from 'mint-ui';
   import copy from 'copy-to-clipboard';
@@ -79,7 +78,7 @@
               $footer.show();
               self.charge(money);
             } else {
-              Token.message.toast("无效的金额");
+              self.$message.toast("无效的金额");
               $this.html('<span class="extra">其它</span>');
               $footer.show();
             }
@@ -107,12 +106,12 @@
         });
       },
       charge (amount) {
-        if (Token.detect.wechat()) {
+        if (this.$detect.wechat()) {
           this.qrcode('暂不支持微信内支付，请长按打开小程序“武汉理工大学电费查询”', '/Application/Electric/Assets/image/mina.jpg');
           return;
         }
         if (amount < 1) {
-          Token.message.toast('充值金额必须大于1元');
+          this.$message.toast('充值金额必须大于1元');
           return;
         }
         if (this.type === '微信支付') this.chargeWechat(amount);
@@ -126,7 +125,7 @@
             amount: amount,
             sno: this.$store.state.sno,
             meter: this.$store.state.meter,
-            type: Token.detect.mobile() ? 'MWEB' : 'NATIVE'
+            type: this.$detect.mobile() ? 'MWEB' : 'NATIVE'
           };
           if (ip.data) param['ip'] = ip.data;
 
@@ -148,7 +147,7 @@
           (now.getHours() === 23 && now.getMinutes() >= 20) ||
           (now.getHours() === 0 && now.getMinutes() <= 10)
         ) {
-          Token.message.alert('23:20至次日00:10为校园缴费平台结算时间，暂不可充值');
+          this.$message.alert('23:20至次日00:10为校园缴费平台结算时间，暂不可充值');
           return false;
         }
 
@@ -167,7 +166,7 @@
               const captcha = $$("#txtCaptcha").val();
 
               if(captcha.trim() === "") {
-                Token.message.toast("验证码输入不完整");
+                this.$message.toast("验证码输入不完整");
                 return;
               }
 
@@ -186,7 +185,7 @@
                   if (typeof tokenNative === 'undefined') location.assign(url);
                   else tokenNative.openAppWithURL({ url });
                 }
-                else Token.message.toast('订单生成失败');
+                else this.$message.toast('订单生成失败');
               });
             }
           }
@@ -195,11 +194,11 @@
       },
       change () {
         // 屏蔽缴费平台支付
-        Token.message.alert('只支持微信支付，支付宝/校园缴费平台渠道暂时下线');
+        this.$message.alert('只支持微信支付，支付宝/校园缴费平台渠道暂时下线');
         return;
 
         if (this.$store.state.area != 7) {
-          Token.message.toast('暂只支持支付宝支付');
+          this.$message.toast('暂只支持支付宝支付');
           return;
         }
 
@@ -221,14 +220,14 @@
       openLocation () {
         this.$f7.modal({
           title: '请选择充值方式',
-          text: "马房山校区的宿舍请在00:10-23:20间用电脑访问以下网址缴费<br><strong>https://web.wutnews.net/electric</strong><br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
+          text: "马房山校区的宿舍请在00:10-23:20间用电脑访问以下网址缴费<br><strong>https://cwsf.whut.edu.cn/</strong><br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
           verticalButtons: true,
           buttons: [{
             text: '复制缴费网址',
             bold: true,
-            onClick() {
-              copy('https://web.wutnews.net/electric');
-              Token.message.toast('复制成功');
+            onClick: () => {
+              copy('https://cwsf.whut.edu.cn/');
+              this.$message.toast('复制成功');
             }
           }, {
             text: '查看线下充值点',

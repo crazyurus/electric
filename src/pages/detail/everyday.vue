@@ -6,13 +6,12 @@
 </template>
 
 <script>
-  import Token from '../../libs/Token'
   import Loader from '../../libs/Loader'
 
   export default {
     mounted () {
       Loader('/Application/Electric/Assets/chart/echarts.min.js').then(() => {
-        Token.indicator.show();
+        this.$indicator.show();
         this.$http.post('https://api.wutnews.net/electric/info/day', {
           id: this.$store.state.meter,
           area: this.$store.state.area
@@ -97,7 +96,7 @@
             }]
           };
 
-          Token.indicator.hide();
+          this.$indicator.hide();
           ElectricChart.setOption(option);
         });
       });

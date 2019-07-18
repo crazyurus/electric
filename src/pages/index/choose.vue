@@ -48,7 +48,6 @@
 </template>
 
 <script>
-  import Token from '../../libs/Token'
   import TokenLogo from '@/images/token.png';
 
   export default {
@@ -90,10 +89,10 @@
           this.select.area = "7";
         }
 
-        Token.indicator.show();
+        this.$indicator.show();
         this.getChooseInfo('architecture', select).then(res => {
           let result = res.data.data;
-          Token.indicator.hide();
+          this.$indicator.hide();
 
           result.forEach(item => {
             item.name = this.transMeterName(item.name);
@@ -107,26 +106,26 @@
         this.select.architecture = select;
 
         if (select.indexOf('升升') > -1) {
-          Token.message.toast('暂不支持');
+          this.$message.toast('暂不支持');
           return;
         }
 
-        Token.indicator.show();
+        this.$indicator.show();
         this.getChooseInfo('floor', select).then(res => {
           let result = res.data.data;
-          Token.indicator.hide();
+          this.$indicator.hide();
 
           if (res) this.roomInfo.floor = result;
-          else Token.message.toast('暂不支持');
+          else this.$message.toast('暂不支持');
         });
       },
       changeFloorPicker (e) {
         let select = e.target ? e.target.value : e.id;
 
-        if (e.target) Token.indicator.show();
+        if (e.target) this.$indicator.show();
         this.getChooseInfo('meter', select).then(res => {
           let result = res.data.data;
-          if (e.target) Token.indicator.hide();
+          if (e.target) this.$indicator.hide();
 
           result.sort(function(a, b) {
             return a.name.split("-")[1] - b.name.split("-")[1];
@@ -154,7 +153,7 @@
             this.$store.commit('meter', this.select);
             this.$f7.mainView.router.reloadPage('/detail/index');
           }
-          else Token.message.toast('未知异常，请联系管理员');
+          else this.$message.toast('未知异常，请联系管理员');
         });
       },
       transMeterName (arc) {
@@ -176,7 +175,7 @@
         });
       },
       about () {
-        Token.message.alert('Token团队出品<br>产品：廖星 石明阳<br>设计：廖星 郑文伟<br>开发：廖星 邓维迪 刘福鑫');
+        this.$message.alert('Token团队出品<br>产品：廖星 石明阳<br>设计：廖星 郑文伟<br>开发：廖星 邓维迪 刘福鑫');
       }
     }
   }

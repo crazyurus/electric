@@ -24,8 +24,6 @@
 </template>
 
 <script>
-  import Token from '../../libs/Token'
-
   export default {
     data () {
       return {
@@ -35,7 +33,7 @@
       }
     },
     mounted () {
-      Token.indicator.show();
+      this.$indicator.show();
       this.load();
     },
     methods: {
@@ -47,7 +45,7 @@
           page: this.page,
           area: this.$store.state.area
         }).then(result => {
-          if (this.page === 1) Token.indicator.hide();
+          if (this.page === 1) this.$indicator.hide();
 
           const data = result.data.data;
           if (data.length !== 0) {

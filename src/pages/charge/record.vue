@@ -45,8 +45,6 @@
 </template>
 
 <script>
-  import Token from '../../libs/Token'
-
   export default {
     data () {
       return {
@@ -55,16 +53,16 @@
       }
     },
     mounted () {
-      Token.indicator.show();
+      this.$indicator.show();
       this.$http.post('https://api.wutnews.net/electric/info/pay', {
         id: this.$store.state.meter,
         area: this.$store.state.area
       }).then(result => {
-        Token.indicator.hide();
+        this.$indicator.hide();
         result = result.data;
 
         if (result.errCode === 0) this.record = result.data;
-        else Token.message.toast('网络请求错误');
+        else this.$message.toast('网络请求错误');
       });
     },
     filters: {

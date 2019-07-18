@@ -18,8 +18,6 @@
 </template>
 
 <script>
-  import Token from '../../libs/Token'
-
   export default {
     props: ['link'],
     data () {
@@ -34,9 +32,9 @@
       }
     },
     mounted () {
-      Token.indicator.show();
+      this.$indicator.show();
       this.$http.get('https://api.wutnews.net/electric/notice/content?link=' + decodeURIComponent(this.link)).then(result => {
-        Token.indicator.hide();
+        this.$indicator.hide();
         this.article = result.data.data;
       })
     }

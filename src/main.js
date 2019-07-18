@@ -12,9 +12,11 @@ import Routes from './routes.js';
 import App from './pages/app';
 
 import axios from './libs/axios';
+import Token from './libs/Token';
 import store from './store/data';
 
 Vue.use(Framework7Vue);
+Vue.use(Token);
 Vue.prototype.$http = axios;
 
 new Vue({
