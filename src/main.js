@@ -1,21 +1,21 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
-import 'framework7'
-import Framework7Vue from 'framework7-vue'
-import 'framework7/dist/css/framework7.ios.min.css'
-import 'framework7/dist/css/framework7.ios.colors.min.css'
+import 'framework7';
+import Framework7Vue from 'framework7-vue';
+import 'framework7/dist/css/framework7.ios.min.css';
+import 'framework7/dist/css/framework7.ios.colors.min.css';
 
-import 'mint-ui/lib/style.css'
-import './css/app.css'
-import './css/notice.css'
-import Routes from './routes.js'
-import App from './pages/app'
+import 'mint-ui/lib/style.css';
+import './css/app.css';
+import './css/notice.css';
+import Routes from './routes.js';
+import App from './pages/app';
 
-import axios from './libs/axios'
-import store from './store/data'
+import axios from './libs/axios';
+import store from './store/data';
 
-Vue.use(Framework7Vue)
-Vue.prototype.$http = axios
+Vue.use(Framework7Vue);
+Vue.prototype.$http = axios;
 
 new Vue({
   el: '#app',
