@@ -17,7 +17,7 @@ import store from './store/data';
 
 Vue.use(Framework7Vue);
 Vue.use(Token);
-Vue.prototype.$http = axios;
+Vue.use(axios);
 
 new Vue({
   el: '#app',
