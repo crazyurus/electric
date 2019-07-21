@@ -74,7 +74,7 @@ export default class ChooseForm extends PureComponent {
   };
 
   changeAreaPicker = value => {
-    const area = Number.parseInt(value.split('*')[0], 10);
+    const area = value.includes('余区') ? 7 : Number.parseInt(value.split('*')[0], 10);
     this.state.select.area = area;
     this.getChooseInfo('architecture', value).then(res => {
       this.setState({
@@ -181,7 +181,7 @@ export default class ChooseForm extends PureComponent {
                     </Option>
                   </OptGroup>
                   <OptGroup label="余家头校区">
-                    <Option value="7*Area*余区">余区</Option>
+                    <Option value="1*Area*余区">余区</Option>
                   </OptGroup>
                 </Select>
               )}
