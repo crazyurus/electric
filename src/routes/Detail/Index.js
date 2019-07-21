@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 import { Avatar, Divider, Row, Col, Icon, Card, Tabs, Tooltip, message } from 'antd';
 import numeral from 'numeral';
-import { ChartCard, Field, Bar } from 'components/Charts';
+import { ChartCard, Field, Bar } from '@/components/Charts';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './Index.less';
 

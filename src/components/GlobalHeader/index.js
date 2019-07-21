@@ -16,7 +16,7 @@ import {
 import Debounce from 'lodash-decorators/debounce';
 import { Link } from 'dva/router';
 import styles from './index.less';
-import weappLogo from 'assets/weapp.svg';
+import weappLogo from '@/assets/weapp.svg';
 
 export default class GlobalHeader extends PureComponent {
   state = {

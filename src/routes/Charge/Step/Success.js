@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import { Button } from 'antd';
-import Result from 'components/Result';
+import Result from '@/components/Result';
 
 class ChargeSuccess extends React.PureComponent {
   render() {
