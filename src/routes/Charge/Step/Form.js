@@ -70,9 +70,10 @@ class ChargeForm extends React.PureComponent {
 
   render() {
     const { form, room, submitLoading } = this.props;
-    const { getFieldDecorator } = form;
+    const { getFieldDecorator, getFieldValue } = form;
     const isYuArea = room.room.area === 7;
-    const isOffline = room.detail.status.indexOf('离线') > -1;
+    const isOffline = room.detail.status.includes('离线');
+    const isCWSF = getFieldValue('type') === 2;
     const station = [
       {
         name: '南湖',
@@ -140,7 +141,7 @@ class ChargeForm extends React.PureComponent {
           <Form.Item {...formItemLayout} label="宿舍">
             <strong>{room.room.meter.split('*')[2]}</strong>
           </Form.Item>
-          <Form.Item {...formItemLayout} label="充值金额">
+          {!isCWSF && <Form.Item {...formItemLayout} label="充值金额">
             {getFieldDecorator('amount', {
               initialValue: 100,
               validateFirst: true,
@@ -161,7 +162,7 @@ class ChargeForm extends React.PureComponent {
                 },
               ],
             })(<Input prefix="￥" placeholder="请输入充值金额" maxLength="3" />)}
-          </Form.Item>
+          </Form.Item>}
           <Form.Item {...formItemLayout} label="支付方式">
             {getFieldDecorator('type', {
               initialValue: isYuArea ? 1 : 2,
@@ -188,9 +189,10 @@ class ChargeForm extends React.PureComponent {
               },
             }}
           >
-            <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline}>
-              支付
-            </Button>
+            {isCWSF ?
+              <Button type="primary" onClick={this.openCWSF}>前往校园缴费平台</Button> :
+              <Button type="primary" htmlType="submit" loading={submitLoading} disabled={isOffline}>支付</Button>
+            }
             <Button
               type="default"
               style={{ marginLeft: '12px' }}
