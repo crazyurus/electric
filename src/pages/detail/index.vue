@@ -1,12 +1,5 @@
 <template>
-  <div class="page" data-page="detail">
-    <div class="am-notice" role="alert" v-if="broadcast.text">
-      <div class="am-notice-content">{{broadcast.text}}</div>
-      <div class="am-notice-operation">
-        <a class="am-notice-go" :href="broadcast.link"
-           :class="{ external: broadcast.link.indexOf('http') > -1 }"></a>
-      </div>
-    </div>
+  <f7-page name="detail">
     <div class="page-content pull-to-refresh-content">
       <div class="pull-to-refresh-layer">
         <div class="preloader preloader-white"></div>
@@ -139,7 +132,7 @@
         <p>以上电费信息更新于&nbsp;{{electric.time}}，关注微信/QQ小程序“武汉理工大学电费查询”也可以查询哦</p>
       </div>
     </div>
-  </div>
+  </f7-page>
 </template>
 
 <script>
@@ -170,7 +163,6 @@
           show: false,
           value: 20
         },
-        broadcast: {},
         icons: {
           home: svgHome,
           pay: svgPay,
@@ -202,10 +194,6 @@
           this.$f7.hideIndicator();
           this.$message.toast('无法读取电表数据');
         });
-
-        /* this.$http.get('https://web.wutnews.net/electric/api/broadcast').then(result => {
-          this.broadcast = result.data;
-        }); */
 
         if (location.search.indexOf('?refresh=') > -1) token.setMeter(meter + '|' + area);
 
@@ -386,10 +374,6 @@
   .list-block {
     margin: 0;
     font-weight: 300;
-  }
-
-  .text-red {
-    color: red !important;
   }
 
   .item-range {
