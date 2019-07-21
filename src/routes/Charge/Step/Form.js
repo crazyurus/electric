@@ -68,6 +68,10 @@ class ChargeForm extends React.PureComponent {
     });
   };
 
+  openCWSF() {
+    window.open('http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023');
+  }
+
   render() {
     const { form, room, submitLoading } = this.props;
     const { getFieldDecorator, getFieldValue } = form;
