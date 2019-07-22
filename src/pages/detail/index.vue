@@ -150,8 +150,8 @@
     data() {
       return {
         electric: {
-          name: '加载中……',
-          status: '',
+          name: '',
+          status: '加载中……',
           left: 0,
           today: {
             use: '',
@@ -171,8 +171,10 @@
       }
     },
     mounted() {
+      const { meter, area } = this.$store.state;
+      this.electric.name = meter.split('*')[2];
+
       Vue.nextTick(() => {
-        const {meter, area} = this.$store.state;
         this.$f7.showIndicator();
         this.$http.post('https://api.wutnews.net/electric/info/detail', {
           id: meter,
