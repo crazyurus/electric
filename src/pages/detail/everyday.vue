@@ -6,11 +6,9 @@
 </template>
 
 <script>
-  import Loader from '../../libs/Loader'
-
   export default {
     mounted () {
-      Loader('/Application/Electric/Assets/chart/echarts.min.js').then(() => {
+      import('echarts').then(echarts => {
         this.$indicator.show();
         this.$http.post('https://api.wutnews.net/electric/info/day', {
           id: this.$store.state.meter,
@@ -19,14 +17,14 @@
           result = result.data.data;
 
           // 数据处理
-          let data = new Map();
+          const data = new Map();
           for (let item in result) {
-            let date = item.split('-');
+            const date = item.split('-');
             if (!data.has(date[0])) data.set(date[0], []);
             data.get(date[0]).push(result[item]);
           }
           const keys = data.keys();
-          let months = [];
+          const months = [];
           for (let key of keys) {
             months.push(key);
           }
@@ -37,14 +35,14 @@
           const month2 = data.get(months[1]);
 
           // 日期定义
-          let day = [];
+          const day = [];
           for (let i = 1; i <= Math.max(month1.length, month2.length); ++i) {
             day.push(i + '日');
           }
 
           // 数据渲染
-          let ElectricChart = echarts.init(document.getElementById('chart'));
-          let option = {
+          const ElectricChart = echarts.init(document.getElementById('chart'));
+          const option = {
             legend: {
               data: legends
             },

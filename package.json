@@ -29,6 +29,7 @@
   "homepage": "https://web.wutnews.net/electric",
   "dependencies": {
     "axios": "^0.19.0",
+    "echarts": "^4.2.1",
     "framework7": "^1.7.1",
     "framework7-vue": "^0.9.4",
     "mint-ui": "^2.2.13",
