@@ -136,9 +136,9 @@
 </template>
 
 <script>
-  import Loader from '../../libs/Loader'
   import Vue from 'vue'
   import { Range } from 'mint-ui';
+  import CountUp from '@/libs/CountUp.js'
 
   import svgHome from '@/images/detail/home.svg';
   import svgPay from '@/images/detail/pay.svg';
@@ -182,11 +182,9 @@
 
           result = result.data;
           if (result.errCode === 0) {
-            Loader('/Application/Electric/Assets/js/count.js').then(() => {
-              new CountUp("txtLeft", 0, Number.parseFloat(result.data.left.replace('度', '')), 2, 1).start();
-              new CountUp("txtTodayCost", 0, Number.parseFloat(result.data.today.use.replace('千瓦时', '')), 2, 1).start();
-              new CountUp("txtTodayPrice", 0, Number.parseFloat(result.data.today.price.replace('千瓦时', '')), 2, 1).start();
-            });
+            new CountUp("txtLeft", 0, Number.parseFloat(result.data.left.replace('度', '')), 2, 1).start();
+            new CountUp("txtTodayCost", 0, Number.parseFloat(result.data.today.use.replace('千瓦时', '')), 2, 1).start();
+            new CountUp("txtTodayPrice", 0, Number.parseFloat(result.data.today.price.replace('千瓦时', '')), 2, 1).start();
 
             this.electric = result.data;
           } else this.$message.alert(result.errMsg);
