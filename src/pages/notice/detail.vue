@@ -33,7 +33,9 @@
     },
     mounted () {
       this.$indicator.show();
-      this.$http.get('https://api.wutnews.net/electric/notice/content?link=' + decodeURIComponent(this.link)).then(result => {
+      this.$http.post('https://api.wutnews.net/electric/notice/content', {
+        link: decodeURIComponent(this.link)
+      }).then(result => {
         this.$indicator.hide();
         this.article = result.data.data;
       })
