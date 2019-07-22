@@ -1,7 +1,7 @@
 {
   "name": "electric-vue",
-  "version": "1.6.0",
-  "description": "Electric by Framework7 Vue + Webpack",
+  "version": "1.7.0",
+  "description": "掌上理工大电费查询模块",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://git.wutnews.net/crazyurus/electric-vue.git"
+    "url": "https://git.wutnews.net/crazyurus/electric-vue.git"
   },
   "keywords": [
     "ios",
@@ -22,7 +22,7 @@
     "app",
     "f7"
   ],
-  "author": "Crazy Urus",
+  "author": "廖星 <xing.liao@wutnews.net>",
   "license": "MIT",
   "bugs": {
     "url": "https://git.wutnews.net/crazyurus/electric-vue/issues"
@@ -68,7 +68,7 @@
     "vue-loader": "^14.2.4",
     "vue-style-loader": "^3.1.2",
     "vue-template-compiler": "^2.6.10",
-    "webpack": "^2.2.1",
+    "webpack": "^2.7.0",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.16.1",
