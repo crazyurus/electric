@@ -10,8 +10,9 @@
     mounted () {
       Promise.all([
         import('echarts/lib/echarts'),
-        import('echarts/lib/chart/bar')
-      ]).then(echarts => {
+        import('echarts/lib/chart/bar'),
+        import('echarts/lib/component/legendScroll')
+      ]).then(([ echarts ]) => {
         this.$indicator.show();
         this.$http.post('https://api.wutnews.net/electric/info/day', {
           id: this.$store.state.meter,
