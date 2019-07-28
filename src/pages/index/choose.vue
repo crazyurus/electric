@@ -18,22 +18,19 @@
           </optgroup>
         </select>
       </f7-list-item>
-      <f7-list-item smart-select title="宿舍楼" smart-select-searchbar-placeholder="搜索宿舍楼" smart-select-searchbar-cancel="取消">
+      <f7-list-item class="ArchSelect smart-select" smart-select title="宿舍楼" smart-select-searchbar-placeholder="搜索宿舍楼" smart-select-searchbar-cancel="取消">
         <select @change="changeArcPicker">
           <option value="">请选择</option>
-          <option v-for="arc in roomInfo.architecture" :key="arc.id" :value="arc.id">{{arc.name}}</option>
         </select>
       </f7-list-item>
-      <f7-list-item smart-select title="楼层" smart-select-searchbar-placeholder="搜索楼层" smart-select-searchbar-cancel="取消">
+      <f7-list-item class="FloorSelect smart-select" smart-select title="楼层" smart-select-searchbar-placeholder="搜索楼层" smart-select-searchbar-cancel="取消">
         <select @change="changeFloorPicker">
           <option value="">请选择</option>
-          <option v-for="floor in roomInfo.floor" :key="floor.id" :value="floor.id">{{floor.name}}</option>
         </select>
       </f7-list-item>
-      <f7-list-item smart-select title="房间" smart-select-searchbar-placeholder="搜索房间" smart-select-searchbar-cancel="取消">
+      <f7-list-item class="RoomSelect smart-select" smart-select title="房间" smart-select-searchbar-placeholder="搜索房间" smart-select-searchbar-cancel="取消">
         <select @change="changeMeterPicker">
           <option value="">请选择</option>
-          <option v-for="meter in roomInfo.meter" :key="meter.id" :value="meter.id">{{meter.name}}</option>
         </select>
       </f7-list-item>
       <f7-list-label>* 暂不支持升升公寓的电费查询</f7-list-label>
@@ -98,7 +95,11 @@
             item.name = this.transMeterName(item.name);
           });
 
-          this.roomInfo.architecture = result;
+          this.Dom7('.ArchSelect.smart-select select').empty();
+          for (let res of result) {
+            this.$f7.smartSelectAddOption('.ArchSelect.smart-select select', '<option value=' + res.id + '>' + res.name + '</option>')
+          }
+          this.$f7.smartSelectOpen('.ArchSelect.smart-select');
         });
       },
       changeArcPicker (e) {
@@ -115,7 +116,13 @@
           let result = res.data.data;
           this.$indicator.hide();
 
-          if (res) this.roomInfo.floor = result;
+          this.Dom7('.FloorSelect.smart-select select').empty();
+          if (result) {
+            for (let res of result) {
+              this.$f7.smartSelectAddOption('.FloorSelect.smart-select select', '<option value=' + res.id + '>' + res.name + '</option>')
+            }
+            this.$f7.smartSelectOpen('.FloorSelect.smart-select');
+          }
           else this.$message.toast('暂不支持');
         });
       },
@@ -132,7 +139,12 @@
           });
 
           this.select.floor = select;
-          this.roomInfo.meter = result;
+
+          this.Dom7('.RoomSelect.smart-select select').empty();
+          for (let res of result) {
+            this.$f7.smartSelectAddOption('.RoomSelect.smart-select select', '<option value=' + res.id + '>' + res.name + '</option>')
+          }
+          this.$f7.smartSelectOpen('.RoomSelect.smart-select');
         });
       },
       changeMeterPicker (e) {
