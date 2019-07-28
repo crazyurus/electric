@@ -99,7 +99,8 @@
           for (let res of result) {
             this.$f7.smartSelectAddOption('.ArchSelect.smart-select select', '<option value=' + res.id + '>' + res.name + '</option>')
           }
-          this.$f7.smartSelectOpen('.ArchSelect.smart-select');
+
+          setTimeout(() => this.$f7.smartSelectOpen('.ArchSelect.smart-select'), 200)
         });
       },
       changeArcPicker (e) {
@@ -121,7 +122,7 @@
             for (let res of result) {
               this.$f7.smartSelectAddOption('.FloorSelect.smart-select select', '<option value=' + res.id + '>' + res.name + '</option>')
             }
-            this.$f7.smartSelectOpen('.FloorSelect.smart-select');
+            setTimeout(() => this.$f7.smartSelectOpen('.FloorSelect.smart-select'), 200);
           }
           else this.$message.toast('暂不支持');
         });
@@ -144,7 +145,7 @@
           for (let res of result) {
             this.$f7.smartSelectAddOption('.RoomSelect.smart-select select', '<option value=' + res.id + '>' + res.name + '</option>')
           }
-          this.$f7.smartSelectOpen('.RoomSelect.smart-select');
+          setTimeout(()=> this.$f7.smartSelectOpen('.RoomSelect.smart-select'), 200);
         });
       },
       changeMeterPicker (e) {
