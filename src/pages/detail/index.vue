@@ -9,7 +9,9 @@
         <div class="cost-title" @click="charge">剩余电量(度)</div>
         <div class="cost-content number" id="txtLeft" @click="charge">0.00</div>
         <div class="cost-button" @click="charge">充值电费</div>
-        <div class="cost-wrapper" @click="charge" ref="wave"></div>
+        <div class="cost-wrapper" @click="charge" ref="wave">
+          <div class="cost-wave" v-if="!supportCSSWorklet"></div>
+        </div>
         <div class="cost-bottom row">
           <div class="col-50">
             <div class="cost-bottom-title">当日用电(度)</div>
@@ -146,10 +148,12 @@
   Vue.component(Range.name, Range);
 
   const MAX_INDICATOR_LEFT = 300;
+  const SUPPORT_CSS_PAINTING = CSS.paintWorklet !== undefined;
 
   export default {
     data() {
       return {
+        supportCSSWorklet: SUPPORT_CSS_PAINTING,
         electric: {
           name: '',
           status: '加载中……',
@@ -176,7 +180,7 @@
       const self = this;
       this.electric.name = meter.split('*')[2];
 
-      if ('paintWorklet' in CSS) {
+      if (SUPPORT_CSS_PAINTING) {
         CSS.paintWorklet.addModule(WaveWorklet);
 
         let tick = 0;
@@ -307,6 +311,8 @@
 </script>
 
 <style scoped>
+  @import "../../css/wave.css";
+
   .link-disabled {
     opacity: 0.55;
   }
