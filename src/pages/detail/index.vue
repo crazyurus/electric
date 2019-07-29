@@ -7,7 +7,7 @@
       </div>
       <div class="cost-area">
         <div class="cost-title" @click="charge">剩余电量(度)</div>
-        <div class="cost-content number" id="txtLeft" @click="charge">0.00</div>
+        <div class="cost-content number" @click="charge" ref="left">0.00</div>
         <div class="cost-button" @click="charge">充值电费</div>
         <div class="cost-wrapper" @click="charge" ref="wave">
           <div class="cost-wave" v-if="!supportCSSWorklet"></div>
@@ -15,11 +15,11 @@
         <div class="cost-bottom row">
           <div class="col-50">
             <div class="cost-bottom-title">当日用电(度)</div>
-            <div class="cost-bottom-content number" id="txtTodayCost">0.00</div>
+            <div class="cost-bottom-content number" ref="todayCost">0.00</div>
           </div>
           <div class="col-50">
             <div class="cost-bottom-title">当日电费(元)</div>
-            <div class="cost-bottom-content number" id="txtTodayPrice">0.00</div>
+            <div class="cost-bottom-content number" ref="todayPrice">0.00</div>
           </div>
         </div>
       </div>
@@ -201,8 +201,8 @@
 
           result = result.data;
           if (result.errCode === 0) {
-            new CountUp("txtTodayCost", 0, Number.parseFloat(result.data.today.use.replace('千瓦时', '')), 2, 1).start();
-            new CountUp("txtTodayPrice", 0, Number.parseFloat(result.data.today.price.replace('千瓦时', '')), 2, 1).start();
+            new CountUp(this.$refs.todayCost, 0, Number.parseFloat(result.data.today.use.replace('千瓦时', '')), 2, 1).start();
+            new CountUp(this.$refs.todayPrice, 0, Number.parseFloat(result.data.today.price.replace('千瓦时', '')), 2, 1).start();
 
             this.electric = {
               ...result.data,
@@ -289,7 +289,7 @@
         const percent = value / MAX_INDICATOR_LEFT;
         const dom = this.$refs.wave;
 
-        new CountUp('txtLeft', oldValue, value, 2, 1).start();
+        new CountUp(this.$refs.left, oldValue, value, 2, 1).start();
         dom.style.setProperty('--wave-height', percent > 1 ? 0 : 1 - percent);
 
         if (value <= 15 && value > 5) dom.className = 'cost-wrapper warning';
