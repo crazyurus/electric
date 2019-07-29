@@ -9,9 +9,7 @@
         <div class="cost-title" @click="charge">剩余电量(度)</div>
         <div class="cost-content number" id="txtLeft" @click="charge">0.00</div>
         <div class="cost-button" @click="charge">充值电费</div>
-        <div class="cost-wrapper" @click="charge">
-          <div class="cost-wave" :class="waveClass"></div>
-        </div>
+        <div class="cost-wrapper" @click="charge" ref="wave"></div>
         <div class="cost-bottom row">
           <div class="col-50">
             <div class="cost-bottom-title">当日用电(度)</div>
@@ -138,7 +136,8 @@
 <script>
   import Vue from 'vue'
   import { Range } from 'mint-ui';
-  import CountUp from '@/libs/CountUp.js'
+  import CountUp from '@/libs/CountUp.js';
+  import WaveWorklet from '@/worklets/wave.worklet.js';
 
   import svgHome from '@/images/detail/home.svg';
   import svgPay from '@/images/detail/pay.svg';
@@ -146,13 +145,15 @@
 
   Vue.component(Range.name, Range);
 
+  const MAX_INDICATOR_LEFT = 300;
+
   export default {
     data() {
       return {
         electric: {
           name: '',
           status: '加载中……',
-          left: 0,
+          left: MAX_INDICATOR_LEFT,
           today: {
             use: '',
             price: ''
@@ -172,7 +173,19 @@
     },
     mounted() {
       const { meter, area } = this.$store.state;
+      const self = this;
       this.electric.name = meter.split('*')[2];
+
+      if ('paintWorklet' in CSS) {
+        CSS.paintWorklet.addModule(WaveWorklet);
+
+        let tick = 0;
+        requestAnimationFrame(function raf() {
+          tick += 1;
+          self.$refs.wave.style.setProperty('--animation-tick', tick);
+          requestAnimationFrame(raf);
+        });
+      }
 
       Vue.nextTick(() => {
         this.$f7.showIndicator();
@@ -184,11 +197,13 @@
 
           result = result.data;
           if (result.errCode === 0) {
-            new CountUp("txtLeft", 0, Number.parseFloat(result.data.left.replace('度', '')), 2, 1).start();
             new CountUp("txtTodayCost", 0, Number.parseFloat(result.data.today.use.replace('千瓦时', '')), 2, 1).start();
             new CountUp("txtTodayPrice", 0, Number.parseFloat(result.data.today.price.replace('千瓦时', '')), 2, 1).start();
 
-            this.electric = result.data;
+            this.electric = {
+              ...result.data,
+              left: Number.parseFloat(result.data.left.replace('度', ''))
+            };
           } else this.$message.alert(result.errMsg);
         }).catch(() => {
           this.$f7.hideIndicator();
@@ -243,12 +258,9 @@
           id: this.$store.state.meter,
           area: this.$store.state.area
         }).then(result => {
-          // this.$f7.hidePreloader();
-
-          const left = this.electric.left.replace('度', '');
           this.electric.time = result.data.data.time.split('.')[0].replace('T', ' ').replace('-0', '/').replace('-0', '/').replace('-', '/').replace('-', '/');
           this.electric.left = result.data.data.left;
-          new CountUp('txtLeft', Number.parseFloat(left), Number.parseFloat(result.data.data.left), 2, 1).start();
+
           this.$f7.pullToRefreshDone();
         }).catch(result => {
           this.$message.alert(result.data.errMsg);
@@ -262,16 +274,22 @@
       remain() {
         const speed = this.electric.speed;
         if (!speed || speed == -1) return '很久之后';
-        let remain = Math.floor(this.electric.left.replace('度', '') / speed);
+        let remain = Math.floor(this.electric.left / speed);
         let now = new Date();
         let predict = new Date(now.getFullYear(), now.getMonth(), now.getDate() + remain);
         return (predict.getFullYear() === now.getFullYear() ? '' : predict.getFullYear() + '年') + (predict.getMonth() + 1) + '月' + predict.getDate() + '日';
-      },
-      waveClass() {
-        if (!this.electric.status) return '';
-        if (this.electric.left <= 15 && this.electric.left > 5) return 'warning';
-        if (this.electric.left <= 5) return 'danger';
-        return '';
+      }
+    },
+    watch: {
+      ['electric.left'](value, oldValue) {
+        const percent = value / MAX_INDICATOR_LEFT;
+        const dom = this.$refs.wave;
+
+        new CountUp('txtLeft', oldValue, value, 2, 1).start();
+        dom.style.setProperty('--wave-height', percent > 1 ? 0 : 1 - percent);
+
+        if (value <= 15 && value > 5) dom.style.className = 'cost-wrapper warning';
+        else if (value < 5) dom.style.className = 'cost-wrapper danger';
       }
     },
     filters: {
@@ -289,8 +307,6 @@
 </script>
 
 <style scoped>
-  @import '../../css/wave.css';
-
   .link-disabled {
     opacity: 0.55;
   }
@@ -330,7 +346,7 @@
     font-size: 12px;
     text-align: center;
     z-index: 30;
-    border: 1px solid #83DBE8;
+    border: 1px solid rgba(255,255,255,0.6);
     border-radius: 13px;
   }
 
@@ -347,6 +363,30 @@
 
   .cost-bottom-content {
     font-size: 1rem;
+  }
+
+  .cost-wrapper {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    top: 100px;
+    left: 50%;
+    border: 1px solid #83DBE8;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 40px;
+    background-image: paint(wave);
+    --wave-height: 0.82;
+    --wave-color: #83dbe8;
+  }
+
+  .cost-wrapper.warning {
+    --wave-color: rgba(255,137,0,0.7);
+  }
+
+  .cost-wrapper.danger {
+    --wave-color: rgba(255,108,108,0.7);
   }
 
   .toolbar-inner a.link {
