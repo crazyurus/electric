@@ -148,7 +148,8 @@
   Vue.component(Range.name, Range);
 
   const MAX_INDICATOR_LEFT = 300;
-  const SUPPORT_CSS_PAINTING = CSS.paintWorklet !== undefined;
+  const IS_X5_WEBVIEW = window.getX5WebViewExtension || navigator.userAgent.includes('TBS/');
+  const SUPPORT_CSS_PAINTING = CSS.paintWorklet !== undefined && !IS_X5_WEBVIEW;
 
   export default {
     data() {
