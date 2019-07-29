@@ -140,6 +140,7 @@
   import { Range } from 'mint-ui';
   import CountUp from '@/libs/CountUp.js';
   import WaveWorklet from '@/worklets/wave.worklet.js';
+  import { SUPPORT_CSS_HOUDINI } from '@/libs/const.js';
 
   import svgHome from '@/images/detail/home.svg';
   import svgPay from '@/images/detail/pay.svg';
@@ -148,13 +149,11 @@
   Vue.component(Range.name, Range);
 
   const MAX_INDICATOR_LEFT = 300;
-  const IS_X5_WEBVIEW = navigator.userAgent.includes('TBS/') || window.getX5WebViewExtension;
-  const SUPPORT_CSS_PAINTING = !IS_X5_WEBVIEW && CSS.paintWorklet;
 
   export default {
     data() {
       return {
-        supportCSSWorklet: SUPPORT_CSS_PAINTING,
+        supportCSSWorklet: SUPPORT_CSS_HOUDINI,
         electric: {
           name: '',
           status: '加载中……',
@@ -181,7 +180,7 @@
       const self = this;
       this.electric.name = meter.split('*')[2];
 
-      if (SUPPORT_CSS_PAINTING) {
+      if (SUPPORT_CSS_HOUDINI) {
         CSS.paintWorklet.addModule(WaveWorklet);
 
         let tick = 0;
