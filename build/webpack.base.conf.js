@@ -33,7 +33,11 @@ module.exports = {
       },
       {
         test: /\.worklet\.js$/,
-        loader: 'worklet-loader'
+        loader: 'worklet-loader',
+        options: {
+          name: 'worklet.[hash].js',
+          publicPath: '/static/js/'
+        }
       },
       {
         test: /\.js$/,
