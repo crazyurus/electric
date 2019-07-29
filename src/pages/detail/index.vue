@@ -10,7 +10,7 @@
         <div class="cost-content number" @click="charge" ref="left">0.00</div>
         <div class="cost-button" @click="charge">充值电费</div>
         <div class="cost-wrapper" @click="charge" ref="wave">
-          <div class="cost-wave" v-if="!supportCSSHoudini"></div>
+          <div class="cost-wave"></div>
         </div>
         <div class="cost-bottom row">
           <div class="col-50">
@@ -151,7 +151,6 @@
   export default {
     data() {
       return {
-        supportCSSHoudini: false,
         electric: {
           name: '',
           status: '加载中……',
@@ -277,7 +276,6 @@
         const dom = this.$refs.wave;
 
         new CountUp(this.$refs.left, oldValue, value, 2, 1).start();
-        dom.style.setProperty('--wave-height', percent > 1 ? 0 : 1 - percent);
 
         if (value <= 15 && value > 5) dom.className = 'cost-wrapper warning';
         else if (value < 5) dom.className = 'cost-wrapper danger';
@@ -339,7 +337,7 @@
     font-size: 12px;
     text-align: center;
     z-index: 30;
-    border: 1px solid rgba(255,255,255,0.6);
+    border: 1px solid #83DBE8;
     border-radius: 13px;
   }
 
@@ -369,17 +367,6 @@
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 40px;
-    background-image: paint(wave);
-    --wave-height: 0.82;
-    --wave-color: #83dbe8;
-  }
-
-  .cost-wrapper.warning {
-    --wave-color: rgba(255,137,0,0.7);
-  }
-
-  .cost-wrapper.danger {
-    --wave-color: rgba(255,108,108,0.7);
   }
 
   .toolbar-inner a.link {

@@ -32,14 +32,6 @@ module.exports = {
         options: vueLoaderConfig
       },
       {
-        test: /\.worklet\.js$/,
-        loader: 'worklet-loader',
-        options: {
-          name: 'worklet.[hash].js',
-          publicPath: '/static/js/'
-        }
-      },
-      {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
