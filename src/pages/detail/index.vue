@@ -288,8 +288,8 @@
         new CountUp('txtLeft', oldValue, value, 2, 1).start();
         dom.style.setProperty('--wave-height', percent > 1 ? 0 : 1 - percent);
 
-        if (value <= 15 && value > 5) dom.style.className = 'cost-wrapper warning';
-        else if (value < 5) dom.style.className = 'cost-wrapper danger';
+        if (value <= 15 && value > 5) dom.className = 'cost-wrapper warning';
+        else if (value < 5) dom.className = 'cost-wrapper danger';
       }
     },
     filters: {
