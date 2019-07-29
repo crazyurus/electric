@@ -10,7 +10,7 @@
         <div class="cost-content number" @click="charge" ref="left">0.00</div>
         <div class="cost-button" @click="charge">充值电费</div>
         <div class="cost-wrapper" @click="charge" ref="wave">
-          <div class="cost-wave" v-if="!supportCSSWorklet"></div>
+          <div class="cost-wave" v-if="!supportCSSHoudini"></div>
         </div>
         <div class="cost-bottom row">
           <div class="col-50">
@@ -139,8 +139,6 @@
   import Vue from 'vue'
   import { Range } from 'mint-ui';
   import CountUp from '@/libs/CountUp.js';
-  import WaveWorklet from '@/worklets/wave.worklet.js';
-  import { SUPPORT_CSS_HOUDINI } from '@/libs/const.js';
 
   import svgHome from '@/images/detail/home.svg';
   import svgPay from '@/images/detail/pay.svg';
@@ -153,7 +151,7 @@
   export default {
     data() {
       return {
-        supportCSSWorklet: SUPPORT_CSS_HOUDINI,
+        supportCSSHoudini: false,
         electric: {
           name: '',
           status: '加载中……',
@@ -179,17 +177,6 @@
       const { meter, area } = this.$store.state;
       const self = this;
       this.electric.name = meter.split('*')[2];
-
-      if (SUPPORT_CSS_HOUDINI) {
-        CSS.paintWorklet.addModule(WaveWorklet);
-
-        let tick = 0;
-        requestAnimationFrame(function raf() {
-          tick += 1;
-          self.$refs.wave.style.setProperty('--animation-tick', tick);
-          requestAnimationFrame(raf);
-        });
-      }
 
       Vue.nextTick(() => {
         this.$f7.showIndicator();
