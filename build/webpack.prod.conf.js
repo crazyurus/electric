@@ -82,7 +82,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     }),
     new SriPlugin({
       hashFuncNames: ['sha256', 'sha512'],
-      enabled: true
+      enabled: false
     })
   ]
 });
