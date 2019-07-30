@@ -119,25 +119,23 @@
       },
       chargeWechat(amount) {
         Indicator.open('微信支付');
-        this.$http.get('https://palmwhut.sinaapp.com/ip.php').then(ip => {
-          let param = {
-            area: this.$store.state.area,
-            amount: amount,
-            sno: this.$store.state.sno,
-            meter: this.$store.state.meter,
-            type: this.$detect.mobile() ? 'MWEB' : 'NATIVE'
-          };
-          if (ip.data) param['ip'] = ip.data;
 
-          this.$http.post('/electric/pay/prepare', param).then(result => {
-            Indicator.close();
-            if (result.data.data.return.mweb_url) {
-              const url = result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('https://web.wutnews.net/electric/pay/callback?order=' + result.data.data.return.prepay_id);
-              if (typeof tokenNative === 'undefined') location.assign('newtab:https://web.wutnews.net/electric/api/wechatPay?url=' + encodeURIComponent(url));
-              else location.assign(url);
-            }
-            if (result.data.data.return.code_url) this.qrcode('请用微信扫码完成支付', '/electric/api/qrcode?url=' + encodeURIComponent(result.data.data.return.code_url));
-          });
+        const param = {
+          area: this.$store.state.area,
+          amount: amount,
+          sno: this.$store.state.sno,
+          meter: this.$store.state.meter,
+          type: this.$detect.mobile() ? 'MWEB' : 'NATIVE'
+        };
+
+        this.$http.post('/electric/pay/prepare', param).then(result => {
+          Indicator.close();
+          if (result.data.data.return.mweb_url) {
+            const url = result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('https://web.wutnews.net/electric/pay/callback?order=' + result.data.data.return.prepay_id);
+            if (typeof tokenNative === 'undefined') location.assign('newtab:https://web.wutnews.net/electric/api/wechatPay?url=' + encodeURIComponent(url));
+            else location.assign(url);
+          }
+          if (result.data.data.return.code_url) this.qrcode('请用微信扫码完成支付', '/electric/api/qrcode?url=' + encodeURIComponent(result.data.data.return.code_url));
         });
       },
       chargeAlipay(amount) {
