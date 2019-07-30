@@ -169,7 +169,7 @@
         }
       },
       getChooseInfo (api, id) {
-        return this.$http.post('https://api.itoken.team/electric/choose/' + api, {
+        return this.$http.post('https://api.wutnews.net/electric/choose/' + api, {
           id: id,
           area: this.select.area
         });
