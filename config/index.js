@@ -34,12 +34,12 @@ module.exports = {
         changeOrigin: true
       },
       '/web': {
-        target: 'https://web.itoken.team',
+        target: 'https://web.wutnews.net',
         pathRewrite: {'^/web': ''},
         changeOrigin: true
       },
       '/Application': {
-        target: 'https://web.itoken.team',
+        target: 'https://web.wutnews.net',
         changeOrigin: true
       }
     },

@@ -143,7 +143,7 @@
       },
       queryMeterDetail () {
         this.$f7.showPreloader('正在查询，请稍后…');
-        this.$http.post('https://web.itoken.team/electric/login/register', {
+        this.$http.post('https://web.wutnews.net/electric/login/register', {
           meter: this.select.meter,
           area: this.select.area
         }).then(result => {
