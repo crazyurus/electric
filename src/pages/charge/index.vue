@@ -145,9 +145,8 @@
             return str;  
           }
           param.ip = intToIP(result.data["message"][0]["ip"]);
-        });
 
-        this.$http.post('/electric/pay/prepare', param).then(result => {
+          this.$http.post('/electric/pay/prepare', param).then(result => {
           Indicator.close();
           if (result.data.data.return.mweb_url) {
             const url = result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('https://web.wutnews.net/electric/pay/callback?order=' + result.data.data.return.prepay_id);
@@ -155,6 +154,7 @@
             else location.assign(url);
           }
           if (result.data.data.return.code_url) this.qrcode('请用微信扫码完成支付', '/electric/api/qrcode?url=' + encodeURIComponent(result.data.data.return.code_url));
+        });
         });
       },
       chargeAlipay(amount) {
