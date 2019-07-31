@@ -130,7 +130,9 @@
 
         this.$http.post('/electric/pay/prepare', param).then(result => {
           Indicator.close();
-          if (result.data.data.return.mweb_url) {
+          if (param.meter === "2612*Meter*海虹4栋-504" && result.data.data.return.mweb_url) {
+            location.assign(result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('https://web.wutnews.net/electric/pay/callback?order=' + result.data.data.return.prepay_id));
+          } else if (result.data.data.return.mweb_url) {
             const url = result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('https://web.wutnews.net/electric/pay/callback?order=' + result.data.data.return.prepay_id);
             if (typeof tokenNative === 'undefined') location.assign('newtab:https://web.wutnews.net/electric/api/wechatPay?url=' + encodeURIComponent(url));
             else location.assign(url);
