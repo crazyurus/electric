@@ -120,19 +120,36 @@
       chargeWechat(amount) {
         Indicator.open('微信支付');
 
-        const param = {
+        let param = {
           area: this.$store.state.area,
           amount: amount,
           sno: this.$store.state.sno,
           meter: this.$store.state.meter,
-          type: this.$detect.mobile() ? 'MWEB' : 'NATIVE'
+          type: this.$detect.mobile() ? 'MWEB' : 'NATIVE',
+          ip: "0.0.0.0"
         };
+
+        this.$http({
+          method: 'get',
+          url: 'https://jkyip.market.alicloudapi.com/ip',
+          headers: {'Authorization': 'APPCODE fb013fbe90924aca829cb36b361a3f8f'}
+        }).then(result => {
+          function intToIP(num) {  
+            var str;  
+            var tt = new Array();  
+            tt[0] = (num >>> 24) >>> 0;  
+            tt[1] = ((num << 8) >>> 24) >>> 0;  
+            tt[2] = (num << 16) >>> 24;  
+            tt[3] = (num << 24) >>> 24;  
+            str = String(tt[0]) + "." + String(tt[1]) + "." + String(tt[2]) + "." + String(tt[3]);  
+            return str;  
+          }
+          param.ip = intToIP(result.data["message"][0]["ip"]);
+        });
 
         this.$http.post('/electric/pay/prepare', param).then(result => {
           Indicator.close();
-          if (param.meter === "2612*Meter*海虹4栋-504" && result.data.data.return.mweb_url) {
-            location.assign(result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('https://web.wutnews.net/electric/pay/callback?order=' + result.data.data.return.prepay_id));
-          } else if (result.data.data.return.mweb_url) {
+          if (result.data.data.return.mweb_url) {
             const url = result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('https://web.wutnews.net/electric/pay/callback?order=' + result.data.data.return.prepay_id);
             if (typeof tokenNative === 'undefined') location.assign('newtab:https://web.wutnews.net/electric/api/wechatPay?url=' + encodeURIComponent(url));
             else location.assign(url);
