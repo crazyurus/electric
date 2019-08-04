@@ -22,7 +22,7 @@
       </div>
     </div>
     <footer>
-      <a href="javascript:;" @click="showStation">线下充值点</a>
+      <div class="item-link" @click="showStation">线下充值点</div>
     </footer>
     <mt-actionsheet
         :actions="sheet.actions"
@@ -305,7 +305,7 @@
     font-weight: normal;
     font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, "PingFang SC", Arial, Helvetica, sans-serif;
   }
-  .room-block .item-text {
+  .room-block .item-text, .item-link {
     color: #45c8dc;
     line-height: 1.8;
     cursor: pointer;

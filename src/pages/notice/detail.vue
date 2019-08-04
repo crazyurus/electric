@@ -83,5 +83,9 @@
     overflow: hidden;
     border: none;
     cursor: pointer;
+    outline: none;
+  }
+  footer button:active {
+    background-color: #D9D9D9;
   }
 </style>
