@@ -1,16 +1,8 @@
 <template>
   <f7-page name="charge">
-    <div class="list-block">
-      <ul>
-        <li class="item-content">
-          <div class="item-inner">
-            <div class="item-title-row">
-              <div class="item-title item-cardno">{{$store.state.meter.split('*')[2]}}</div>
-              <div class="item-text" style="font-weight:300">{{type}}　<a href="javascript:;" @click="change">更换</a></div>
-            </div>
-          </div>
-        </li>
-      </ul>
+    <div class="room-block">
+      <div class="item-cardno">{{$store.state.meter.split('*')[2]}}</div>
+      <div class="item-text" @click="change">微信支付</div>
     </div>
     <div class="list-block card-block">
       <div class="row">
@@ -305,9 +297,19 @@
 </script>
 
 <style>
-  .page[data-page=charge] .item-cardno {
-    font-size: 1.5rem;
+  .room-block {
+    margin: 30px 1rem;
+  }
+  .room-block .item-cardno {
+    font-size: 28px;
     font-weight: normal;
+    font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, Arial, Helvetica, sans-serif;
+  }
+  .room-block .item-text {
+    color: #45c8dc;
+    line-height: 1.8;
+    cursor: pointer;
+    font-size: 16px;
   }
   .page[data-page=charge] .list-block > .row {
     margin: 0 1rem 1rem;
@@ -384,5 +386,8 @@
     width: 60px;
     display: inline-block;
     vertical-align: bottom;
+  }
+  .money {
+    font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, Arial, Helvetica, sans-serif;
   }
 </style>
