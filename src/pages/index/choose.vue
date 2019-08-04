@@ -6,15 +6,13 @@
       <f7-list-item smart-select title="校区" smart-select-searchbar-placeholder="搜索校区" smart-select-searchbar-cancel="取消">
         <select @change="changeAreaPicker">
           <option value="">请选择</option>
-          <optgroup label="马房山校区">
+          <optgroup label="学生宿舍区">
             <option value="1*Area*南湖">南湖</option>
             <option value="2*Area*东院">东院</option>
             <option value="3*Area*西院">西院</option>
             <option value="3*Area*鉴湖">鉴湖</option>
-            <option value="0*Area*升升" disabled>升升公寓</option>
-          </optgroup>
-          <optgroup label="余家头校区">
             <option value="1*Area*余区">余区</option>
+            <option value="0*Area*升升" disabled>升升公寓</option>
           </optgroup>
           <optgroup label="教工宿舍区">
             <option value="28*Area*2500西院教工宿舍">西院教工宿舍</option>
@@ -80,17 +78,15 @@
 
         if (select === '0*Area*升升') {
           let ssArc = ['升升A栋', '升升B栋', '升升C栋', '升升E栋', '升升F栋', '升升H栋', '升升I栋', '升升J栋', '升升K栋', '升升L栋'];
-          this.roomInfo.architecture = ssArc.map(arc => {
-            return {
-              id: arc,
-              name: arc
-            }
-          });
+          this.roomInfo.architecture = ssArc.map(arc => ({
+            id: arc,
+            name: arc
+          }));
 
           return;
         }
 
-        if (select === '1*Area*余区' || select === '30*Area*5500余区教工宿舍') {
+        if (select === '1*Area*余区') {
           this.select.area = "7";
         }
 
