@@ -1,19 +1,9 @@
 <template>
   <f7-page name="content">
-    <f7-card>
-      <f7-card-header>
-        <p class="card-title">{{article.title}}</p>
-      </f7-card-header>
-      <f7-card-content>
-        <div class="card-content-inner" v-html="article.content"></div>
-      </f7-card-content>
-      <f7-card-footer>
-        <template v-if="article.attachment.length > 0">
-          附件：<a :href="'/electric/notice/attachment?link=' + item.url" class="external" target="_blank" v-for="item in article.attachment">{{item.name}}</a>
-        </template>
-        <span v-else>{{article.time.trim()}}</span>
-      </f7-card-footer>
-    </f7-card>
+    <article>
+      <header>{{article.title}}</header>
+      <main v-html="article.content"></main>
+    </article>
   </f7-page>
 </template>
 
@@ -44,14 +34,18 @@
 </script>
 
 <style scoped>
-  .card-footer {
-    display: block;
+  header {
+    background-color: #45c8dc;
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 160px 0 20px 20px;
   }
-  .card-title {
-    border-left: 6px solid #45c8dc;
-    padding-left: 15px;
-  }
-  .card-content-inner {
+  main {
     word-break: break-all;
+    margin: 20px 0;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #666;
   }
 </style>

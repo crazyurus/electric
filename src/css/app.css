@@ -20,10 +20,6 @@ body {
   background: #fff;
 }
 
-.page[data-page=content] > .page-content, .page[data-page=charge] > .page-content {
-  background: #efeff4;
-}
-
 .badge {
   margin-right: 0.6rem;
   vertical-align: top;
