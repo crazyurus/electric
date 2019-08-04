@@ -16,6 +16,11 @@
           <optgroup label="余家头校区">
             <option value="1*Area*余区">余区</option>
           </optgroup>
+          <optgroup label="教工宿舍区">
+            <option value="28*Area*2500西院教工宿舍">西院教工宿舍</option>
+            <option value="29*Area*1500东院教工宿舍">东院教工宿舍</option>
+            <option value="30*Area*5500余区教工宿舍">余区教工宿舍</option>
+          </optgroup>
         </select>
       </f7-list-item>
       <f7-list-item smart-select title="宿舍楼" smart-select-searchbar-placeholder="搜索宿舍楼" smart-select-searchbar-cancel="取消">
@@ -85,7 +90,7 @@
           return;
         }
 
-        if (select === '1*Area*余区') {
+        if (select === '1*Area*余区' || select === '30*Area*5500余区教工宿舍') {
           this.select.area = "7";
         }
 
