@@ -4,7 +4,7 @@
       <header>{{article.title}}</header>
       <main v-html="article.content"></main>
       <footer>
-        <button>分享</button>
+        <button @click="share">分享</button>
       </footer>
     </article>
   </f7-page>
@@ -32,6 +32,11 @@
         this.$indicator.hide();
         this.article = result.data.data;
       })
+    },
+    methods: {
+      share() {
+        token.invokeShare(this.article.title, location.href, 0);
+      }
     }
   }
 </script>
@@ -53,7 +58,7 @@
     padding: 0 20px;
     font-size: 16px;
     color: #666;
-    min-height: calc(100% - 276px);
+    min-height: calc(100% - 296px);
   }
   footer {
     margin: 35px auto;

@@ -303,7 +303,7 @@
   .room-block .item-cardno {
     font-size: 28px;
     font-weight: normal;
-    font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, Arial, Helvetica, sans-serif;
+    font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, "PingFang SC", Arial, Helvetica, sans-serif;
   }
   .room-block .item-text {
     color: #45c8dc;
