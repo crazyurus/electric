@@ -3,6 +3,9 @@
     <article>
       <header>{{article.title}}</header>
       <main v-html="article.content"></main>
+      <footer>
+        <button>分享</button>
+      </footer>
     </article>
   </f7-page>
 </template>
@@ -34,12 +37,15 @@
 </script>
 
 <style scoped>
+  article {
+    height: 100%;
+  }
   header {
     background-color: #45c8dc;
     color: #fff;
     font-size: 22px;
     font-weight: bold;
-    padding: 160px 0 20px 20px;
+    padding: 120px 0 20px 20px;
   }
   main {
     word-break: break-all;
@@ -47,5 +53,29 @@
     padding: 0 20px;
     font-size: 16px;
     color: #666;
+    min-height: calc(100% - 276px);
+  }
+  footer {
+    margin: 35px auto;
+  }
+  footer button {
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 6px 24px;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #45c8dc;
+    background-color: #F2F2F2;;
+    line-height: 1.5;
+    border-radius: 4px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
   }
 </style>
