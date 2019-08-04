@@ -374,7 +374,7 @@
     text-align: center;
     font-size: 1.5rem !important;
     color: #45c8dc !important;
-    font-weight: 300 !important;
+    font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, Arial, Helvetica, sans-serif;
   }
   .modal-input-captcha > input {
     display: inline-block;

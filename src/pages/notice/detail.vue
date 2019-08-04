@@ -61,7 +61,8 @@
     min-height: calc(100% - 296px);
   }
   footer {
-    margin: 35px auto;
+    margin: 35px auto 0;
+    padding-bottom: 35px;
   }
   footer button {
     position: relative;
