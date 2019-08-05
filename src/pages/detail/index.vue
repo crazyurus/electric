@@ -101,20 +101,15 @@
           <img :src="icons.rank">
           <span>排名信息</span>
         </li>
-        <li class="item-content">
-          <div class="item-inner">
-            <div class="item-title">区域用电排名</div>
-            <div class="item-after">暂无</div>
-          </div>
-        </li>
-        <li class="item-content">
-          <div class="item-inner">
-            <div class="item-title">建筑用电排名</div>
-            <div class="item-after">暂无</div>
-          </div>
+        <li>
+          <a class="item-link item-content" @click="showStation">
+            <div class="item-inner">
+              <div class="item-title">线下充值点</div>
+            </div>
+          </a>
         </li>
         <li>
-          <a class="item-link item-content external" href="/feedback?from=electric">
+          <a class="item-link item-content" href="/feedback">
             <div class="item-inner">
               <div class="item-title">帮助与建议</div>
             </div>
@@ -143,6 +138,8 @@
   import svgHome from '@/images/detail/home.svg';
   import svgPay from '@/images/detail/pay.svg';
   import svgRank from '@/images/detail/rank.svg';
+
+  import stations from '@/data/station';
 
   Vue.component(Range.name, Range);
 
@@ -255,6 +252,26 @@
         }).catch(result => {
           this.$message.alert(result.data.errMsg);
         });
+      },
+      showStation() {
+        const stationButtons = stations.map((station, index) => ({
+          text: station.name,
+          onClick: () => {
+            let name = encodeURIComponent(station.name + '电费充值点');
+            this.$f7.mainView.router.loadPage('/charge/map/' + station.position[0] + '/' + station.position[1] + '/' + name + '/' + encodeURIComponent(index == 4 ? '武汉升升学府物业管理有限公司' : '武汉理工大学水电管理中心') + '/' + station.telephone);
+          }
+        }));
+        const cancelButtons = [{
+          text: '关闭',
+          color: 'red'
+        }];
+
+        stationButtons.unshift({
+          text: '线下电费充值点',
+          label: true
+        });
+
+        this.$f7.actions([stationButtons, cancelButtons]);
       }
     },
     computed: {
