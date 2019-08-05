@@ -22,7 +22,7 @@
       </div>
     </div>
     <footer>
-      <div class="item-link" @click="showStation">线下充值点</div>
+      <div class="link" @click="showStation">线下充值点</div>
     </footer>
     <mt-actionsheet
         :actions="sheet.actions"
@@ -296,7 +296,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .room-block {
     margin: 30px 1rem;
   }
@@ -305,7 +305,7 @@
     font-weight: normal;
     font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, "PingFang SC", Arial, Helvetica, sans-serif;
   }
-  .room-block .item-text, .item-link {
+  .room-block .item-text, .link {
     color: #45c8dc;
     line-height: 1.8;
     cursor: pointer;
@@ -362,9 +362,6 @@
     background: #45c8dc;
     width: 100%;
     border-color: #45c8dc;
-  }
-  a {
-    color: #45c8dc;
   }
   #btnPay {
     height: 2.8rem;
