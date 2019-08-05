@@ -11,6 +11,8 @@
 </template>
 
 <script>
+  import { Base64 } from 'js-base64';
+
   export default {
     props: ['link'],
     data () {
@@ -35,7 +37,8 @@
     },
     methods: {
       share() {
-        token.invokeShare(this.article.title, location.href, 0);
+        if (window.token && token.invokeShare) token.invokeShare(this.article.title, location.href, 0);
+        else location.assign('mqqapi://share/to_fri?src_type=web&version=1&file_type=news&share_id=1109559705&title=' + Base64.encode(this.article.title) + '&thirdAppDisplayName=5o6M5LiK55CG5bel5aSn&url=' + Base64.encode(location.href) + '&description=' + Base64.encode('来自掌上理工大电费查询'));
       }
     }
   }
