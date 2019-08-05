@@ -267,7 +267,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .room-block {
     margin: 30px 1rem;
   }
@@ -276,7 +276,7 @@
     font-weight: normal;
     font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, "PingFang SC", Arial, Helvetica, sans-serif;
   }
-  .room-block .item-text, .link {
+  .room-block .page[data-page=charge] .item-text, .page[data-page=charge] .link {
     color: #45c8dc;
     line-height: 1.8;
     cursor: pointer;
@@ -356,7 +356,7 @@
     display: inline-block;
     vertical-align: bottom;
   }
-  .money {
+  .page[data-page=charge] .money {
     font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, Arial, Helvetica, sans-serif;
   }
 </style>
