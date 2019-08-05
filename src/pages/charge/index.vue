@@ -98,8 +98,8 @@
           }]
         });
       },
-      charge (amount) {
-        if (his.$detect.wechat()) {
+      charge(amount) {
+        if (this.$detect.wechat()) {
           this.qrcode('暂不支持微信内支付，请长按打开小程序“武汉理工大学电费查询”', '/Application/Electric/Assets/image/mina.jpg');
           return;
         }
