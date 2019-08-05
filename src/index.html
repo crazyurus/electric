@@ -14,12 +14,14 @@
       sno: '09901',
       userName: '测试用户',
       area: '3',
-      meter: '4511*Meter*学海20栋-409'
+      meter: '4511*Meter*学海20栋-409',
+      avatar: ''
     } : {
       sno: '{$Think.session.sno}',
       userName: '{$Think.session.tl_user.name}',
       area: '{$Think.session.area}',
-      meter: '{$Think.session.meter}'
+      meter: '{$Think.session.meter}',
+      avatar: '{$Think.session.tl_user.avatar}'
     };
     // 百度统计
     var _hmt = _hmt || [];

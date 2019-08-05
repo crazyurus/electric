@@ -237,7 +237,7 @@
             text: '复制缴费网址',
             bold: true,
             onClick: () => {
-              copy('https://cwsf.whut.edu.cn/');
+              copy('http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023');
               this.$message.toast('复制成功');
             }
           }, {
@@ -253,7 +253,7 @@
         const buttons = stations.map((station, index) => ({
           name: station.name,
           method: () => {
-            let name = encodeURIComponent(station.name + '电费充值点');
+            const name = encodeURIComponent(station.name + '电费充值点');
             this.$f7.mainView.router.loadPage('/charge/map/' + station.position[0] + '/' + station.position[1] + '/' + name + '/' + encodeURIComponent(index == 4 ? '武汉升升学府物业管理有限公司' : '武汉理工大学水电管理中心') + '/' + station.telephone);
           }
         }));
@@ -281,6 +281,7 @@
     line-height: 1.8;
     cursor: pointer;
     font-size: 16px;
+    font-weight: normal;
   }
   .page[data-page=charge] .list-block > .row {
     margin: 0 1rem 1rem;

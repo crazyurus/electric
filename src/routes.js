@@ -6,6 +6,7 @@ import NoticeListPage from './pages/notice/list';
 import NoticeDetailPage from './pages/notice/detail';
 import ChargePage from './pages/charge/index';
 import MapPage from './pages/charge/map';
+import FeedbackPage from './pages/feedback/index';
 
 export default [
   {
@@ -39,5 +40,9 @@ export default [
   {
     path: '/charge/map/:latitude/:longitude/:title/:address/:telephone',
     component: MapPage
+  },
+  {
+    path: '/feedback',
+    component: FeedbackPage
   }
 ];

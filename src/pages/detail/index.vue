@@ -234,7 +234,7 @@
           e.target.disabled = true;
           return this.$http.get('/electric/login/logout');
         }).then(() => {
-          if (typeof token !== 'undefined' && token.setMeter) token.setMeter('');
+          if (window.token && token.setMeter) token.setMeter('');
           this.$f7.hidePreloader();
           this.$f7.mainView.router.reloadPage('/index/choose');
         });
@@ -257,8 +257,8 @@
         const stationButtons = stations.map((station, index) => ({
           text: station.name,
           onClick: () => {
-            let name = encodeURIComponent(station.name + '电费充值点');
-            this.$f7.mainView.router.loadPage('/charge/map/' + station.position[0] + '/' + station.position[1] + '/' + name + '/' + encodeURIComponent(index == 4 ? '武汉升升学府物业管理有限公司' : '武汉理工大学水电管理中心') + '/' + station.telephone);
+            const name = encodeURIComponent(station.name + '电费充值点');
+            this.$f7.mainView.router.loadPage('/charge/map/' + station.position[0] + '/' + station.position[1] + '/' + name + '/' + encodeURIComponent(index === 4 ? '武汉升升学府物业管理有限公司' : '武汉理工大学水电管理中心') + '/' + station.telephone);
           }
         }));
         const cancelButtons = [{
