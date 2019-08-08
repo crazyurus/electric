@@ -2,7 +2,7 @@
   <f7-page name="charge">
     <div class="room-block">
       <div class="item-cardno">{{$store.state.meter.split('*')[2]}}</div>
-      <div class="item-text" @click="change">微信支付</div>
+      <div class="link" @click="change">微信支付</div>
     </div>
     <div class="list-block card-block">
       <div class="row">
@@ -36,6 +36,7 @@
   import { Actionsheet, Indicator } from 'mint-ui';
   import copy from 'copy-to-clipboard';
   import stations from '@/data/station';
+  import { intToIP } from '@/libs/utils';
 
   Vue.component(Actionsheet.name, Actionsheet);
   Vue.use(Indicator);
@@ -128,17 +129,7 @@
             Authorization: 'APPCODE fb013fbe90924aca829cb36b361a3f8f'
           }
         }).then(result => {
-          function intToIP(num) {
-            let str;
-            const tt = [];
-            tt[0] = (num >>> 24) >>> 0;
-            tt[1] = ((num << 8) >>> 24) >>> 0;
-            tt[2] = (num << 16) >>> 24;
-            tt[3] = (num << 24) >>> 24;
-            str = String(tt[0]) + "." + String(tt[1]) + "." + String(tt[2]) + "." + String(tt[3]);
-            return str;
-          }
-          param.ip = intToIP(result.data["message"][0]["ip"]);
+          param.ip = intToIP(result.data.message[0].ip);
 
           this.$http.post('/electric/pay/prepare', param).then(result => {
             Indicator.close();
@@ -205,7 +196,7 @@
       },
       change() {
         // 屏蔽缴费平台支付
-        this.$message.alert('只支持微信支付，支付宝/校园缴费平台渠道暂时下线');
+        this.$message.alert('暂只支持微信支付');
         return;
 
         if (this.$store.state.area != 7) {
@@ -276,7 +267,7 @@
     font-weight: normal;
     font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, "PingFang SC", Arial, Helvetica, sans-serif;
   }
-  .room-block .page[data-page=charge] .item-text, .page[data-page=charge] .link {
+  .page[data-page=charge] .link {
     color: #45c8dc;
     line-height: 1.8;
     cursor: pointer;
