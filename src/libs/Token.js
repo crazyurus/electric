@@ -20,6 +20,10 @@ export default {
         iframe.style.display = 'none';
         if (id) iframe.id = id;
         document.body.appendChild(iframe);
+      },
+      browser(url) {
+        if (window.tokenNative && tokenNative.pushSafariWithURL) tokenNative.pushSafariWithURL(url);
+        else location.assign('newtab:' + url);
       }
     };
 

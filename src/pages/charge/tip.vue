@@ -35,7 +35,6 @@
     mounted() {
       this.orderId = this.$route.options.query.orderId;
       this.url = this.$route.options.query.url;
-      console.log(this.$route);
 
       this.retry();
     },
@@ -44,7 +43,7 @@
         location.replace('/electric/pay/tip?order=' + this.orderId);
       },
       retry() {
-        this.$navigator.launch('https://web.wutnews.net/electric/api/wechatPay?url=' + encodeURIComponent(this.url), 'wechatPay');
+        this.$navigator.browser('https://web.wutnews.net/electric/api/wechatPay?url=' + encodeURIComponent(this.url));
       },
       cancel() {
         this.$f7.mainView.router.back();
