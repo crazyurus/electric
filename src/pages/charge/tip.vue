@@ -44,7 +44,7 @@
         location.replace('/electric/pay/tip?order=' + this.orderId);
       },
       retry() {
-        this.$navigator.launch(this.url, 'wechatPay');
+        this.$navigator.launch('https://web.wutnews.net/electric/api/wechatPay?url=' + encodeURIComponent(this.url), 'wechatPay');
       },
       cancel() {
         this.$f7.mainView.router.back();
