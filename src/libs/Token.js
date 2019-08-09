@@ -18,7 +18,7 @@ export default {
         const iframe = document.createElement('iframe');
         iframe.src = url;
         iframe.style.display = 'none';
-        iframe.sandbox = '';
+        iframe.sandbox = 'allow-scripts';
         if (id) iframe.id = id;
         document.body.appendChild(iframe);
       }
