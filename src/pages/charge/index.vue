@@ -135,7 +135,7 @@
             Indicator.close();
             if (result.data.data.return.mweb_url) {
               const orderId = result.data.data.return.prepay_id;
-              const url = result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('https://web.wutnews.net/electric/pay/callback?order=' + orderId);
+              const url = result.data.data.return.mweb_url;
 
               this.$f7.mainView.router.load({
                 url: '/charge/tip',
