@@ -8,6 +8,17 @@ export default {
       go (url) {
         if (checkMethodAvailable('loadUrl')) token.loadUrl(url);
         else location.assign(url);
+      },
+      launch (url, timeout = 2000) {
+        const iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+
+        setTimeout(() => {
+          location.assign(url);
+          document.body.removeChild(iframe);
+        }, timeout);
       }
     };
 

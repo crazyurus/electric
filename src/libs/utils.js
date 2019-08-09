@@ -1,4 +1,4 @@
-function intToIP(num) {
+export function intToIP(num) {
   let str;
   const tt = [];
   tt[0] = (num >>> 24) >>> 0;

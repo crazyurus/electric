@@ -7,6 +7,7 @@ import NoticeDetailPage from './pages/notice/detail';
 import ChargePage from './pages/charge/index';
 import MapPage from './pages/charge/map';
 import FeedbackPage from './pages/feedback/index';
+import TipPage from './pages/charge/tip';
 
 export default [
   {
@@ -36,6 +37,10 @@ export default [
   {
     path: '/charge/record',
     component: PayRecordPage
+  },
+  {
+    path: '/charge/tip',
+    component: TipPage
   },
   {
     path: '/charge/map/:latitude/:longitude/:title/:address/:telephone',

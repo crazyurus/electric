@@ -144,7 +144,7 @@
       },
       queryMeterDetail () {
         this.$f7.showPreloader('正在查询，请稍后…');
-        this.$http.post('https://web.wutnews.net/electric/login/register', {
+        this.$http.post('/electric/login/register', {
           meter: this.select.meter,
           area: this.select.area
         }).then(result => {
@@ -185,19 +185,6 @@
 <style scoped>
   .content-block-title {
     margin: 20px 20px 10px;
-  }
-  .list-button {
-    display: inline-block !important;
-    padding-left: 1rem !important;
-    border-left: 1px #c8c7cc solid;
-    font-size: 17px !important;
-    line-height: 1.4 !important;
-    padding: 0 3px 0 15px !important;
-    text-align: center !important;
-    color: #45c8dc !important;
-  }
-  .ios .list-button {
-    border-left: 0.5px #c8c7cc solid;
   }
   .item-no-border::after {
     display: none;
