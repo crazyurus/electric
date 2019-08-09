@@ -22,7 +22,7 @@ export default {
         document.body.appendChild(iframe);
       },
       browser(url) {
-        if (checkMethodAvailable('loadUrl')) token.loadUrl(url);
+        if (window.tokenNative && tokenNative.pushSafariWithURL) tokenNative.pushSafariWithURL(url.replace('https://', ''));
         else location.assign('newtab:' + url);
       }
     };
