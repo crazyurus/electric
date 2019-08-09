@@ -8,12 +8,12 @@
       </div>
       <div class="weui-msg__opr-area">
         <p class="weui-btn-area">
-          <a href="javascript:history.back();" class="weui-btn weui-btn_primary">我已支付</a>
-          <a href="javascript:history.back();" class="weui-btn weui-btn_default">我还没有支付</a>
+          <a @click="query" class="weui-btn weui-btn_primary">我已支付</a>
+          <a @click="retry" class="weui-btn weui-btn_default">我还没有支付</a>
         </p>
       </div>
       <div class="weui-msg__tips-area">
-        <p class="weui-msg__tips">提示详情，可根据实际需要安排，如果换行则不超过规定长度，居中展现<a href="javascript:void(0);">文字链接</a></p>
+        <p class="weui-msg__tips">如果订单信息错误或放弃支付，请<a @click="cancel">取消订单</a></p>
       </div>
       <div class="weui-msg__extra-area">
         <div class="weui-footer">
@@ -26,7 +26,30 @@
 
 <script>
   export default {
+    data() {
+      return {
+        orderId: '',
+        url: ''
+      }
+    },
+    mounted() {
+      this.orderId = this.$route.options.query.orderId;
+      this.url = this.$route.options.query.url;
+      console.log(this.$route);
 
+      this.retry();
+    },
+    methods: {
+      query() {
+        location.replace('/electric/pay/tip?order=' + this.orderId);
+      },
+      retry() {
+        this.$navigator.launch(this.url, 'wechatPay');
+      },
+      cancel() {
+        this.$f7.mainView.router.back();
+      }
+    }
   }
 </script>
 

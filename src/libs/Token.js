@@ -9,16 +9,17 @@ export default {
         if (checkMethodAvailable('loadUrl')) token.loadUrl(url);
         else location.assign(url);
       },
-      launch (url, timeout = 2000) {
+      launch (url, id = '') {
+        if (id) {
+          const prevIframe = document.getElementById(id);
+          if (prevIframe) document.body.removeChild(prevIframe);
+        }
+
         const iframe = document.createElement('iframe');
         iframe.src = url;
         iframe.style.display = 'none';
+        if (id) iframe.id = id;
         document.body.appendChild(iframe);
-
-        setTimeout(() => {
-          location.assign(url);
-          document.body.removeChild(iframe);
-        }, timeout);
       }
     };
 
