@@ -12,20 +12,16 @@
 </head>
 <body>
   <div id="app"></div>
+  <% if (env === 'production') { %>
   <script>
-    window.electric = location.host === 'localhost:8080' ? {
-      sno: '09901',
-      userName: '测试用户',
-      area: '7',
-      meter: '1141*Meter*老1栋-223',
-      avatar: ''
-    } : {
+    window.electric = {
       sno: '{$Think.session.sno}',
       userName: '{$Think.session.tl_user.name}',
       area: '{$Think.session.area}',
       meter: '{$Think.session.meter}',
       avatar: '{$Think.session.tl_user.avatar}'
     };
+
     // 百度统计
     var _hmt = _hmt || [];
     (function() {
@@ -35,5 +31,16 @@
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+  <% } else {%>
+  <script>
+    window.electric = {
+      sno: '09901',
+      userName: '测试用户',
+      area: '7',
+      meter: '1141*Meter*老1栋-223',
+      avatar: ''
+    };
+  </script>
+  <% } %>
 </body>
 </html>

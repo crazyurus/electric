@@ -10,6 +10,7 @@ var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name]);
 });
+var env = config.dev.env;
 
 module.exports = merge(baseWebpackConfig, {
   module: {
@@ -19,7 +20,7 @@ module.exports = merge(baseWebpackConfig, {
   devtool: '#cheap-module-eval-source-map',
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': config.dev.env
+      'process.env': env
     }),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
@@ -28,7 +29,10 @@ module.exports = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',
-      inject: true
+      inject: true,
+      templateParameters: {
+        env: JSON.parse(env.NODE_ENV)
+      }
     }),
     new FriendlyErrorsPlugin()
   ]
