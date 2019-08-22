@@ -212,15 +212,16 @@
           if (this.$store.state.area == 7) {
             this.$f7.mainView.router.loadPage('/charge/index');
           }
+          //else this.$message.alert('马房山校区、南湖校区电费充值功能应要求下线，如需充值请到线下充值点或电脑访问校园缴费平台');
           else {
             f7.modal({
               title: '电费充值步骤',
-              text: '1. 请先确保工商银行联名卡中有足够余额<br>2. 通过智慧理工大账号登录缴费平台<br>3. 点击电费功能，依次选择学生区域、校区、楼栋、楼层、房间并输入充值金额<br>4. 选择工行e支付充值<br>5. 输入银行卡预留的手机号和验证码完成验证<br>6. 选择相应的银行卡完成支付',
+              text: '1. 通过智慧理工大账号登录缴费平台<br>2. 选择宿舍并输入充值金额<br>3. 选择支付宝或微信支付充值<br>4. 将二维码截图并打开支付宝或微信扫一扫<br>5. 从相册选择该二维码并完成支付',
               buttons: [{
                 text: '前往缴费平台充值',
                 bold: true,
                 onClick: () => {
-                  this.$navigator.go('http://cwsf.whut.edu.cn/MNetWorkUI/casLoginAction!casLogin10497.do?myurl=MNetWorkUI/elecdetails516E023');
+                  this.$navigator.go('http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023');
                 }
               }]
             });
