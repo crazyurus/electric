@@ -216,12 +216,18 @@
           else {
             f7.modal({
               title: '电费充值步骤',
-              text: '1. 通过智慧理工大账号登录缴费平台<br>2. 选择宿舍并输入充值金额<br>3. 选择支付宝或微信支付充值<br>4. 将二维码截图并打开支付宝或微信扫一扫<br>5. 从相册选择该二维码并完成支付',
+              text: '<div align="left">1. 通过智慧理工大账号登录缴费平台<br>2. 选择宿舍并输入充值金额<br>3. 选择支付宝或微信支付充值<br>4. 将二维码截图并打开支付宝或微信扫一扫<br>5. 从相册选择该二维码并完成支付<br>若充值遇到问题，请加QQ群<a>939924027</a>反馈</div>',
+              verticalButtons: true,
               buttons: [{
                 text: '前往缴费平台充值',
                 bold: true,
                 onClick: () => {
                   this.$navigator.go('http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023');
+                }
+              }, {
+                text: '问题反馈',
+                onClick() {
+                  location.assign('mqqapi://card/show_pslcard?src_type=internal&version=1&uin=939924027&card_type=group&source=qrcode');
                 }
               }]
             });
