@@ -226,7 +226,7 @@
               }, {
                 text: '问题反馈',
                 onClick() {
-                  location.assign('mqqapi://card/show_pslcard?src_type=internal&version=1&uin=939924027&card_type=group&source=qrcode');
+                  this.$navigator.browser('mqqapi://card/show_pslcard?src_type=internal&version=1&uin=939924027&card_type=group&source=qrcode');
                 }
               }, {
                 text: '关闭',
