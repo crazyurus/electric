@@ -5,21 +5,13 @@ export default {
     };
 
     Vue.prototype.$navigator = {
-      go (url) {
+      go(url) {
         if (checkMethodAvailable('loadUrl')) token.loadUrl(url);
         else location.assign(url);
       },
-      launch (url, id = '') {
-        if (id) {
-          const prevIframe = document.getElementById(id);
-          if (prevIframe) document.body.removeChild(prevIframe);
-        }
-
-        const iframe = document.createElement('iframe');
-        iframe.src = url;
-        iframe.style.display = 'none';
-        if (id) iframe.id = id;
-        document.body.appendChild(iframe);
+      launch(url) {
+        if (navigator.userAgent.toLowerCase().includes('android')) location.assign('newtab:' + url);
+        else location.assign(url);
       },
       browser(url) {
         if (window.tokenNative && tokenNative.pushSafariWithURL) tokenNative.pushSafariWithURL(url.replace('https://', ''));

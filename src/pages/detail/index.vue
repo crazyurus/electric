@@ -116,7 +116,7 @@
           </a>
         </li>
         <li>
-          <a class="item-link item-content external" href="mqqapi://microapp/open?mini_appid=1109559705&fakeUrl=https://m.q.qq.com/a/s/11c84551edb3b31057d38c468a0a0818&xcxPath=pages/index/index.html&xcxSourceType=0">
+          <a class="item-link item-content" @click="miniProgram">
             <div class="item-inner">
               <div class="item-title">打开QQ小程序</div>
             </div>
@@ -226,7 +226,7 @@
               }, {
                 text: '问题反馈',
                 onClick: () => {
-                  this.$navigator.browser('mqqapi://card/show_pslcard?src_type=internal&version=1&uin=939924027&card_type=group&source=qrcode');
+                  this.$navigator.launch('mqqapi://card/show_pslcard?src_type=internal&version=1&uin=939924027&card_type=group&source=qrcode');
                 }
               }, {
                 text: '关闭',
@@ -280,6 +280,9 @@
         });
 
         this.$f7.actions([stationButtons, cancelButtons]);
+      },
+      miniProgram() {
+        this.$navigator.launch('mqqapi://microapp/open?mini_appid=1109559705&fakeUrl=https://m.q.qq.com/a/s/11c84551edb3b31057d38c468a0a0818&xcxPath=pages/index/index.html&xcxSourceType=0');
       }
     },
     computed: {
