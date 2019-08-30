@@ -25,12 +25,14 @@
         });
       },
       telephone() {
-        const stationButtons = stations.map(station => ({
-          text: station.name,
-          onClick() {
-            location.assign('tel:' + station.telephone);
-          }
-        }));
+        const stationButtons = stations
+          .filter(station => station.telephone !== 'empty')
+          .map(station => ({
+            text: station.name,
+            onClick() {
+              location.assign('tel:' + station.telephone);
+            }
+          }));
         const cancelButtons = [{
           text: '关闭',
           color: 'red'
