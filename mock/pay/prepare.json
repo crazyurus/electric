@@ -1,1 +1,10 @@
-{"errCode":0,"errMsg":"OK","data":{"return":{"code_url":"http://www.baidu.com/","prepay_id":"wx123"}}}
+{
+  "errCode": 0,
+  "errMsg": "OK",
+  "data": {
+    "return": {
+      "code_url": "https://cwsf.whut.edu.cn/",
+      "prepay_id": "wx123456"
+    }
+  }
+}

@@ -61,7 +61,7 @@ export default function request(host, url, options) {
     newOptions.body = formData.join('&');
   }
 
-  return fetch((isProduction ? '//' + host : '') + '/electric' + url, newOptions)
+  return fetch(host + '/electric' + url, newOptions)
     .then(checkStatus)
     .then(response => {
       if (newOptions.method === 'DELETE' || response.status === 204) {

@@ -1,1 +1,180 @@
-{"errCode":0,"errMsg":"OK","data":[{"id":"6465*Meter*4\u820d-401","name":"4\u820d-401","today":"1.41KW.H","left":"194.31\u5ea6"},{"id":"6466*Meter*4\u820d-402","name":"4\u820d-402","today":"0.33KW.H","left":"78.91\u5ea6"},{"id":"6467*Meter*4\u820d-403","name":"4\u820d-403","today":"0.04KW.H","left":"409.50\u5ea6"},{"id":"6468*Meter*4\u820d-404","name":"4\u820d-404","today":"3.39KW.H","left":"309.04\u5ea6"},{"id":"6469*Meter*4\u820d-405","name":"4\u820d-405","today":"0.03KW.H","left":"537.81\u5ea6"},{"id":"6470*Meter*4\u820d-406","name":"4\u820d-406","today":"0.17KW.H","left":"58.13\u5ea6"},{"id":"6471*Meter*4\u820d-407","name":"4\u820d-407","today":"0.37KW.H","left":"100.67\u5ea6"},{"id":"6472*Meter*4\u820d-408","name":"4\u820d-408","today":"0.30KW.H","left":"103.18\u5ea6"},{"id":"6473*Meter*4\u820d-409","name":"4\u820d-409","today":"1.41KW.H","left":"92.04\u5ea6"},{"id":"6474*Meter*4\u820d-410","name":"4\u820d-410","today":"0.19KW.H","left":"134.17\u5ea6"},{"id":"6475*Meter*4\u820d-411","name":"4\u820d-411","today":"0.46KW.H","left":"34.01\u5ea6"},{"id":"6476*Meter*4\u820d-412","name":"4\u820d-412","today":"0.54KW.H","left":"185.30\u5ea6"},{"id":"6477*Meter*4\u820d-413","name":"4\u820d-413","today":"0.16KW.H","left":"165.90\u5ea6"},{"id":"6478*Meter*4\u820d-414","name":"4\u820d-414","today":"0.08KW.H","left":"124.88\u5ea6"},{"id":"6479*Meter*4\u820d-415","name":"4\u820d-415","today":"0.15KW.H","left":"70.11\u5ea6"},{"id":"6480*Meter*4\u820d-416","name":"4\u820d-416","today":"0.06KW.H","left":"184.87\u5ea6"},{"id":"6481*Meter*4\u820d-417","name":"4\u820d-417","today":"0.16KW.H","left":"173.82\u5ea6"},{"id":"6482*Meter*4\u820d-418","name":"4\u820d-418","today":"0.51KW.H","left":"182.65\u5ea6"},{"id":"6483*Meter*4\u820d-419","name":"4\u820d-419","today":"0.29KW.H","left":"250.35\u5ea6"},{"id":"6484*Meter*4\u820d-420","name":"4\u820d-420","today":"0.04KW.H","left":"76.58\u5ea6"},{"id":"6485*Meter*4\u820d-421","name":"4\u820d-421","today":"0.36KW.H","left":"184.65\u5ea6"},{"id":"6486*Meter*4\u820d-422","name":"4\u820d-422","today":"0.04KW.H","left":"157.93\u5ea6"},{"id":"6487*Meter*4\u820d-423","name":"4\u820d-423","today":"0.43KW.H","left":"149.39\u5ea6"},{"id":"6488*Meter*4\u820d-424","name":"4\u820d-424","today":"0.25KW.H","left":"173.26\u5ea6"},{"id":"6489*Meter*4\u820d-425","name":"4\u820d-425","today":"0.80KW.H","left":"213.47\u5ea6"},{"id":"6490*Meter*4\u820d-426","name":"4\u820d-426","today":"0.24KW.H","left":"76.20\u5ea6"},{"id":"6491*Meter*4\u820d-427","name":"4\u820d-427","today":"0.16KW.H","left":"70.97\u5ea6"},{"id":"6492*Meter*4\u820d-428","name":"4\u820d-428","today":"0.04KW.H","left":"64.95\u5ea6"},{"id":"6493*Meter*4\u820d-429","name":"4\u820d-429","today":"0.09KW.H","left":"88.01\u5ea6"}]}
+{
+  "errCode": 0,
+  "errMsg": "OK",
+  "data": [
+    {
+      "id": "6465*Meter*4\u820d-401",
+      "name": "4\u820d-401",
+      "today": "1.41KW.H",
+      "left": "194.31\u5ea6"
+    },
+    {
+      "id": "6466*Meter*4\u820d-402",
+      "name": "4\u820d-402",
+      "today": "0.33KW.H",
+      "left": "78.91\u5ea6"
+    },
+    {
+      "id": "6467*Meter*4\u820d-403",
+      "name": "4\u820d-403",
+      "today": "0.04KW.H",
+      "left": "409.50\u5ea6"
+    },
+    {
+      "id": "6468*Meter*4\u820d-404",
+      "name": "4\u820d-404",
+      "today": "3.39KW.H",
+      "left": "309.04\u5ea6"
+    },
+    {
+      "id": "6469*Meter*4\u820d-405",
+      "name": "4\u820d-405",
+      "today": "0.03KW.H",
+      "left": "537.81\u5ea6"
+    },
+    {
+      "id": "6470*Meter*4\u820d-406",
+      "name": "4\u820d-406",
+      "today": "0.17KW.H",
+      "left": "58.13\u5ea6"
+    },
+    {
+      "id": "6471*Meter*4\u820d-407",
+      "name": "4\u820d-407",
+      "today": "0.37KW.H",
+      "left": "100.67\u5ea6"
+    },
+    {
+      "id": "6472*Meter*4\u820d-408",
+      "name": "4\u820d-408",
+      "today": "0.30KW.H",
+      "left": "103.18\u5ea6"
+    },
+    {
+      "id": "6473*Meter*4\u820d-409",
+      "name": "4\u820d-409",
+      "today": "1.41KW.H",
+      "left": "92.04\u5ea6"
+    },
+    {
+      "id": "6474*Meter*4\u820d-410",
+      "name": "4\u820d-410",
+      "today": "0.19KW.H",
+      "left": "134.17\u5ea6"
+    },
+    {
+      "id": "6475*Meter*4\u820d-411",
+      "name": "4\u820d-411",
+      "today": "0.46KW.H",
+      "left": "34.01\u5ea6"
+    },
+    {
+      "id": "6476*Meter*4\u820d-412",
+      "name": "4\u820d-412",
+      "today": "0.54KW.H",
+      "left": "185.30\u5ea6"
+    },
+    {
+      "id": "6477*Meter*4\u820d-413",
+      "name": "4\u820d-413",
+      "today": "0.16KW.H",
+      "left": "165.90\u5ea6"
+    },
+    {
+      "id": "6478*Meter*4\u820d-414",
+      "name": "4\u820d-414",
+      "today": "0.08KW.H",
+      "left": "124.88\u5ea6"
+    },
+    {
+      "id": "6479*Meter*4\u820d-415",
+      "name": "4\u820d-415",
+      "today": "0.15KW.H",
+      "left": "70.11\u5ea6"
+    },
+    {
+      "id": "6480*Meter*4\u820d-416",
+      "name": "4\u820d-416",
+      "today": "0.06KW.H",
+      "left": "184.87\u5ea6"
+    },
+    {
+      "id": "6481*Meter*4\u820d-417",
+      "name": "4\u820d-417",
+      "today": "0.16KW.H",
+      "left": "173.82\u5ea6"
+    },
+    {
+      "id": "6482*Meter*4\u820d-418",
+      "name": "4\u820d-418",
+      "today": "0.51KW.H",
+      "left": "182.65\u5ea6"
+    },
+    {
+      "id": "6483*Meter*4\u820d-419",
+      "name": "4\u820d-419",
+      "today": "0.29KW.H",
+      "left": "250.35\u5ea6"
+    },
+    {
+      "id": "6484*Meter*4\u820d-420",
+      "name": "4\u820d-420",
+      "today": "0.04KW.H",
+      "left": "76.58\u5ea6"
+    },
+    {
+      "id": "6485*Meter*4\u820d-421",
+      "name": "4\u820d-421",
+      "today": "0.36KW.H",
+      "left": "184.65\u5ea6"
+    },
+    {
+      "id": "6486*Meter*4\u820d-422",
+      "name": "4\u820d-422",
+      "today": "0.04KW.H",
+      "left": "157.93\u5ea6"
+    },
+    {
+      "id": "6487*Meter*4\u820d-423",
+      "name": "4\u820d-423",
+      "today": "0.43KW.H",
+      "left": "149.39\u5ea6"
+    },
+    {
+      "id": "6488*Meter*4\u820d-424",
+      "name": "4\u820d-424",
+      "today": "0.25KW.H",
+      "left": "173.26\u5ea6"
+    },
+    {
+      "id": "6489*Meter*4\u820d-425",
+      "name": "4\u820d-425",
+      "today": "0.80KW.H",
+      "left": "213.47\u5ea6"
+    },
+    {
+      "id": "6490*Meter*4\u820d-426",
+      "name": "4\u820d-426",
+      "today": "0.24KW.H",
+      "left": "76.20\u5ea6"
+    },
+    {
+      "id": "6491*Meter*4\u820d-427",
+      "name": "4\u820d-427",
+      "today": "0.16KW.H",
+      "left": "70.97\u5ea6"
+    },
+    {
+      "id": "6492*Meter*4\u820d-428",
+      "name": "4\u820d-428",
+      "today": "0.04KW.H",
+      "left": "64.95\u5ea6"
+    },
+    {
+      "id": "6493*Meter*4\u820d-429",
+      "name": "4\u820d-429",
+      "today": "0.09KW.H",
+      "left": "88.01\u5ea6"
+    }
+  ]
+}

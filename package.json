@@ -1,8 +1,8 @@
 {
   "name": "electric-pc",
   "version": "1.6.0",
-  "description": "电费查询PC版",
-  "author": "廖星",
+  "description": "武汉理工大学电费查询 PC 版",
+  "author": "Crazy Urus <crazyurus@vip.qq.com>",
   "private": true,
   "scripts": {
     "start": "cross-env PORT=8080 ESLINT=none roadhog dev",
@@ -66,7 +66,7 @@
     "prettier": "1.11.1",
     "redbox-react": "^1.5.0",
     "regenerator-runtime": "^0.11.1",
-    "roadhog": "^2.4.9",
+    "roadhog": "2.5.0-beta.4",
     "roadhog-api-doc": "^1.0.3",
     "stylelint": "^8.4.0",
     "stylelint-config-prettier": "^3.0.4",

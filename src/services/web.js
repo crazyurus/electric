@@ -1,6 +1,6 @@
 import request from '../utils/request';
 
-const host = 'web.wutnews.net';
+const host = '';
 
 export default {
   async user() {

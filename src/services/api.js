@@ -1,6 +1,6 @@
 import request from '../utils/request';
 
-const host = 'api.wutnews.net';
+const host = '';
 
 export default {
   async InfoDetail(params) {

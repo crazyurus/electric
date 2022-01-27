@@ -1,6 +1,5 @@
 import web from '../services/web';
 import api from '../services/api';
-import sae from '../services/sae';
 import { refactRoom } from '../utils/utils';
 
 export default {
@@ -30,10 +29,6 @@ export default {
         type: 'saveQrcode',
         payload: response.data.return,
       });
-    },
-    *ip(_, { call }) {
-      const response = yield call(sae.ip);
-      return response.ip;
     },
     *check({ payload }, { call }) {
       const response = yield call(web.check, payload);

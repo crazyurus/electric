@@ -17,6 +17,7 @@ import Debounce from 'lodash-decorators/debounce';
 import { Link } from 'dva/router';
 import styles from './index.less';
 import weappLogo from '@/assets/weapp.svg';
+import imageMinaQRCode from '@/assets/mina.jpg';
 
 export default class GlobalHeader extends PureComponent {
   state = {
@@ -159,7 +160,7 @@ export default class GlobalHeader extends PureComponent {
             title={<center>微信扫一扫打开小程序</center>}
             content={
               <img
-                src="/Application/Electric/Assets/image/mina.jpg"
+                src={imageMinaQRCode}
                 style={{ width: '200px', height: '200px' }}
               />
             }

@@ -44,7 +44,7 @@ export default class ChooseForm extends PureComponent {
   };
 
   getChooseInfo = (api, id) => {
-    return request('api.wutnews.net', '/choose/' + api, {
+    return request('', '/choose/' + api, {
       method: 'POST',
       body: {
         id,

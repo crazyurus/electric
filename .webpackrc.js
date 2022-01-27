@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 export default {
   entry: 'src/index.js',
@@ -8,7 +9,7 @@ export default {
       extraBabelPlugins: ['dva-hmr'],
     },
     production: {
-      publicPath: '/Application/Electric/Assets/pc/',
+      publicPath: '/',
     },
   },
   alias: {
@@ -21,4 +22,10 @@ export default {
   },
   disableDynamicImport: true,
   hash: true,
+  copy: [
+    {
+      from: 'mock',
+      to: 'mock',
+    }
+  ],
 };
