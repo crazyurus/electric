@@ -2,8 +2,8 @@ import '@babel/polyfill';
 import 'url-polyfill';
 import dva from 'dva';
 
-// import createHistory from 'history/createHashHistory';
-import createHistory from 'history/createBrowserHistory';
+import createHistory from 'history/createHashHistory';
+// import createHistory from 'history/createBrowserHistory';
 import createLoading from 'dva-loading';
 import 'moment/locale/zh-cn';
 
@@ -11,7 +11,7 @@ import './index.less';
 // 1. Initialize
 const app = dva({
   history: createHistory({
-    basename: '/electric',
+    basename: '/',
   }),
 });
 

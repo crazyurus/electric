@@ -25,7 +25,7 @@ export default {
   copy: [
     {
       from: 'mock',
-      to: 'mock',
+      to: 'electric',
     }
   ],
 };

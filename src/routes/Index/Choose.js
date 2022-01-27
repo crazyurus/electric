@@ -44,7 +44,7 @@ export default class ChooseForm extends PureComponent {
   };
 
   getChooseInfo = (api, id) => {
-    return request('', '/choose/' + api, {
+    return request('', '/choose/' + api + '.json', {
       method: 'POST',
       body: {
         id,

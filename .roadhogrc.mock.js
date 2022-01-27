@@ -5,20 +5,20 @@ const noProxy = process.env.NO_PROXY === 'true';
 
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 const api = [
-  'GET /electric/api/user',
-  'GET /electric/api/room',
-  'POST /electric/info/detail',
-  'POST /electric/info/day',
-  'POST /electric/info/update',
-  'POST /electric/info/pay',
-  'POST /electric/choose/architecture',
-  'POST /electric/choose/floor',
-  'POST /electric/choose/meter',
-  'POST /electric/login/register',
-  'POST /electric/pay/prepare',
-  'POST /electric/pay/check',
-  'POST /electric/notice/api',
-  'GET /electric/notice/content'
+  'GET /electric/api/user.json',
+  'GET /electric/api/room.json',
+  'POST /electric/info/detail.json',
+  'POST /electric/info/day.json',
+  'POST /electric/info/update.json',
+  'POST /electric/info/pay.json',
+  'POST /electric/choose/architecture.json',
+  'POST /electric/choose/floor.json',
+  'POST /electric/choose/meter.json',
+  'POST /electric/login/register.json',
+  'POST /electric/pay/prepare.json',
+  'POST /electric/pay/check.json',
+  'POST /electric/notice/api.json',
+  'GET /electric/notice/content.json'
 ];
 
 const proxy = {};

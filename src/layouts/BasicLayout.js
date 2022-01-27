@@ -117,7 +117,7 @@ class BasicLayout extends React.PureComponent {
         type: 'room/fetchCurrent',
       })
       .then(room => {
-        if (location.pathname === '/electric')
+        if (location.pathname === '/')
           this.props.dispatch(
             routerRedux.push(room.meter === '' ? '/index/choose' : '/detail/index')
           );

@@ -3,8 +3,6 @@ import { notification } from 'antd';
 import { routerRedux } from 'dva/router';
 import store from '../index';
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -37,13 +35,6 @@ function checkStatus(response) {
   throw error;
 }
 
-/**
- * Requests a URL, returning a promise.
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- * @return {object}           An object containing either "data" or "err"
- */
 export default function request(host, url, options) {
   const defaultOptions = {
     credentials: 'include',
@@ -61,7 +52,7 @@ export default function request(host, url, options) {
     newOptions.body = formData.join('&');
   }
 
-  return fetch(host + '/electric' + url, newOptions)
+  return fetch(host + '/electric' + url)
     .then(checkStatus)
     .then(response => {
       if (newOptions.method === 'DELETE' || response.status === 204) {

@@ -99,8 +99,8 @@ export default class SiderMenu extends PureComponent {
         onClick={
           this.props.isMobile
             ? () => {
-                this.props.onCollapse(true);
-              }
+              this.props.onCollapse(true);
+            }
             : undefined
         }
       >
@@ -196,8 +196,8 @@ export default class SiderMenu extends PureComponent {
     const menuProps = collapsed
       ? {}
       : {
-          openKeys,
-        };
+        openKeys,
+      };
     // if pathname can't match, use the nearest parent's key
     let selectedKeys = this.getSelectedMenuKeys();
     if (!selectedKeys.length) {
@@ -214,7 +214,7 @@ export default class SiderMenu extends PureComponent {
         className={styles.sider}
       >
         <div className={styles.logo} key="logo">
-          <a href="/electric" rel="noreferer">
+          <a href="/" rel="noreferer">
             <img src={logo} alt="logo" />
             <h1>电费系统</h1>
           </a>
