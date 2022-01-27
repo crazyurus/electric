@@ -26,6 +26,9 @@ export default {
     {
       from: 'mock',
       to: 'electric',
+    },
+    {
+      from: '_redirects',
     }
   ],
 };

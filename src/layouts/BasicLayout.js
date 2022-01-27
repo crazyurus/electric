@@ -116,9 +116,12 @@ class BasicLayout extends React.PureComponent {
     await this.props.dispatch({
       type: 'user/fetchCurrent',
     });
-    await this.props.dispatch(
-      routerRedux.push(getAuthority() === 'guest' ? '/index/choose' : '/detail/index')
-    );
+    
+    if (location.pathname === '/') {
+      await this.props.dispatch(
+        routerRedux.push(getAuthority() === 'guest' ? '/index/choose' : '/detail/index')
+      );
+    }
   }
   componentWillUnmount() {
     unenquireScreen(this.enquireHandler);
@@ -209,7 +212,7 @@ class BasicLayout extends React.PureComponent {
                 {
                   key: 'github',
                   title: <Icon type="github" />,
-                  href: 'https://github.com/tokenteam',
+                  href: 'https://github.com/crazyurus/electric-pc',
                   blankTarget: true,
                 },
                 {
@@ -221,7 +224,7 @@ class BasicLayout extends React.PureComponent {
               ]}
               copyright={
                 <Fragment>
-                  Copyright <Icon type="copyright" /> 2018 武汉理工大学Token团队
+                  Copyright <Icon type="copyright" /> 2022 武汉理工大学 Token 团队
                 </Fragment>
               }
             />
