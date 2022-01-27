@@ -5,7 +5,7 @@ const menuData = [
     name: '概况',
     icon: 'dashboard',
     path: 'detail/index',
-    authority: ['user', 'anonymous'],
+    authority: ['user'],
   },
   {
     name: '充值',
@@ -19,25 +19,25 @@ const menuData = [
     icon: 'profile',
     path: 'notice',
     redirect: 'notice/list',
-    authority: ['user', 'anonymous'],
-  },
-  {
-    name: '帮助建议',
-    icon: 'question-circle',
-    path: 'feedback',
-    authority: ['user', 'anonymous'],
-  },
-  {
-    name: '更换宿舍',
-    icon: 'cloud',
-    path: 'index/choose',
-    authority: ['user', 'anonymous'],
+    authority: ['user'],
   },
   {
     name: '选择宿舍',
     icon: 'cloud',
     path: 'index/choose',
     authority: ['guest'],
+  },
+  {
+    name: '帮助建议',
+    icon: 'question-circle',
+    path: 'feedback',
+    authority: ['user', 'guest'],
+  },
+  {
+    name: '更换宿舍',
+    icon: 'cloud',
+    path: 'index/choose',
+    authority: ['user'],
   },
 ];
 

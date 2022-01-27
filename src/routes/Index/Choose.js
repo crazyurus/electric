@@ -150,10 +150,7 @@ export default class ChooseForm extends PureComponent {
     return (
       <PageHeaderLayout
         title="宿舍"
-        content={
-          (currentAuthority === 'anonymous' ? `来自${currentUser.name}的` : currentUser.name) +
-          '同学你好，请选择你的宿舍'
-        }
+        content={currentUser.name + '同学你好，请选择你的宿舍'}
       >
         <Card bordered={false}>
           <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>

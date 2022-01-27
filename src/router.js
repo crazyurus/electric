@@ -23,7 +23,7 @@ function RouterConfig({ history, app }) {
           <AuthorizedRoute
             path="/"
             render={props => <BasicLayout {...props} />}
-            authority={['anonymous', 'user', 'guest']} // 有宿舍但匿名，实名，无宿舍
+            authority={['user', 'guest']}
             redirectPath="/exception/404"
           />
         </Switch>

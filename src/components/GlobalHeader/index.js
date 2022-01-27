@@ -61,37 +61,34 @@ export default class GlobalHeader extends PureComponent {
 
   render() {
     const { currentUser = {}, collapsed, isMobile, logo, onMenuClick } = this.props;
-    const menu =
-      currentUser.sno === 'anonymous' ? (
-        ''
-      ) : (
-        <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
-          <Menu.Item>
-            <a
-              target="_blank"
-              href="http://zhlgd.whut.edu.cn/tp_idc/idc?m=idc"
-              rel="noopener noreferrer"
-            >
-              <Icon type="user" />个人中心
-            </a>
-          </Menu.Item>
-          <Menu.Item>
-            <a
-              target="_blank"
-              href="http://zhlgd.whut.edu.cn/tp_up/view?m=up#act=sys/uacm/profile"
-              rel="noopener noreferrer"
-            >
-              <Icon type="safety" />账户安全
-            </a>
-          </Menu.Item>
-          <Menu.Divider />
-          <Menu.Item key="logout">
-            <a target="_blank" href="/electric/api/logout" rel="noopener noreferrer">
-              <Icon type="logout" />退出登录
-            </a>
-          </Menu.Item>
-        </Menu>
-      );
+    const menu = (
+      <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
+        <Menu.Item>
+          <a
+            target="_blank"
+            href="http://zhlgd.whut.edu.cn/tp_idc/idc?m=idc"
+            rel="noopener noreferrer"
+          >
+            <Icon type="user" />个人中心
+          </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a
+            target="_blank"
+            href="http://zhlgd.whut.edu.cn/tp_up/view?m=up#act=sys/uacm/profile"
+            rel="noopener noreferrer"
+          >
+            <Icon type="safety" />账户安全
+          </a>
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="logout">
+          <a target="_blank" href="/electric/api/logout" rel="noopener noreferrer">
+            <Icon type="logout" />退出登录
+          </a>
+        </Menu.Item>
+      </Menu>
+    );
 
     const formItemLayout = {
       labelCol: {

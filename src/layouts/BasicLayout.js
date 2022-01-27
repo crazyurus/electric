@@ -12,6 +12,7 @@ import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
+import { getAuthority } from '../utils/authority';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.png';
 
@@ -103,25 +104,21 @@ class BasicLayout extends React.PureComponent {
       breadcrumbNameMap: getBreadcrumbNameMap(getMenuData(), routerData),
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
     this.enquireHandler = enquireScreen(mobile => {
       this.setState({
         isMobile: mobile,
       });
     });
-    this.props.dispatch({
+    await this.props.dispatch({
+      type: 'room/fetchCurrent',
+    });
+    await this.props.dispatch({
       type: 'user/fetchCurrent',
     });
-    this.props
-      .dispatch({
-        type: 'room/fetchCurrent',
-      })
-      .then(room => {
-        if (location.pathname === '/')
-          this.props.dispatch(
-            routerRedux.push(room.meter === '' ? '/index/choose' : '/detail/index')
-          );
-      });
+    await this.props.dispatch(
+      routerRedux.push(getAuthority() === 'guest' ? '/index/choose' : '/detail/index')
+    );
   }
   componentWillUnmount() {
     unenquireScreen(this.enquireHandler);

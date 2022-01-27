@@ -75,27 +75,27 @@ export const getRouterData = app => {
     '/detail/index': {
       name: '概况',
       component: dynamicWrapper(app, ['room'], () => import('../routes/Detail/Index')),
-      authority: ['user', 'anonymous'],
+      authority: ['user'],
     },
     '/charge/record': {
       name: '充值记录',
       component: dynamicWrapper(app, [], () => import('../routes/Detail/Pay')),
-      authority: ['user', 'anonymous'],
+      authority: ['user'],
     },
     '/notice/list': {
       name: '通知列表',
       component: dynamicWrapper(app, ['room', 'notice'], () => import('../routes/Notice/List')),
-      authority: ['user', 'anonymous'],
+      authority: ['user'],
     },
     '/notice/detail/:link': {
       name: '通知详情',
       component: dynamicWrapper(app, ['notice'], () => import('../routes/Notice/Content')),
-      authority: ['user', 'anonymous'],
+      authority: ['user'],
     },
     '/index/choose': {
       name: '选择宿舍',
       component: dynamicWrapper(app, ['user', 'room'], () => import('../routes/Index/Choose')),
-      authority: ['user', 'anonymous', 'guest'],
+      authority: ['user', 'guest'],
     },
     '/charge/index': {
       component: dynamicWrapper(app, ['pay'], () => import('../routes/Charge/Index')),
@@ -121,17 +121,17 @@ export const getRouterData = app => {
     '/charge/map': {
       name: '线下充值点',
       component: dynamicWrapper(app, [], () => import('../routes/Charge/Map')),
-      authority: ['user', 'anonymous'],
+      authority: ['user'],
     },
     '/feedback': {
       name: '帮助建议',
       component: dynamicWrapper(app, [], () => import('../routes/Feedback')),
-      authority: ['user', 'anonymous'],
+      authority: ['user', 'guest'],
     },
     '/mobile': {
       name: '手机版',
       component: dynamicWrapper(app, [], () => import('../routes/Index/Mobile')),
-      authority: ['user', 'anonymous'],
+      authority: ['user'],
     },
     '/exception/403': {
       component: dynamicWrapper(app, [], () => import('../routes/Exception/403')),

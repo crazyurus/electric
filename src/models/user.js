@@ -1,12 +1,11 @@
 import web from '../services/web';
-import { setAuthority } from '../utils/authority';
 
 export default {
   namespace: 'user',
 
   state: {
     current: {},
-    authority: 'anonymous',
+    authority: 'user',
   },
 
   effects: {
@@ -21,14 +20,9 @@ export default {
 
   reducers: {
     saveCurrentUser(state, action) {
-      const authority = action.payload.room
-        ? action.payload.sno === 'anonymous' ? 'anonymous' : 'user'
-        : 'guest';
-      setAuthority(authority);
       return {
         ...state,
         current: action.payload,
-        authority,
       };
     },
   },
