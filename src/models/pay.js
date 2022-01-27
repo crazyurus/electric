@@ -6,6 +6,7 @@ export default {
   namespace: 'pay',
 
   state: {
+    type: 0,
     qrcode: '',
     order: '',
     record: [],
@@ -27,7 +28,10 @@ export default {
       const response = yield call(web.prepare, payload);
       yield put({
         type: 'saveQrcode',
-        payload: response.data.return,
+        payload: {
+          type: payload.type,
+          ...response.data.return,
+        },
       });
     },
     *check({ payload }, { call }) {
@@ -56,6 +60,7 @@ export default {
         ...state,
         qrcode: payload.code_url,
         order: payload.prepay_id,
+        type: payload.type,
       };
     },
   },

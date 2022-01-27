@@ -3,8 +3,7 @@
   "errMsg": "OK",
   "data": {
     "return": {
-      "code_url": "http://cwsf.whut.edu.cn",
-      "prepay_id": "wx123456"
+      "url": "http://cwsf.whut.edu.cn"
     }
   }
 }

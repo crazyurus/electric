@@ -17,6 +17,7 @@ const api = [
   'POST /electric/login/register.json',
   'POST /electric/pay/prepare.json',
   'POST /electric/pay/check.json',
+  'POST /electric/pay/cwsf.json',
   'POST /electric/notice/api.json',
   'GET /electric/notice/content.json'
 ];

@@ -20,25 +20,18 @@ class ChargeForm extends React.PureComponent {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (err) return;
 
-      if (values.type === 1) {
-        this.props
-          .dispatch({
-            type: 'pay/ip',
-          })
-          .then(ip => {
-            return this.props.dispatch({
-              type: 'pay/prepare',
-              payload: {
-                area: this.props.room.room.area,
-                amount: values.amount,
-                sno: this.props.currentUser.sno,
-                meter: this.props.room.room.meter,
-                type: 'NATIVE',
-                ip,
-              },
-            });
-          })
-          .then(() => {
+      if (values.type === 1 || values.type === 2) {
+          return this.props.dispatch({
+            type: 'pay/prepare',
+            payload: {
+              area: this.props.room.room.area,
+              amount: values.amount,
+              sno: this.props.currentUser.sno,
+              meter: this.props.room.room.meter,
+              type: values.type,
+              ip: '',
+            },
+          }).then(() => {
             return this.props.dispatch(routerRedux.push('/charge/index/qrcode'));
           });
       } else {
@@ -77,7 +70,7 @@ class ChargeForm extends React.PureComponent {
     const { getFieldDecorator, getFieldValue } = form;
     const isYuArea = room.room.area === 7;
     const isOffline = room.detail.status.includes('离线');
-    const isCWSF = getFieldValue('type') === 2;
+    const isCWSF = getFieldValue('type') === 3;
     const station = [
       {
         name: '南湖',
@@ -169,17 +162,18 @@ class ChargeForm extends React.PureComponent {
           </Form.Item>}
           <Form.Item {...formItemLayout} label="支付方式">
             {getFieldDecorator('type', {
-              initialValue: isYuArea ? 1 : 2,
+              initialValue: isYuArea ? 1 : 3,
               rules: [{ required: true, message: '支付方式必选' }],
             })(
               isYuArea ? (
                 <Radio.Group>
                   <Radio value={1}>微信支付</Radio>
-                  <Radio value={2}>缴费平台支付</Radio>
+                  <Radio value={2}>支付宝</Radio>
+                  <Radio value={3}>缴费平台支付</Radio>
                 </Radio.Group>
               ) : (
                 <Radio.Group>
-                  <Radio value={2}>缴费平台支付</Radio>
+                  <Radio value={3}>缴费平台支付</Radio>
                 </Radio.Group>
               )
             )}

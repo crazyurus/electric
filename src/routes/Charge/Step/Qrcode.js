@@ -9,7 +9,7 @@ class ChargeQrcode extends Component {
   state = {};
 
   componentDidMount() {
-    this.state.timer = setInterval(::this.checkPaySuccess, 2000);
+    this.state.timer = setInterval(::this.checkPaySuccess, 5000);
   }
 
   componentWillUnmount() {
@@ -34,18 +34,18 @@ class ChargeQrcode extends Component {
   }
 
   render() {
-    const isCwsf = this.props.pay.qrcode.indexOf('.icbc.') > -1;
     return (
       <div className={styles.qrcode}>
         <div className={styles.title}>
-          请打开 <Icon type="wechat" /> <strong>微信</strong>
-          {isCwsf ? (
+          请打开{' '}{this.props.pay.type === 1 ? (
             <Fragment>
-              {' '}
-              或 <Icon type="alipay" /> <strong>支付宝</strong>
+              <Icon type="wechat" /> <strong>微信</strong>
             </Fragment>
-          ) : null}{' '}
-          扫描二维码支付
+          ) : (
+            <Fragment>
+              <Icon type="alipay" /> <strong>支付宝</strong>
+            </Fragment>
+          )}{' '}扫描二维码支付
         </div>
         <div className={styles.image}>
           <QRCode value={this.props.pay.qrcode} size={248} />
