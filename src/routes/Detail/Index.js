@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Avatar, Divider, Row, Col, Icon, Card, Tabs, Tooltip, message } from 'antd';
 import numeral from 'numeral';
 import { ChartCard, Field, Bar } from '@/components/Charts';
+import Trend from '@/components/Trend';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './Index.less';
 
@@ -155,7 +156,7 @@ export default class Index extends Component {
         </div>
         <div className={styles.statItem}>
           <p>用电排行</p>
-          <p>暂无</p>
+          <p>{room.detail.rank[0]} / <span style={{ color: 'inherit' }}>{room.detail.rank[1]}</span></p>
         </div>
       </div>
     );
@@ -210,7 +211,12 @@ export default class Index extends Component {
               bordered={false}
               title="今日用电"
               total={<Do>{room.detail.today.use}</Do>}
-              footer={<Field label="当日电费" value={<Yuan>{room.detail.today.price}</Yuan>} />}
+              footer={
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <Field label="当日电费" value={<Yuan>{room.detail.today.price}</Yuan>} />
+                  <Trend flag="up">12%</Trend>
+                </div>
+              }
               contentHeight={46}
               loading={detailLoading}
             />
@@ -220,7 +226,12 @@ export default class Index extends Component {
               bordered={false}
               title="当月用电"
               total={<Do>{room.detail.month.use}</Do>}
-              footer={<Field label="当月电费" value={<Yuan>{room.detail.month.price}</Yuan>} />}
+              footer={
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <Field label="当月电费" value={<Yuan>{room.detail.month.price}</Yuan>} />
+                  <Trend flag="down">30%</Trend>
+                </div>
+              }
               contentHeight={46}
               loading={detailLoading}
             />
