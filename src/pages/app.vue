@@ -16,7 +16,7 @@
   export default {
     mounted () {
       Vue.nextTick(() => {
-        this.$f7.mainView.router.reloadPage('/notice/detail/last');
+        this.$f7.mainView.router.reloadPage(this.$store.state.meter ? '/detail/index' : '/index/choose');
       });
     }
   }

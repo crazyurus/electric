@@ -14,7 +14,7 @@
         import('echarts/lib/chart/bar'),
         import('echarts/lib/component/legendScroll')
       ]).then(([ echarts ]) => {
-        this.$http.post('https://api.wutnews.net/electric/info/day', {
+        this.$http.get('/electric/info/day', {
           id: this.$store.state.meter,
           area: this.$store.state.area
         }).then(result => {

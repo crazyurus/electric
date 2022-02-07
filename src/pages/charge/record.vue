@@ -54,7 +54,7 @@
     },
     mounted () {
       this.$indicator.show();
-      this.$http.post('https://api.wutnews.net/electric/info/pay', {
+      this.$http.get('/electric/info/pay', {
         id: this.$store.state.meter,
         area: this.$store.state.area
       }).then(result => {

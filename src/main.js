@@ -1,3 +1,4 @@
+import '../mock';
 import Vue from 'vue';
 
 import 'framework7';

@@ -119,35 +119,26 @@
           amount: amount,
           sno: this.$store.state.sno,
           meter: this.$store.state.meter,
-          type: this.$detect.mobile() ? 'MWEB' : 'NATIVE'
+          type: this.$detect.mobile() ? 'MWEB' : 'NATIVE',
+          ip: '',
         };
 
-        this.$http({
-          method: 'GET',
-          url: '//jkyip.market.alicloudapi.com/ip',
-          headers: {
-            Authorization: 'APPCODE fb013fbe90924aca829cb36b361a3f8f'
+        this.$http.post('/electric/pay/prepare', param).then(result => {
+          Indicator.close();
+          if (result.data.data.return.mweb_url) {
+            const orderId = result.data.data.return.prepay_id;
+            const url = result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('/electric/pay/callback?order=' + orderId);
+
+            this.$f7.mainView.router.load({
+              url: '/charge/tip',
+              ignoreCache: true,
+              query: {
+                orderId,
+                url,
+              }
+            });
           }
-        }).then(result => {
-          param.ip = intToIP(result.data.message[0].ip);
-
-          this.$http.post('/electric/pay/prepare', param).then(result => {
-            Indicator.close();
-            if (result.data.data.return.mweb_url) {
-              const orderId = result.data.data.return.prepay_id;
-              const url = result.data.data.return.mweb_url + '&redirect_url=' + encodeURIComponent('https://web.wutnews.net/electric/pay/callback?order=' + orderId);
-
-              this.$f7.mainView.router.load({
-                url: '/charge/tip',
-                ignoreCache: true,
-                query: {
-                  orderId,
-                  url,
-                }
-              });
-            }
-            if (result.data.data.return.code_url) this.qrcode('请用微信扫码完成支付', '/electric/api/qrcode?url=' + encodeURIComponent(result.data.data.return.code_url));
-          });
+          if (result.data.data.return.code_url) this.qrcode('请用微信扫码完成支付', 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(result.data.data.return.code_url));
         });
       },
       chargeAlipay(amount) {

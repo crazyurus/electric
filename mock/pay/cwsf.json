@@ -1,0 +1,9 @@
+{
+  "errCode": 0,
+  "errMsg": "OK",
+  "data": {
+    "return": {
+      "url": "http://cwsf.whut.edu.cn"
+    }
+  }
+}

@@ -1,27 +1,13 @@
 # 电费查询
 
-Vue + Vuex + Framework7 + Webpack 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ae48d3c8-fa94-4bdb-bdc9-5fce6d5059fe/deploy-status)](https://app.netlify.com/sites/whut-electric/deploys)
 
-## 安装
+掌上理工大电费查询模块
 
-``` bash
-# install dependencies
-npm install
+`Vue` + `Vuex` + `Framework7`
 
-# serve with hot reload at localhost:8080
-npm run dev
+## 项目脚本
 
-# build for production with minification
-npm run build
-```
-
-## 目录结构
-
-* `src/components` - folder with custom `.vue` components
-* `src/store` - Vuex相关
-* `src/css` - put custom app CSS styles here
-* `src/pages` - app `.vue` pages
-* `src/main.js` - main app file where you include/import all required libs and init app
-* `src/mock.js` - mock
-* `src/course.js` - 课程类
-* `src/app.vue` - main app structure/component
+* `npm run start` - 本地运行项目
+* `npm run build` - 打包项目
+* `npm run analyse` - 项目构建分析

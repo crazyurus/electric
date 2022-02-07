@@ -176,7 +176,7 @@
 
       Vue.nextTick(() => {
         this.$f7.showIndicator();
-        this.$http.post('https://api.wutnews.net/electric/info/detail', {
+        this.$http.get('/electric/info/detail', {
           id: meter,
           area: area
         }).then(result => {
@@ -249,7 +249,7 @@
       },
       update() {
         // this.$f7.showPreloader("正在抄表中…");
-        this.$http.post('https://api.wutnews.net/electric/info/update', {
+        this.$http.get('/electric/info/update', {
           id: this.$store.state.meter,
           area: this.$store.state.area
         }).then(result => {

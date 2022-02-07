@@ -170,13 +170,13 @@
         }
       },
       getChooseInfo (api, id) {
-        return this.$http.post('https://api.wutnews.net/electric/choose/' + api, {
+        return this.$http.post('/electric/choose/' + api, {
           id: id,
           area: this.select.area
         });
       },
       about () {
-        this.$message.alert('Token团队出品<br>产品：廖星 石明阳<br>设计：廖星 郑文伟<br>开发：廖星 邓维迪 刘福鑫');
+        this.$message.alert('Token团队出品');
       }
     }
   }

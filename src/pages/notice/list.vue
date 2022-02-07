@@ -41,7 +41,7 @@
         if (this.loading) return;
 
         this.loading = true;
-        this.$http.post('https://api.wutnews.net/electric/notice/api', {
+        this.$http.get('/electric/notice/list', {
           page: this.page,
           area: this.$store.state.area
         }).then(result => {
