@@ -44,7 +44,7 @@ export default class ChooseForm extends PureComponent {
   };
 
   getChooseInfo = (api, id) => {
-    return request('', '/choose/' + api + '.json', {
+    return request('', '/choose/' + api, {
       method: 'POST',
       body: {
         id,
@@ -198,7 +198,7 @@ export default class ChooseForm extends PureComponent {
                   options={this.state.data}
                   loadData={this.changeCascader}
                   onChange={this.changeMeterPicker}
-                  filedNames={{ label: 'name', value: 'id' }}
+                  fieldNames={{ label: 'name', value: 'id' }}
                 />
               )}
             </Form.Item>

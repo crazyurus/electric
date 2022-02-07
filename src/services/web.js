@@ -4,31 +4,31 @@ const host = '';
 
 export default {
   async user() {
-    return request(host, '/api/user.json');
+    return request(host, '/api/user');
   },
   async room() {
-    return request(host, '/api/room.json');
+    return request(host, '/api/room');
   },
   async register(params) {
-    return request(host, '/login/register.json', {
-      method: 'POST',
+    return request(host, '/login/register', {
+      method: 'PUT',
       body: params,
     });
   },
   async prepare(params) {
-    return request(host, '/pay/prepare.json', {
+    return request(host, '/pay/prepare', {
       method: 'POST',
       body: params,
     });
   },
   async cwsf(params) {
-    return request(host, '/pay/cwsf.json', {
+    return request(host, '/pay/cwsf', {
       method: 'POST',
       body: params,
     });
   },
   async check(params) {
-    return request(host, '/pay/check.json', {
+    return request(host, '/pay/check', {
       method: 'POST',
       body: params,
     });

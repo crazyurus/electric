@@ -1,4 +1,4 @@
-import fetch from 'dva/fetch';
+import axios from 'axios';
 import { notification } from 'antd';
 import { routerRedux } from 'dva/router';
 import store from '../index';
@@ -22,11 +22,11 @@ const codeMessage = {
 };
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
-    return response;
+    return response.data;
   }
   const errortext = codeMessage[response.status] || response.statusText;
   notification.error({
-    message: `请求错误 ${response.status}: ${response.url}`,
+    message: `请求错误 ${response.status}: ${response.config.url}`,
     description: errortext,
   });
   const error = new Error(errortext);
@@ -52,14 +52,11 @@ export default function request(host, url, options) {
     newOptions.body = formData.join('&');
   }
 
-  return fetch(host + '/electric' + url)
+  return axios({
+    url: host + '/electric' + url,
+    method: newOptions.method,
+  })
     .then(checkStatus)
-    .then(response => {
-      if (newOptions.method === 'DELETE' || response.status === 204) {
-        return response.text();
-      }
-      return response.json();
-    })
     .catch(e => {
       const { dispatch } = store;
       const status = e.name;

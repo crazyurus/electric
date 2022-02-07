@@ -116,6 +116,7 @@ export default {
           sum: '0',
           today: {},
           month: {},
+          rank: [0, 0],
         },
         everyday: {},
       };
