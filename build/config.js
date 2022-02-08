@@ -1,6 +1,8 @@
 const path = require('path');
+const { getPlugin, pluginByName } = require('@craco/craco');
 const CracoLessPlugin = require('craco-less');
-const CracoCSSModules = require('craco-css-modules');
+const CracoCSSModulesPlugin = require('craco-css-modules');
+const CracoMFSUPlugin = require('craco-mfsu');
 const CopyPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
@@ -27,7 +29,10 @@ module.exports = {
       },
     },
     {
-      plugin: CracoCSSModules,
+      plugin: CracoCSSModulesPlugin,
+    },
+    {
+      plugin: CracoMFSUPlugin,
     },
   ],
   style: {
@@ -58,11 +63,11 @@ module.exports = {
     },
     configure(options) {
       options.output.crossOriginLoading = 'anonymous';
-      options.plugins.forEach(plugin => {
-        if (plugin.constructor.name === 'MiniCssExtractPlugin') {
-          plugin.options.ignoreOrder = true;
-        }
-      });
+
+      const { isFound, match } = getPlugin(options, pluginByName('MiniCssExtractPlugin'));
+      if (isFound) {
+        match.options.ignoreOrder = true;
+      }
 
       return options;
     },
