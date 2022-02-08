@@ -35,15 +35,10 @@
     },
     methods: {
       share() {
-        if (window.token && token.invokeShare) token.invokeShare(this.article.title, location.href, 0);
-        else if (window.tokenNative && tokenNative.showShare) {
-          tokenNative.showShare({
-            title: this.article.title,
-            link: location.href,
-            desc: '来自掌上理工大电费查询'
-          });
-        }
-        else location.assign('mqqapi://share/to_fri?src_type=web&version=1&file_type=news&share_id=1109559705&title=' + btoa(this.article.title) + '&thirdAppDisplayName=5o6M5LiK55CG5bel5aSn&url=' + btoa(location.href) + '&description=' + btoa('来自掌上理工大电费查询'));
+        navigator.share({
+          url: location.href,
+          title: this.article.title,
+        });
       }
     }
   }

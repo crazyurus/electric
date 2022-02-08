@@ -101,6 +101,12 @@
           <img :src="icons.rank">
           <span>排名信息</span>
         </li>
+        <li class="item-content">
+          <div class="item-inner">
+            <div class="item-title label">用电排名</div>
+            <div class="item-after item-range">{{electric.rank[0] + '/' + electric.rank[1]}}</div>
+          </div>
+        </li>
         <li>
           <a class="item-link item-content" @click="showStation">
             <div class="item-inner">
@@ -118,7 +124,7 @@
         <li>
           <a class="item-link item-content" @click="miniProgram">
             <div class="item-inner">
-              <div class="item-title">打开QQ小程序</div>
+              <div class="item-title">打开小程序</div>
             </div>
           </a>
         </li>
@@ -156,7 +162,8 @@
             use: '',
             price: ''
           },
-          month: {}
+          month: {},
+          rank: [0, 0],
         },
         warning: {
           show: false,
@@ -209,38 +216,14 @@
         if (this.electric.status.includes("未开户")) {
           this.$message.alert('由于上一次缴费系统主服务器故障，导致部分宿舍线上显示未开户，这部分宿舍暂时只能通过线下缴费点缴费，预计下学期全部恢复。');
         } else if (this.electric.status.includes('在线')) {
-          if (this.$store.state.area == 7) {
-            this.$f7.mainView.router.loadPage('/charge/index');
-          }
-          else {
-            f7.modal({
-              title: '电费充值步骤',
-              text: '<div align="left">1. 通过智慧理工大账号登录缴费平台<br>2. 选择宿舍并输入充值金额<br>3. 选择支付宝或微信支付充值<br>4. 将二维码截图并打开支付宝或微信扫一扫<br>5. 从相册选择该二维码并完成支付<br>若充值遇到问题，请加QQ群<a href="mqqapi://card/show_pslcard?src_type=internal&version=1&uin=939924027&card_type=group&source=qrcode" class="external">939924027</a>反馈</div>',
-              verticalButtons: true,
-              buttons: [{
-                text: '前往缴费平台充值',
-                bold: true,
-                onClick: () => {
-                  this.$navigator.go('http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023');
-                }
-              }, {
-                text: '问题反馈',
-                onClick: () => {
-                  this.$navigator.launch('mqqapi://card/show_pslcard?src_type=internal&version=1&uin=939924027&card_type=group&source=qrcode');
-                }
-              }, {
-                text: '关闭',
-                close: true
-              }]
-            });
-          }
+          this.$f7.mainView.router.loadPage('/charge/index');
         } else this.$message.alert('电表处于离线状态，暂不可以充值电费，请前往自助充值点缴费');
       },
       change(e) {
         this.$message.confirm("确定要更换宿舍信息吗？").then(() => {
           this.$f7.showPreloader("更换宿舍中…");
           e.target.disabled = true;
-          return this.$http.get('/electric/login/logout');
+          return this.$http.post('/electric/login/logout');
         }).then(() => {
           if (window.token && token.setMeter) token.setMeter('');
           this.$f7.hidePreloader();
@@ -282,7 +265,7 @@
         this.$f7.actions([stationButtons, cancelButtons]);
       },
       miniProgram() {
-        this.$navigator.launch('mqqapi://microapp/open?mini_appid=1109559705&fakeUrl=https://m.q.qq.com/a/s/11c84551edb3b31057d38c468a0a0818&xcxPath=pages/index/index.html&xcxSourceType=0');
+        this.$navigator.open('mqqapi://microapp/open?mini_appid=1109559705&fakeUrl=https://m.q.qq.com/a/s/11c84551edb3b31057d38c468a0a0818&xcxPath=pages/index/index.html&xcxSourceType=0');
       }
     },
     computed: {

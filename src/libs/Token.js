@@ -5,49 +5,41 @@ export default {
     };
 
     Vue.prototype.$navigator = {
-      go(url) {
+      open(url) {
         if (checkMethodAvailable('loadUrl')) token.loadUrl(url);
         else location.assign(url);
       },
-      launch(url) {
-        if (navigator.userAgent.toLowerCase().includes('android')) location.assign('newtab:' + url);
-        else location.assign(url);
-      },
-      browser(url) {
-        if (window.tokenNative && tokenNative.pushSafariWithURL) tokenNative.pushSafariWithURL(url.replace('https://', ''));
-        else location.assign('newtab:' + url);
-      }
     };
 
     Vue.prototype.$message = {
-      alert (text) {
+      alert(text) {
         return new Promise(function (resolve) {
           f7.alert(text, resolve);
         });
       },
-      confirm (text) {
+      confirm(text) {
         return new Promise(function (resolve, reject) {
           f7.confirm(text, resolve, reject);
         });
       },
-      prompt (text, title) {
+      prompt(text, title) {
         return new Promise(function (resolve, reject) {
           f7.prompt(text, title, resolve, reject);
         });
       },
-      toast (text) {
+      toast(text) {
         if (typeof token === 'undefined' || typeof token.showNativeToast === 'undefined') f7.alert(text);
         else token.showNativeToast(text, true);
       }
     };
 
     Vue.prototype.$indicator = {
-      show () {
+      show() {
         // if(typeof token == "undefined" || typeof token.showIndicator == "undefined")
         f7.showIndicator();
         // else token.showIndicator();
       },
-      hide () {
+      hide() {
         // if(typeof token == "undefined" || typeof token.hideIndicator == "undefined")
         f7.hideIndicator();
         // else token.hideIndicator();
@@ -56,42 +48,42 @@ export default {
 
     Vue.prototype.$storage = {
       _storage: window.localStorage,
-      enable () {
+      enable() {
         return this._storage !== undefined;
       },
-      set (key, value) {
+      set(key, value) {
         if (this._storage) {
           this._storage.setItem(key, value);
         }
       },
-      get (key) {
+      get(key) {
         let val = undefined;
         if (this._storage) {
           val = this._storage.getItem(key);
         }
         return val;
       },
-      has (key) {
+      has(key) {
         return this.get(key) !== null;
       },
-      remove (key) {
+      remove(key) {
         if (this._storage) {
           this._storage.removeItem(key);
         }
       },
-      clear () {
+      clear() {
         this._storage.clear();
       }
     };
 
     Vue.prototype.$detect = {
-      mobile () {
+      mobile() {
         return !!navigator.userAgent.match(/(android|iphone)/i);
       },
-      iWUT () {
+      iWUT() {
         return typeof token !== 'undefined';
       },
-      wechat () {
+      wechat() {
         return navigator.userAgent.indexOf('MicroMessenger') > -1;
       }
     };

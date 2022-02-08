@@ -43,7 +43,7 @@
         location.replace('/electric/pay/tip?order=' + this.orderId);
       },
       retry() {
-        this.$navigator.browser('/electric/api/wechatPay?url=' + encodeURIComponent(this.url));
+        this.$navigator.open('weixin://dl?url=' + encodeURIComponent(this.url));
       },
       cancel() {
         this.$f7.mainView.router.back();

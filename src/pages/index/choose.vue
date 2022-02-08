@@ -144,7 +144,7 @@
       },
       queryMeterDetail () {
         this.$f7.showPreloader('正在查询，请稍后…');
-        this.$http.post('/electric/login/register', {
+        this.$http.put('/electric/login/register', {
           meter: this.select.meter,
           area: this.select.area
         }).then(result => {

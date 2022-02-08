@@ -17,6 +17,7 @@ Mock.mock('/electric/choose/floor', 'post', require('./choose/floor.json'));
 Mock.mock('/electric/choose/meter', 'post', require('./choose/meter.json'));
 
 Mock.mock('/electric/login/register', 'put', require('./login/register.json'));
+Mock.mock('/electric/login/logout', 'post', require('./login/logout.json'));
 
 Mock.mock('/electric/pay/prepare', 'post', require('./pay/prepare.json'));
 Mock.mock('/electric/pay/check', 'post', require('./pay/check.json'));

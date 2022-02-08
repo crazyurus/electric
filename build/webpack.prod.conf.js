@@ -7,7 +7,8 @@ var baseWebpackConfig = require('./webpack.base.conf');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-var SriPlugin = require('webpack-subresource-integrity');
+var SubresourceIntegrityPlugin = require('webpack-subresource-integrity');
+var CopyPlugin = require('copy-webpack-plugin');
 
 var env = config.build.env;
 
@@ -83,9 +84,8 @@ var webpackConfig = merge(baseWebpackConfig, {
       name: 'manifest',
       chunks: ['vendor']
     }),
-    new SriPlugin({
+    new SubresourceIntegrityPlugin({
       hashFuncNames: ['sha256', 'sha512'],
-      enabled: false
     })
   ]
 });
@@ -107,5 +107,11 @@ if (config.build.productionGzip) {
     })
   );
 }
+
+webpackConfig.plugins.push(
+  new CopyPlugin([{
+    from: '_redirects',
+  }])
+);
 
 module.exports = webpackConfig;

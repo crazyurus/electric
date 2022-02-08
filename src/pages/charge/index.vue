@@ -2,7 +2,7 @@
   <f7-page name="charge">
     <div class="room-block">
       <div class="item-cardno">{{$store.state.meter.split('*')[2]}}</div>
-      <div class="link" @click="change">微信支付</div>
+      <div class="link" @click="change">{{type}}</div>
     </div>
     <div class="list-block card-block">
       <div class="row">
@@ -34,9 +34,7 @@
 <script>
   import Vue from 'vue'
   import { Actionsheet, Indicator } from 'mint-ui';
-  import copy from 'copy-to-clipboard';
   import stations from '@/data/station';
-  import { intToIP } from '@/libs/utils';
 
   Vue.component(Actionsheet.name, Actionsheet);
   Vue.use(Indicator);
@@ -48,7 +46,7 @@
           actions: [],
           show: false
         },
-        type: this.$store.state.area == 7 ? '微信支付' : '支付宝支付'
+        type: '微信支付'
       }
     },
     methods: {
@@ -100,20 +98,16 @@
         });
       },
       charge(amount) {
-        if (this.$detect.wechat()) {
-          this.qrcode('暂不支持微信内支付，请长按打开小程序“武汉理工大学电费查询”', '/Application/Electric/Assets/image/mina.jpg');
-          return;
-        }
         if (amount < 1) {
           this.$message.toast('充值金额必须大于1元');
           return;
         }
+
+        Indicator.open(this.type);
         if (this.type === '微信支付') this.chargeWechat(amount);
         else this.chargeAlipay(amount);
       },
       chargeWechat(amount) {
-        Indicator.open('微信支付');
-
         const param = {
           area: this.$store.state.area,
           amount: amount,
@@ -142,67 +136,23 @@
         });
       },
       chargeAlipay(amount) {
-        const now = new Date();
-        const $$ = this.Dom7;
-        if (
-          (now.getHours() === 23 && now.getMinutes() >= 20) ||
-          (now.getHours() === 0 && now.getMinutes() <= 10)
-        ) {
-          this.$message.alert('23:20至次日00:10为校园缴费平台结算时间，暂不可充值');
-          return false;
-        }
+        this.$http.post('/electric/pay/cwsf', {
+          area: this.$store.state.area,
+          amount: amount,
+          meter: this.$store.state.meter,
+          captcha: '',
+        }).then(response => {
+          Indicator.close();
+          const result = response.data.data;
 
-        this.$f7.modal({
-          title: "校园缴费平台",
-          text: "请输入下方图片中的数字",
-          afterText: '<div class="input-field modal-input-double modal-input-captcha"><input type="tel" maxlength="4" class="modal-text-input" id="txtCaptcha" placeholder="验证码"><img src="/electric/cwsf/captcha" alt="点击刷新" onclick="this.src = this.src;"></div>',
-          buttons: [
-            {
-              text: '验证',
-              bold: true
-            }
-          ],
-          onClick: (modal, index) => {
-            if(index === 0) {
-              const captcha = $$("#txtCaptcha").val();
-
-              if(captcha.trim() === "") {
-                this.$message.toast("验证码输入不完整");
-                return;
-              }
-
-              Indicator.open('支付宝');
-              let param = {
-                area: this.$store.state.area,
-                amount: amount,
-                meter: this.$store.state.meter,
-                captcha,
-              };
-
-              this.$http.post('/electric/cwsf/pay', param).then(result => {
-                Indicator.close();
-                if (result.data.url) {
-                  const url = 'alipays://platformapi/startapp?appId=20000067&url=' + encodeURIComponent(result.data.url);
-                  if (typeof tokenNative === 'undefined') location.assign(url);
-                  else tokenNative.openAppWithURL({ url });
-                }
-                else this.$message.toast('订单生成失败');
-              });
-            }
+          if (result.return.url) {
+            const url = 'alipays://platformapi/startapp?appId=20000067&url=' + encodeURIComponent(result.return.url);
+            location.assign(url);
           }
+          else this.$message.toast('订单生成失败');
         });
-        $$("#txtCaptcha").focus();
       },
       change() {
-        // 屏蔽缴费平台支付
-        this.$message.alert('暂只支持微信支付');
-        return;
-
-        if (this.$store.state.area != 7) {
-          this.$message.toast('暂只支持支付宝支付');
-          return;
-        }
-
         this.sheet = {
           show: true,
           actions: [{
@@ -211,33 +161,12 @@
               this.type = '微信支付'
             }
           }, {
-            name: '支付宝支付',
+            name: '支付宝',
             method: () => {
-              this.type = '支付宝支付'
+              this.type = '支付宝'
             }
           }]
         };
-      },
-      openLocation() {
-        this.$f7.modal({
-          title: '请选择充值方式',
-          text: "马房山校区的宿舍请在00:10-23:20间用电脑访问以下网址缴费<br><strong>https://cwsf.whut.edu.cn/</strong><br>人工窗口工作时间：周一到周五 8:00-11:30 14:00-16:30<br>自助充值机充值时间：每日6:00-24:00<br>注意不可以跨校区充值哦",
-          verticalButtons: true,
-          buttons: [{
-            text: '复制缴费网址',
-            bold: true,
-            onClick: () => {
-              copy('http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023');
-              this.$message.toast('复制成功');
-            }
-          }, {
-            text: '查看线下充值点',
-            bold: false,
-            onClick: this.showStation
-          }, {
-            text: '关闭',
-          }]
-        });
       },
       showStation() {
         const buttons = stations.map((station, index) => ({
