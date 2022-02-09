@@ -1,27 +1,43 @@
 import Mock from 'mockjs';
+import APIUser from './api/user.json';
+import APIRoom from './api/room.json';
+import InfoDetail from './info/detail.json';
+import InfoDay from './info/day.json';
+import InfoUpdate from './info/update.json';
+import InfoPay from './info/pay.json';
+import ChooseArchitecture from './choose/architecture.json';
+import ChooseFloor from './choose/floor.json';
+import ChooseMeter from './choose/meter.json';
+import LoginRegister from './login/register.json';
+import LoginLogout from './login/logout.json';
+import PayPrepare from './pay/prepare.json';
+import PayCheck from './pay/check.json';
+import PayCWSF from './pay/cwsf.json';
+import NoticeList from './notice/list.json';
+import NoticeContent from './notice/content.json';
 
 Mock.setup({
   timeout: '300-800',
 });
 
-Mock.mock('/electric/api/user', 'get', require('./api/user.json'));
-Mock.mock('/electric/api/room', 'get', require('./api/room.json'));
+Mock.mock('/electric/api/user', 'get', APIUser);
+Mock.mock('/electric/api/room', 'get', APIRoom);
 
-Mock.mock('/electric/info/detail', 'get', require('./info/detail.json'));
-Mock.mock('/electric/info/day', 'get', require('./info/day.json'));
-Mock.mock('/electric/info/update', 'get', require('./info/update.json'));
-Mock.mock('/electric/info/pay', 'get', require('./info/pay.json'));
+Mock.mock('/electric/info/detail', 'get', InfoDetail);
+Mock.mock('/electric/info/day', 'get', InfoDay);
+Mock.mock('/electric/info/update', 'get', InfoUpdate);
+Mock.mock('/electric/info/pay', 'get', InfoPay);
 
-Mock.mock('/electric/choose/architecture', 'post', require('./choose/architecture.json'));
-Mock.mock('/electric/choose/floor', 'post', require('./choose/floor.json'));
-Mock.mock('/electric/choose/meter', 'post', require('./choose/meter.json'));
+Mock.mock('/electric/choose/architecture', 'post', ChooseArchitecture);
+Mock.mock('/electric/choose/floor', 'post', ChooseFloor);
+Mock.mock('/electric/choose/meter', 'post', ChooseMeter);
 
-Mock.mock('/electric/login/register', 'put', require('./login/register.json'));
-Mock.mock('/electric/login/logout', 'post', require('./login/logout.json'));
+Mock.mock('/electric/login/register', 'put', LoginRegister);
+Mock.mock('/electric/login/logout', 'post', LoginLogout);
 
-Mock.mock('/electric/pay/prepare', 'post', require('./pay/prepare.json'));
-Mock.mock('/electric/pay/check', 'post', require('./pay/check.json'));
-Mock.mock('/electric/pay/cwsf', 'post', require('./pay/cwsf.json'));
+Mock.mock('/electric/pay/prepare', 'post', PayPrepare);
+Mock.mock('/electric/pay/check', 'post', PayCheck);
+Mock.mock('/electric/pay/cwsf', 'post', PayCWSF);
 
-Mock.mock('/electric/notice/list', 'get', require('./notice/list.json'));
-Mock.mock('/electric/notice/content', 'get', require('./notice/content.json'));
+Mock.mock('/electric/notice/list', 'get', NoticeList);
+Mock.mock('/electric/notice/content', 'get', NoticeContent);

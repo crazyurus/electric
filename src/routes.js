@@ -1,13 +1,13 @@
-import DetailPage from './pages/detail/index';
-import PayRecordPage from './pages/charge/record';
-import DayRecordPage from './pages/detail/everyday';
-import ChoosePage from './pages/index/choose';
-import NoticeListPage from './pages/notice/list';
-import NoticeDetailPage from './pages/notice/detail';
-import ChargePage from './pages/charge/index';
-import MapPage from './pages/charge/map';
-import FeedbackPage from './pages/feedback/index';
-import TipPage from './pages/charge/tip';
+import DetailPage from './pages/detail/index.vue';
+import PayRecordPage from './pages/charge/record.vue';
+import DayRecordPage from './pages/detail/everyday.vue';
+import ChoosePage from './pages/index/choose.vue';
+import NoticeListPage from './pages/notice/list.vue';
+import NoticeDetailPage from './pages/notice/detail.vue';
+import ChargePage from './pages/charge/index.vue';
+import MapPage from './pages/charge/map.vue';
+import FeedbackPage from './pages/feedback/index.vue';
+import TipPage from './pages/charge/tip.vue';
 
 export default [
   {
