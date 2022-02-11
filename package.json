@@ -37,7 +37,7 @@
     "copy-webpack-plugin": "^10.2.4",
     "craco-css-modules": "^1.0.1",
     "craco-less": "^2.0.0",
-    "craco-mfsu": "^0.0.1",
+    "craco-mfsu": "^0.0.2",
     "cross-env": "^7.0.3",
     "react-scripts": "^5.0.0",
     "speed-measure-webpack-plugin": "^1.5.0",
