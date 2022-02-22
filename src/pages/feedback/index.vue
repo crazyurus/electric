@@ -18,7 +18,7 @@
   export default {
     methods: {
       tucao() {
-        Tucao.request(66640, {
+        Tucao.request(23796, {
           nickname: window.electric.userName,
           avatar: window.electric.avatar,
           openid: window.electric.sno
