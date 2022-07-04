@@ -17,19 +17,17 @@
     "email": "crazyurus@vip.qq.com"
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "echarts": "^4.2.1",
+    "axios": "^0.27.2",
+    "echarts": "^4.9.0",
     "framework7": "^1.7.1",
     "framework7-vue": "^0.9.4",
     "mint-ui": "^2.2.13",
     "mockjs": "^1.1.0",
-    "vue": "^2.6.10",
-    "vuex": "^3.1.1"
+    "vue": "^2.7.0",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "eslint": "^6.0.1",
-    "vite": "^2.7.13",
-    "vite-plugin-vue2": "^1.9.3",
-    "vue-template-compiler": "^2.6.10"
+    "@vitejs/plugin-vue2": "^1.1.2",
+    "vite": "^2.9.13"
   }
 }

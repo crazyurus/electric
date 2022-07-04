@@ -1,4 +1,4 @@
-import { createVuePlugin } from 'vite-plugin-vue2';
+import vue from '@vitejs/plugin-vue2';
 
 export default {
   resolve: {
@@ -7,7 +7,7 @@ export default {
     },
   },
   esbuild: true,
-  plugins: [createVuePlugin()],
+  plugins: [vue()],
   server: {
     open: true
   }
