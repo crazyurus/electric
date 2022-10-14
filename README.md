@@ -1,10 +1,8 @@
 # 电费查询
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/96263aab-fc9a-40af-b0cc-ac3360eee080/deploy-status)](https://app.netlify.com/sites/whut-electric-pc/deploys)
-
 武汉理工大学电费查询 PC 版
 
-https://whut-electric-pc.netlify.app/
+https://whut-electric-pc.vercel.app/
 
 `React` + `Craco` + `Ant Design`
 

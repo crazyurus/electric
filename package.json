@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "antd": "^3.26.20",
-    "axios": "^0.25.0",
     "bizcharts": "^3.5.10",
     "classnames": "^2.3.1",
     "dva": "^2.2.3",
@@ -18,7 +17,6 @@
     "enquire-js": "^0.2.1",
     "lodash": "^4.17.15",
     "lodash-decorators": "^5.0.0",
-    "mockjs": "^1.1.0",
     "moment": "^2.24.0",
     "numeral": "^2.0.6",
     "qrcode.react": "^1.0.1",
@@ -65,5 +63,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "pnpm@7.13.4"
 }

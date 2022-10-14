@@ -1,4 +1,3 @@
-import './mock';
 import dva from 'dva';
 import { createBrowserHistory } from 'history';
 import createLoading from 'dva-loading';
