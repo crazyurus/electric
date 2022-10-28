@@ -44,7 +44,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "analyse": "cross-env ANALYSE=TRUE craco build"
+    "analyze": "cross-env ANALYZE=TRUE craco build"
   },
   "eslintConfig": {
     "extends": [

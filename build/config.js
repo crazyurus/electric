@@ -7,7 +7,7 @@ const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const { SubresourceIntegrityPlugin } = require('webpack-subresource-integrity');
 const theme = require('./theme');
 const isProduction = process.env.NODE_ENV === 'production';
-const isAnalysis = process.env.ANALYSE === 'TRUE';
+const isAnalysis = process.env.ANALYZE === 'TRUE';
 
 process.env.BUILD_PATH = path.resolve('./dist');
 process.env.GENERATE_SOURCEMAP = !isProduction.toString();
@@ -51,8 +51,24 @@ module.exports = {
     },
     configure(options) {
       options.output.crossOriginLoading = 'anonymous';
+      options.devtool = isProduction ? false : 'eval';
+      options.experiments = {
+        lazyCompilation: !isProduction,
+      };
+      options.watchOptions = {
+        ignored: /node_modules/,
+      };
+      options.resolve.extensions = ['.js', '.jsx'];
+      options.optimization.runtimeChunk = 'single';
+      options.optimization.splitChunks = {
+        chunks: 'all',
+        maxInitialRequests: Infinity,
+        minSize: 0,
+        minChunks: 2,
+      };
 
       const { isFound, match } = getPlugin(options, pluginByName('MiniCssExtractPlugin'));
+
       if (isFound) {
         match.options.ignoreOrder = true;
       }
