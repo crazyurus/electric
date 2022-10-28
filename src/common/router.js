@@ -82,14 +82,14 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, [], () => import('../pages/Detail/Pay')),
       authority: ['user'],
     },
-    '/notice/list': {
+    '/notification/list': {
       name: '通知列表',
-      component: dynamicWrapper(app, ['room', 'notice'], () => import('../pages/Notice/List')),
+      component: dynamicWrapper(app, ['room', 'notification'], () => import('../pages/Notification/List')),
       authority: ['user'],
     },
-    '/notice/detail/:link': {
+    '/notification/detail/:link': {
       name: '通知详情',
-      component: dynamicWrapper(app, ['notice'], () => import('../pages/Notice/Content')),
+      component: dynamicWrapper(app, ['notification'], () => import('../pages/Notification/Content')),
       authority: ['user'],
     },
     '/index/choose': {

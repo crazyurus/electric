@@ -4,12 +4,12 @@ import { Link } from 'dva/router';
 import { Card, List, Icon, Button } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
-@connect(({ room, notice, loading }) => ({
+@connect(({ room, notification, loading }) => ({
   room: room.room,
-  notice,
-  loading: loading.effects['notice/list'],
+  notification,
+  loading: loading.effects['notification/list'],
 }))
-export default class NoticeList extends Component {
+export default class NotificationList extends Component {
   state = {
     page: 1,
   };
@@ -20,7 +20,7 @@ export default class NoticeList extends Component {
 
   fetchMore = () => {
     this.props.dispatch({
-      type: 'notice/list',
+      type: 'notification/list',
       payload: {
         page: this.state.page,
         area: this.props.room.area,
@@ -30,7 +30,7 @@ export default class NoticeList extends Component {
   };
 
   render() {
-    const { notice: { list }, loading } = this.props;
+    const { notification: { list }, loading } = this.props;
 
     const loadMore =
       list.length > 0 ? (
@@ -71,7 +71,7 @@ export default class NoticeList extends Component {
               <List.Item key={item.link}>
                 <List.Item.Meta
                   title={
-                    <Link to={'/notice/detail/' + encodeURIComponent(item.link)}>{item.title}</Link>
+                    <Link to={'/notification/detail/' + encodeURIComponent(item.link)}>{item.title}</Link>
                   }
                   description={item.time}
                   style={{ marginBottom: 0 }}

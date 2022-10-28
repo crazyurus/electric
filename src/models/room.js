@@ -25,13 +25,13 @@ export default {
       const response = yield call(web.room);
       yield put({
         type: 'saveCurrentRoom',
-        payload: response,
+        payload: response.data,
       });
       return response;
     },
     *fetchRoomDetail(_, { select, call, put }) {
       const room = yield select(state => state.room.room);
-      const response = yield call(api.InfoDetail, refactRoom(room));
+      const response = yield call(api.getInformationDetail, refactRoom(room));
       yield put({
         type: 'saveRoomDetail',
         payload: response.data,
@@ -39,7 +39,7 @@ export default {
     },
     *updateRoomDetail(_, { select, call, put }) {
       const room = yield select(state => state.room.room);
-      const response = yield call(api.InfoUpdate, refactRoom(room));
+      const response = yield call(api.updateInformation, refactRoom(room));
       if (response.data)
         yield put({
           type: 'update',
@@ -49,7 +49,7 @@ export default {
     },
     *fetchEverydayInfo(_, { select, call, put }) {
       const room = yield select(state => state.room.room);
-      const response = yield call(api.InfoEveryday, refactRoom(room));
+      const response = yield call(api.getInformationStatistics, refactRoom(room));
 
       const everyday = {};
       let month = 0;

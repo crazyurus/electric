@@ -169,7 +169,7 @@ export function isUrl(path) {
 
 export function share(type, title) {
   const site = '%E6%8E%8C%E4%B8%8A%E7%90%86%E5%B7%A5%E5%A4%A7';
-  const pic = encodeURI('https://web.wutnews.net/Application/Electric/Assets/image/logo.png');
+  const pic = encodeURI('https://sf3-cdn-tos.douyinstatic.com/obj/eden-cn/eseh7nupevhps/test/logo.png');
   const href = encodeURI(window.location.href);
   let url = '';
   title = encodeURI(title + ' - 武汉理工大学电费系统');

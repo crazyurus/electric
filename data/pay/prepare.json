@@ -1,6 +1,6 @@
 {
-  "errCode": 0,
-  "errMsg": "OK",
+  "code": 0,
+  "message": "OK",
   "data": {
     "return": {
       "code_url": "http://cwsf.whut.edu.cn",

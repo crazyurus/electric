@@ -1,6 +1,6 @@
 {
-  "errCode": 0,
-  "errMsg": "OK",
+  "code": 0,
+  "message": "OK",
   "data": [
     {
       "no": "201802261798",

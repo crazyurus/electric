@@ -1,34 +1,32 @@
 import request from '../utils/request';
 
-const host = '';
-
 export default {
-  async user() {
-    return request(host, '/api/user');
+  user() {
+    return request('/user/me.json');
   },
-  async room() {
-    return request(host, '/api/room');
+  room() {
+    return request('/room.json');
   },
-  async register(params) {
-    return request(host, '/login/register', {
+  register(params) {
+    return request('/user/register.json', {
       method: 'PUT',
       body: params,
     });
   },
-  async prepare(params) {
-    return request(host, '/pay/prepare', {
+  prepare(params) {
+    return request('/pay/prepare.json', {
       method: 'POST',
       body: params,
     });
   },
-  async cwsf(params) {
-    return request(host, '/pay/cwsf', {
+  cwsf(params) {
+    return request('/pay/cwsf.json', {
       method: 'POST',
       body: params,
     });
   },
-  async check(params) {
-    return request(host, '/pay/check', {
+  check(params) {
+    return request('/pay/check.json', {
       method: 'POST',
       body: params,
     });

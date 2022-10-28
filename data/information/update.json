@@ -1,6 +1,6 @@
 {
-  "errCode": 0,
-  "errMsg": "OK",
+  "code": 0,
+  "message": "OK",
   "data": {
     "left": "13.71",
     "time": "2018-06-03T00:51:03.7729428+08:00"

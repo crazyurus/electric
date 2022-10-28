@@ -1,7 +1,7 @@
 import api from '../services/api';
 
 export default {
-  namespace: 'notice',
+  namespace: 'notification',
 
   state: {
     list: [],
@@ -9,19 +9,19 @@ export default {
 
   effects: {
     *list({ payload }, { call, put }) {
-      const response = yield call(api.NoticeList, payload);
+      const response = yield call(api.getNotificationList, payload);
       yield put({
-        type: 'saveNoticeList',
+        type: 'saveNotificationList',
         payload: response.data,
       });
     },
     *detail({ link }, { call }) {
-      return yield call(api.NoticeDetail, link);
+      return yield call(api.getNotificationDetail, link);
     },
   },
 
   reducers: {
-    saveNoticeList(state, action) {
+    saveNotificationList(state, action) {
       return {
         ...state,
         list: state.list.concat(action.payload),

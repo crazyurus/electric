@@ -4,11 +4,11 @@ import { Card, Tooltip, Icon } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import { share } from '../../utils/utils';
 
-@connect(({ notice, loading }) => ({
-  notice,
-  loading: loading.effects['notice/detail'],
+@connect(({ notification, loading }) => ({
+  notification,
+  loading: loading.effects['notification/detail'],
 }))
-export default class NoticeContent extends Component {
+export default class NotificationContent extends Component {
   state = {
     article: {},
   };
@@ -16,7 +16,7 @@ export default class NoticeContent extends Component {
   componentDidMount() {
     this.props
       .dispatch({
-        type: 'notice/detail',
+        type: 'notification/detail',
         link: this.props.match.params.link,
       })
       .then(response => {

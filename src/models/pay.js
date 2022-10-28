@@ -40,7 +40,7 @@ export default {
     },
     *record(_, { select, call, put }) {
       const room = yield select(state => state.room.room);
-      const response = yield call(api.InfoCharge, refactRoom(room));
+      const response = yield call(api.getInformationCharge, refactRoom(room));
       yield put({
         type: 'saveChargeList',
         payload: response.data,

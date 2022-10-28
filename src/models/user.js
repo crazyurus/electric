@@ -13,7 +13,7 @@ export default {
       const response = yield call(web.user);
       yield put({
         type: 'saveCurrentUser',
-        payload: response,
+        payload: response.data,
       });
     },
   },

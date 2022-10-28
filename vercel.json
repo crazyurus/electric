@@ -1,11 +1,32 @@
 {
   "rewrites": [
-    { "source": "/index/(.*)", "destination": "/" },
-    { "source": "/detail/(.*)", "destination": "/" },
-    { "source": "/charge/(.*)", "destination": "/" },
-    { "source": "/notice/(.*)", "destination": "/" },
-    { "source": "/exception/(.*)", "destination": "/" },
-    { "source": "/feedback", "destination": "/" },
-    { "source": "/mobile", "destination": "/" },
+    {
+      "source": "/index/(.*)",
+      "destination": "/"
+    },
+    {
+      "source": "/detail/(.*)",
+      "destination": "/"
+    },
+    {
+      "source": "/charge/(.*)",
+      "destination": "/"
+    },
+    {
+      "source": "/notification/(.*)",
+      "destination": "/"
+    },
+    {
+      "source": "/exception/(.*)",
+      "destination": "/"
+    },
+    {
+      "source": "/feedback",
+      "destination": "/"
+    },
+    {
+      "source": "/mobile",
+      "destination": "/"
+    }
   ]
 }

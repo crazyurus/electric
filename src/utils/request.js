@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { notification } from 'antd';
 import { routerRedux } from 'dva/router';
 import store from '../index';
@@ -35,7 +34,8 @@ function checkStatus(response) {
   throw error;
 }
 
-export default function request(host, url, options) {
+export default function request(url, options) {
+  const baseURL = 'https://raw.githubusercontent.com/crazyurus/electric-pc/master/data';
   const defaultOptions = {
     credentials: 'include',
   };
@@ -52,11 +52,12 @@ export default function request(host, url, options) {
     newOptions.body = formData.join('&');
   }
 
-  return axios({
-    url: host + '/electric' + url,
+  return fetch({
+    url: baseURL + url,
     method: newOptions.method,
   })
     .then(checkStatus)
+    .then(response => response.json())
     .catch(e => {
       const { dispatch } = store;
       const status = e.name;

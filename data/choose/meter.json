@@ -1,6 +1,6 @@
 {
-  "errCode": 0,
-  "errMsg": "OK",
+  "code": 0,
+  "message": "OK",
   "data": [
     {
       "id": "6465*Meter*4\u820d-401",

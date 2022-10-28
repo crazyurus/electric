@@ -1,6 +1,6 @@
 {
-  "errCode": 0,
-  "errMsg": "OK",
+  "code": 0,
+  "message": "OK",
   "data": {
     "04-01": "1.77",
     "04-02": "0.96",

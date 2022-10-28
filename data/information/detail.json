@@ -1,6 +1,6 @@
 {
-  "errCode": 0,
-  "errMsg": "OK",
+  "code": 0,
+  "message": "OK",
   "data": {
     "no": "001401084750",
     "name": "\u5b66\u6d7720\u680b-409",

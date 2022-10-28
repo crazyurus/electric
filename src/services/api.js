@@ -1,40 +1,38 @@
 import request from '../utils/request';
 
-const host = '';
-
 export default {
-  async InfoDetail(params) {
-    return request(host, '/info/detail', {
+  getInformationDetail(params) {
+    return request('/information/detail.json', {
       method: 'GET',
       body: params,
     });
   },
-  async InfoCharge(params) {
-    return request(host, '/info/pay', {
+  getInformationCharge(params) {
+    return request('/information/pay.json', {
       method: 'GET',
       body: params,
     });
   },
-  async InfoEveryday(params) {
-    return request(host, '/info/day', {
+  getInformationStatistics(params) {
+    return request('/information/statistics.json', {
       method: 'GET',
       body: params,
     });
   },
-  async InfoUpdate(params) {
-    return request(host, '/info/update', {
+  updateInformation(params) {
+    return request('/information/update.json', {
       method: 'GET',
       body: params,
     });
   },
-  async NoticeList(params) {
-    return request(host, '/notice/list', {
+  getNotificationList(params) {
+    return request('/notification/list.json', {
       method: 'GET',
       body: params,
     });
   },
-  async NoticeDetail(link) {
-    return request(host, '/notice/content', {
+  getNotificationDetail(link) {
+    return request('/notification/detail.json', {
       method: 'GET',
       body: {
         link,

@@ -17,8 +17,8 @@ const menuData = [
   {
     name: '停电通知',
     icon: 'profile',
-    path: 'notice',
-    redirect: 'notice/list',
+    path: 'notification',
+    redirect: 'notification/list',
     authority: ['user'],
   },
   {
