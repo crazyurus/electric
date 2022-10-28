@@ -62,11 +62,11 @@ export default class ChooseForm extends PureComponent {
             type: 'room/register',
             payload: this.state.select,
           })
-          .then(res => {
+          .then(response => {
             this.props.dispatch({
               type: 'room/reset',
             });
-            if (res.errCode === 0) this.props.dispatch(routerRedux.push('/detail/index'));
+            if (response.code === 0) this.props.dispatch(routerRedux.push('/detail/index'));
             else message.error('选择宿舍失败，请稍后再试');
           });
       }

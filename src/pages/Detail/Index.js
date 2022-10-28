@@ -67,8 +67,8 @@ export default class Index extends Component {
         type: 'room/updateRoomDetail',
       })
       .then(response => {
-        if (response.errCode === 0) message.success('抄表成功');
-        else message.error(response.errMsg || '抄表失败');
+        if (response.code === 0) message.success('抄表成功');
+        else message.error(response.message || '抄表失败');
       });
   };
 

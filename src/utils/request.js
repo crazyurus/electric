@@ -21,7 +21,7 @@ const codeMessage = {
 };
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
-    return response.data;
+    return response;
   }
   const errortext = codeMessage[response.status] || response.statusText;
   notification.error({
@@ -38,6 +38,7 @@ export default function request(url, options) {
   const baseURL = 'https://raw.githubusercontent.com/crazyurus/electric-pc/master/data';
   const defaultOptions = {
     credentials: 'include',
+    method: 'GET',
   };
   const newOptions = { ...defaultOptions, ...options };
   if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
@@ -52,9 +53,8 @@ export default function request(url, options) {
     newOptions.body = formData.join('&');
   }
 
-  return fetch({
-    url: baseURL + url,
-    method: newOptions.method,
+  return fetch(baseURL + url, {
+    method: 'GET', // newOptions.method,
   })
     .then(checkStatus)
     .then(response => response.json())

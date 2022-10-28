@@ -1,5 +1,4 @@
 import React, { PureComponent, createElement } from 'react';
-import PropTypes from 'prop-types';
 import pathToRegexp from 'path-to-regexp';
 import { Breadcrumb, Tabs } from 'antd';
 import classNames from 'classnames';
@@ -20,13 +19,6 @@ export function getBreadcrumb(breadcrumbNameMap, url) {
 }
 
 export default class PageHeader extends PureComponent {
-  static contextTypes = {
-    routes: PropTypes.array,
-    params: PropTypes.object,
-    location: PropTypes.object,
-    breadcrumbNameMap: PropTypes.object,
-  };
-
   state = {
     breadcrumb: null,
   };
