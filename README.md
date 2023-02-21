@@ -8,6 +8,7 @@ https://whut-electric-pc.vercel.app/
 
 ## 项目脚本
 
-* `npm run start` - 本地运行项目
-* `npm run build` - 打包项目
-* `npm run analyse` - 项目构建分析
+* `pnpm run start` - 本地运行项目
+* `pnpm run build` - 打包项目
+* `pnpm run lint` - 代码 lint
+* `pnpm run analyse` - 项目构建分析

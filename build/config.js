@@ -52,14 +52,10 @@ module.exports = {
     configure(options) {
       options.output.crossOriginLoading = 'anonymous';
       options.devtool = isProduction ? false : 'eval';
-      options.experiments = {
-        lazyCompilation: !isProduction,
-      };
       options.watchOptions = {
         ignored: /node_modules/,
       };
       options.resolve.extensions = ['.js', '.jsx'];
-      options.optimization.runtimeChunk = 'single';
       options.optimization.splitChunks = {
         chunks: 'all',
         maxInitialRequests: Infinity,
