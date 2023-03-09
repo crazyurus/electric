@@ -13,6 +13,6 @@ const app = dva({
 app.use(createLoading());
 app.model(require('./models/global').default);
 app.router(require('./router').default);
-app.start('#app');
+app.start('#root');
 
 export default app._store;

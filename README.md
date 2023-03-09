@@ -10,5 +10,4 @@ https://whut-electric-pc.vercel.app/
 
 * `pnpm run start` - 本地运行项目
 * `pnpm run build` - 打包项目
-* `pnpm run lint` - 代码 lint
-* `pnpm run analyse` - 项目构建分析
+* `pnpm run analyze` - 项目构建分析

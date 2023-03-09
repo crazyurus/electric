@@ -1,3 +1,4 @@
+/* eslint-env node */
 const path = require('path');
 const { getPlugin, pluginByName } = require('@craco/craco');
 const CracoLessPlugin = require('craco-less');
@@ -46,12 +47,14 @@ module.exports = {
           hashFuncNames: ['sha256', 'sha512'],
           enabled: isProduction,
         }),
-      ].concat(isAnalysis ? [new BundleAnalyzerPlugin(), new SpeedMeasurePlugin()] : []),
+      ].concat(
+        isAnalysis ? [new BundleAnalyzerPlugin(), new SpeedMeasurePlugin()] : []
+      ),
       remove: ['WebpackManifestPlugin', 'ESLintWebpackPlugin'],
     },
     configure(options) {
       options.output.crossOriginLoading = 'anonymous';
-      options.devtool = isProduction ? false : 'eval';
+      options.devtool = isProduction ? 'hidden-source-map' : 'cheap-module-source-map';
       options.watchOptions = {
         ignored: /node_modules/,
       };
