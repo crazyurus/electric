@@ -39,6 +39,7 @@ specifiers:
   speed-measure-webpack-plugin: ^1.5.0
   stylelint: ^15.2.0
   stylelint-config-standard: ^30.0.1
+  stylelint-config-standard-less: ^1.0.0
   webpack-bundle-analyzer: ^4.8.0
   webpack-subresource-integrity: ^5.1.0
 
@@ -83,6 +84,7 @@ devDependencies:
   speed-measure-webpack-plugin: 1.5.0
   stylelint: 15.2.0
   stylelint-config-standard: 30.0.1_stylelint@15.2.0
+  stylelint-config-standard-less: 1.0.0_stylelint@15.2.0
   webpack-bundle-analyzer: 4.8.0
   webpack-subresource-integrity: 5.1.0
 
@@ -4559,6 +4561,17 @@ packages:
 
   /cosmiconfig/7.0.1:
     resolution: {integrity: sha512-a1YWNUV2HwGimB7dU2s1wUMurNKjpx60HxBB6xUM8Re+2s1g1IIfJvFR0/iCF+XHdE0GMTKTuLR32UQff4TEyQ==}
+    engines: {node: '>=10'}
+    dependencies:
+      '@types/parse-json': 4.0.0
+      import-fresh: 3.3.0
+      parse-json: 5.2.0
+      path-type: 4.0.0
+      yaml: 1.10.2
+    dev: true
+
+  /cosmiconfig/7.1.0:
+    resolution: {integrity: sha512-AdmX6xUzdNASswsFtmwSt7Vj8po9IuqXm0UXz7QKPuEUmPB4XyjGfaAr2PSuELMwkRMVH1EpIkX5bTZGRB3eCA==}
     engines: {node: '>=10'}
     dependencies:
       '@types/parse-json': 4.0.0
@@ -11667,12 +11680,46 @@ packages:
       postcss-selector-parser: 6.0.11
     dev: true
 
+  /stylelint-config-recommended-less/1.0.4:
+    resolution: {integrity: sha512-8tzP0h2hGjfWhDPSMmgxAeWQUK8/+BWA1Qc4nsvxbJnQkOiexPXpZwdjnYjeoT1uIh77XHfz5gnh0rYbHu/Tgg==}
+    dependencies:
+      stylelint: 14.16.1
+      stylelint-config-recommended: 6.0.0_stylelint@14.16.1
+      stylelint-less: 1.0.6_stylelint@14.16.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /stylelint-config-recommended/10.0.1_stylelint@15.2.0:
     resolution: {integrity: sha512-TQ4xQ48tW4QSlODcti7pgSRqBZcUaBzuh0jPpfiMhwJKBPkqzTIAU+IrSWL/7BgXlOM90DjB7YaNgFpx8QWhuA==}
     peerDependencies:
       stylelint: ^15.0.0
     dependencies:
       stylelint: 15.2.0
+    dev: true
+
+  /stylelint-config-recommended/6.0.0_stylelint@14.16.1:
+    resolution: {integrity: sha512-ZorSSdyMcxWpROYUvLEMm0vSZud2uB7tX1hzBZwvVY9SV/uly4AvvJPPhCcymZL3fcQhEQG5AELmrxWqtmzacw==}
+    peerDependencies:
+      stylelint: ^14.0.0
+    dependencies:
+      stylelint: 14.16.1
+    dev: true
+
+  /stylelint-config-standard-less/1.0.0_stylelint@15.2.0:
+    resolution: {integrity: sha512-6XJ9awr8lnIn/+S2ua1dh8Uif3wIIzAM6LwnvOSh4bz511zogrD/zZAg4m0Y0IzjF6BZbfn1ReWYuPjHFveUQA==}
+    peerDependencies:
+      postcss: ^8.3.3
+      stylelint: ^15.0.0
+    peerDependenciesMeta:
+      postcss:
+        optional: true
+    dependencies:
+      stylelint: 15.2.0
+      stylelint-config-recommended-less: 1.0.4
+      stylelint-config-standard: 30.0.1_stylelint@15.2.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /stylelint-config-standard/30.0.1_stylelint@15.2.0:
@@ -11682,6 +11729,63 @@ packages:
     dependencies:
       stylelint: 15.2.0
       stylelint-config-recommended: 10.0.1_stylelint@15.2.0
+    dev: true
+
+  /stylelint-less/1.0.6_stylelint@14.16.1:
+    resolution: {integrity: sha512-lL+4HFP8V6WkXuNGXRAirnW83KQYEE6LpBsOCibka0bFHUh2mIcJXwcc4uQu1c9UUopHr8vjIH2YElW61lQBXg==}
+    peerDependencies:
+      stylelint: ^14.9.1
+    dependencies:
+      postcss: 8.4.21
+      postcss-value-parser: 4.2.0
+      stylelint: 14.16.1
+    dev: true
+
+  /stylelint/14.16.1:
+    resolution: {integrity: sha512-ErlzR/T3hhbV+a925/gbfc3f3Fep9/bnspMiJPorfGEmcBbXdS+oo6LrVtoUZ/w9fqD6o6k7PtUlCOsCRdjX/A==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    hasBin: true
+    dependencies:
+      '@csstools/selector-specificity': 2.1.1_wajs5nedgkikc5pcuwett7legi
+      balanced-match: 2.0.0
+      colord: 2.9.3
+      cosmiconfig: 7.1.0
+      css-functions-list: 3.1.0
+      debug: 4.3.4
+      fast-glob: 3.2.12
+      fastest-levenshtein: 1.0.16
+      file-entry-cache: 6.0.1
+      global-modules: 2.0.0
+      globby: 11.1.0
+      globjoin: 0.1.4
+      html-tags: 3.2.0
+      ignore: 5.2.4
+      import-lazy: 4.0.0
+      imurmurhash: 0.1.4
+      is-plain-object: 5.0.0
+      known-css-properties: 0.26.0
+      mathml-tag-names: 2.1.3
+      meow: 9.0.0
+      micromatch: 4.0.5
+      normalize-path: 3.0.0
+      picocolors: 1.0.0
+      postcss: 8.4.21
+      postcss-media-query-parser: 0.2.3
+      postcss-resolve-nested-selector: 0.1.1
+      postcss-safe-parser: 6.0.0_postcss@8.4.21
+      postcss-selector-parser: 6.0.11
+      postcss-value-parser: 4.2.0
+      resolve-from: 5.0.0
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
+      style-search: 0.1.0
+      supports-hyperlinks: 2.3.0
+      svg-tags: 1.0.0
+      table: 6.8.1
+      v8-compile-cache: 2.3.0
+      write-file-atomic: 4.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /stylelint/15.2.0:
@@ -12914,6 +13018,14 @@ packages:
       is-typedarray: 1.0.0
       signal-exit: 3.0.7
       typedarray-to-buffer: 3.1.5
+    dev: true
+
+  /write-file-atomic/4.0.2:
+    resolution: {integrity: sha512-7KxauUdBmSdWnmpaGFg+ppNjKF8uNLry8LyzjauQDOVONfFLNKrKvQOxZ/VuTIcS/gge/YNahf5RIIQWTSarlg==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    dependencies:
+      imurmurhash: 0.1.4
+      signal-exit: 3.0.7
     dev: true
 
   /write-file-atomic/5.0.0:
