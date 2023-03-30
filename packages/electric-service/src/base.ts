@@ -1,19 +1,21 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://raw.githubusercontent.com/crazyurus/electric-pc/master/data',
+  baseURL: 'https://raw.githubusercontent.com/crazyurus/electric-pc/master/packages/electric-service/data'
 });
 
 instance.interceptors.request.use(config => {
   config.method = 'GET';
   config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-  config.transformRequest = [data => {
-    let ret = [];
-    for (let item in data) {
-      ret.push(encodeURIComponent(item) + '=' + encodeURIComponent(data[item]));
+  config.transformRequest = [
+    data => {
+      let ret = [];
+      for (let item in data) {
+        ret.push(encodeURIComponent(item) + '=' + encodeURIComponent(data[item]));
+      }
+      return ret.join('&');
     }
-    return ret.join('&');
-  }];
+  ];
 
   return config;
 });
@@ -28,10 +30,6 @@ instance.interceptors.response.use(response => {
   }
 
   throw new Error(response.statusText);
-})
+});
 
-export default {
-  install(Vue) {
-    Vue.prototype.$http = instance;
-  }
-};
+export default instance;

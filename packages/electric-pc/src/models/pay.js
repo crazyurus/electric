@@ -1,5 +1,4 @@
-import web from '../services/web';
-import api from '../services/api';
+import { pay, prepare, check, getInformationCharge } from 'electric-service';
 import { refactRoom } from '../utils/utils';
 
 export default {
@@ -14,7 +13,7 @@ export default {
 
   effects: {
     *cwsf({ payload }, { call, put }) {
-      const response = yield call(web.cwsf, payload);
+      const response = yield call(pay, payload);
       yield put({
         type: 'saveQrcode',
         payload: {
@@ -25,25 +24,25 @@ export default {
       return response;
     },
     *prepare({ payload }, { call, put }) {
-      const response = yield call(web.prepare, payload);
+      const response = yield call(prepare, payload);
       yield put({
         type: 'saveQrcode',
         payload: {
           type: payload.type,
-          ...response.data.return,
+          ...response.return,
         },
       });
     },
     *check({ payload }, { call }) {
-      const response = yield call(web.check, payload);
+      const response = yield call(check, payload);
       return response.status;
     },
     *record(_, { select, call, put }) {
       const room = yield select(state => state.room.room);
-      const response = yield call(api.getInformationCharge, refactRoom(room));
+      const response = yield call(getInformationCharge, refactRoom(room));
       yield put({
         type: 'saveChargeList',
-        payload: response.data,
+        payload: response,
       });
     },
   },

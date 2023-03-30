@@ -11,13 +11,11 @@ import './css/notice.css';
 import Routes from './routes.js';
 import App from './pages/app.vue';
 
-import axios from './libs/axios';
 import Token from './libs/Token';
 import store from './store/data';
 
 Vue.use(Framework7Vue);
 Vue.use(Token);
-Vue.use(axios);
 
 new Vue({
   el: '#app',

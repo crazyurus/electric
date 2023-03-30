@@ -1,4 +1,4 @@
-import api from '../services/api';
+import { getNotificationList, getNotificationDetail } from 'electric-service';
 
 export default {
   namespace: 'notification',
@@ -9,14 +9,14 @@ export default {
 
   effects: {
     *list({ payload }, { call, put }) {
-      const response = yield call(api.getNotificationList, payload);
+      const response = yield call(getNotificationList, payload);
       yield put({
         type: 'saveNotificationList',
-        payload: response.data,
+        payload: response,
       });
     },
     *detail({ link }, { call }) {
-      return yield call(api.getNotificationDetail, link);
+      return yield call(getNotificationDetail, link);
     },
   },
 

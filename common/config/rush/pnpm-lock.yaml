@@ -8,9 +8,8 @@ importers:
   ../../packages/electric-mobile:
     specifiers:
       '@vitejs/plugin-vue2': ^1.1.2
-      axios: ^1.1.3
-      axios-jsonp: ^1.0.4
       echarts: ^4.9.0
+      electric-service: workspace:*
       eslint: ^8.37.0
       eslint-config-prettier: ^8.7.0
       eslint-plugin-vue: ^9.10.0
@@ -21,9 +20,8 @@ importers:
       vue: ^2.7.13
       vuex: ^3.6.2
     dependencies:
-      axios: 1.3.4
-      axios-jsonp: 1.0.4
       echarts: 4.9.0
+      electric-service: link:../electric-service
       framework7: 1.7.1
       framework7-vue: 0.9.4
       mint-ui: 2.2.13_vue@2.7.14
@@ -51,6 +49,7 @@ importers:
       cross-env: ^7.0.3
       dva: ^2.2.3
       dva-loading: ^1.0.4
+      electric-service: workspace:*
       enquire-js: ^0.2.1
       eslint: ^8.37.0
       eslint-config-prettier: ^8.7.0
@@ -80,6 +79,7 @@ importers:
       classnames: 2.3.2
       dva: 2.4.1_sfoxds7t5ydpegc3knd667wn6m
       dva-loading: 1.0.4_dva@2.4.1
+      electric-service: link:../electric-service
       enquire-js: 0.2.1
       history: 4.10.1
       lodash: 4.17.21
@@ -112,6 +112,21 @@ importers:
       stylelint-config-standard-less: 1.0.0_stylelint@15.3.0
       webpack-bundle-analyzer: 4.8.0
       webpack-subresource-integrity: 5.1.0
+
+  ../../packages/electric-service:
+    specifiers:
+      axios: ^1.3.4
+      axios-jsonp: ^1.0.4
+      eslint: ^8.37.0
+      eslint-config-prettier: ^8.7.0
+      typescript: ^5.0.2
+    dependencies:
+      axios: 1.3.4
+      axios-jsonp: 1.0.4
+    devDependencies:
+      eslint: 8.37.0
+      eslint-config-prettier: 8.8.0_eslint@8.37.0
+      typescript: 5.0.2
 
 packages:
 
@@ -12078,6 +12093,12 @@ packages:
     resolution: {integrity: sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==}
     dependencies:
       is-typedarray: 1.0.0
+    dev: true
+
+  /typescript/5.0.2:
+    resolution: {integrity: sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==}
+    engines: {node: '>=12.20'}
+    hasBin: true
     dev: true
 
   /ua-parser-js/0.7.34:

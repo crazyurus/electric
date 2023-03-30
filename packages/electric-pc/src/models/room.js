@@ -1,5 +1,4 @@
-import api from '../services/api';
-import web from '../services/web';
+import { register, getRoomInfo, getInformationDetail, updateInformation, getInformationStatistics } from 'electric-service';
 import { refactRoom } from '../utils/utils';
 import { setAuthority } from '../utils/authority';
 
@@ -22,44 +21,44 @@ export default {
 
   effects: {
     *fetchCurrent(_, { call, put }) {
-      const response = yield call(web.room);
+      const response = yield call(getRoomInfo);
       yield put({
         type: 'saveCurrentRoom',
-        payload: response.data,
+        payload: response,
       });
       return response;
     },
     *fetchRoomDetail(_, { select, call, put }) {
       const room = yield select(state => state.room.room);
-      const response = yield call(api.getInformationDetail, refactRoom(room));
+      const response = yield call(getInformationDetail, refactRoom(room));
       yield put({
         type: 'saveRoomDetail',
-        payload: response.data,
+        payload: response,
       });
     },
     *updateRoomDetail(_, { select, call, put }) {
       const room = yield select(state => state.room.room);
-      const response = yield call(api.updateInformation, refactRoom(room));
-      if (response.data)
+      const response = yield call(updateInformation, refactRoom(room));
+      if (response)
         yield put({
           type: 'update',
-          payload: response.data,
+          payload: response,
         });
       return response;
     },
     *fetchEverydayInfo(_, { select, call, put }) {
       const room = yield select(state => state.room.room);
-      const response = yield call(api.getInformationStatistics, refactRoom(room));
+      const response = yield call(getInformationStatistics, refactRoom(room));
 
       const everyday = {};
       let month = 0;
-      for (const day in response.data) {
+      for (const day in response) {
         const current = day.split('-');
         month = Number.parseInt(current[0]);
         if (!everyday[month]) everyday[month] = [];
         everyday[month].push({
           x: Number.parseInt(current[1]),
-          y: Number.parseFloat(response.data[day]),
+          y: Number.parseFloat(response[day]),
         });
       }
 
@@ -71,7 +70,7 @@ export default {
       return month;
     },
     *register({ payload }, { call, put }) {
-      const response = yield call(web.register, payload);
+      const response = yield call(register, payload);
       yield put({
         type: 'saveCurrentRoom',
         payload,

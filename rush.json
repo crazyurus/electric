@@ -418,6 +418,12 @@
       "projectFolder": "packages/electric-mobile",
       "reviewCategory": "production",
       "tags": ["app"]
+    },
+    {
+      "packageName": "electric-service",
+      "projectFolder": "packages/electric-service",
+      "reviewCategory": "production",
+      "tags": ["service"]
     }
   ]
 }

@@ -21,7 +21,7 @@ export default class NotificationContent extends Component {
       })
       .then(response => {
         this.setState({
-          article: response.data,
+          article: response,
         });
       });
   }

@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import { Form, Select, Cascader, Button, Card, message } from 'antd';
+import { getChooseInfo } from 'electric-service';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
-import request from '../../utils/request';
 
 const { Option, OptGroup } = Select;
 
@@ -43,16 +43,6 @@ export default class ChooseForm extends PureComponent {
     },
   };
 
-  getChooseInfo = (api, id) => {
-    return request('/choose/' + api + '.json', {
-      method: 'POST',
-      body: {
-        id,
-        area: this.state.select.area,
-      },
-    });
-  };
-
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll(err => {
@@ -62,12 +52,14 @@ export default class ChooseForm extends PureComponent {
             type: 'room/register',
             payload: this.state.select,
           })
-          .then(response => {
+          .then(() => {
             this.props.dispatch({
               type: 'room/reset',
             });
-            if (response.code === 0) this.props.dispatch(routerRedux.push('/detail/index'));
-            else message.error('选择宿舍失败，请稍后再试');
+
+            this.props.dispatch(routerRedux.push('/detail/index'));
+          }).catch(() => {
+            message.error('选择宿舍失败，请稍后再试');
           });
       }
     });
@@ -76,10 +68,10 @@ export default class ChooseForm extends PureComponent {
   changeAreaPicker = value => {
     const area = value.includes('余区') ? 7 : Number.parseInt(value.split('*')[0], 10);
     this.state.select.area = area;
-    this.getChooseInfo('architecture', value).then(res => {
+    getChooseInfo('architecture', value, this.state.select.area).then(response => {
       this.setState({
         select: { area },
-        data: res.data.map(item => ({
+        data: response.map(item => ({
           id: item.id,
           type: 'architecture',
           name: ChooseForm.transMeterName(item.name),
@@ -101,17 +93,13 @@ export default class ChooseForm extends PureComponent {
     const childType = targetOption.type === 'architecture' ? 'floor' : 'meter';
     targetOption.loading = true;
 
-    this.getChooseInfo(childType, targetOption.id).then(res => {
-      let { data } = res;
-
-      if (childType !== 'meter') {
-        data = data.map(item => ({
-          id: item.id,
-          name: item.name,
-          type: childType,
-          isLeaf: false,
-        }));
-      }
+    getChooseInfo(childType, targetOption.id, this.state.select.area).then(response => {
+      const data = response.map(item => ({
+        id: item.id,
+        name: item.name,
+        type: childType,
+        isLeaf: childType === 'meter',
+      }));
 
       targetOption.loading = false;
       targetOption.children = data;

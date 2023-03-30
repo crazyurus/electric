@@ -1,4 +1,4 @@
-import web from '../services/web';
+import { getUserInfo } from 'electric-service';
 
 export default {
   namespace: 'user',
@@ -10,10 +10,10 @@ export default {
 
   effects: {
     *fetchCurrent(_, { call, put }) {
-      const response = yield call(web.user);
+      const response = yield call(getUserInfo);
       yield put({
         type: 'saveCurrentUser',
-        payload: response.data,
+        payload: response,
       });
     },
   },

@@ -66,9 +66,10 @@ export default class Index extends Component {
       .dispatch({
         type: 'room/updateRoomDetail',
       })
-      .then(response => {
-        if (response.code === 0) message.success('抄表成功');
-        else message.error(response.message || '抄表失败');
+      .then(() => {
+        message.success('抄表成功');
+      }).catch(error => {
+        message.error(error.message || '抄表失败');
       });
   };
 

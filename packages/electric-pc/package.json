@@ -20,6 +20,7 @@
     "classnames": "^2.3.1",
     "dva": "^2.2.3",
     "dva-loading": "^1.0.4",
+    "electric-service": "workspace:*",
     "enquire-js": "^0.2.1",
     "history": "^4.10.1",
     "lodash": "^4.17.15",
