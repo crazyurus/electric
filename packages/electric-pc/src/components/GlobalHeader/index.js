@@ -167,7 +167,7 @@ export default class GlobalHeader extends PureComponent {
             </a>
           </Popover>
           <Tooltip title="手机版">
-            <Link to="/mobile" className={styles.action}>
+            <Link to="/mobile-portal" className={styles.action}>
               <Icon type="mobile" />
             </Link>
           </Tooltip>

@@ -128,7 +128,7 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, [], () => import('../pages/Feedback')),
       authority: ['user', 'guest'],
     },
-    '/mobile': {
+    '/mobile-portal': {
       name: '手机版',
       component: dynamicWrapper(app, [], () => import('../pages/Index/Mobile')),
       authority: ['user'],

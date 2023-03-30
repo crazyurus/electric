@@ -1,0 +1,36 @@
+{
+  "rewrites": [
+    {
+      "source": "/index/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/detail/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/charge/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/notification/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/feedback",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/exception/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/mobile-portal",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/mobile/(.*)",
+      "destination": "/mobile/index.html"
+    }
+  ]
+}
