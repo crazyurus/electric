@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/index/(.*)",
+      "destination": "/"
+    },
+    {
+      "source": "/detail/(.*)",
+      "destination": "/"
+    },
+    {
+      "source": "/charge/(.*)",
+      "destination": "/"
+    },
+    {
+      "source": "/notification/(.*)",
+      "destination": "/"
+    },
+    {
+      "source": "/feedback",
+      "destination": "/"
+    }
+  ]
+}

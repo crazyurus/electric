@@ -1,0 +1,43 @@
+.cost-wave {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  background-color: #83DBE8;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.cost-wrapper.warning .cost-wave {
+  background-color: rgba(255,137,0,0.7);
+}
+.cost-wrapper.cost-wave.danger .cost-wave {
+  background-color: rgba(255,108,108,0.7);
+}
+.cost-wave::before, .cost-wave::after {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  top: 0;
+  left: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 45%;
+  transform: translate(-50%, -70%) rotate(0);
+  animation: rotate 6s linear infinite;
+  z-index: 10;
+}
+.cost-wave::after {
+  border-radius: 47%;
+  background-color: #45c8dc;
+  transform: translate(-50%, -70%) rotate(0);
+  animation: rotate 10s linear -5s infinite;
+  z-index: 20;
+}
+
+@keyframes rotate {
+  50% {
+    transform: translate(-50%, -73%) rotate(180deg);
+  }
+  100% {
+    transform: translate(-50%, -70%) rotate(360deg);
+  }
+}

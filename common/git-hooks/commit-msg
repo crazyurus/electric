@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rush commitlint --edit '' || exit $?

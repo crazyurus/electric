@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rush lint-staged || exit $?
+node common/scripts/install-run-rush.js prettier || exit $?

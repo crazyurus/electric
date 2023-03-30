@@ -1,0 +1,205 @@
+body {
+  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans","wenquanyi micro hei","Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
+}
+
+a {
+  color: #45c8dc;
+}
+
+.navbar {
+  display: none
+}
+.searchbar {
+  background: #45c8dc;
+}
+.searchbar-cancel {
+  color: #fff;
+}
+
+.list-block .item-text {
+  height: auto;
+}
+
+.page-content {
+  background: #fff;
+}
+
+.badge {
+  margin-right: 0.6rem;
+  vertical-align: top;
+  padding-top: 1px;
+}
+
+.pull-right {
+  float: right;
+}
+
+i.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  vertical-align: top;
+}
+
+.ime-remove {
+  ime-mode: disabled;
+}
+
+.text-center {
+  text-align: center;
+}
+
+a {
+  color: #45c8dc;
+}
+
+.button-area {
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+.button-area .button {
+  border-color: #45c8dc;
+  color: #45c8dc;
+  background-color: transparent;
+}
+.modal-button {
+  color: #333;
+}
+.modal-button.modal-button-bold {
+  color: #45c8dc;
+}
+.button-area .button-fill {
+  color: #fff;
+  background: #45c8dc !important;
+  width: 100%;
+}
+.circle {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  margin-right: 1.25rem;
+}
+
+.circle.bg-green {
+  background: rgb(80, 227, 194);
+}
+
+.circle.bg-orange {
+  background: rgb(252, 171, 83);
+}
+
+.circle.bg-blue {
+  background: rgb(68, 199, 219);
+}
+
+.circle.bg-purple {
+  background: rgb(139, 135, 254);
+}
+
+.circle.bg-red {
+  background: rgb(254, 50, 101);
+}
+
+.circle.bg-gray {
+  background: #8e8e93;
+}
+
+.page[data-page=choose] .list-block .item-content {
+  padding-left: 20px;
+}
+
+.record-list {
+  margin-top: -6px;
+}
+
+.record-list .item-inner {
+  padding-top: 1.5rem !important;
+  padding-left: 1.8rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+.record-list .item-content {
+  padding-left: 0;
+}
+
+.record-list .item-divider {
+  height: 40px;
+  font-weight: 300;
+  padding-top: 8px;
+  font-size: 1rem;
+}
+
+.record-list .item-title, .record-list .item-text, .record-list .item-after {
+  font-weight: 300 !important;
+}
+
+.record-list .item-text {
+  margin-top: 0.5rem;
+  margin-left: 2rem;
+}
+
+label.label-radio input[type=checkbox]:checked ~ .item-inner, label.label-radio input[type=radio]:checked ~ .item-inner {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2013%2010'%3E%3Cpolygon%20fill%3D'%2345c8dc'%20points%3D'11.6%2C0%204.4%2C7.2%201.4%2C4.2%200%2C5.6%204.4%2C10%204.4%2C10%204.4%2C10%2013%2C1.4%20'%2F%3E%3C%2Fsvg%3E") !important;
+}
+
+.label-switch input[type=checkbox]:checked+.checkbox {
+  background: #45c8dc !important;
+}
+
+.mt-range-progress {
+  background-color: #45c8dc !important;
+}
+
+.mint-actionsheet {
+  background-color: #EFEFF4;
+}
+
+.mint-actionsheet-list {
+  margin-bottom: 6px;
+}
+
+.mint-actionsheet-listitem, .mint-actionsheet-button {
+  position: relative;
+  color: #000;
+  padding: 10px 0;
+  font-size: 18px;
+  line-height: 1.6;
+  height: auto;
+  border: none;
+}
+
+.mint-actionsheet-listitem::before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid #e5e5e5;
+  color: #e5e5e5;
+  transform-origin: 0 0;
+  transform: scaleY(0.5);
+}
+
+.mint-actionsheet-listitem:active, .mint-actionsheet-button:active {
+  background-color: #ECECEC;
+}
+
+.mint-indicator-wrapper {
+  z-index: 9999;
+}
+
+.v-modal {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+@font-face {
+  font-family: DIN;
+  src: url('../fonts/DIN.ttf');
+}
+
+.number {
+  font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
