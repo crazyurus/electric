@@ -19,6 +19,10 @@ export function register(params: any) {
   return axios.put('/user/register.json', params);
 }
 
+export function logout(params: any) {
+  return axios.post('/user/register.json', params);
+}
+
 export function prepare(params: any) {
   return axios.post('/pay/prepare.json', params);
 }

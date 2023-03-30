@@ -11,6 +11,8 @@
 </template>
 
 <script>
+  import { getNotificationDetail } from 'electric-service';
+
   export default {
     props: ['link'],
     data () {
@@ -26,7 +28,7 @@
     },
     mounted () {
       this.$indicator.show();
-      this.$http.get('/notification/detail.json', {
+      getNotificationDetail({
         link: decodeURIComponent(this.link)
       }).then(result => {
         this.$indicator.hide();

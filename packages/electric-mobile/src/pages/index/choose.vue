@@ -51,6 +51,7 @@
 </template>
 
 <script>
+  import { register, getChooseInfo } from 'electric-service';
   import TokenLogo from '@/images/token.png';
 
   export default {
@@ -140,7 +141,7 @@
       },
       queryMeterDetail () {
         this.$f7.showPreloader('正在查询，请稍后…');
-        this.$http.put('/user/register.json', {
+        register({
           meter: this.select.meter,
           area: this.select.area
         }).then(() => {
@@ -165,10 +166,7 @@
         }
       },
       getChooseInfo (api, id) {
-        return this.$http.post('/choose/' + api + '.json', {
-          id: id,
-          area: this.select.area
-        }).catch(error => {
+        return getChooseInfo(api, id, this.select.area).catch(error => {
           this.$message.toast(error.message);
         });
       },

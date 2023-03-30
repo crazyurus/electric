@@ -139,6 +139,7 @@
 <script>
   import Vue from 'vue'
   import { Range } from 'mint-ui';
+  import { getInformationDetail, logout, updateInformation } from 'electric-service';
   import CountUp from '@/libs/CountUp.js';
 
   import svgHome from '@/images/detail/home.svg';
@@ -183,7 +184,7 @@
 
       Vue.nextTick(() => {
         this.$f7.showIndicator();
-        this.$http.get('/information/detail.json', {
+        getInformationDetail({
           id: meter,
           area: area
         }).then(result => {
@@ -218,7 +219,7 @@
         this.$message.confirm("确定要更换宿舍信息吗？").then(() => {
           this.$f7.showPreloader("更换宿舍中…");
           e.target.disabled = true;
-          return this.$http.post('/user/logout.json');
+          return logout();
         }).then(() => {
           this.$f7.hidePreloader();
           this.$f7.mainView.router.reloadPage('/index/choose');
@@ -226,7 +227,7 @@
       },
       update() {
         // this.$f7.showPreloader("正在抄表中…");
-        this.$http.get('/information/update.json', {
+        updateInformation({
           id: this.$store.state.meter,
           area: this.$store.state.area
         }).then(result => {

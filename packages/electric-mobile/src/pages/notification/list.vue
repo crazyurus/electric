@@ -24,6 +24,8 @@
 </template>
 
 <script>
+  import { getNotificationList } from 'electric-service';
+
   export default {
     data () {
       return {
@@ -41,7 +43,7 @@
         if (this.loading) return;
 
         this.loading = true;
-        this.$http.get('/notification/list.json', {
+        getNotificationList({
           page: this.page,
           area: this.$store.state.area
         }).then(result => {

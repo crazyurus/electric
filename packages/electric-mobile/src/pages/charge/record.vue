@@ -45,6 +45,8 @@
 </template>
 
 <script>
+  import { getInformationCharge } from 'electric-service';
+
   export default {
     data () {
       return {
@@ -54,7 +56,7 @@
     },
     mounted () {
       this.$indicator.show();
-      this.$http.get('/information/pay.json', {
+      getInformationCharge({
         id: this.$store.state.meter,
         area: this.$store.state.area
       }).then(result => {

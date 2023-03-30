@@ -34,6 +34,7 @@
 <script>
   import Vue from 'vue'
   import { Actionsheet, Indicator } from 'mint-ui';
+  import { prepare, pay } from 'electric-service';
   import stations from '@/data/station';
 
   Vue.component(Actionsheet.name, Actionsheet);
@@ -117,7 +118,7 @@
           ip: '',
         };
 
-        this.$http.post('/pay/prepare.json', param).then(result => {
+        prepare(param).then(result => {
           Indicator.close();
           if (result.return.mweb_url) {
             const orderId = result.return.prepay_id;
@@ -136,7 +137,7 @@
         });
       },
       chargeAlipay(amount) {
-        this.$http.post('/pay/cwsf.json', {
+        pay({
           area: this.$store.state.area,
           amount: amount,
           meter: this.$store.state.meter,

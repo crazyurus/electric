@@ -6,6 +6,8 @@
 </template>
 
 <script>
+  import { getInformationStatistics } from 'electric-service';
+
   export default {
     mounted () {
       this.$indicator.show();
@@ -14,7 +16,7 @@
         import('echarts/lib/chart/bar'),
         import('echarts/lib/component/legendScroll')
       ]).then(([ echarts ]) => {
-        this.$http.get('/information/statistics.json', {
+        getInformationStatistics({
           id: this.$store.state.meter,
           area: this.$store.state.area
         }).then(result => {
