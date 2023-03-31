@@ -1,0 +1,5 @@
+common/deploy/common
+common/deploy/deploy-metadata.json
+common/deploy/**/node_modules
+common/deploy/**/package.json
+README.md

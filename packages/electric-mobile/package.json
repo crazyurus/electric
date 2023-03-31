@@ -13,6 +13,9 @@
     "start": "vite",
     "build": "vite build"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "echarts": "^4.9.0",
     "electric-service": "workspace:*",

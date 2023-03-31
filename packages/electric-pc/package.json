@@ -14,6 +14,9 @@
     "build": "craco build",
     "analyze": "cross-env ANALYZE=TRUE craco build"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "antd": "^3.26.20",
     "bizcharts": "^3.5.10",

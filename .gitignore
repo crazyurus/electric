@@ -72,6 +72,5 @@ common/autoinstallers/*/.npmrc
 # Heft temporary files
 .heft
 
-dist
 packages/*/dist
 packages/**/pnpm-lock.yaml

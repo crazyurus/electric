@@ -6,5 +6,8 @@
   "files.associations": {
     "*.json": "jsonc"
   },
-  "files.trimTrailingWhitespace": true
+  "files.trimTrailingWhitespace": true,
+  "npm.packageManager": "pnpm",
+  "eslint.packageManager": "pnpm",
+  "prettier.prettierPath": "common/autoinstallers/rush-prettier/node_modules/prettier"
 }
