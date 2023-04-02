@@ -1,0 +1,11 @@
+<map longitude="{{longitude}}" latitude="{{latitude}}" scale="18" markers="{{[{latitude, longitude}]}}"></map>
+<view class="info">
+  <image src="../../assets/nav.png" bindtap="openLocation"></image>
+  <view class="title">{{title}}</view>
+  <view class="desc">{{address}}</view>
+  <view class="tel">
+    <text>联系电话：</text>
+    <a wx:if="{{telephone}}" bindtap="makePhoneCall">{{telephone}}</a>
+    <text wx:else>暂无</text>
+  </view>
+</view>

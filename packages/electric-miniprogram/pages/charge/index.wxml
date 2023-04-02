@@ -1,0 +1,23 @@
+<view class="page-content">
+  <view class="room-block">
+    <view class="item-cardno">{{room}}</view>
+    <view class="item-text" bindtap="clickChangeBtn">{{paytype}}</view>
+  </view>
+  <view class="card-block">
+    <view class="row">
+      <view wx:for="{{amtArr}}" wx:key="{{index}}" class="col-33 {{active[index] ? 'active' : ''}}" data-id="{{index}}" capture-bind:tap="clickChargeAmt">
+        <text class="money">{{item}}</text>
+        <text class="yuan">元</text>
+      </view>
+      <view class="col-33 {{active[8]}}" data-id="8" bindtap="clickChargeAmt">
+        <text hidden="{{extra[0]}}" class="extra">其它</text>
+        <input type="number" maxlength="3" focus="{{!extra[1]}}" confirm-type="done" hidden="{{extra[1]}}" bindblur="chargeExtraAmt" bindconfirm="chargeExtraAmt" class="item-input" />
+        <text hidden="{{extra[2]}}" class="money">{{extraAmt}}</text>
+        <text hidden="{{extra[2]}}" class="yuan">元</text>
+      </view>
+    </view>
+  </view>
+  <view class="content-token">
+    <a bindtap="clickOfflineBtn">线下充值点</a>
+  </view>
+</view>

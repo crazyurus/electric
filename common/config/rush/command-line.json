@@ -213,7 +213,7 @@
       "summary": "Run stylelint",
       "safeForSimultaneousRushProcesses": true,
       "autoinstallerName": "rush-stylelint",
-      "shellCommand": "stylelint"
+      "shellCommand": "stylelint --fix"
     }
   ],
 

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "停电通知",
+  "onReachBottomDistance": 30,
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

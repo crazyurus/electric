@@ -1,0 +1,29 @@
+page {
+  height: 100%;
+}
+map {
+  height: calc(100% - 107px);
+  width: 100%;
+}
+.info {
+  height: 107px;
+  box-sizing: border-box;
+  padding: 15px;
+  position: relative;
+  border-top: 1rpx solid #c8c7cc;
+}
+.info image {
+  float: right;
+  width: 50px;
+  height: 50px;
+  padding-top: 10px;
+}
+.info .title {
+  font-size: 21px;
+}
+.info .desc, .info .tel {
+  font-size: 13px;
+  color: #999;
+  height: 23px;
+  line-height: 23px;
+}

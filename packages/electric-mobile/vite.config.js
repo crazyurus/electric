@@ -1,7 +1,6 @@
 import vue from '@vitejs/plugin-vue2';
 
 export default {
-  base: '/electric-mobile/dist/',
   resolve: {
     alias: {
       '@': '/src',

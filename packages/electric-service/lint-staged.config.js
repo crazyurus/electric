@@ -1,4 +1,4 @@
 /* eslint-env node */
 module.exports = {
-  'src/**/*.{ts}': 'node common/scripts/install-run-rush.js eslint'
+  'src/**/*.ts': '../../common/scripts/lint-staged.sh eslint'
 };

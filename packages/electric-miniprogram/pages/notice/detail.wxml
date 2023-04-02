@@ -1,0 +1,9 @@
+<view class="page-content">
+  <view class="header">{{article.title}}</view>
+  <view class="content">
+    <rich-text nodes="{{article.content}}"></rich-text>
+  </view>
+  <view class="footer">
+    <button class="button" open-type="share" hover-class="button-active">分享</button>
+  </view>
+</view>

@@ -420,6 +420,12 @@
       "tags": ["app"]
     },
     {
+      "packageName": "electric-miniprogram",
+      "projectFolder": "packages/electric-miniprogram",
+      "reviewCategory": "production",
+      "tags": ["app"]
+    },
+    {
       "packageName": "electric-service",
       "projectFolder": "packages/electric-service",
       "reviewCategory": "production",

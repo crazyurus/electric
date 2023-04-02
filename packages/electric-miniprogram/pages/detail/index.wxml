@@ -1,0 +1,157 @@
+<view class="token-notice" role="alert" wx:if="{{broadcast.text}}">
+    <view class="token-notice-content">{{broadcast.text}}</view>
+    <view class="token-notice-operation">
+        <navigator class="token-notice-go" url="{{broadcast.link}}"></navigator>
+    </view>
+</view>
+<view class="page-content">
+  <view class="cost-area">
+    <view class="cost-title" bindtap="clickChargeBtn">剩余电量(度)</view>
+    <view class="cost-content number" bindtap="clickChargeBtn">{{result.left}}</view>
+    <view class="cost-button" bindtap="clickChargeBtn">充值电费</view>
+    <view class="cost-wrapper" bindtap="clickChargeBtn">
+      <view class="cost-wave {{result.name && result.left <= 15 && result.left > 5 ? 'warning' : ''}} {{result.name && result.left <= 5 ? 'danger' : ''}}"></view>
+    </view>
+    <view class="cost-bottom row">
+      <view class="col-50">
+        <view class="cost-bottom-title">当日用电(度)</view>
+        <view class="cost-bottom-content number">{{result.today.use}}</view>
+      </view>
+      <view class="col-50">
+        <view class="cost-bottom-title">当日电费(元)</view>
+        <view class="cost-bottom-content number">{{result.today.price}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="list-block">
+    <view class="list-group-title">
+      <image src="../../assets/detail/home.svg"></image>
+      <text>宿舍信息</text>
+      <a class="link-after link" bindtap="clickChangeBtn">更换宿舍</a>
+    </view>
+    <view class="item-content">
+      <view class="item-inner">
+        <view class="item-title">宿舍</view>
+        <view class="item-after">{{result.name}}</view>
+      </view>
+    </view>
+    <view class="item-content">
+      <view class="item-inner">
+        <view class="item-title">电表状态</view>
+        <view class="item-after">{{result.status}}</view>
+      </view>
+    </view>
+    <view class="item-content">
+      <view class="item-inner item-inner-last">
+        <view class="item-title">电表编号</view>
+        <view class="item-after">{{result.no}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="list-block">
+    <view class="list-group-title">
+      <image src="../../assets/detail/pay.svg"></image>
+      <text>支付信息</text>
+    </view>
+    <navigator url="/pages/charge/record" class="item-link">
+      <view class="item-content">
+        <view class="item-inner">
+          <view class="item-title">购电详情</view>
+        </view>
+      </view>
+    </navigator>
+    <navigator url="/pages/detail/everyday" class="item-link">
+      <view class="item-content">
+        <view class="item-inner">
+          <view class="item-title">每日用电</view>
+        </view>
+      </view>
+    </navigator>
+    <view class="item-content">
+      <view class="item-inner">
+        <view class="item-title">用电趋势</view>
+        <view class="item-after">预计{{predict}}用完</view>
+      </view>
+    </view>
+    <navigator url="/pages/notice/list" class="item-link">
+      <view class="item-content">
+        <view class="item-inner">
+          <view class="item-title">停电通知</view>
+        </view>
+      </view>
+    </navigator>
+    <view class="item-content">
+      <view class="item-inner">
+        <view class="item-title">当月电费</view>
+        <view class="item-after">{{result.month.use}}/￥{{result.month.price}}</view>
+      </view>
+    </view>
+    <view class="item-content" wx:if="{{false}}">
+      <view class="item-inner">
+        <view class="item-title">上月电费</view>
+        <view class="item-after">{{result.last.use}}/￥{{result.last.use}}</view>
+      </view>
+    </view>
+    <view class="item-content">
+      <view class="item-inner">
+        <view class="item-title">总共用电</view>
+        <view class="item-after">{{result.sum}}</view>
+      </view>
+    </view>
+    <view class="item-content">
+      <view class="item-inner">
+        <view class="item-title">电费单价</view>
+        <view class="item-after">￥{{result.unit_price}}/度</view>
+      </view>
+    </view>
+    <view class="item-content">
+      <view class="item-inner {{showRange ? '' : 'item-inner-last'}}">
+        <view class="item-title">剩余电量不足时提醒</view>
+        <view class="item-after">
+          <switch color="#45c8dc" bindchange="switchNoticeLeft" />
+        </view>
+      </view>
+    </view>
+    <view class="item-content" wx:if="{{showRange}}">
+      <view class="item-inner item-inner-last">
+        <view class="item-title">剩余电量警告值</view>
+        <view class="item-after" style="width: 60%">
+          <slider bindchange="slider4change" min="1" max="120" value="20" show-value step="1" activeColor="#45c8dc" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="list-block">
+    <view class="list-group-title">
+      <image src="../../assets/detail/rank.svg"></image>
+      <text>排名信息</text>
+    </view>
+    <view class="item-link" bindtap="offlineStation">
+      <view class="item-content">
+        <view class="item-inner">
+          <view class="item-title">线下充值点</view>
+        </view>
+      </view>
+    </view>
+    <button class="item-link item-content" plain="true" hover-class="none" open-type="openSetting">
+      <view class="item-inner">
+        <view class="item-title">设置</view>
+      </view>
+    </button>
+    <navigator url="/pages/feedback/index" class="item-link">
+      <view class="item-content">
+        <view class="item-inner">
+          <view class="item-title">帮助与建议</view>
+        </view>
+      </view>
+    </navigator>
+    <button class="item-link item-content" plain="true" hover-class="none" open-type="share">
+      <view class="item-inner item-inner-last">
+        <view class="item-title">分享小程序</view>
+      </view>
+    </button>
+  </view>
+  <view class="content-block">
+    <text>以上电费信息更新于 {{result.time}}</text>
+  </view>
+</view>

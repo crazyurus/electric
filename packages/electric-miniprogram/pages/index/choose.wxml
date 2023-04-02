@@ -1,0 +1,49 @@
+<view class="page-content">
+  <div class="title">宿舍</div>
+  <view class="content-block-title">
+    <text wx:if="{{userInfo.nickName}}">{{userInfo.nickName}}</text>
+    <open-data wx:else type="userNickName"></open-data>
+    <text>同学你好，请选择你的宿舍</text>
+  </view>
+  <view class="list-block">
+    <navigator url="/pages/index/area" class="item-link">
+      <view class="item-content">
+        <view class="item-inner">
+          <view class="item-title label">校区</view>
+          <view class="item-after">{{select.area.name}}</view>
+        </view>
+      </view>
+    </navigator>
+    <picker class="item-link" bindchange="changeArcPicker" range="{{roomInfo.architecture}}" range-key="name">
+      <view class="item-content">
+        <view class="item-inner">
+          <view class="item-title label">宿舍楼</view>
+          <view class="item-after">{{select.architecture.name}}</view>
+        </view>
+      </view>
+    </picker>
+    <picker class="item-link" bindchange="changeFloorPicker" range="{{roomInfo.floor}}" range-key="name">
+      <view class="item-content">
+        <view class="item-inner">
+          <view class="item-title label">楼层</view>
+          <view class="item-after">{{select.floor.name}}</view>
+        </view>
+      </view>
+    </picker>
+    <picker class="item-link" bindchange="changeMeterPicker" range="{{roomInfo.meter}}" range-key="name">
+      <view class="item-content">
+        <view class="item-inner">
+          <view class="item-title label">房间</view>
+          <view class="item-after">{{select.meter.name}}</view>
+        </view>
+      </view>
+    </picker>
+  </view>
+  <view class="list-block-label">
+    <text>* 暂不支持升升公寓的电费查询</text>
+  </view>
+  <button type="primary" bindtap="queryMeterDetail" disabled="{{!canSubmit}}">查询</button>
+</view>
+<view class="content-token" bindtap="about">
+  <image src="../../assets/token.png" />
+</view>

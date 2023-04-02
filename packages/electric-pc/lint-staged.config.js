@@ -1,4 +1,4 @@
 module.exports = {
-  'src/**/*.{js,jsx}': 'node common/scripts/install-run-rush.js eslint',
-  'src/**/*.{css,less}': 'node common/scripts/install-run-rush.js stylelint'
+  'src/**/*.{js,jsx}': '../../common/scripts/lint-staged.sh eslint',
+  'src/**/*.{css,less}': '../../common/scripts/lint-staged.sh stylelint'
 };

@@ -1,0 +1,20 @@
+{
+  "name": "electric-miniprogram",
+  "version": "2.0.0",
+  "private": true,
+  "license": "BSD-3-Clause",
+  "description": "武汉理工大学电费查询小程序",
+  "repository": "https://github.com/crazyurus/electric",
+  "author": {
+    "name": "Crazy Urus",
+    "email": "crazyurus@vip.qq.com"
+  },
+  "scripts": {
+    "build": ""
+  },
+  "files": [],
+  "dependencies": {
+    "electric-service": "workspace:*"
+  },
+  "packageManager": "npm@9.6.1"
+}

@@ -1,0 +1,5 @@
+[submodule "packages/electric-miniprogram/utils/ec-canvas"]
+	path = packages/electric-miniprogram/utils/ec-canvas
+	url = git@github.com:ecomfe/echarts-for-weixin.git
+	branch = master
+	shallow = true

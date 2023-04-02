@@ -1,0 +1,70 @@
+.list-block .item-link:last-child .item-inner {
+  border-bottom: none;
+}
+
+button[disabled] {
+  opacity: 0.55 !important;
+  color: #fff;
+}
+
+button[open-type] {
+  background: rgb(80, 227, 194) !important;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.item-no .item-after {
+  flex: 1;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-no .item-after input {
+  flex: 1;
+  height: 28px;
+}
+
+.item-no .item-after button {
+  display: inline-block;
+  padding: 0 0 0 17px;
+  border: none;
+  border-left: 1rpx #c8c7cc solid;
+  border-radius: 0;
+  font-size: 17px;
+  line-height: 28px;
+  text-align: center;
+  color: #45c8dc;
+  padding-right: 3px;
+}
+
+.button-hover2 {
+  opacity: 0.6;
+}
+
+modal input {
+  border: 1rpx solid rgba(0,0,0,.3);
+  padding: 5px;
+  color: #000;
+  line-height: 1.5;
+}
+
+modal input.first {
+  margin-top: 20rpx;
+  border-bottom: none;
+}
+
+.list-block .item-content {
+  padding-left: 20px;
+}
+
+.title {
+  margin: 0 25px;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 76px;
+}
+
+.content-block-title {
+  margin: 8px 20px 10px;
+}

@@ -1,0 +1,104 @@
+@import 'notice.wxss';
+@import 'wave.wxss';
+
+.cost-area {
+  background: #45c8dc;
+  color: #fff;
+  text-align: center;
+}
+
+.cost-title {
+  position: absolute;
+  top: 44px;
+  width: 100%;
+  text-align: center;
+  z-index: 30;
+  font-size: 16px;
+}
+
+.cost-content {
+  position: absolute;
+  font-size: 42px;
+  top: 66px;
+  width: 100%;
+  text-align: center;
+  z-index: 30;
+}
+
+.cost-button {
+  position: absolute;
+  top: 128px;
+  left: calc(50% - 40px);
+  width: 80px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+  text-align: center;
+  z-index: 30;
+  border: 1px solid #83DBE8;
+  border-radius: 13px;
+}
+
+.cost-bottom {
+  padding: 8px 0;
+  background: rgb(98, 206, 223);
+}
+
+.cost-bottom-title {
+  font-size: 15.2px;
+  padding-bottom: 4.8px;
+  font-weight: 300;
+}
+
+.cost-bottom-content {
+  font-size: 16px;
+}
+
+.list-block .list-group-title {
+  height: 48px;
+  line-height: 44.8px;
+}
+
+.list-group-title image {
+  width: 24px;
+  height: 24px;
+  margin-right: 5.6px;
+  margin-top: -3px;
+  vertical-align: middle;
+}
+
+.list-block {
+  margin: 0;
+  font-weight: 300;
+}
+
+.text-red {
+  color: red !important;
+}
+
+.toolbar .link {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  color: #45c8dc;
+}
+
+slider {
+  width: 100%;
+  margin-right: 0;
+  margin-top: 5px;
+}
+
+.link-after {
+  float: right;
+  font-weight: normal;
+}
+
+button[plain] {
+  color: #000;
+  border: none;
+  padding-right: 0;
+  font-size: 17px;
+  line-height: inherit;
+  border-radius: 0;
+}

@@ -1,4 +1,4 @@
 module.exports = {
-  'src/**/*.{js,vue}': 'node common/scripts/install-run-rush.js eslint',
-  'src/**/*.{vue}': 'node common/scripts/install-run-rush.js stylelint'
+  'src/**/*.{js,vue}': '../../common/scripts/lint-staged.sh eslint',
+  'src/**/*.vue': '../../common/scripts/lint-staged.sh stylelint'
 };

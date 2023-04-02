@@ -1,3 +1,3 @@
 module.exports = {
-  "packages/**/*": "prettier --write --ignore-unknown",
+  "packages/**/*": "./common/scripts/lint-staged.sh prettier --write --ignore-unknown",
 };

@@ -1,0 +1,88 @@
+page {
+  height: 100%;
+}
+
+.page-content {
+  background: #fff;
+  height: 100%;
+}
+
+.content-token {
+  bottom: 35px;
+}
+
+.list-block {
+  margin: 0 0 45px;
+  font-size: 17px;
+  background: #fff;
+}
+
+.item-meter {
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.item-text {
+  float: left;
+  font-weight: 300;
+}
+
+.item-type {
+  margin-right: 15px;
+}
+
+.row {
+  margin: 0 15px 0;
+}
+
+.row .col-33 {
+  text-align: center;
+  border: 1px #45c8dc solid;
+  border-radius: 3.2px;
+  height: 64px;
+  background-color: #fff;
+  color: #45c8dc;
+  font-size: 24px;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.row .col-33.active {
+  color: #fff;
+  background-color: #45c8dc;
+}
+
+.row .col-33 .yuan {
+  font-size: 16px;
+  padding-top: 8rpx;
+}
+
+.row .col-33 .extra {
+  font-size: 16px;
+}
+
+.row .col-33 input {
+  height: 24px;
+}
+
+.room-block {
+  margin: 30px 16px 50px;
+}
+.room-block .item-cardno {
+  font-size: 26px;
+  font-weight: normal;
+}
+.room-block .item-text, .item-link {
+  color: #45c8dc;
+  line-height: 1.8;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.money, .item-cardno, .item-input {
+  font-family: DINAlternate-Bold, DINCondensed-Bold, DIN, Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
