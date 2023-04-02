@@ -1,0 +1,4 @@
+#!/bin/sh
+
+node common/scripts/install-run-rush.js install --check-only || exit $?
+git gc --prune=now

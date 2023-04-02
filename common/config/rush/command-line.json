@@ -198,6 +198,22 @@
       "autoinstallerName": "rush-lint-staged",
       "shellCommand": "lint-staged",
       "safeForSimultaneousRushProcesses": true
+    },
+    {
+      "name": "eslint",
+      "commandKind": "global",
+      "summary": "Run ESLint",
+      "safeForSimultaneousRushProcesses": true,
+      "autoinstallerName": "rush-eslint",
+      "shellCommand": "eslint --fix"
+    },
+    {
+      "name": "stylelint",
+      "commandKind": "global",
+      "summary": "Run stylelint",
+      "safeForSimultaneousRushProcesses": true,
+      "autoinstallerName": "rush-stylelint",
+      "shellCommand": "stylelint"
     }
   ],
 

@@ -1,6 +1,3 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-standard-less"
-  ]
+  "extends": ["../../common/autoinstallers/rush-stylelint/.stylelintrc.json", "stylelint-config-standard-less"]
 }

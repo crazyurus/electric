@@ -1,14 +1,5 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "extends": ["eslint:recommended", "plugin:vue/vue2-recommend", "prettier"],
-  "overrides": [],
-  "parserOptions": {
-    "ecmaVersion": "latest",
-    "sourceType": "module"
-  },
+  "extends": ["../../common/autoinstallers/rush-eslint/.eslintrc.json", "plugin:vue/vue2-recommend"],
   "plugins": ["vue"],
   "rules": {}
 }

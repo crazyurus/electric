@@ -1,0 +1,9 @@
+{
+  "name": "rush-eslint",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0"
+  }
+}

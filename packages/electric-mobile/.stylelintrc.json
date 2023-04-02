@@ -1,0 +1,3 @@
+{
+  "extends": ["../../common/autoinstallers/rush-stylelint/.stylelintrc.json", "stylelint-config-standard-vue"]
+}
