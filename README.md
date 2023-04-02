@@ -1,6 +1,7 @@
 # 武汉理工大学电费系统
 
-https://electric.crazyurus.cn
+PC 端：https://electric.crazyurus.cn
+移动端：https://electric.crazyurus.cn/mobile
 
 采用 `rush` + `pnpm` 的 monorepo，包含：
 

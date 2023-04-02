@@ -189,12 +189,13 @@
       "summary": "Used by the commit-msg Git hook. This command invokes commitlint to lint commit message.",
       "safeForSimultaneousRushProcesses": true,
       "autoinstallerName": "rush-commitlint",
-      "shellCommand": "commitlint --config common/autoinstallers/command-plugins/commitlint.config.js"
+      "shellCommand": "commitlint --config common/autoinstallers/rush-commitlint/commitlint.config.js"
     },
     {
       "name": "lint-staged",
       "commandKind": "global",
       "summary": "Run lint-staged",
+      "autoinstallerName": "rush-lint-staged",
       "shellCommand": "lint-staged",
       "safeForSimultaneousRushProcesses": true
     }
