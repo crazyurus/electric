@@ -1,0 +1,40 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/electric-pc/dist/index.html"
+    },
+    {
+      "source": "/index/(.*)",
+      "destination": "/electric-pc/dist/index.html"
+    },
+    {
+      "source": "/detail/(.*)",
+      "destination": "/electric-pc/dist/index.html"
+    },
+    {
+      "source": "/charge/(.*)",
+      "destination": "/electric-pc/dist/index.html"
+    },
+    {
+      "source": "/notification/(.*)",
+      "destination": "/electric-pc/dist/index.html"
+    },
+    {
+      "source": "/feedback",
+      "destination": "/electric-pc/dist/index.html"
+    },
+    {
+      "source": "/exception/(.*)",
+      "destination": "/electric-pc/dist/index.html"
+    },
+    {
+      "source": "/mobile-portal",
+      "destination": "/electric-pc/dist/index.html"
+    },
+    {
+      "source": "/mobile(.*)",
+      "destination": "/electric-mobile/dist/index.html"
+    }
+  ]
+}

@@ -62,6 +62,7 @@ module.exports = {
       remove: ['WebpackManifestPlugin', 'ESLintWebpackPlugin'],
     },
     configure(options) {
+      options.output.publicPath = isProduction ? '/electric-pc/dist/' : '/';
       options.output.crossOriginLoading = 'anonymous';
       options.devtool = isProduction ? 'hidden-source-map' : 'cheap-module-source-map';
       options.watchOptions = {

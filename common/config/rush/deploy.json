@@ -54,14 +54,14 @@
    *   create the links described in the "deploy-metadata.json" output file.
    * - "none": Do nothing; some other tool may create the links later.
    */
-  // "linkCreation": "script",
+  "linkCreation": "none",
 
   /**
    * If this path is specified, then after "rush deploy", recursively copy the files from this folder to
    * the deployment target folder (common/deploy). This can be used to provide additional configuration files
    * or scripts needed by the server when deploying. The path is resolved relative to the repository root.
    */
-  "folderToCopy": "common/config/vercel",
+  // "folderToCopy": "common/config/vercel",
 
   /**
    * Customize how Rush projects are processed during deployment.
