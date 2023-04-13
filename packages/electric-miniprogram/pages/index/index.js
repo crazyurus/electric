@@ -1,7 +1,7 @@
 Page({
   onLoad: function (options) {
     wx.redirectTo({
-      url: '/pages/notice/detail'
+      url: wx.getStorageSync('meter') ? '/pages/detail/index' : '/pages/index/choose'
     });
   }
-})
+});

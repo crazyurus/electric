@@ -13,7 +13,7 @@ Page({
     this.loadNoticeList();
 
     this.setData({
-      'from': area == 7 ? '余家头校区管理委员会' : '后勤保障处'
+      from: area == 7 ? '余家头校区管理委员会' : '后勤保障处'
     });
   },
   onReachBottom() {
@@ -24,21 +24,27 @@ Page({
 
     this.data.loading = true;
     wx.showNavigationBarLoading();
-    app.request.post('https://api.wutnews.net/electric/notice/api', {
-      page: this.data.page,
-      area: this.data.area
-    }, {
-      loading: false
-    }).then(result => {
-      if (result.length === 0) return;
+    app.request
+      .post(
+        'https://raw.githubusercontent.com/crazyurus/electric-pc/master/packages/electric-service/data/notification/list.json',
+        {
+          page: this.data.page,
+          area: this.data.area
+        },
+        {
+          loading: false
+        }
+      )
+      .then(result => {
+        if (result.length === 0) return;
 
-      this.data.loading = false;
-      this.data.page++;
-      wx.hideNavigationBarLoading();
+        this.data.loading = false;
+        this.data.page++;
+        wx.hideNavigationBarLoading();
 
-      this.setData({
-        list: this.data.list.concat(result)
+        this.setData({
+          list: this.data.list.concat(result)
+        });
       });
-    });
   }
 });

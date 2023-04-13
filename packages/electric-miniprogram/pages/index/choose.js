@@ -46,12 +46,23 @@ Page({
   },
   changeAreaPicker(select) {
     if (select.name === '升升公寓') {
-      const ssArc = ['升升A栋', '升升B栋', '升升C栋', '升升E栋', '升升F栋', '升升H栋', '升升I栋', '升升J栋', '升升K栋', '升升L栋'];
+      const ssArc = [
+        '升升A栋',
+        '升升B栋',
+        '升升C栋',
+        '升升E栋',
+        '升升F栋',
+        '升升H栋',
+        '升升I栋',
+        '升升J栋',
+        '升升K栋',
+        '升升L栋'
+      ];
       let result = ssArc.map(arc => {
         return {
           id: arc,
           name: arc
-        }
+        };
       });
       this.setData({
         'roomInfo.architecture': result
@@ -84,10 +95,9 @@ Page({
       if (result) {
         this.setData({
           'roomInfo.floor': result,
-          'setInputFocus': this.data.canInputNo
+          setInputFocus: this.data.canInputNo
         });
-      }
-      else app.toast('暂不支持');
+      } else app.toast('暂不支持');
     });
   },
   changeFloorPicker(e) {
@@ -109,7 +119,7 @@ Page({
 
     this.setData({
       'select.meter': select,
-      'canSubmit': true
+      canSubmit: true
     });
   },
   queryMeterDetail(e) {
@@ -134,21 +144,34 @@ Page({
     });
   },
   getChooseInfo(api, id) {
-    return app.request.post('https://api.wutnews.net/electric/choose/' + api, {
-      id: id,
-      area: this.data.area
-    });
+    return app.request.post(
+      'https://raw.githubusercontent.com/crazyurus/electric-pc/master/packages/electric-service/data/choose/' +
+        api +
+        '.json',
+      {
+        id: id,
+        area: this.data.area
+      }
+    );
   },
   transMeterName(arc) {
     switch (arc) {
-      case "学海15栋": return "学海G栋/西15栋";
-      case "学海16栋": return "学海F栋/西16栋";
-      case "学海17栋": return "学海D栋/西17栋";
-      case "学海18栋": return "学海E栋/西18栋";
-      case "学海19栋": return "学海C栋/西19栋";
-      case "学海20栋": return "学海B栋/西20栋";
-      case "学海21栋": return "学海A栋/西21栋";
-      default: return arc;
+      case '学海15栋':
+        return '学海G栋/西15栋';
+      case '学海16栋':
+        return '学海F栋/西16栋';
+      case '学海17栋':
+        return '学海D栋/西17栋';
+      case '学海18栋':
+        return '学海E栋/西18栋';
+      case '学海19栋':
+        return '学海C栋/西19栋';
+      case '学海20栋':
+        return '学海B栋/西20栋';
+      case '学海21栋':
+        return '学海A栋/西21栋';
+      default:
+        return arc;
     }
   }
 });

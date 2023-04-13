@@ -15,12 +15,22 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "uglifyFileName": true
+    "uglifyFileName": true,
+    "condition": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.8.0",
   "appid": "wx2887b96a44dd3198",
   "projectname": "%E7%94%B5%E8%B4%B9%E6%9F%A5%E8%AF%A2",
   "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {}
+  "simulatorPluginLibVersion": {},
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "condition": {},
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  }
 }

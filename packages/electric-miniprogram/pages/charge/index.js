@@ -34,11 +34,12 @@ Page({
       confirmColor: '#45c8dc',
       confirmText: '复制网址',
       cancelText: '关闭',
-      content: "马房山校区暂不支持小程序内支付，请前往校园缴费平台充值\r\nhttp://cwsf.whut.edu.cn",
+      content: '马房山校区暂不支持小程序内支付，请前往校园缴费平台充值\r\nhttp://cwsf.whut.edu.cn',
       success(res) {
-        if (res.confirm) wx.setClipboardData({
-          data: 'http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023',
-        });
+        if (res.confirm)
+          wx.setClipboardData({
+            data: 'http://cwsf.whut.edu.cn/casLogin?myurl=elecdetails516E023'
+          });
       }
     });
   },
@@ -62,12 +63,11 @@ Page({
               wx.hideLoading();
               app.alert({
                 title: '充值失败',
-                content: "未通过身份验证，无法继续充值"
+                content: '未通过身份验证，无法继续充值'
               });
             }
           });
-        }
-        else self.cardCharge();
+        } else self.cardCharge();
       },
       fail: self.cardCharge
     });
@@ -76,38 +76,45 @@ Page({
     wx.hideLoading();
     app.alert({
       title: '充值失败',
-      content: "尚未开通校园卡电子账户充值"
+      content: '尚未开通校园卡电子账户充值'
     });
   },
   wxPayCharge() {
-    app.login().then(result => {
-      return app.request.post('https://web.wutnews.net/electric/pay/prepare', {
-        openid: result.openid,
-        area: this.data.area,
-        amount: this.data.amount,
-        sno: wx.getStorageSync('sno'),
-        meter: this.data.meter,
-        type: 'JSAPI'
-      });
-    }).then(result => {
-      wx.requestPayment({
-        timeStamp: String(result.sign.timestamp),
-        nonceStr: result.return.nonce_str,
-        package: 'prepay_id=' + result.return.prepay_id,
-        signType: 'MD5',
-        paySign: result.sign.str,
-        success() {
-          app.alert({
-            title: '支付成功',
-            content: '充值的电量预计1-10分钟后下发到电表，可以在购电详情中查询。若长时间仍未成功下发，请咨询所在校区充值点的工作人员。'
-          });
-          wx.reportAnalytics('charge', {
+    app
+      .login()
+      .then(result => {
+        return app.request.post(
+          'https://raw.githubusercontent.com/crazyurus/electric-pc/master/packages/electric-service/data/pay/prepare.json',
+          {
+            openid: result.openid,
+            area: this.data.area,
             amount: this.data.amount,
-            paytype: this.data.paytype,
-          });
-        }
+            sno: wx.getStorageSync('sno'),
+            meter: this.data.meter,
+            type: 'JSAPI'
+          }
+        );
+      })
+      .then(result => {
+        wx.requestPayment({
+          timeStamp: String(result.sign.timestamp),
+          nonceStr: result.return.nonce_str,
+          package: 'prepay_id=' + result.return.prepay_id,
+          signType: 'MD5',
+          paySign: result.sign.str,
+          success() {
+            app.alert({
+              title: '支付成功',
+              content:
+                '充值的电量预计1-10分钟后下发到电表，可以在购电详情中查询。若长时间仍未成功下发，请咨询所在校区充值点的工作人员。'
+            });
+            wx.reportAnalytics('charge', {
+              amount: this.data.amount,
+              paytype: this.data.paytype
+            });
+          }
+        });
       });
-    });
   },
   clickChangeBtn() {
     const payTypeArr = ['校园卡电子账户支付', '微信支付'];
@@ -130,8 +137,7 @@ Page({
       this.setData({
         extra: [true, false, true]
       });
-    }
-    else {
+    } else {
       this.setData({
         active: arr,
         amount: this.data.amtArr[id]
@@ -160,12 +166,19 @@ Page({
       success(res) {
         const index = res.tapIndex;
         wx.navigateTo({
-          url: '/pages/charge/map?' +
-            'title=' + names[index] + '电费充值点' +
-            '&address=' + (index == 4 ? '武汉升升学府物业管理有限公司' : '武汉理工大学水电管理中心') +
-            '&telephone=' + station[index].telephone +
-            '&latitude=' + station[index].position[0] +
-            '&longitude=' + station[index].position[1]
+          url:
+            '/pages/charge/map?' +
+            'title=' +
+            names[index] +
+            '电费充值点' +
+            '&address=' +
+            (index == 4 ? '武汉升升学府物业管理有限公司' : '武汉理工大学水电管理中心') +
+            '&telephone=' +
+            station[index].telephone +
+            '&latitude=' +
+            station[index].position[0] +
+            '&longitude=' +
+            station[index].position[1]
         });
       }
     });

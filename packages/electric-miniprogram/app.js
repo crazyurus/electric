@@ -24,14 +24,12 @@ App({
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         success(response) {
-          if (
-            response.statusCode === 200 &&
-            response.data &&
-            response.data.errCode === 0
-          ) {
+          if (response.statusCode === 200 && response.data && response.data.code === 0) {
             resolve(response.data.data);
           } else {
-            self.toast(response.statusCode === 200 ? response.data.errMsg : response.statusCode + ' ' + response.errMsg);
+            self.toast(
+              response.statusCode === 200 ? response.data.message : response.statusCode + ' ' + response.message
+            );
             reject(response);
           }
         },
@@ -56,7 +54,7 @@ App({
       },
       post(url, data, options) {
         return self.fetch({
-          method: 'POST',
+          method: 'GET',
           url,
           data,
           ...options
@@ -90,7 +88,7 @@ App({
     });
   },
   about() {
-    this.alert('Token团队出品\r\n产品：廖星 石明阳\r\n设计：廖星 郑文伟\r\n开发：廖星 邓维迪 刘福鑫');
+    this.alert('Token团队出品');
   },
   login() {
     const self = this;
@@ -99,15 +97,21 @@ App({
       else {
         wx.login({
           success(res) {
-            self.request.post('https://web.wutnews.net/electric/login/weapp', {
-              code: res.code
-            }, {
-              loading: false
-            }).then(result => {
-              if (!result.openid) reject();
-              self.globalData.userLogin = result;
-              resolve(result);
-            });
+            self.request
+              .post(
+                'https://web.wutnews.net/electric/login/weapp',
+                {
+                  code: res.code
+                },
+                {
+                  loading: false
+                }
+              )
+              .then(result => {
+                if (!result.openid) reject();
+                self.globalData.userLogin = result;
+                resolve(result);
+              });
           },
           fail: reject
         });
